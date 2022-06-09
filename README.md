@@ -34,7 +34,7 @@ tarball’s URL matches the version of NixOS you installed.
 3. In `configuration.nix`, import the following:
 	- `./deployment/home-manager.nix`
 	- `./deployment/common.nix`
-	- `./deployment/jason-laptop-linux.nix`
+	- `./deployment/jason-laptop-linux.nix` or `./deployment/jason-desktop-linux.nix`
 4. In `./deployment/common.nix`, make sure that `home.stateversion` matches the
 version of NixOS you installed.
 5. Run `./deploy.sh`.
