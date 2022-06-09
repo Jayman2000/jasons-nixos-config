@@ -7,6 +7,25 @@ SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2021–2022)
 
 This repo will eventually hold the configuration files for my NixOS installs.
 
+## Installation
+
+Follow the instructions in [NixOS’s Installation Instructions](https://nixos.org/manual/nixos/stable/index.html#ch-installation).
+Each section in that manual is given a number like 1, 2.2 or 2.2.1. Bellow is a
+list of section numbers and any additional notes that I have for them:
+
+- (2.1) Make sure that you boot into UEFI mode.
+	Once you’re at a command prompt, run
+	[this command](https://askubuntu.com/a/162896):
+
+		[ -d /sys/firmware/efi ] && echo UEFI || echo BIOS
+
+	If it outputs “UEFI”, then you’re good.
+
+- (2.2.3) Use the following labels:
+	- `nixos-root` for the root partition.
+	- `nixos-swap` for the swap partition.
+	- `nixos-hdd` for the data partition on the hard drive.
+
 ## Hints for Contributors
 
 If you decide to contribute to this project, then I hope that you’ll find the
