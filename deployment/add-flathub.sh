@@ -1,9 +1,5 @@
-# yamllint disable rule:line-length
+#!/usr/bin/env bash
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <swagfortress@gmail.com> (2022)
-# yamllint enable
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 
-default: true
-MD007: false
-MD010: false
-MD028: false
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo

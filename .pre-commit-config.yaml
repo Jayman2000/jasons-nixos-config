@@ -13,9 +13,11 @@ repos:
         hooks:
             - id: check-yaml
             - id: check-case-conflict
+            - id: check-executables-have-shebangs
             - id: check-merge-conflict
             - id: check-symlinks
             - id: check-vcs-permalinks
+            - id: check-shebang-scripts-are-executable
             - id: destroyed-symlinks
             - id: detect-private-key
             - id: end-of-file-fixer
@@ -48,21 +50,38 @@ repos:
         hooks:
             - id: markdownlint
     -
+        repo: https://github.com/scop/pre-commit-shfmt
+        rev: v3.5.1-1
+        hooks:
+            - id: shfmt
+# TODO: How do I make it accept hard tabs?
+#    -
+#        repo: https://github.com/nix-community/nixpkgs-fmt
+#        rev: v1.2.0
+#        hooks:
+#            - id: nixpkgs-fmt
+    -
         repo: https://pagure.io/assert_contains_regex.git
         rev: 0.0.0
         hooks:
             -
                 id: assert_contains_regex
+                name: "assert_contains_regex (everything but CC symbols CSS)"
+                exclude: &cc_css
+                    '^src/jasons-web-site/static/cc-symbols-font\.css$'
                 args:
+                    - --companion-suffix
+                    - .spdx-meta
                     - --pattern
-                    # The parentheses here don’t change anything from a regex
-                    # perspective, but they do prevent this from looking like
-                    # an SPDX file tag
-                    # (<https://spdx.github.io/spdx-spec/file-tags/>).
                     - >
-                        SPDX-(FileNotice): 🅭🄍1\.0 This file is dedicated to the
-                        public domain using the CC0 1\.0 Universal Public Domain
-                        Dedication
-                        <https://creativecommons.org/publicdomain/zero/1\.0/>.
+                        SPDX-FileNotice:( 🅭🄍1\.0 This file is dedicated to the
+                        public domain using the CC0 1\.0 Universal Public
+                        Domain Dedication
+                        <https://creativecommons.org/publicdomain/zero/1\.0/>|
+                        The author of this font waived all copyright to the
+                        font and released it into the 🅮 public domain).
                     - --pattern
-                    - "SPDX-FileContributor: .+ <.+> \\((2021[-–])?2022\\)\n"
+                    - >
+                        SPDX-FileContributor:
+                        .+( <.+>)?
+                        \(([0-9]{4}[-–])?[0-9]{4}\)
