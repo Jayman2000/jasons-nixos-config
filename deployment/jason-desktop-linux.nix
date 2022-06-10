@@ -10,7 +10,7 @@
 
 	networking = {
 		hostName = "Jason-Desktop-Linux";
-		interfaces.eno1.useDHCP = true;
+		interfaces.enp8s0.useDHCP = true;
 	};
 	time.timeZone = "America/New_York";
 }
