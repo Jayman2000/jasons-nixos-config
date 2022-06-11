@@ -43,6 +43,7 @@
 	home-manager.users.jayman = { pkgs, ... }: {
 		home.packages = with pkgs; [
 			ark
+			godot
 			keepassxc
 			kgpg
 			libreoffice-qt # Hopefully, the Qt version will look better with the Plasma desktop.
