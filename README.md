@@ -64,6 +64,8 @@ click “Save & Exit”.
 19. In the Tor Browser, enable HTTPS only mode.
 20. In the Tor Browser, install uBlock Origin.
 21. Set up any additional email accounts in Thunderbird.
+22. In Kalendar, set up a reminder on the first of every month to review
+installed packages.
 
 ## Hints for Contributors
 
