@@ -43,6 +43,7 @@
 	home-manager.users.jayman = { pkgs, ... }: {
 		home.packages = with pkgs; [
 			ark
+			chars
 			godot
 			kalendar
 			keepassxc
