@@ -17,4 +17,8 @@
 	time.timeZone = "America/New_York";
         nixpkgs.config.allowUnfree = true;
         programs.steam.enable = true;
+
+	home-manager.users.jayman = { pkgs, ... }: {
+		home.packages = [ pkgs.transmission-qt ];
+	};
 }
