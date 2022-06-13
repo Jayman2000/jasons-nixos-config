@@ -49,6 +49,7 @@
 			keepassxc
 			kgpg
 			libreoffice-qt # Hopefully, the Qt version will look better with the Plasma desktop.
+			mpv
 			thunderbird
 			xclip
 			yakuake
