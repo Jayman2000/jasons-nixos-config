@@ -71,5 +71,7 @@
 			enableSshSupport = true;
 			pinentryFlavor = "qt";
 		};
+
+                programs.powerline-go.enable = true;
 	};
 }
