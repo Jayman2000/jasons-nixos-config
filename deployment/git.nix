@@ -23,6 +23,8 @@
 			enable = true;
 			# I’ll enable this once this option is available in a stable version of Home Manager.
 			#diff-so-fancy.enable = true;
+			# This will make sure that git-send-email is installed.
+			package = pkgs.gitAndTools.gitFull;
 			userEmail = "jason@jasonyundt.email";
 			userName = "Jason Yundt";
 			extraConfig.init.defaultBranch = "main";
