@@ -27,7 +27,16 @@
 			package = pkgs.gitAndTools.gitFull;
 			userEmail = "jason@jasonyundt.email";
 			userName = "Jason Yundt";
-			extraConfig.init.defaultBranch = "main";
+			extraConfig = {
+				init.defaultBranch = "main";
+				sendemail = {
+					smtpServer = "box.jasonyundt.email";
+					smtpUser = "jason@jasonyundt.email";
+					smtpEncryption = "tls";
+					# See <https://www.mailgun.com/blog/email/which-smtp-port-understanding-ports-25-465-587/>.
+					smtpServerPort = 587;
+				};
+			};
 		};
 		home.shellAliases."bhc" = "git bhc | tr -d '\n' | xclip -select clipboard";
 	};
