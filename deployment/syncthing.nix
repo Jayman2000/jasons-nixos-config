@@ -19,17 +19,14 @@
 		folders = {
 			"Keep Across Linux Distros!" = {
 				id = "syrpl-vpqnk";
-				path = "/home/jayman/Documents/Home/Syncthing/.save";
 				devices = [ "Server" "Jason-Lemur-Pro" "Jason-Desktop-Linux" "Jason-Desktop-Windows" ];
 			};
 			"Projects" = {
 				id = "mjwge-zeznc";
-				path = "/home/jayman/Documents/Home/Syncthing/Projects";
 				devices = [ "Server" "Jason-Lemur-Pro" "Jason-Desktop-Linux" "Jason-Desktop-Windows" ];
 			};
 			"Game Data" = {
 				id = "eheef-uq5hv";
-				path = "/home/jayman/Documents/Home/Syncthing/Game Data";
 				devices = [ "Server" "Jason-Lemur-Pro" "Jason-Desktop-Linux" "Jason-Desktop-Windows" ];
 			};
 		};

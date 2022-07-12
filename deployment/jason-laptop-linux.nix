@@ -21,4 +21,9 @@
 		};
 	};
 	time.timeZone = "America/New_York";
+	services.syncthing.folders = {
+		"Keep Across Linux Distros!".path = "/home/jayman/Documents/Home/Syncthing/.save";
+		"Projects".path = "/home/jayman/Documents/Home/Syncthing/Projects";
+		"Game Data".path = "/home/jayman/Documents/Home/Syncthing/Game Data";
+	};
 }
