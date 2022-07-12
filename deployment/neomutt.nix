@@ -33,7 +33,10 @@ in
 				set spoolfile="imaps://${mail_server_domain}:993/"
 				set imap_user = "${address}"
 				set imap_pass = "${pass_command}"
-				set smtp_url = "smtps://${address_percent_encoded}@${mail_server_domain}:465"
+				# 587 is the recommended port for SMTP over TLS [1], and it happens to be
+				# one of the ports that my mail server supports for SMTP.
+				# [1]: <https://www.mailgun.com/blog/email/which-smtp-port-understanding-ports-25-465-587/>.
+				set smtp_url = "smtps://${address_percent_encoded}@${mail_server_domain}:587"
 				set smtp_pass = "${pass_command}"
 
 				set folder = $spoolfile
