@@ -14,7 +14,7 @@
 
 		devices = let
 			desktop-device = {
-				"Jason-Desktop-Linux" = { id = "VQ3YVQK-FPN6REG-T3BNHX2-LT5YS4O-YFGVXPV-ENJM3AZ-LD7AE5W-FFS"; };
+				"Jason-Desktop-Linux" = { id = "7A735CO-FSRRF2I-FN5WRGV-OHGRWHR-TF4Z47H-OJBHRBA-G7CP7BN-FTLXGAX"; };
 			};
 		in
 		{
