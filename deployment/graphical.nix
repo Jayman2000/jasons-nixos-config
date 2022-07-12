@@ -72,6 +72,6 @@
 			pinentryFlavor = "qt";
 		};
 
-                programs.powerline-go.enable = true;
+		programs.powerline-go.enable = true;
 	};
 }
