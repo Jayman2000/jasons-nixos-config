@@ -33,10 +33,22 @@ in
 				set spoolfile="imaps://${mail_server_domain}:993/"
 				set imap_user = "${address}"
 				set imap_pass = "${pass_command}"
+
 				# 587 is the recommended port for SMTP over TLS [1], and it happens to be
-				# one of the ports that my mail server supports for SMTP.
-				# [1]: <https://www.mailgun.com/blog/email/which-smtp-port-understanding-ports-25-465-587/>.
-				set smtp_url = "smtps://${address_percent_encoded}@${mail_server_domain}:587"
+				# one of the ports that my mail server supports for SMTP. That’s why I
+				# specify the port at the end of the URL.
+				#
+				# Mail-in-a-box is configured such that connections to port 587 must
+				# start unencrypted and be upgraded using STARTTLS. Luckily, it also
+				# requires that TLS be active if you want to do anything [2].
+				# Additionally, NeoMutt will require TLS when ssl_force_tls is on.
+				# That’s why I’m using the smtp:// scheme instead of the smtps://
+				# scheme.
+				# [1]: <https://www.mailgun.com/blog/email/which-smtp-port-understanding-ports-25-465-587/>
+				# [2]: <https://github.com/mail-in-a-box/mailinabox/blob/main/security.md#services-behind-tls>
+				# [3]: neomuttrc(5)
+				set smtp_url = "smtp://${address_percent_encoded}@${mail_server_domain}:587"
+				set ssl_force_tls = yes
 				set smtp_pass = "${pass_command}"
 
 				set folder = $spoolfile
