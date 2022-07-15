@@ -23,6 +23,7 @@
 		randomizedDelaySec = "45min";
 	};
 
+	environment.defaultPackages = [ ];
 	environment.systemPackages = [ pkgs.htop ];
 	home-manager.useGlobalPkgs = true;
 
