@@ -39,6 +39,7 @@
 			# Browsers to test my site with.
 			librewolf
 			palemoon
+			rsync
 			ungoogled-chromium
 		];
 		programs.bash = {
