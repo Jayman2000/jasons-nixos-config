@@ -51,6 +51,7 @@
 			libreoffice-qt # Hopefully, the Qt version will look better with the Plasma desktop.
 			mpv
 			rustfmt
+			tdesktop
 			thunderbird
 			xclip
 			yakuake
