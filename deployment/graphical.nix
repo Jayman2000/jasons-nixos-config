@@ -50,11 +50,17 @@
 			kgpg
 			libreoffice-qt # Hopefully, the Qt version will look better with the Plasma desktop.
 			mpv
+			rsync
 			rustfmt
 			tdesktop
 			thunderbird
 			xclip
 			yakuake
+
+			# Browsers to test my site with.
+			librewolf
+			palemoon
+			ungoogled-chromium
 		];
 		xdg.dataFile."fonts/CCSymbols.ttf".source = "/etc/nixos/deployment/CCSymbols.ttf";
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.
