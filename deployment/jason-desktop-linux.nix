@@ -7,6 +7,7 @@
 			./efi.nix
 			./cli-shortcuts.nix
 			./graphical.nix
+			./vm-host.nix
 		];
 
 	networking = {
