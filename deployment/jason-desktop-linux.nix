@@ -28,4 +28,7 @@
 		"Projects".path = "/hdd/home/jayman/Syncthing/Projects";
 		"Game Data".path = "/hdd/home/jayman/Syncthing/Game Data";
 	};
+
+	# I keep ending up with so little space that I can’t update.
+	nix.settings.auto-optimise-store = true;
 }
