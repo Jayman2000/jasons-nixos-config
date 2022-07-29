@@ -5,7 +5,7 @@ SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2021–2022)
 
 # Jason’s [NixOS] Config
 
-This repo will eventually hold the configuration files for my NixOS installs.
+How to install and configure NixOS the way I do.
 
 ## Installation
 
