@@ -4,5 +4,6 @@
 {
 	imports = [ ./jasonyundt.website-common.nix ];
 
-	networking.hostName = "jws-test";
+	# The goal here is to make networking.fqdn accurate.
+	networking.domain = "website";
 }
