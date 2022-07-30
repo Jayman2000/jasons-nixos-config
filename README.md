@@ -56,9 +56,23 @@ version of NixOS you installed.
 6. Reboot.
 7. Log in as root and set jayman’s password.
 
+### Instructions specific to Jason’s Web Site
+
+These post-installation steps should only be done on `jasonyundt.website` or
+`jasonyundt.website.home.arpa`.
+
+1. If one doesn’t already exist, create a new email address on
+`jasonyundt.email`. The address should be `<fqdn>@jasonyundt.email` where
+`<fqdn>` is the domain name of the machine you’re currently setting up.
+2. On the machine that you’re setting up, create a `~root/mail-password` file
+that contains the password for that email address.
+3. Make sure that only root has access to that file:
+
+		sudo chmod 400 ~root/mail-password
+
 ### Instructions specific to graphical installs
 
-The rest of these steps should only be done on graphical systems.
+These post-installation steps should only be done on graphical systems.
 
 1. Log in via SDDM.
 2. Use KGpg to create a new GPG key to use for a KDE Wallet. Make sure that you
