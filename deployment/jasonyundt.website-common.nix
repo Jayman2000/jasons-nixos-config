@@ -2,7 +2,10 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 { config, pkgs, ... }:
 {
-	imports = [ ./efi.nix ];
+	imports = [
+		./efi.nix
+		./msmtp.nix
+	];
 
 	# TODO: Update this interface’s name.
 	#networking.interfaces.enp8s0.useDHCP = true;
@@ -10,31 +13,7 @@
 
 	# The goal here is to make networking.fqdn accurate.
 	networking.hostName = "jasonyundt";
-	programs.msmtp = {
-		enable = true;
-		accounts.default = {
-			domain = config.networking.fqdn;
-			auth = true;
-			from = "${config.networking.fqdn}+%U@jasonyundt.email";
-			syslog = true;
 
-			host = "box.jasonyundt.email";
-			# 587 is the recommended port for SMTP over TLS [1], and it happens to be
-			# one of the ports that my mail server supports for SMTP.
-			#
-			# Mail-in-a-box is configured such that connections to port 587 must
-			# start unencrypted and be upgraded using STARTTLS. Luckily, it also
-			# requires that TLS be active if you want to do anything [2].
-			# [1]: <https://www.mailgun.com/blog/email/which-smtp-port-understanding-ports-25-465-587/>
-			# [2]: <https://github.com/mail-in-a-box/mailinabox/blob/main/security.md#services-behind-tls>
-			port = 587;
-			tls = true;
-			tls_starttls = true;
-
-			user = "${config.networking.fqdn}@jasonyundt.email";
-			passwordeval = "cat ~root/mail-password";
-		};
-	};
 	systemd.services.auto-update = {
 		enable = true;
 		wants = ["network-online.target"];
