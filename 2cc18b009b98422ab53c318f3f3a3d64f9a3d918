@@ -1,0 +1,3 @@
+As it turns out, the Q variable doesn’t need to be set. If it isn’t set,
+then msmtq will default to creating a directory in the current user’s
+home directory.
