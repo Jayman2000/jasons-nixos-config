@@ -14,10 +14,12 @@
 	# The goal here is to make networking.fqdn accurate.
 	networking.hostName = "jasonyundt";
 
-	systemd.services.auto-update = {
+	systemd.services.auto-update = let
+		dependencies = [ "network-online.target" ];
+	in {
 		enable = true;
-		wants = ["network-online.target"];
-		after = ["network-online.target"];
+		wants = dependencies;
+		after = dependencies;
 		description = "nixos-rebuild boot --upgrade";
 
 		# I don’t know if config.nix.envVars is needed here, but NixOS’s built in automatic updating service [1] includes it [2].
