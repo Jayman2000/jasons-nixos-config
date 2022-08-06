@@ -40,6 +40,7 @@
 			pkgs.netcat-gnu
 			pkgs.which
 		];
+		startAt = "daily";
 		script = let
 			fqdn = config.networking.fqdn;
 			# This is what NixOS’s built in automatic updating service [1] does [2]. I don’t know why it does it like that.
