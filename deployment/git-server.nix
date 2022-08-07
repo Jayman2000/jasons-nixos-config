@@ -2,6 +2,7 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 { config, pkgs, ... }:
 {
+	imports = [ ./home-manager.nix ];
 	users.groups.git = { };
 	users.users.git = {
 		description = "Owner of Git repos. git-clone should use this user when cloning over SSH.";
@@ -19,5 +20,10 @@
 		# its mode be 740 and users that are supposed to be able to
 		# access ~git/repos/ will be added to the git group.
 		homeMode = "710";
+	};
+	home-manager.users.git = { pkgs, ... }: {
+		home.stateVersion = config.system.stateVersion;
+		programs.git.enable = true;
+		programs.git.extraConfig.core.hooksPath = "${(import applications/post-update.nix)}/bin";
 	};
 }
