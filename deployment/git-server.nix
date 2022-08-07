@@ -3,6 +3,9 @@
 { config, pkgs, ... }:
 {
 	imports = [ ./home-manager.nix ];
+
+	services.openssh.enable = true;
+
 	users.groups.git = { };
 	users.users.git = {
 		description = "Owner of Git repos. git-clone should use this user when cloning over SSH.";
@@ -20,6 +23,13 @@
 		# its mode be 740 and users that are supposed to be able to
 		# access ~git/repos/ will be added to the git group.
 		homeMode = "710";
+
+		openssh.authorizedKeys.keys = let
+			restrictions = "no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty";
+		in [
+			"${restrictions} ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
+		];
+
 	};
 	home-manager.users.git = { pkgs, ... }: {
 		home.stateVersion = config.system.stateVersion;
