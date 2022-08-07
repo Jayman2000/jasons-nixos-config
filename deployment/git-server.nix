@@ -13,5 +13,11 @@
 		# authorized keys file.
 		createHome = true;
 		home = "/home/git";
+		# Any Web (HTTPS, FTP, IPFS, etc.) servers are going to need to
+		# be able to read ~git/repos/, but they won’t need to have access
+		# to anything else in git’s home folder. ~git/repos/ will have
+		# its mode be 740 and users that are supposed to be able to
+		# access ~git/repos/ will be added to the git group.
+		homeMode = "710";
 	};
 }
