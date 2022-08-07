@@ -4,6 +4,7 @@
 {
 	imports = [
 		./efi.nix
+		./git-server.nix
 		./msmtp.nix
 	];
 
