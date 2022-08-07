@@ -7,5 +7,10 @@
 		description = "Owner of Git repos. git-clone should use this user when cloning over SSH.";
 		group = "git";
 		isSystemUser = true;
+
+		# Git repos will be stored here. Also needed for the SSH
+		# authorized keys file.
+		createHome = true;
+		home = "/home/git";
 	};
 }
