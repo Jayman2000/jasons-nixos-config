@@ -33,6 +33,7 @@
 		wants = dependencies;
 		after = dependencies;
 		description = "try to send any emails that are stuck in msmtpq’s queue";
+		startAt = "hourly";
 
 		path = with pkgs; [
 			msmtp
