@@ -2,6 +2,7 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 { config, pkgs, ... }:
 let
+	authorizedKeysInfo = (import values/ssh-authorized-keys.nix);
 	gitHomeDir = "/home/git";
 in {
 	imports = [ ./home-manager.nix ];
@@ -26,7 +27,9 @@ in {
 		# access ~git/repos/ will be added to the git group.
 		homeMode = "710";
 
-		openssh.authorizedKeys.keys = (import values/ssh-authorized-keys.nix);
+		openssh.authorizedKeys.keys = [
+			"${authorizedKeysInfo.defaultOptions} ${authorizedKeysInfo.mainKey}"
+		];
 	};
 	home-manager.users.git = { pkgs, ... }: {
 		home.stateVersion = config.system.stateVersion;
