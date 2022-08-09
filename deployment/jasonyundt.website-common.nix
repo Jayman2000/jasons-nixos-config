@@ -6,6 +6,7 @@
 		./efi.nix
 		./git-server.nix
 		./msmtp.nix
+		./www-content.nix
 	];
 
 	# TODO: Update this interface’s name.

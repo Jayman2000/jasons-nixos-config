@@ -26,12 +26,7 @@ in {
 		# access ~git/repos/ will be added to the git group.
 		homeMode = "710";
 
-		openssh.authorizedKeys.keys = let
-			restrictions = "no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty";
-		in [
-			"${restrictions} ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
-		];
-
+		openssh.authorizedKeys.keys = (import values/ssh-authorized-keys.nix);
 	};
 	home-manager.users.git = { pkgs, ... }: {
 		home.stateVersion = config.system.stateVersion;
