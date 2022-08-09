@@ -1,7 +1,9 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 { config, pkgs, ... }:
-{
+let
+	gitHomeDir = "/home/git";
+in {
 	imports = [ ./home-manager.nix ];
 
 	services.openssh.enable = true;
@@ -16,7 +18,7 @@
 		# Git repos will be stored here. Also needed for the SSH
 		# authorized keys file.
 		createHome = true;
-		home = "/home/git";
+		home = gitHomeDir;
 		# Any Web (HTTPS, FTP, IPFS, etc.) servers are going to need to
 		# be able to read ~git/repos/, but they won’t need to have access
 		# to anything else in git’s home folder. ~git/repos/ will have
@@ -36,4 +38,19 @@
 		programs.git.enable = true;
 		programs.git.extraConfig.core.hooksPath = "${(import applications/post-update.nix)}/bin";
 	};
+
+	# The git user has write permission for the repo folders. git-daemon
+	# shouldn’t have that permission.
+	users.users.git-daemon = {
+		isSystemUser = true;
+		group = "git";
+	};
+	services.gitDaemon = {
+		enable = true;
+		basePath = "${gitHomeDir}/repos";
+		exportAll = true;
+		group = "git";
+		user = "git-daemon";
+	};
+	networking.firewall.allowedTCPPorts = [ config.services.gitDaemon.port ];
 }
