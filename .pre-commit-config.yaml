@@ -87,9 +87,6 @@ repos:
         hooks:
             -
                 id: assert_contains_regex
-                name: "assert_contains_regex (everything but CC symbols CSS)"
-                exclude: &cc_css
-                    '^src/jasons-web-site/static/cc-symbols-font\.css$'
                 args:
                     - --companion-suffix
                     - .spdx-meta
