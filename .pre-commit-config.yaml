@@ -6,6 +6,27 @@
 
 %YAML 1.2
 ---
+# Rationale: CC0-1.0.txt contains the official plain text version of CC0 [1].
+# From a copyright perspective, it’s OK to modify CC0’t text [2]. The caveat is
+# that CC0 contains trademarks that are owned by Creative Commons [3]. Creative
+# Commons does give us a license to use those trademarks, but that license
+# stipulates that you can’t use those trademarks with modified versions of
+# Creative Commons legal tools. CC0 is a Creative Commons legal tool [4], so if
+# we modify CC0, then we have to remove any Creative Commons trademarks from it.
+#
+# Excluding CC0-1.0.txt makes sure that pre-commit won’t inadvertently encourage
+# someone to modify CC0’s text. In general, legal text should be handled with
+# care and not automatically modified by a tool.
+#
+# I’m also excluding CC0-1.0.txt.spdx-meta since it would be annoying to make
+# that file and CC0-1.0.txt pass the assert_contains_regex hook.
+#
+# yamllint disable rule:line-length
+# [1]: <https://wiki.creativecommons.org/wiki/CC0_FAQ#May_I_apply_CC0_to_computer_software.3F_If_so.2C_is_there_a_recommended_implementation.3F>
+# [2]: <https://github.com/creativecommons/creativecommons.org/issues/1218#issuecomment-1212525987>
+# [3]: <https://creativecommons.org/policies/#trademark>
+# [4]: <https://creativecommons.org/faq/#what-is-creative-commons-and-what-do-you-do>
+exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
         repo: https://github.com/pre-commit/pre-commit-hooks

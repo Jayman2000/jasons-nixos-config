@@ -58,7 +58,13 @@ mean that `./a/foo.txt` is a documentation file. That piece of information
 alone tells you nothing about `./a/foo.txt.spdx-meta`.
 
 All SPDX Metadata Files in this repo are dedicated to the public domain using
-[the CC0 1.0 Universal Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+[the CC0 1.0 Universal Public Domain Dedication].
+
+## Location of legal tools
+
+Any licenses that this repo uses can be found in the directory named
+`LICENSES`. A copy of [the CC0 1.0 Universal Public Domain Dedication] can be
+found in the file named `CC0-1.0.txt`.
 
 [JSON]: https://www.json.org/json-en.html
 [NixOS]: https://nixos.org/
@@ -66,3 +72,4 @@ All SPDX Metadata Files in this repo are dedicated to the public domain using
 [SPDX file tags]: https://spdx.github.io/spdx-spec/v2.3/file-tags/
 [SPDX license list short identifier]: https://spdx.github.io/spdx-spec/v2.3/using-SPDX-short-identifiers-in-source-files/
 [SPDX license list short identifiers]: https://spdx.github.io/spdx-spec/v2.3/using-SPDX-short-identifiers-in-source-files/
+[the CC0 1.0 Universal Public Domain Dedication]: https://creativecommons.org/publicdomain/zero/1.0/
