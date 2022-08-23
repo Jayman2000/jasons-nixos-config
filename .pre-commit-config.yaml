@@ -97,9 +97,12 @@ repos:
                         Domain Dedication
                         <https://creativecommons.org/publicdomain/zero/1\.0/>|
                         The author of this font waived all copyright to the
-                        font and released it into the 🅮 public domain).
+                        font and released it into the 🅮 public
+                        domain).|SPDX-License-Identifier:( LicenseRef-MIT-JY)
                     - --pattern
                     - >
                         SPDX-FileContributor:
                         .+( <.+>)?
-                        \(([0-9]{4}[-–])?[0-9]{4}\)
+                        \(([0-9]{4}[-–])?[0-9]{4}\)|SPDX-FileCopyrightText:(
+                        ([0-9]{4}[-–])?[0-9]{4}
+                        .+ <.+>)
