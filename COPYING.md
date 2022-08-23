@@ -5,19 +5,22 @@ SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2021–2022)
 
 # Copying Information for Jason’s [NixOS] Config
 
-This project uses [SPDX file tags] to declare its copying information.
+This project uses [SPDX license list short identifiers] and [SPDX file tags] to
+declare its copying information.
 
 ## SPDX Metadata Files
 
-Normally, [SPDX file tags] are put in the files they describe. For example, in
-a comment at the top of this file, there’s an [SPDX file tag] which says that
-“Jason Yundt” [contributed](https://spdx.github.io/spdx-spec/v2.3/file-information/#814-file-contributor-field)
+Normally, [SPDX license list short identifiers] and [SPDX file tags] are put in
+the files they describe. For example, in a comment at the top of this file,
+there’s an [SPDX file tag] which says that “Jason Yundt” [contributed](https://spdx.github.io/spdx-spec/v2.3/file-information/#814-file-contributor-field)
 to this file.
 
-Sometimes, for technical reasons, an [SPDX file tag] can’t be included in the
-file itself. For example, [`Pipfile.lock`](https://pipenv.pypa.io/en/stable/basics/)
-is a [JSON] file. [JSON files can’t have comments](https://stackoverflow.com/questions/244777/can-comments-be-used-in-json),
-so there isn’t a good place to put an [SPDX file tag] in a [JSON] file.
+Sometimes, for technical reasons, an [SPDX license list short identifier] or
+[SPDX file tag] can’t be included in the file itself. For example,
+[`Pipfile.lock`](https://pipenv.pypa.io/en/stable/basics/) is a [JSON] file.
+[JSON files can’t have comments](https://stackoverflow.com/questions/244777/can-comments-be-used-in-json),
+so there isn’t a good place to put an [SPDX license list short identifier] or
+[SPDX file tag] in a [JSON] file.
 
 The solution: SPDX Metadata Files. SPDX Metadata Files are [plain text](https://www.rfc-editor.org/rfc/rfc2046.html#section-4.1)
 files who’s names end with “`.spdx-meta`”. Every SPDX Metadata File has a
@@ -45,8 +48,9 @@ In this example,
 It’s an SPDX Metadata File because its name ends with “`.spdx-meta`”. It’s
 invalid because it has no companion file.
 
-SPDX Metadata Files describe their companion files; [SPDX file tags] in SPDX
-Metadata Files don’t describe the SPDX Metadata Files that they’re in.
+SPDX Metadata Files describe their companion files; [SPDX license list short
+identifiers] and [SPDX file tags] in SPDX Metadata Files don’t describe the SPDX
+Metadata Files that they’re in.
 
 Consider that previous example again. If `./a/foo.txt.spdx-meta` contained
 “SPDX-FileType” followed by a colon, a space and “DOCUMENTATION”, that would
@@ -60,3 +64,5 @@ All SPDX Metadata Files in this repo are dedicated to the public domain using
 [NixOS]: https://nixos.org/
 [SPDX file tag]: https://spdx.github.io/spdx-spec/v2.3/file-tags/
 [SPDX file tags]: https://spdx.github.io/spdx-spec/v2.3/file-tags/
+[SPDX license list short identifier]: https://spdx.github.io/spdx-spec/v2.3/using-SPDX-short-identifiers-in-source-files/
+[SPDX license list short identifiers]: https://spdx.github.io/spdx-spec/v2.3/using-SPDX-short-identifiers-in-source-files/
