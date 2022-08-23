@@ -11,7 +11,7 @@ This project uses [SPDX file tags] to declare its copying information.
 
 Normally, [SPDX file tags] are put in the files they describe. For example, in
 a comment at the top of this file, there’s an [SPDX file tag] which says that
-“Jason Yundt” [contributed](https://spdx.github.io/spdx-spec/file-information/#814-file-contributor-field)
+“Jason Yundt” [contributed](https://spdx.github.io/spdx-spec/v2.3/file-information/#814-file-contributor-field)
 to this file.
 
 Sometimes, for technical reasons, an [SPDX file tag] can’t be included in the
@@ -58,5 +58,5 @@ All SPDX Metadata Files in this repo are dedicated to the public domain using
 
 [JSON]: https://www.json.org/json-en.html
 [NixOS]: https://nixos.org/
-[SPDX file tag]: https://spdx.github.io/spdx-spec/file-tags/
-[SPDX file tags]: https://spdx.github.io/spdx-spec/file-tags/
+[SPDX file tag]: https://spdx.github.io/spdx-spec/v2.3/file-tags/
+[SPDX file tags]: https://spdx.github.io/spdx-spec/v2.3/file-tags/
