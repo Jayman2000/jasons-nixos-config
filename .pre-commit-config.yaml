@@ -56,7 +56,8 @@ repos:
                 id: forbid-space-in-indent
                 # YAML requires spaces for indentation. See:
                 # <https://yaml.org/spec/1.2.2/#61-indentation-spaces>
-                exclude: '.*\.yaml$'
+                # Pipfile.lock is automatically generated.
+                exclude: '.*\.yaml$|(.*/)?Pipfile\.lock$'
                 # This is a workaround the following issue:
                 # <https://github.com/jumanjihouse/pre-commit-hooks/issues/69>
                 types: ['text']

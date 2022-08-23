@@ -7,6 +7,7 @@
 		./neomutt.nix
 		./syncthing.nix
 		./tor-browser.nix
+		./tmpfs-and-swap.nix
 	];
 
 	boot.tmpOnTmpfs = true;
