@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
 	preBuild = ''
 		# Why do the double quotes have to be escaped here? Isn’t the
 		# fact that they’re in single quotes enough?
-		makeFlagsArray+=(CFLAGS='-DETCPREFIX=\"/etc\" -DVARPREFIX=\"var\"')
+		makeFlagsArray+=(CFLAGS='-DETCPREFIX=\"/etc\" -DVARPREFIX=\"/var\"')
 	'';
 	postInstall = ''
 		# Upstream tries to install the man page [1], but for whatever
