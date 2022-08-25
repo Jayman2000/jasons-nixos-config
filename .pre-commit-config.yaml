@@ -93,7 +93,8 @@ repos:
                     - .spdx-meta
                     - --pattern
                     - >
-                        SPDX-FileNotice:( 🅭🄍1\.0 This file is dedicated to the
+                        SPDX-FileNotice:( 🅭🄍1\.0 (Unless otherwise noted,
+                        everything in t|T)his file is dedicated to the
                         public domain using the CC0 1\.0 Universal Public
                         Domain Dedication
                         <https://creativecommons.org/publicdomain/zero/1\.0/>|
