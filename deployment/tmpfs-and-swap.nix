@@ -3,4 +3,8 @@
 { config, pkgs, ... }:
 {
 	environment.systemPackages = [ (import ./applications/swapspace.nix) ];
+	boot.tmpOnTmpfs = true;
+	# This is probably way more than I need, but I have a lot of swap, so
+	# it’s probably fine.
+	boot.tmpOnTmpfsSize = "290%";
 }

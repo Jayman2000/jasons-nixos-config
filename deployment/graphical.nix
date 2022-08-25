@@ -10,11 +10,6 @@
 		./tmpfs-and-swap.nix
 	];
 
-	boot.tmpOnTmpfs = true;
-	# This is probably way more than I need, but I have a lot of swap, so
-	# it’s probably fine.
-	boot.tmpOnTmpfsSize = "290%";
-
 	sound.enable = true;
 	hardware.pulseaudio.enable = true;
 
