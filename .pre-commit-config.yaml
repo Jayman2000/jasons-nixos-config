@@ -75,7 +75,9 @@ repos:
         repo: https://github.com/scop/pre-commit-shfmt
         rev: v3.5.1-1
         hooks:
-            - id: shfmt
+            -
+                id: shfmt
+                args: ["-fn"]
 # TODO: How do I make it accept hard tabs?
 #    -
 #        repo: https://github.com/nix-community/nixpkgs-fmt

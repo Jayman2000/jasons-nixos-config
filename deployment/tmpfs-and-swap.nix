@@ -3,11 +3,45 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 # SPDX-FileContributor: Jacob Adams <tookmund@gmail.com>
 { config, pkgs, ... }:
-{
-	boot.tmpOnTmpfs = true;
-	# This is probably way more than I need, but I have a lot of swap, so
-	# it’s probably fine.
-	boot.tmpOnTmpfsSize = "290%";
+let
+	# I which I could just say “all tmpfses will report that they’re full
+	# only if 90% of how ever much virtual memory we currently have is in
+	# use.”
+	normalTmpfsSize = "40G";
+	ramConstrainedTmpfsSize = "45%";
+in {
+	boot.devShmSize = normalTmpfsSize;
+	services.logind.extraConfig = ''
+		RuntimeDirectorySize=${normalTmpfsSize}
+	'';
+	# If the /run tmpfs ends up being larger than the machine’s physical
+	# RAM, then you won’t be able to shutdown cleanly. The systemd
+	# executable is stored in /run, so /run can’t be unmounted until very
+	# late in the boot process. Unfortunately, “very late in the boot
+	# process” ends up meaning “after all swap partitions and files have
+	# been deactivated”. So the system can’t unmount /run until after all of
+	# the swap has been deactivated, and all of the swap can’t be
+	# deactivated until after /run is unmounted.
+	boot.runSize = ramConstrainedTmpfsSize;
+	# The swap partition’s block device is located in /dev. If the swap
+	# partition just so happens to be the only swap that the system
+	# currently has available and /dev is large enough that it needs that
+	# swap, then you won’t be able to unmount /dev. /dev will require the
+	# swap partition and the swap partition will require /dev. In a
+	# situation like that, you won’t be able to shut down.
+	boot.devSize = ramConstrainedTmpfsSize;
+
+	# My main concern is running out of virtual memory or hitting the size
+	# limit of a tmpfs. I’ll happily slow the system down a bit in order to
+	# avoid both of those things.
+	boot.tmpOnTmpfs = false;
+	# My expectation is that /tmp will be cleared when the system shuts
+	# down. It wouldn’t be a good idea, but I could see a program storing
+	# sensitive data in /tmp. The logic would go like this: “If the program
+	# shuts down successfully, then it will delete the file. If the program
+	# doesn’t shut down successfully, then it will get deleted when the
+	# system shuts down.”
+	boot.cleanTmpDir = true;
 
 	# This next section was adapted from Swapspace’s swapspace.service. See:
 	# <https://github.com/Tookmund/Swapspace/blob/62c25dbc3f4741f23c99b6c9310c17d63391ad10/swapspace.service>
