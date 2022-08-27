@@ -72,6 +72,8 @@ in {
 		serviceConfig = {
 			Restart = "always";
 			RestartSec = 30;
+
+			TimeoutSec = 1200;  # 20 minutes
 		};
 		wantedBy = [ "multi-user.target" ];
 	};
