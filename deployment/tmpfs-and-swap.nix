@@ -58,7 +58,7 @@ in {
 		requires = dependencies;
 
 		path = [
-			pkgs.coreutils  # for mkdir and chmod
+			pkgs.coreutils	# for mkdir and chmod
 			pkgs.util-linux  # for mkswap (swapspace runs it)
 			swapspacePkg
 		];
@@ -78,4 +78,29 @@ in {
 		wantedBy = [ "multi-user.target" ];
 	};
 	# END GPL-2.0-or-later LICENSED SECTION
+	systemd.services.ensure-enough-vm-to-shutdown = let
+		execStopPkg = (import ./applications/ensure-enough-vm-to-shutdown.nix);
+	in {
+		after = [ "swap.target" ];
+		wantedBy = [ "swap.target" ];
+		serviceConfig = {
+			ExecStop = "${execStopPkg}/bin/ensure-enough-vm-to-shutdown";
+			RemainAfterExit = true;
+		};
+		serviceConfig.TimeoutSec = 1800;  # 30 minutes
+
+		unitConfig = {
+			# I would rather keep DefaultDependencies on, but that
+			# would create a dependency on sysinit.target. That
+			# would be fine with me, but sysinit.target depends on
+			# swap.target. In other words, it would create a
+			# dependency cycle.
+			DefaultDependencies = false;
+			StopPropagatedFrom = "swap.target";
+		};
+		# Normally, these would be enabled by DefaultDependencies (see
+		# systemd.services(5)).
+		conflicts = [ "shutdown.target" ];
+		before = [ "shutdown.target" ];
+	};
 }
