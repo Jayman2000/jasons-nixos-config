@@ -41,10 +41,15 @@
 		serif = [ "Noto Serif" ];
 	};
 
+	# Needed for local GitLab Runner
+	users.users.jayman.extraGroups = [ "docker" ];
+	virtualisation.docker.enable = true;
+
 	home-manager.users.jayman = { pkgs, ... }: {
 		home.packages = with pkgs; [
 			ark
 			chars
+			gitlab-runner
 			godot
 			kalendar
 			keepassxc
