@@ -4,13 +4,17 @@
 {
 	imports = [ ./home-manager.nix ];
 	users.users.jayman.packages = with pkgs; [
+		chocolateDoom
 		ecwolf
 		slade
 	];
 	home-manager.users.jayman = let
-		wolf3DDataPath = "${config.services.syncthing.folders."Game Data".path}/Wolfenstien 3D";
+		gameDataPath = config.services.syncthing.folders."Game Data".path;
+		doomDataPath = "${gameDataPath}/doom";
+		wolf3DDataPath = "${gameDataPath}/Wolfenstien 3D";
 	in
 	{config, pkgs, ...}: {
+		home.sessionVariables.DOOMWADDIR = doomDataPath;
 		xdg = {
 			enable = true;
 			# The mkOutOfStoreSymlnk part ensures that the
