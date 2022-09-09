@@ -103,8 +103,4 @@ in {
 		conflicts = [ "shutdown.target" ];
 		before = [ "shutdown.target" ];
 	};
-	# When the system is using a lot of swap, stopping .swap units can take
-	# a while. And yes, DefaultTimeout**START**Sec= controls the **STOP**
-	# time for swap units.
-	systemd.extraConfig = "DefaultTimeoutStartSec=1800";  # 30 minutes
 }

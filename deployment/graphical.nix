@@ -8,6 +8,7 @@
 		./syncthing.nix
 		./tor-browser.nix
 		./tmpfs-and-swap.nix
+		./unit-timeouts.nix
 	];
 
 	sound.enable = true;
