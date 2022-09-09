@@ -10,6 +10,7 @@
 		./tor-browser.nix
 		./tmpfs-and-swap.nix
 		./unit-timeouts.nix
+		./vm-host.nix
 	];
 
 	sound.enable = true;
