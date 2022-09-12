@@ -87,7 +87,6 @@ in {
 			ExecStop = "${execStopPkg}/bin/ensure-enough-vm-to-shutdown";
 			RemainAfterExit = true;
 		};
-		serviceConfig.TimeoutSec = 1800;  # 30 minutes
 
 		unitConfig = {
 			# I would rather keep DefaultDependencies on, but that
