@@ -50,9 +50,11 @@
 		home.packages = with pkgs; [
 			ark
 			chars
+			ecwolf  # TODO: Declaratively specify base game data location
 			gitlab-runner
 			godot
 			kalendar
+			kdialog  # Used by ecwolf
 			keepassxc
 			kgpg
 			libreoffice-qt # Hopefully, the Qt version will look better with the Plasma desktop.
