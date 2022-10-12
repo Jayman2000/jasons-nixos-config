@@ -51,6 +51,7 @@
 			ark
 			chars
 			ecwolf  # TODO: Declaratively specify base game data location
+			filelight
 			gitlab-runner
 			godot
 			kalendar
