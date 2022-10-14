@@ -62,6 +62,7 @@
 			mpv
 			rsync
 			rustfmt
+			slade
 			tdesktop
 			thunderbird
 			xclip
