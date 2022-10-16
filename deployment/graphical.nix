@@ -3,6 +3,7 @@
 { config, pkgs, ... }:
 {
 	imports = [
+		./games.nix
 		./git.nix
 		./neomutt.nix
 		./syncthing.nix
@@ -50,7 +51,6 @@
 		home.packages = with pkgs; [
 			ark
 			chars
-			ecwolf  # TODO: Declaratively specify base game data location
 			filelight
 			gitlab-runner
 			godot
@@ -62,7 +62,6 @@
 			mpv
 			rsync
 			rustfmt
-			slade
 			tdesktop
 			thunderbird
 			xclip
