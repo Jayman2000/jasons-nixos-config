@@ -4,7 +4,21 @@
 {
 	imports = [ ./home-manager.nix ];
 	users.users.jayman.packages = with pkgs; [
-		ecwolf  # TODO: Declaratively specify base game data location
+		ecwolf
 		slade
 	];
+	home-manager.users.jayman = let
+		wolf3DDataPath = "${config.services.syncthing.folders."Game Data".path}/Wolfenstien 3D";
+	in
+	{config, pkgs, ...}: {
+		xdg = {
+			enable = true;
+			# The mkOutOfStoreSymlnk part ensures that the
+			# symlink gets created even if the target
+			# doesn’t exist yet. The target won’t exist when
+			# a fresh install is done (Syncthing won’t have
+			# created the directory yet).
+			dataFile.ecwolf.source = config.lib.file.mkOutOfStoreSymlink wolf3DDataPath;
+		};
+	};
 }
