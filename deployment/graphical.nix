@@ -64,6 +64,7 @@
 			rustfmt
 			tdesktop
 			thunderbird
+			transmission-qt
 			xclip
 			yakuake
 

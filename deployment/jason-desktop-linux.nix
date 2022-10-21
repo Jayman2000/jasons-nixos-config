@@ -19,10 +19,6 @@
 	nixpkgs.config.allowUnfree = true;
 	programs.steam.enable = true;
 
-	home-manager.users.jayman = { pkgs, ... }: {
-		home.packages = [ pkgs.transmission-qt ];
-	};
-
 	services.syncthing.folders = {
 		"Keep Across Linux Distros!".path = "/hdd/home/jayman/Syncthing/.save";
 		"Projects".path = "/hdd/home/jayman/Syncthing/Projects";
