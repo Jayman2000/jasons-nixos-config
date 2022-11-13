@@ -109,10 +109,16 @@
 				config.services.syncthing.folders."Game Data".path
 		);
 		doomDataPath = "${gameDataPath}/doom";
+		soundFontPath = "${gameDataPath}/soundfonts/GM.sf2";
 		wolf3DDataPath = "${gameDataPath}/Wolfenstien 3D";
 	in
 	{config, pkgs, ...}: {
-		home.sessionVariables.DOOMWADDIR = doomDataPath;
+		home.sessionVariables = {
+			DOOMWADDIR = doomDataPath;
+
+			SDL_FORCE_SOUNDFONTS = "1";
+			SDL_SOUNDFONTS = soundFontPath;
+		};
 		xdg = {
 			enable = true;
 			# The mkOutOfStoreSymlnk part ensures that the
