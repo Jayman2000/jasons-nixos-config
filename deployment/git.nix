@@ -37,6 +37,7 @@
 					smtpServerPort = 587;
 				};
 			};
+			aliases.f = "fetch --all --prune";
 		};
 		home.shellAliases."bhc" = "git bhc | tr -d '\n' | xclip -select clipboard";
 	};
