@@ -7,14 +7,52 @@ SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2021–2022)
 
 How to install and configure NixOS the way I do.
 
+**Note:** At the moment, this repo only work with NixOS 22.05. In the future,
+it will be updated to work properly with NixOS 22.11.
+
+## Build a copy of the NixOS 22.05 Manual
+
+Since this repo only works with NixOS 22.05, it’s probably a good idea to follow
+the installation instructions in the NixOS 22.05 Manual (as opposed to the
+instructions in the manual for the latest version of NixOS). Unfortunately, the
+NixOS project doesn’t seem to distribute manuals for older stable versions of
+NixOS, so we’ll have to build the NixOS 22.05 Manual from source. Here’s how:
+
+1. Make sure that you have [the Nix package
+manager](https://nixos.org/manual/nix/stable/) installed.
+	You can verify whether or not Nix is installed by running:
+
+		nix-build --version && \
+			echo nix-build is installed. || \
+			echo nix-build is not installed.
+
+2. If you don’t already have one, get a local copy of
+[the Nixpkgs repo](https://github.com/NixOS/nixpkgs):
+
+		git clone https://github.com/NixOS/nixpkgs.git
+
+3. Change directory into the Nixpkgs repo:
+
+		cd nixpkgs
+
+4. Make sure that you’re looking at the branch that contains the 22.05 version
+of the manual:
+
+		git checkout release-22.05
+
+5. Follow the instructions in
+`nixos/doc/manual/contributing-to-this-manual.chapter.md`
+
 ## Installation
 
-Follow the instructions in [NixOS’s Installation Instructions](https://nixos.org/manual/nixos/stable/index.html#ch-installation).
-Each section in that manual is given a number like 1, 2.2 or 2.2.1. Bellow is a
-list of section numbers and any additional notes that I have for them:
+Follow the instructions in NixOS’s Installation Instructions (there’re in the
+NixOS 22.05 Manual). Each section in that manual is given a number like 1, 2.2
+or 2.2.1. Bellow is a list of section numbers and any additional notes that I
+have for them:
 
 - (1) Download the minimal ISO image. Also download its SHA-256 file, but
-download it from a separate Tor Browser session.
+download it from a separate Tor Browser session. **Make sure that you download
+a 22.05 image** (as opposed to one for a later version).
 
 - (2) If you’re installing NixOS on `jasonyundt.website.home.arpa`, then create
 a VM. Its specs should match [the specs of Vultr’s $3.50 per month “Regular
