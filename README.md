@@ -54,10 +54,16 @@ have for them:
 download it from a separate Tor Browser session. **Make sure that you download
 a 22.05 image** (as opposed to one for a later version).
 
-- (2) If you’re installing NixOS on `jasonyundt.website.home.arpa`, then create
-a VM. Its specs should match [the specs of Vultr’s $3.50 per month “Regular
-Performance” VM](https://www.vultr.com/pricing/#cloud-compute). Don’t forget to
-make it a UEFI system and not a BIOS one.
+- (2)
+	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
+	create a VM. Its specs should match [the specs of Vultr’s $3.50 per
+	month “Regular Performance”
+	VM](https://www.vultr.com/pricing/#cloud-compute). Don’t forget to
+	make it a UEFI system and not a BIOS one.
+
+	- If you’re installing NixOS on `Graphical-Test-VM`, then make sure that
+	the virtual disk you create for it is large enough to store the “Keep
+	Across Linux Distros!” Syncthing folder.
 
 - (2.1) Make sure that you boot into UEFI mode.
 	Once you’re at a command prompt, run
@@ -86,6 +92,7 @@ tarball’s URL matches the version of NixOS you installed.
 	- One of the system specific configs:
 		- `./deployment/jason-desktop-linux.nix`,
 		- `./deployment/jason-laptop-linux.nix`,
+		- `./deployment/graphical-test-vm.nix`,
 		- `./deployment/jasonyundt.website.nix` or
 		- `./deployment/jasonyundt.website.home.arpa.nix`
 4. In `./deployment/common.nix`, make sure that `home.stateversion` matches the

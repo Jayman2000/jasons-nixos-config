@@ -29,7 +29,7 @@
 		// (if config.networking.hostName != "Jason-Laptop-Linux" then laptop-device else { });
 
 		folders = let
-			all-others = [
+			all-others-except-vm = [
 				"Server"
 				"Jason-Lemur-Pro"
 				"Jason-Desktop-Windows"
@@ -39,16 +39,19 @@
 		{
 			"Keep Across Linux Distros!" = {
 				id = "syrpl-vpqnk";
-				devices = all-others;
+				# TODO: Uncomment that last part once Graphical-Test-VM has a Syncthing ID.
+				devices = all-others-except-vm; #++ [ "Graphical-Test-VM" ];
 			};
+		# In other words, only add the Projects and Game Data folders if we’re not deploying on Graphical-Test-VM.
+		} // (if config.networking.hostName != "Graphical-Test-VM" then {
 			"Projects" = {
 				id = "mjwge-zeznc";
-				devices = all-others;
+				devices = all-others-except-vm;
 			};
 			"Game Data" = {
 				id = "eheef-uq5hv";
-				devices = all-others;
+				devices = all-others-except-vm;
 			};
-		};
+		} else { });
 	};
 }

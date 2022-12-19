@@ -9,7 +9,14 @@
 		slade
 	];
 	home-manager.users.jayman = let
-		gameDataPath = config.services.syncthing.folders."Game Data".path;
+		gameDataPath = (
+			# TODO: It would be better if this said “if the config.services.syncthing.folders."Game Data" property exists”, but I don’t know how to say that.
+			if config.networking.hostName == "Graphical-Test-VM"
+			then
+				"/var/empty"
+			else
+				config.services.syncthing.folders."Game Data".path
+		);
 		doomDataPath = "${gameDataPath}/doom";
 		wolf3DDataPath = "${gameDataPath}/Wolfenstien 3D";
 	in
