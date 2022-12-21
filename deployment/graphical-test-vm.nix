@@ -3,6 +3,8 @@
 {
 	imports =
 		[
+			./home-manager.nix
+			./common.nix
 			./efi.nix
 			./cli-shortcuts.nix
 			./graphical.nix

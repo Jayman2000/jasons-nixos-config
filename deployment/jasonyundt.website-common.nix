@@ -3,6 +3,8 @@
 { config, pkgs, ... }:
 {
 	imports = [
+		./home-manager.nix
+		./common.nix
 		./efi.nix
 		./git-server.nix
 		./msmtp.nix

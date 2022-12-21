@@ -86,15 +86,12 @@ arbitrary number.
 1. Get a copy of this repo on the machine.
 2. In `deployment/home-manager.nix`, make sure that the version number in the
 tarball’s URL matches the version of NixOS you installed.
-3. In `configuration.nix`, import the following:
-	- `./deployment/home-manager.nix`
-	- `./deployment/common.nix`
-	- One of the system specific configs:
-		- `./deployment/jason-desktop-linux.nix`,
-		- `./deployment/jason-laptop-linux.nix`,
-		- `./deployment/graphical-test-vm.nix`,
-		- `./deployment/jasonyundt.website.nix` or
-		- `./deployment/jasonyundt.website.home.arpa.nix`
+3. In `configuration.nix`, one of the system specific configs:
+	- `./deployment/jason-desktop-linux.nix`,
+	- `./deployment/jason-laptop-linux.nix`,
+	- `./deployment/graphical-test-vm.nix`,
+	- `./deployment/jasonyundt.website.nix` or
+	- `./deployment/jasonyundt.website.home.arpa.nix`
 4. Run `./deploy.sh`.
 5. Reboot.
 6. Log in as root and set jayman’s password.
