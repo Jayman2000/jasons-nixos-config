@@ -33,7 +33,7 @@
 		extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
 	};
 	home-manager.users.jayman = { pkgs, ... }: {
-		home.stateVersion = "22.05";
+		home.stateVersion = config.system.stateVersion;
 		home.packages = with pkgs; [
 			file
 		];

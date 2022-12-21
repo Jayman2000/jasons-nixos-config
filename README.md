@@ -95,11 +95,9 @@ tarball’s URL matches the version of NixOS you installed.
 		- `./deployment/graphical-test-vm.nix`,
 		- `./deployment/jasonyundt.website.nix` or
 		- `./deployment/jasonyundt.website.home.arpa.nix`
-4. In `./deployment/common.nix`, make sure that `home.stateversion` matches the
-version of NixOS you installed.
-5. Run `./deploy.sh`.
-6. Reboot.
-7. Log in as root and set jayman’s password.
+4. Run `./deploy.sh`.
+5. Reboot.
+6. Log in as root and set jayman’s password.
 
 ### Instructions specific to Jason’s Web Site
 
