@@ -2,10 +2,7 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 { config, pkgs, ... }:
 {
-	imports = [
-		./home-manager.nix
-		./neovim.nix
-	];
+	imports = [ ./neovim.nix ];
 	# Hopefully, this will prevent the machine from getting stuck during boot (sometimes, it will get stuck waiting for the DHCP client to start).
 	networking.dhcpcd.enable = false;
 	networking.networkmanager.enable = true;

@@ -2,7 +2,6 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 { config, pkgs, ... }:
 {
-	imports = [ ./home-manager.nix ];
 	users.users.jayman.packages = with pkgs; [
 		chocolateDoom
 		ecwolf

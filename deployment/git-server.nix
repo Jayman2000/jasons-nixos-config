@@ -4,8 +4,6 @@
 let
 	gitHomeDir = "/home/git";
 in {
-	imports = [ ./home-manager.nix ];
-
 	services.openssh.enable = true;
 
 	users.groups.git = { };

@@ -2,7 +2,6 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
 { config, pkgs, ... }:
 {
-	imports = [ ./home-manager.nix ];
 	# Normally, I would just have pre-commit download its own copy of NodeJS, but
 	# on NixOS that doesn’t work. I tried installed NodeJS for jayman only, but
 	# that also didn’t work.
