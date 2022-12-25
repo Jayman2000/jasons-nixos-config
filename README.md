@@ -84,8 +84,16 @@ arbitrary number.
 ## Post-installation
 
 1. Get a copy of this repo on the machine.
-2. In `deployment/home-manager.nix`, make sure that the version number in the
-tarball’s URL matches the version of NixOS you installed.
+2. Make sure that the config for the machine that you’re deploying uses the
+correct version of Home Manager. If you’re installing NixOS 22.05, then you
+should use Home Manager 22.05. If you’re installing NixOS 22.11, then you should
+use Home Manager 22.11. etc. Check in one of the following files for a line that
+looks like `./home-manager/<version>.nix`:
+	- `./deployment/jason-desktop-linux.nix` (for Jason-Desktop-Linux),
+	- `./deployment/jason-laptop-linux.nix` (for Jason-Laptop-Linux),
+	- `./deployment/graphical-test-vm.nix` (for Graphical-Test-VM), or
+	- `./deployment/jasonyundt.website-common.nix` (for `jasonyundt.website`
+	or `jasonyundt.website.home.arpa`).
 3. In `configuration.nix`, one of the system specific configs:
 	- `./deployment/jason-desktop-linux.nix`,
 	- `./deployment/jason-laptop-linux.nix`,
