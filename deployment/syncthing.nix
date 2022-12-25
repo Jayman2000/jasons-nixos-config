@@ -16,6 +16,9 @@
 			desktop-device = {
 				"Jason-Desktop-Linux" = { id = "7A735CO-FSRRF2I-FN5WRGV-OHGRWHR-TF4Z47H-OJBHRBA-G7CP7BN-FTLXGAX"; };
 			};
+			graphical-test-vm-device = {
+				"Graphical-Test-VM" = { id = "TGH2DYG-CR3KY4I-T77EEFI-OZU4WDH-TA7TMS4-F6KKBLH-ZNYXHOE-32DDJAT"; };
+			};
 			laptop-device = {
 				"Jason-Laptop-Linux" = { id = "HIUQOJU-CNAGZCU-BHAFKP7-2T4WAO3-XUMWZKC-N2ZXQWD-XSGWNZH-WRGEWAP"; };
 			};
@@ -26,6 +29,7 @@
 			"Jason-Desktop-Windows" = { id = "DAW6JNR-DHBHAVL-42UVJDB-SENEDDQ-OVLHNH3-XOVKDE4-JXVIQ23-GJBG6QZ"; };
 		# In other words, only add each device to the devices list if this config isn’t being deployed on that device.
 		} // (if config.networking.hostName != "Jason-Desktop-Linux" then desktop-device else { })
+		// (if config.networking.hostName != "Graphical-Test-VM" then graphical-test-vm-device else { })
 		// (if config.networking.hostName != "Jason-Laptop-Linux" then laptop-device else { });
 
 		folders = let
@@ -39,8 +43,7 @@
 		{
 			"Keep Across Linux Distros!" = {
 				id = "syrpl-vpqnk";
-				# TODO: Uncomment that last part once Graphical-Test-VM has a Syncthing ID.
-				devices = all-others-except-vm; #++ [ "Graphical-Test-VM" ];
+				devices = all-others-except-vm ++ (if config.networking.hostName != "Graphical-Test-VM" then [ "Graphical-Test-VM" ] else [ ]);
 			};
 		# In other words, only add the Projects and Game Data folders if we’re not deploying on Graphical-Test-VM.
 		} // (if config.networking.hostName != "Graphical-Test-VM" then {
