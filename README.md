@@ -7,10 +7,36 @@ SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2021–2022)
 
 How to install and configure NixOS the way I do.
 
-**Note:** At the moment, this repo only work with NixOS 22.05. In the future,
-it will be updated to work properly with NixOS 22.11.
+## How To Set Up a System That Uses This Config
 
-## Build a copy of the NixOS 22.05 Manual
+### 1. Determine what version of NixOS the config currently expects
+
+You must make sure that you install the appropriate version of NixOS. Each
+machine’s config is designed to work with only one version of NixOS.
+
+1. Find the machine-specific config file that contains the information that
+we’re looking for.
+	- For Jason-Desktop-Linux, this is
+	`./deployment/jason-desktop-linux.nix`.
+
+	- For Jason-Laptop-Linux, this is
+	`./deployment/jason-laptop-linux.nix`.
+
+	- For Graphical-Test-VM, this is
+	`./deployment/graphical-test-vm.nix`.
+
+	- For `jasonyundt.website` and `jasonyundt.website.home.arpa`, this is
+	`./deployment/jasonyundt.website-common.nix`.
+2. Open that file.
+3. Look for a line that looks like this:
+
+		./home-manager/<version>.nix
+
+You’ll need to install whatever version of NixOS matches that Home Manager
+version. If `<version>` is “22.05” then install NixOS 22.05; If `<version>` is
+“22.11” then install NixOS 22.11; etc.
+
+### 2. If you plan to install NixOS 22.05, then build its manual
 
 Since this repo only works with NixOS 22.05, it’s probably a good idea to follow
 the installation instructions in the NixOS 22.05 Manual (as opposed to the
@@ -43,7 +69,7 @@ of the manual:
 5. Follow the instructions in
 `nixos/doc/manual/contributing-to-this-manual.chapter.md`
 
-## Installation
+### 3. Install NixOS
 
 Follow the instructions in NixOS’s Installation Instructions (there’re in the
 NixOS 22.05 Manual). Each section in that manual is given a number like 1, 2.2
@@ -81,30 +107,20 @@ arbitrary number.
 	- `nixos-swap` for the swap partition.
 	- `nixos-hdd` for the data partition on the hard drive.
 
-## Post-installation
+### 4. Deploy this config
 
 1. Get a copy of this repo on the machine.
-2. Make sure that the config for the machine that you’re deploying uses the
-correct version of Home Manager. If you’re installing NixOS 22.05, then you
-should use Home Manager 22.05. If you’re installing NixOS 22.11, then you should
-use Home Manager 22.11. etc. Check in one of the following files for a line that
-looks like `./home-manager/<version>.nix`:
-	- `./deployment/jason-desktop-linux.nix` (for Jason-Desktop-Linux),
-	- `./deployment/jason-laptop-linux.nix` (for Jason-Laptop-Linux),
-	- `./deployment/graphical-test-vm.nix` (for Graphical-Test-VM), or
-	- `./deployment/jasonyundt.website-common.nix` (for `jasonyundt.website`
-	or `jasonyundt.website.home.arpa`).
-3. In `configuration.nix`, one of the system specific configs:
+2. In `configuration.nix`, one of the system specific configs:
 	- `./deployment/jason-desktop-linux.nix`,
 	- `./deployment/jason-laptop-linux.nix`,
 	- `./deployment/graphical-test-vm.nix`,
 	- `./deployment/jasonyundt.website.nix` or
 	- `./deployment/jasonyundt.website.home.arpa.nix`
-4. Run `./deploy.sh`.
-5. Reboot.
-6. Log in as root and set jayman’s password.
+3. Run `./deploy.sh`.
+4. Reboot.
+5. Log in as root and set jayman’s password.
 
-### Instructions specific to Jason’s Web Site
+#### Instructions specific to Jason’s Web Site
 
 These post-installation steps should only be done on `jasonyundt.website` or
 `jasonyundt.website.home.arpa`.
@@ -118,7 +134,7 @@ that contains the password for that email address.
 
 		sudo chmod 400 ~root/mail-password
 
-### Instructions specific to graphical installs
+#### Instructions specific to graphical installs
 
 These post-installation steps should only be done on graphical systems.
 
