@@ -38,8 +38,8 @@ version. If `<version>` is “22.05” then install NixOS 22.05; If `<version>` 
 
 ### 2. If you plan to install NixOS 22.05, then build its manual
 
-Since this repo only works with NixOS 22.05, it’s probably a good idea to follow
-the installation instructions in the NixOS 22.05 Manual (as opposed to the
+If you’re going to install NixOS 22.05, it’s probably a good idea to follow the
+installation instructions in the NixOS 22.05 Manual (as opposed to the
 instructions in the manual for the latest version of NixOS). Unfortunately, the
 NixOS project doesn’t seem to distribute manuals for older stable versions of
 NixOS, so we’ll have to build the NixOS 22.05 Manual from source. Here’s how:
@@ -72,13 +72,14 @@ of the manual:
 ### 3. Install NixOS
 
 Follow the instructions in NixOS’s Installation Instructions (there’re in the
-NixOS 22.05 Manual). Each section in that manual is given a number like 1, 2.2
-or 2.2.1. Bellow is a list of section numbers and any additional notes that I
-have for them:
+NixOS Manual). Each section in that manual is given a number like 1, 2.2 or
+2.2.1. Bellow is a list of section numbers and any additional notes that I have
+for them:
 
 - (1) Download the minimal ISO image. Also download its SHA-256 file, but
 download it from a separate Tor Browser session. **Make sure that you download
-a 22.05 image** (as opposed to one for a later version).
+an image for the correct version of NixOS** (the version that the
+machine-specific config depends on).
 
 - (2)
 	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
