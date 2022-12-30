@@ -3,7 +3,7 @@
 { config, pkgs, ... }:
 {
 	imports = [
-		./home-manager/22.05.nix
+		./home-manager/22.11.nix
 		./common.nix
 		./efi.nix
 		./git-server.nix
