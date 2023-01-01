@@ -28,4 +28,6 @@
 		"Projects".path = "/home/jayman/Documents/Home/Syncthing/Projects";
 		"Game Data".path = "/home/jayman/Documents/Home/Syncthing/Game Data";
 	};
+	nixpkgs.config.allowUnfree = true;
+	programs.steam.enable = true;
 }
