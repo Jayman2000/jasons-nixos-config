@@ -3,9 +3,102 @@
 { config, pkgs, ... }:
 {
 	users.users.jayman.packages = with pkgs; [
+		_2048-in-terminal
+		#abbaye-des-morts  # TODO: Figure out why this fails to build.
+		#abuse  # TODO: Install on systems that already have unfree packages enabled.
+		alephone  # TODO: Declaratively install game data.
+		#alienarena  # TODO: Report upstream that this fails to build.
+		#armagetronad  # TODO: Figure out why this doesn’t work.
+		#assaultcube  # TODO: Install on systems that already have unfree packages enabled.
+		atanks
+		azimuth
+		ballAndPaddle
+		ballerburg
+		blackshades
+		blobby
+		blobwars
+		blockattack
+		brutalmaze
+		bsdgames
+		btanks
+		bugdom
+		bzflag
+		cdogs-sdl
+		chromium-bsu
+		curseofwar
 		chocolateDoom
+		cuyo
 		ecwolf
+		egoboo
+		endgame-singularity
+		endless-sky
+		enigma
+		extremetuxracer
+		fish-fillets-ng
+		fltrator
+		freedink
+		freedroid
+		#frogatto  # TODO: Install on systems that already have unfree packages enabled.
+		frozen-bubble
+		gnujump
+		gotypist
+		graphwar
+		hedgewars
+		kabeljau
+		kmines
+		lugaru
+		mar1d
+		mari0
+		megaglest
+		mindustry
+		nanosaur
+		nethack
+		neverball
+		ninvaders
+		oh-my-git
+		openarena
+		opensupaplex
+		openttd
+		opentyrian
+		#osu-lazer  # TODO: Install on systems that already have unfree packages enabled.
+		otto-matic
+		pacvim
+		pinball
+		powermanga
+		redeclipse
+		robotfindskitten
+		rocksndiamonds
+		rpg-cli
+		rrootage
+		sauerbraten
+		sdlpop
 		slade
+		srb2
+		srb2kart
+		stuntrally
+		superTuxKart
+		superTux
+		system-syzygy
+		taisei
+		tecnoballz
+		teeworlds
+		the-legend-of-edgar
+		the-powder-toy
+		titanion
+		toppler
+		torus-trooper
+		tumiki-fighters
+		tworld2
+		unvanquished
+		#urbanterror  # TODO: Install on systems that already have unfree packages enabled.
+		vectoroids
+		vimgolf
+		vitetris
+		#warsow  # TODO: Install on systems that already have unfree packages enabled.
+		warzone2100
+		wesnoth
+		xmoto
+		xonotic
 	];
 	home-manager.users.jayman = let
 		gameDataPath = (
