@@ -41,7 +41,7 @@ in
 				# Mail-in-a-box is configured such that connections to port 587 must
 				# start unencrypted and be upgraded using STARTTLS. Luckily, it also
 				# requires that TLS be active if you want to do anything [2].
-				# Additionally, NeoMutt will require TLS when ssl_force_tls is on.
+				# Additionally, NeoMutt will require TLS when ssl_force_tls is on [3].
 				# That’s why I’m using the smtp:// scheme instead of the smtps://
 				# scheme.
 				# [1]: <https://www.mailgun.com/blog/email/which-smtp-port-understanding-ports-25-465-587/>
