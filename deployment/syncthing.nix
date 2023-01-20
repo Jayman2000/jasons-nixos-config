@@ -26,6 +26,7 @@
 		{
 			"Server" = { id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7"; };
 			"Jason-Lemur-Pro" = { id = "THEABSO-67CCBNW-OCJ6RXK-F6FK54L-2MCDW43-OT7OJNB-MT4OZFM-Z7OCNA4"; };
+			"Jason-Lemur-Pro-VM-Test" = { id = "SWCITFD-QV7ZP4H-ODSSDAL-BT24TRJ-XQZZBIP-M7Y527D-K6RIZRW-ZFPUFAS"; };
 			"Jason-Desktop-Windows" = { id = "DAW6JNR-DHBHAVL-42UVJDB-SENEDDQ-OVLHNH3-XOVKDE4-JXVIQ23-GJBG6QZ"; };
 		# In other words, only add each device to the devices list if this config isn’t being deployed on that device.
 		} // (if config.networking.hostName != "Jason-Desktop-Linux" then desktop-device else { })
@@ -33,7 +34,7 @@
 		// (if config.networking.hostName != "Jason-Laptop-Linux" then laptop-device else { });
 
 		folders = let
-			all-others-except-vm = [
+			all-others-except-vms = [
 				"Server"
 				"Jason-Lemur-Pro"
 				"Jason-Desktop-Windows"
@@ -43,17 +44,17 @@
 		{
 			"Keep Across Linux Distros!" = {
 				id = "syrpl-vpqnk";
-				devices = all-others-except-vm ++ (if config.networking.hostName != "Graphical-Test-VM" then [ "Graphical-Test-VM" ] else [ ]);
+				devices = all-others-except-vms ++ [ "Jason-Lemur-Pro-VM-Test" ] ++ (if config.networking.hostName != "Graphical-Test-VM" then [ "Graphical-Test-VM" ] else [ ]);
 			};
 		# In other words, only add the Projects and Game Data folders if we’re not deploying on Graphical-Test-VM.
 		} // (if config.networking.hostName != "Graphical-Test-VM" then {
 			"Projects" = {
 				id = "mjwge-zeznc";
-				devices = all-others-except-vm;
+				devices = all-others-except-vms;
 			};
 			"Game Data" = {
 				id = "eheef-uq5hv";
-				devices = all-others-except-vm;
+				devices = all-others-except-vms;
 			};
 		} else { });
 	};
