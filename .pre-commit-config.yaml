@@ -102,7 +102,8 @@ repos:
                         <https://creativecommons.org/publicdomain/zero/1\.0/>|
                         The author of this font waived all copyright to the
                         font and released it into the 🅮 public
-                        domain).|SPDX-License-Identifier:( LicenseRef-MIT-JY)
+                        domain).|SPDX-License-Identifier:( LicenseRef-MIT-JY|
+                        LicenseRef-MIT-NixOSWiki)
                     - --pattern
                     - >
                         SPDX-FileContributor:

@@ -9,6 +9,7 @@
 			./efi.nix
 			./cli-shortcuts.nix
 			./graphical.nix
+			./osx-kvm.nix
 		];
 
 	networking = {
