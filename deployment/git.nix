@@ -14,7 +14,6 @@
 			(pkgs.pre-commit.override {
 				python3Packages = pkgs.python310Packages;
 			})
-			(import applications/cmark-html.nix)
 			(import applications/git-bhc.nix)
 			(import applications/git-tb.nix)
 		];

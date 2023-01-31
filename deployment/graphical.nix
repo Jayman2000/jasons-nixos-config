@@ -73,6 +73,8 @@
 			librewolf
 			palemoon
 			ungoogled-chromium
+
+			(import applications/cmark-html.nix)
 		];
 		xdg.dataFile."fonts/CCSymbols.ttf".source = "/etc/nixos/deployment/CCSymbols.ttf";
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.
