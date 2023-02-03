@@ -23,6 +23,9 @@
 			config.nix.package.out
 			pkgs.msmtp
 			pkgs.perlPackages.mimeConstruct
+			# There’s a comment in msmtp.nix that explains why
+			# pkgs.inetutils is needed.
+			pkgs.inetutils
 		];
 		startAt = "daily";
 		script = let

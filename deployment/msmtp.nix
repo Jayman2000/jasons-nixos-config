@@ -37,6 +37,25 @@
 
 		path = with pkgs; [
 			msmtp
+			# The msmtp package in Nixpkgs uses resholve [1] to
+			# make sure that the commands used in the msmtpq script
+			# are absolute paths [2]. As a result, we don’t have to
+			# worry about whether or not the majority of commands
+			# are on the PATH. Unfortunately, resholve doesn’t do
+			# this for ping (among other commands) [3] [4]. As a
+			# result, we have to make sure that ping is on the path
+			# before running msmtpq or else msmtpq will try and fail
+			# to run ping. When ping fails, msmtpq just assumes that
+			# you don’t have access to the Internet and doesn’t even
+			# try to run msmtp to acutally send the message [5] [6].
+			#
+			# [1]: <https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/misc/resholve/README.md>
+			# [2]: <https://github.com/NixOS/nixpkgs/blob/9f8ce180e0a13d3148435417d8f264f5163ce9be/pkgs/applications/networking/msmtp/default.nix#L65>
+			# [3]: <https://github.com/NixOS/nixpkgs/issues/195532#issuecomment-1324484168>
+			# [4]: <https://github.com/abathur/resholve/issues/29>
+			# [5]: <https://git.marlam.de/gitweb/?p=msmtp.git;a=blob;f=scripts/msmtpq/msmtpq;h=d8b4039338254ba9674fc95ffc252f674d965155;hb=8ee1b0e42f4a735c547caed35775cfe858e69d40#l203>
+			# [6]: <https://git.marlam.de/gitweb/?p=msmtp.git;a=blob;f=scripts/msmtpq/msmtpq;h=d8b4039338254ba9674fc95ffc252f674d965155;hb=8ee1b0e42f4a735c547caed35775cfe858e69d40#l286>
+			inetutils
 		];
 		script = ''
 			msmtpq --q-mgmt -r
