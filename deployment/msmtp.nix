@@ -37,21 +37,6 @@
 
 		path = with pkgs; [
 			msmtp
-			# netcat-gnu is a dependency of msmtp [1], but, for
-			# whatever reason, msmtpq is failing to find the netcat
-			# executable when I run it from a systemd service.
-			#
-			# [1]: <https://github.com/NixOS/nixpkgs/blob/36b9f3d40b822eadfc5c81c9762404d2d3d8374b/pkgs/applications/networking/msmtp/default.nix#L2>
-			netcat-gnu
-			# msmtpq uses which to test whether or not the nc
-			# command is available. Unfortunately, msmtpq makes an
-			# incorrect assumption. It tells you that nc isn’t
-			# available if running “which nc” fails [1]. “which nc”
-			# will fail if nc isn’t available, but “which nc” will
-			# also fail if which isn’t available.
-			#
-			# [1]: <https://git.marlam.de/gitweb/?p=msmtp.git;a=blob;f=scripts/msmtpq/msmtpq;h=4b074dea78e2052a6b7e34a27b2dab5d24e3fbb4;hb=0f8e1c49f7b915c0a70d204e2fd5ffb7979f11b6#l211>
-			which
 		];
 		script = ''
 			msmtpq --q-mgmt -r

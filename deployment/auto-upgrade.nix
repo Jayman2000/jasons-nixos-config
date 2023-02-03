@@ -23,11 +23,6 @@
 			config.nix.package.out
 			pkgs.msmtp
 			pkgs.perlPackages.mimeConstruct
-
-			# There’s a comment in msmtp.nix that explains why
-			# “netcat-gnu” and “which” are needed.
-			pkgs.netcat-gnu
-			pkgs.which
 		];
 		startAt = "daily";
 		script = let
