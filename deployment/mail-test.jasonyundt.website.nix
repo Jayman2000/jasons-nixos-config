@@ -16,7 +16,7 @@
 	networking.hostName = "mail-test";
 	networking.domain = "jasonyundt.website";
 
-	users.users.root.openssh.authorizedKeys.keys = [
+	users.users.jayman.openssh.authorizedKeys.keys = [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
 	];
 }
