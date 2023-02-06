@@ -6,6 +6,7 @@
 		./home-manager/22.11.nix
 		./common.nix
 		./auto-upgrade.nix
+		./nixos-mailserver/22.11.nix
 	];
 
 	# The server itself is in Paris, but I’ll be using it from
