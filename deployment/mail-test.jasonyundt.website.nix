@@ -21,4 +21,45 @@
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAxhFrE4xzbbctfKmM731F3SEAilbltANP4J8WQhIAIb jayman@Jason-Lemur-Pro"
 	];
+
+	mailserver = {
+		enable = true;
+		fqdn = config.networking.fqdn;
+		domains = [ config.networking.fqdn ];
+
+		# Don’t allow IMAP with STARTTLS.
+		enableImap = false;
+		# Allow IMAP with implicit TLS.
+		enableImapSsl = true;
+
+		# Don’t allow SMTP with STARTTLS.
+		enableSubmission = false;
+		# Allow SMTP with implicit TLS.
+		enableSubmissionSsl = true;
+
+		hierarchySeparator = "/";
+
+		# I’m using auto-upgrade.nix for automatic updating.
+		rebootAfterKernelUpgrade.enable = false;
+
+		loginAccounts = let
+			userName = "jason";
+			address = "${userName}@${config.networking.fqdn}";
+		in {
+			"${address}" = {
+				catchAll = [ config.networking.fqdn ];
+				hashedPasswordFile = "${config.users.users.root.home}/hashed-passwords/${userName}";
+			};
+		};
+
+		certificateScheme = 3;
+		# This was chosen based on this recommendation:
+		# <https://crypto.stackexchange.com/a/72298>.
+		dkimKeyBits = 2048;
+	};
+	# This is required in order to use mailserver.certificateScheme = 3.
+	security.acme = {
+		acceptTerms = true;
+		email = "jason@jasonyundt.email";
+	};
 }

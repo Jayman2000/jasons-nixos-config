@@ -26,6 +26,11 @@
 			user = "${config.networking.fqdn}@jasonyundt.email";
 			passwordeval = "cat ~root/mail-password";
 		};
+		# mail-test.jasonyundt.website uses a different sendmail. If
+		# programs.msmtp.setSendmail was set to true on
+		# mail-test.jasonyundt.website, then there would be conflicting
+		# sendmail executables.
+		setSendmail = false;
 	};
 	systemd.services.flush-msmtpq-queue = let
 		dependencies = [ "network-online.target" ];
