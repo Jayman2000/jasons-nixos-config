@@ -14,8 +14,8 @@
 	time.timeZone = "Etc/UTC";
 
 	# The goal here is to make networking.fqdn accurate.
-	networking.hostName = "mail-test";
-	networking.domain = "jasonyundt.website";
+	networking.hostName = "mailserver";
+	networking.domain = "test.jasonyundt.email";
 
 	users.users.jayman.openssh.authorizedKeys.keys = [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
@@ -25,7 +25,7 @@
 	mailserver = {
 		enable = true;
 		fqdn = config.networking.fqdn;
-		domains = [ config.networking.fqdn ];
+		domains = [ config.networking.domain ];
 
 		# Don’t allow IMAP with STARTTLS.
 		enableImap = false;
@@ -44,10 +44,10 @@
 
 		loginAccounts = let
 			userName = "jason";
-			address = "${userName}@${config.networking.fqdn}";
+			address = "${userName}@${config.networking.domain}";
 		in {
 			"${address}" = {
-				catchAll = [ config.networking.fqdn ];
+				catchAll = [ config.networking.domain ];
 				hashedPasswordFile = "${config.users.users.root.home}/hashed-passwords/${userName}";
 			};
 		};
