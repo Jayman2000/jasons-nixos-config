@@ -60,6 +60,6 @@
 	# This is required in order to use mailserver.certificateScheme = 3.
 	security.acme = {
 		acceptTerms = true;
-		email = "jason@jasonyundt.email";
+		defaults.email = "jason@jasonyundt.email";
 	};
 }
