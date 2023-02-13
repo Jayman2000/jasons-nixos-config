@@ -7,6 +7,7 @@
 		./common.nix
 		./auto-upgrade.nix
 		./tmpfs-and-swap.nix
+		./self-test.nix
 	];
 
 	# The server itself is in Paris, but I’ll be using it from
