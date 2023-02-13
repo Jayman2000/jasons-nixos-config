@@ -7,7 +7,10 @@ let
 	# I which I could just say “all tmpfses will report that they’re full
 	# only if 90% of how ever much virtual memory we currently have is in
 	# use.”
-	normalTmpfsSize = "40G";
+	#
+	# I’m using a much lower number on mailserver.test.jasonyundt.email
+	# because that machine only has 25G of disk space.
+	normalTmpfsSize = if config.networking.hostName == "mailserver" then "10G" else "40G";
 	ramConstrainedTmpfsSize = "45%";
 in {
 	boot.devShmSize = normalTmpfsSize;
