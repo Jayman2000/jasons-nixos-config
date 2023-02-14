@@ -55,6 +55,10 @@ writeShellApplication {
 		test_logs+=( "$(ping_test 4 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
+		test_names+=( "IPv6 connection" )
+		test_logs+=( "$(ping_test 6 2>&1)" )
+		test_exit_statuses+=( "$?" )
+
 		any_errors=0
 		readonly total_tests="''\${#test_names[@]}"
 		if \
