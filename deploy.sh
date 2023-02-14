@@ -14,7 +14,7 @@ function copy_and_restrict {
 	done
 }
 
-copy_and_restrict u=X,g=,o= deployment/
+copy_and_restrict u=X,g=,o= imports/
 if [ "$switch" = yes ]; then
 	sudo nixos-rebuild switch
 else

@@ -76,7 +76,7 @@
 
 			(import applications/cmark-html.nix)
 		];
-		xdg.dataFile."fonts/CCSymbols.ttf".source = "/etc/nixos/deployment/CCSymbols.ttf";
+		xdg.dataFile."fonts/CCSymbols.ttf".source = "/etc/nixos/imports/CCSymbols.ttf";
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.
 		xsession.enable = true;
 

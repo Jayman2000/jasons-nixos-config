@@ -15,7 +15,7 @@
 			users = [ "jayman" ];
 			commands = [
 				{
-					command = "/etc/nixos/deployment/add-flathub.sh";
+					command = "/etc/nixos/imports/add-flathub.sh";
 					options = [ "NOPASSWD" ];
 				}
 			];
@@ -24,7 +24,7 @@
 	home-manager.users.jayman = { pkgs, ... }: {
 		# This isn’t a very good way of having declarative Flatpaks, but it’s what works at the moment.
 		xsession.initExtra = ''
-			sudo /etc/nixos/deployment/add-flathub.sh
+			sudo /etc/nixos/imports/add-flathub.sh
 			flatpak install flathub com.github.micahflee.torbrowser-launcher -y
 		'';
 	};

@@ -17,16 +17,16 @@ machine’s config is designed to work with only one version of NixOS.
 1. Find the machine-specific config file that contains the information that
 we’re looking for.
 	- For Jason-Desktop-Linux, this is
-	`./deployment/jason-desktop-linux.nix`.
+	`./imports/jason-desktop-linux.nix`.
 
 	- For Jason-Laptop-Linux, this is
-	`./deployment/jason-laptop-linux.nix`.
+	`./imports/jason-laptop-linux.nix`.
 
 	- For Graphical-Test-VM, this is
-	`./deployment/graphical-test-vm.nix`.
+	`./imports/graphical-test-vm.nix`.
 
 	- For `jasonyundt.website` and `jasonyundt.website.home.arpa`, this is
-	`./deployment/jasonyundt.website-common.nix`.
+	`./imports/jasonyundt.website-common.nix`.
 2. Open that file.
 3. Look for a line that looks like this:
 
@@ -112,11 +112,11 @@ arbitrary number.
 
 1. Get a copy of this repo on the machine.
 2. In `configuration.nix`, one of the system specific configs:
-	- `./deployment/jason-desktop-linux.nix`,
-	- `./deployment/jason-laptop-linux.nix`,
-	- `./deployment/graphical-test-vm.nix`,
-	- `./deployment/jasonyundt.website.nix` or
-	- `./deployment/jasonyundt.website.home.arpa.nix`
+	- `./imports/jason-desktop-linux.nix`,
+	- `./imports/jason-laptop-linux.nix`,
+	- `./imports/graphical-test-vm.nix`,
+	- `./imports/jasonyundt.website.nix` or
+	- `./imports/jasonyundt.website.home.arpa.nix`
 3. Run `./deploy.sh`.
 4. Reboot.
 5. Log in as root and set jayman’s password.
