@@ -1,8 +1,11 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
 { config, pkgs, ... }:
 {
-	imports = [ ./neovim.nix ];
+	imports = [
+		./git-common.nix
+		./neovim.nix
+	];
 	# Hopefully, this will prevent the machine from getting stuck during boot (sometimes, it will get stuck waiting for the DHCP client to start).
 	networking.dhcpcd.enable = false;
 	networking.networkmanager.enable = true;
