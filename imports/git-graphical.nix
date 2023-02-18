@@ -44,13 +44,15 @@
 			pkgs.gcc # Used for this repo’s pre-commit config
 			pkgs.go # Used for this repo’s pre-commit config
 
-			# In a future commit, I’m going to add a Python
-			# script that requires Python 3.11. We need to
-			# make sure that pre-commit uses Python 3.11 so
-			# that the mypy hook uses Python 3.11. If we
-			# were to run the mypy hook with Python 3.10,
-			# then the mypy hook would fail to check that
-			# Python 3.11-only script.
+			# local-pre-commit-hooks/update-serial-numbers.py
+			# is a script that requires Python 3.11. It’s
+			# used by this repo’s update-serial-numbers
+			# pre-commit hook. We need to make sure that
+			# pre-commit uses Python 3.11 so that the mypy
+			# hook uses Python 3.11. If we were to run the
+			# mypy hook with Python 3.10, then the mypy hook
+			# would fail to check that Python 3.11-only
+			# script.
 			(pkgs.pre-commit.override {
 				python3Packages = pkgs.python311Packages;
 			})

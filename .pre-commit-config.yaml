@@ -57,7 +57,9 @@ repos:
                 # YAML requires spaces for indentation. See:
                 # <https://yaml.org/spec/1.2.2/#61-indentation-spaces>
                 # Pipfile.lock is automatically generated.
-                exclude: '.*\.yaml$|(.*/)?Pipfile\.lock$'
+                # knot.conf uses YAML-like syntax. See:
+                # <https://www.knot-dns.cz/docs/3.2/html/configuration.html>
+                exclude: '.*\.yaml$|(.*/)?Pipfile\.lock$|imports/knot-dns/knot\.conf$'
                 # This is a workaround the following issue:
                 # <https://github.com/jumanjihouse/pre-commit-hooks/issues/69>
                 types: ['text']
@@ -78,6 +80,31 @@ repos:
             -
                 id: shfmt
                 args: ["-fn"]
+    -
+        repo: https://github.com/pre-commit/mirrors-mypy
+        rev: v1.0.1
+        hooks:
+            - id: mypy
+    -
+        repo: local
+        hooks:
+            -
+                id: &usn update-serial-numbers
+                name: *usn
+                # Here’s how I decided what to set the language and
+                # entry to:
+                # <https://pre-commit.com/#repository-local-hooks>
+                entry: python local-pre-commit-hooks/update-serial-numbers.py
+                language: python
+                files: &zone_files ".*\\.zone$"
+                description: Update serial numbers in DNS zone file SOA records
+            -
+                id: &kzc kzonecheck
+                name: *kzc
+                entry: ./local-pre-commit-hooks/kzonecheck.sh
+                language: system
+                files: *zone_files
+                description: Validate DNS zone files
 # TODO: How do I make it accept hard tabs?
 #    -
 #        repo: https://github.com/nix-community/nixpkgs-fmt
