@@ -46,6 +46,32 @@ writeShellApplication {
 			return "$exit_status"
 		}
 
+		function any_failed_systemd_units
+		{
+			local -r none='0 loaded units listed.'
+
+			local unit_list
+			unit_list="$(systemctl list-units --failed 2>&1)"
+			local -r unit_list_error_code="$?"
+			readonly unit_list
+
+			echo_raw "$unit_list"
+
+			local exit_status=0
+			if [ "$unit_list_error_code" -ne 0 ]
+			then
+				exit_status=1
+				echo_raw \
+					Listing units failed with exit \
+					status "$unit_list_error_code"
+			elif ! echo "$unit_list" | grep -F "$none"
+			then
+				exit_status=1
+				echo At least one unit failed.
+			fi
+			return "$exit_status"
+		}
+
 
 		test_names=( )
 		test_logs=( )
@@ -57,6 +83,10 @@ writeShellApplication {
 
 		test_names+=( "IPv6 connection" )
 		test_logs+=( "$(ping_test 6 2>&1)" )
+		test_exit_statuses+=( "$?" )
+
+		test_names+=( "Failed systemd units" )
+		test_logs+=( "$(any_failed_systemd_units 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
 		any_errors=0
