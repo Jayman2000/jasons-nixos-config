@@ -8,13 +8,53 @@
 	# that also didn’t work.
 	environment.systemPackages = [ pkgs.nodejs ];
 	home-manager.users.jayman = { pkgs, ... }: {
-		home.packages = [
+		# Adapted from
+		# <https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable>.
+		home.packages = let
+			url = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz";
+			tarball = builtins.fetchTarball url;
+			unstablePkgs = import tarball {};
+			# Thanks to strager
+			# (<https://stackoverflow.com/users/39992/strager>)
+			# for this idea:
+			# <https://stackoverflow.com/a/71245733/7593853>
+			pyOverrides = finalAttrs: previousAttrs: {
+				# The version of python3Packages.cffi in
+				# the stable version of nixpkgs doesn’t
+				# work with Python 3.11. See
+				# <https://foss.heptapod.net/pypy/cffi/-/issues/551>.
+				#
+				# The only reason we want cffi to work
+				# with Python 3.11 it’s an indirect
+				# dependency of pre-commit. See below
+				# for why we want to run pre-commit with
+				# Python 3.11.
+				cffi = unstablePkgs.python311Packages.cffi;
+			};
+			overlay = finalAttrs: previousAttrs: {
+				python311 = previousAttrs.python311.override {
+					packageOverrides = pyOverrides;
+				};
+			};
+			pkgs = import <nixpkgs> {
+				overlays = [ overlay ];
+			};
+		in [
 			pkgs.cargo # Used for this repo’s pre-commit config
 			pkgs.gcc # Used for this repo’s pre-commit config
 			pkgs.go # Used for this repo’s pre-commit config
+
+			# In a future commit, I’m going to add a Python
+			# script that requires Python 3.11. We need to
+			# make sure that pre-commit uses Python 3.11 so
+			# that the mypy hook uses Python 3.11. If we
+			# were to run the mypy hook with Python 3.10,
+			# then the mypy hook would fail to check that
+			# Python 3.11-only script.
 			(pkgs.pre-commit.override {
-				python3Packages = pkgs.python310Packages;
+				python3Packages = pkgs.python311Packages;
 			})
+
 			(import applications/git-bhc.nix)
 			(import applications/git-tb.nix)
 		];
