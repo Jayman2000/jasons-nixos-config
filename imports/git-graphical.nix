@@ -11,9 +11,20 @@
 		# Adapted from
 		# <https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable>.
 		home.packages = let
-			url = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz";
-			tarball = builtins.fetchTarball url;
-			unstablePkgs = import tarball {};
+			unstableURL = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz";
+			unstableTarball = builtins.fetchTarball unstableURL;
+			unstablePkgs = import unstableTarball {};
+
+			# In a future commit, I’m going to add some
+			# local pre-commit hooks. For whatever reason,
+			# the parts of the pre-commit config that that
+			# WIP commit adds don’t work with the latest
+			# version of pre-commit that’s available in
+			# nixpkgs. This PR updates pre-commit to 3.1.0.
+			# Hopefully, doing so will make the changes in
+			# that future commit work.
+			pr215429URL = "https://github.com/aaronjheng/nixpkgs/archive/refs/heads/pre-commit.tar.gz";
+			pr215429Tarball = builtins.fetchTarball pr215429URL;
 			# Thanks to strager
 			# (<https://stackoverflow.com/users/39992/strager>)
 			# for this idea:
@@ -35,8 +46,21 @@
 				python311 = previousAttrs.python311.override {
 					packageOverrides = pyOverrides;
 				};
+				pre-commit = (previousAttrs.pre-commit.override {
+					# In a future commit, I’m going
+					# to add a Python script that
+					# requires Python 3.11. We need
+					# to make sure that pre-commit
+					# uses Python 3.11 so that the
+					# mypy hook uses Python 3.11. If
+					# we were to run the mypy hook
+					# with Python 3.10, then the
+					# mypy hook would fail to check
+					# that Python 3.11-only script.
+					python3Packages = finalAttrs.python311Packages;
+				});
 			};
-			pkgs = import <nixpkgs> {
+			customizedPkgs = import pr215429Tarball  {
 				overlays = [ overlay ];
 			};
 		in [
@@ -44,16 +68,7 @@
 			pkgs.gcc # Used for this repo’s pre-commit config
 			pkgs.go # Used for this repo’s pre-commit config
 
-			# In a future commit, I’m going to add a Python
-			# script that requires Python 3.11. We need to
-			# make sure that pre-commit uses Python 3.11 so
-			# that the mypy hook uses Python 3.11. If we
-			# were to run the mypy hook with Python 3.10,
-			# then the mypy hook would fail to check that
-			# Python 3.11-only script.
-			(pkgs.pre-commit.override {
-				python3Packages = pkgs.python311Packages;
-			})
+			customizedPkgs.pre-commit
 
 			(import applications/git-bhc.nix)
 			(import applications/git-tb.nix)
