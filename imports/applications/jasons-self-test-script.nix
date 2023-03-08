@@ -12,6 +12,11 @@ writeShellApplication {
 		# or else the results won’t get printed.
 		set +o errexit
 
+		# This is needed for the while look in
+		# disk_space_too_low to modify the exit_status variable
+		# sucessfully.
+		shopt -s lastpipe
+
 		# This lets you echo the value of a variable, even if
 		# the variable looks like a commandline flag (for
 		# example: the "$var" might be “-E”).
@@ -72,6 +77,33 @@ writeShellApplication {
 			return "$exit_status"
 		}
 
+		function disk_space_too_low
+		{
+			local exit_status=0
+			local pcent target
+			# The tail command gets rid of the table’s
+			# headers.
+			df --output=pcent,target |
+				tail -n +2 |
+				while read -r pcent target
+				do
+					# Turn pcent into a number with
+					# no extra characters.
+					pcent="$(
+						echo_raw "$pcent" |
+							tr -d " %"
+					)"
+					if [ "$pcent" -ge 85 ]
+					then
+						echo \
+							"$target is" \
+							"$pcent% full."
+						exit_status=1
+					fi
+				done
+			return "$exit_status"
+		}
+
 
 		test_names=( )
 		test_logs=( )
@@ -87,6 +119,10 @@ writeShellApplication {
 
 		test_names+=( "Failed systemd units" )
 		test_logs+=( "$(any_failed_systemd_units 2>&1)" )
+		test_exit_statuses+=( "$?" )
+
+		test_names+=( "Disk space" )
+		test_logs+=( "$(disk_space_too_low 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
 		any_errors=0
