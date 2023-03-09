@@ -20,6 +20,7 @@ writeShellApplication {
 		# sucessfully.
 		shopt -s lastpipe
 
+		### Helper functions: ###
 		# This lets you echo the value of a variable, even if
 		# the variable looks like a commandline flag (for
 		# example: the "$var" might be “-E”).
@@ -28,6 +29,36 @@ writeShellApplication {
 			printf '%s\n' "$*"
 		}
 
+		function record_mismatch
+		{
+			if [ "$#" -ne 4 ]
+			then
+				echo_raw \
+					"The record_mismatch funtion" \
+					"was called with $# " \
+					"arguments. It should only" \
+					"ever be called with 4" \
+					"arguments."
+			fi
+			local -r domain="$1"
+			shift
+			local -r type="$1"
+			shift
+			local -r expected="$1"
+			shift
+			# If record_mismatch is called with too many
+			# arguments, act like the extra arguments were
+			# packed into the last argument.
+			local -r actual="$*"
+
+			# shellcheck disable=SC1111
+			echo_raw \
+				"$domain’s $type record" \
+				"should be “$expected”, but" \
+				"it’s actually “$actual”."
+		}
+
+		### Test functions: ###
 		function ping_test
 		{
 			# See <https://www.rfc-editor.org/rfc/rfc2606.html> and
@@ -119,13 +150,77 @@ writeShellApplication {
 			then
 				return 0
 			else
-				# shellcheck disable=SC1111
-				echo_raw \
-					"$domain’s NS record should" \
-					"be “$expected_ns”, but it’s" \
-					"actually “$actual_ns”"
+				record_mismatch \
+					"$domain" \
+					NS \
+					"$expected_ns" \
+					"$actual_ns"
 				return 1
 			fi
+		}
+
+		function dns_a_and_aaaa
+		{
+			local -r domain=nameserver.test.jasonyundt.email
+
+			local -r ipv4_resolver=resolver4.opendns.com
+			local ipv6_resolver
+			ipv6_resolver=resolver1.ipv6-sandbox.opendns.com
+			readonly ipv6_resolver
+
+			# Thanks to Timo Tijhof
+			# (<https://unix.stackexchange.com/users/37512/timo-tijhof>)
+			# for this idea:
+			# <https://unix.stackexchange.com/a/81699/316181>.
+			local -r expected_a="$(
+				kdig \
+					-4 \
+					"@$ipv4_resolver" \
+					myip.opendns.com \
+					+short
+			)"
+			local -r expected_aaaa="$(
+				kdig \
+					-6 \
+					"@$ipv6_resolver" \
+					AAAA \
+					myip.opendns.com \
+					+short
+			)"
+
+			local -r actual_a="$(
+				kdig \
+					A \
+					"$domain" \
+					+short
+			)"
+			local -r actual_aaaa="$(
+				kdig \
+					AAAA \
+					"$domain" \
+					+short
+			)"
+			local exit_status=0
+			if [ "$expected_a" != "$actual_a" ]
+			then
+				record_mismatch \
+					"$domain" \
+					A \
+					"$expected_a" \
+					"$actual_a"
+				exit_status=1
+			fi
+			if [ "$expected_aaaa" != "$actual_aaaa" ]
+			then
+				record_mismatch \
+					"$domain" \
+					AAAA \
+					"$expected_aaaa" \
+					"$actual_aaaa"
+				exit_status=1
+			fi
+
+			return "$exit_status"
 		}
 
 
@@ -151,6 +246,10 @@ writeShellApplication {
 
 		test_names+=( "NS record" )
 		test_logs+=( "$(dns_ns 2>&1)" )
+		test_exit_statuses+=( "$?" )
+
+		test_names+=( "A and AAAA records" )
+		test_logs+=( "$(dns_a_and_aaaa 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
 		any_errors=0
