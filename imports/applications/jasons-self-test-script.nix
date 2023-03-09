@@ -4,7 +4,10 @@ with import <nixpkgs> { };
 
 writeShellApplication {
 	name = "jasons-self-test-script";
-	runtimeInputs = [ iputils ];
+	runtimeInputs = [
+		iputils
+		knot-dns
+	];
 	text = ''
 		# writeShellApplication enables this by default. We need
 		# to turn it off or else the script will exit when a
@@ -104,6 +107,27 @@ writeShellApplication {
 			return "$exit_status"
 		}
 
+		function dns_ns
+		{
+			local -r domain=test.jasonyundt.email
+			local -r expected_ns=nameserver.test.jasonyundt.email.
+			local -r actual_ns="$(
+				kdig NS "$domain" +short |
+					tr -d $'\n'
+			)"
+			if [ "$expected_ns" = "$actual_ns" ]
+			then
+				return 0
+			else
+				# shellcheck disable=SC1111
+				echo_raw \
+					"$domain’s NS record should" \
+					"be “$expected_ns”, but it’s" \
+					"actually “$actual_ns”"
+				return 1
+			fi
+		}
+
 
 		test_names=( )
 		test_logs=( )
@@ -123,6 +147,10 @@ writeShellApplication {
 
 		test_names+=( "Disk space" )
 		test_logs+=( "$(disk_space_too_low 2>&1)" )
+		test_exit_statuses+=( "$?" )
+
+		test_names+=( "NS record" )
+		test_logs+=( "$(dns_ns 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
 		any_errors=0
