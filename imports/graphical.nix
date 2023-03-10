@@ -15,6 +15,7 @@
 
 	sound.enable = true;
 	hardware.pulseaudio.enable = true;
+	networking.networkmanager.enable = true;
 
 	# Enable the X11 windowing system.
 	services.xserver = {
