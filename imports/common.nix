@@ -6,8 +6,6 @@
 		./git-common.nix
 		./neovim.nix
 	];
-	# Hopefully, this will prevent the machine from getting stuck during boot (sometimes, it will get stuck waiting for the DHCP client to start).
-	networking.dhcpcd.enable = false;
 	networking.networkmanager.enable = true;
 
 	i18n.defaultLocale = "en_US.UTF-8";
