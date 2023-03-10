@@ -29,6 +29,94 @@ writeShellApplication {
 			printf '%s\n' "$*"
 		}
 
+		function check_dns_record
+		{
+			local exit_status=0
+
+			if [ "$#" -lt 3 ]
+			then
+				echo_raw \
+					"ERROR: The check_dns_record" \
+					"funtion was called with $# " \
+					"arguments. It should only" \
+					"ever be called with 3" \
+					"arguments, even when tests" \
+					"fail."
+				exit_status=1
+			fi
+			local -r domain="$1"
+			shift
+			local -r type="$1"
+			shift
+			local -r expectation="$*"
+			local -r dns_servers=(
+				""
+				localhost
+			)
+
+			local actual kdig_es
+			for server in "''\${dns_servers[@]}"
+			do
+				for ipv in 4 6
+				do
+					# The arguments here are ordered
+					# according to how <man:kdig(1)>
+					# says they should be ordered.
+
+					local to_run=( kdig )
+					## [common-settings]
+					### [query_class] SKIPED
+					### [query_type]
+					to_run+=( "$type" )
+					### [@server]
+					if [ "$server" != "" ]
+					then
+						to_run+=( "@$server" )
+					fi
+					### [options]
+					to_run+=( "-$ipv" )
+					to_run+=( "+short" )
+					## [query]
+					### name
+					to_run+=( "$domain" )
+					### [settings] SKIPED
+
+					# Add a blank line for spacing.
+					echo
+					echo_raw \
+						'$' \
+						"''\${to_run[*]}"
+					actual="$("''\${to_run[@]}")"
+					kdig_es="$?"
+					echo_raw "$actual"
+					echo_raw \
+						"kdig exit status:" \
+						"$kdig_es"
+					if [ "$kdig_es" -ne 0 ]
+					then
+						exit_status="$kdig_es"
+					fi
+					if [ "$actual" != "$expectation" ]
+					then
+						# shellcheck disable=SC1111
+						echo_raw \
+							"That" \
+							"previous" \
+							"command" \
+							"should have" \
+							"printed" \
+							"“$expectation”."
+						if [ "$exit_status" -eq 0 ]
+						then
+							exit_status=1
+						fi
+					fi
+				done
+			done
+
+			return "$exit_status"
+		}
+
 		function record_mismatch
 		{
 			if [ "$#" -ne 4 ]
@@ -138,88 +226,60 @@ writeShellApplication {
 			return "$exit_status"
 		}
 
-		function dns_ns
+		function dns_records
 		{
-			local -r domain=test.jasonyundt.email
-			local -r expected_ns=nameserver.test.jasonyundt.email.
-			local -r actual_ns="$(
-				kdig NS "$domain" +short |
-					tr -d $'\n'
-			)"
-			if [ "$expected_ns" = "$actual_ns" ]
-			then
-				return 0
-			else
-				record_mismatch \
-					"$domain" \
-					NS \
-					"$expected_ns" \
-					"$actual_ns"
-				return 1
-			fi
-		}
-
-		function dns_a_and_aaaa
-		{
-			local -r domain=nameserver.test.jasonyundt.email
-
-			local -r ipv4_resolver=resolver4.opendns.com
-			local ipv6_resolver
-			ipv6_resolver=resolver1.ipv6-sandbox.opendns.com
-			readonly ipv6_resolver
-
-			# Thanks to Timo Tijhof
-			# (<https://unix.stackexchange.com/users/37512/timo-tijhof>)
-			# for this idea:
-			# <https://unix.stackexchange.com/a/81699/316181>.
-			local -r expected_a="$(
-				kdig \
-					-4 \
-					"@$ipv4_resolver" \
-					myip.opendns.com \
-					+short
-			)"
-			local -r expected_aaaa="$(
-				kdig \
-					-6 \
-					"@$ipv6_resolver" \
-					AAAA \
-					myip.opendns.com \
-					+short
-			)"
-
-			local -r actual_a="$(
-				kdig \
-					A \
-					"$domain" \
-					+short
-			)"
-			local -r actual_aaaa="$(
-				kdig \
-					AAAA \
-					"$domain" \
-					+short
-			)"
 			local exit_status=0
-			if [ "$expected_a" != "$actual_a" ]
+
+			local -a domains types expectations
+
+			domains+=( test.jasonyundt.email )
+			types+=( NS )
+			expectations+=(
+				nameserver.test.jasonyundt.email.
+			)
+
+			domains+=( nameserver.test.jasonyundt.email )
+			types+=( A )
+			expectations+=( 46.226.105.243 )
+
+			domains+=( nameserver.test.jasonyundt.email )
+			types+=( AAAA )
+			expectations+=(
+				2001:4b98:dc0:43:f816:3eff:fe58:92cc
+			)
+
+			local -r total="''\${#expectations[@]}"
+			# Normally, I would indent the condition of this
+			# if statement (because it’s split up over
+			# multiple lines), but doing that messes up the
+			# way that Neovim indents things.
+			if
+			[ "$total" -ne "''\${#domains[@]}" ] ||
+			[ "$total" -ne "''\${#types[@]}" ]
 			then
-				record_mismatch \
-					"$domain" \
-					A \
-					"$expected_a" \
-					"$actual_a"
-				exit_status=1
-			fi
-			if [ "$expected_aaaa" != "$actual_aaaa" ]
-			then
-				record_mismatch \
-					"$domain" \
-					AAAA \
-					"$expected_aaaa" \
-					"$actual_aaaa"
-				exit_status=1
+				# shellcheck disable=SC1110
+				echo \
+					ERROR: the domains, types and \
+					expectations arrays aren’t all \
+					same size. This should never \
+					happen, even when tests \
+					fail. 1>&2
 			fi
 
+			local -a to_run
+			local to_run_es
+			for ((i = 0; i < "$total"; i++))
+			do
+				check_dns_record \
+					"''\${domains[$i]}" \
+					"''\${types[$i]}" \
+					"''\${expectations[$i]}"
+				to_run_es="$?"
+				if [ "$exit_status" -eq 0 ]
+				then
+					exit_status="$to_run_es"
+				fi
+			done
 			return "$exit_status"
 		}
 
@@ -244,12 +304,8 @@ writeShellApplication {
 		test_logs+=( "$(disk_space_too_low 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
-		test_names+=( "NS record" )
-		test_logs+=( "$(dns_ns 2>&1)" )
-		test_exit_statuses+=( "$?" )
-
-		test_names+=( "A and AAAA records" )
-		test_logs+=( "$(dns_a_and_aaaa 2>&1)" )
+		test_names+=( "DNS records" )
+		test_logs+=( "$(dns_records 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
 		any_errors=0
