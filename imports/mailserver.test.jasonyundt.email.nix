@@ -23,6 +23,7 @@
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAxhFrE4xzbbctfKmM731F3SEAilbltANP4J8WQhIAIb jayman@Jason-Lemur-Pro"
 	];
 
+	services.rdnssd.enable = true;
 	# It can be tricky to get the DNS records for a mailserver
 	# right. While it might be more robust to use an external DNS
 	# provider, it would mean that I would have to find a way to
