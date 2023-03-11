@@ -15,13 +15,7 @@
 		preLVM = true;
 	};
 
-	networking = {
-		hostName = "Jason-Laptop-Linux";
-		interfaces = {
-			eno1.useDHCP = true;
-			wlo1.useDHCP = true;
-		};
-	};
+	networking.hostName = "Jason-Laptop-Linux";
 	time.timeZone = "America/New_York";
 	services.syncthing.folders = {
 		"Keep Across Linux Distros!".path = "/home/jayman/Documents/Home/Syncthing/.save";

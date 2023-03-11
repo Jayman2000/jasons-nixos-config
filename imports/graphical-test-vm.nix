@@ -9,13 +9,7 @@
 			./cli-shortcuts.nix
 			./graphical.nix
 		];
-	networking = {
-		hostName = "Graphical-Test-VM";
-		# TODO: What will the interface be named?
-		#interfaces = {
-		#	eno1.useDHCP = true;
-		#};
-	};
+	networking.hostName = "Graphical-Test-VM";
 	time.timeZone = "America/New_York";
 	services.syncthing.folders = {
 		"Keep Across Linux Distros!".path = "/home/jayman/Documents/Home/Syncthing/.save";

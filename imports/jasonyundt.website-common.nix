@@ -10,8 +10,6 @@
 		./git-server.nix
 	];
 
-	# TODO: Update this interface’s name.
-	#networking.interfaces.enp8s0.useDHCP = true;
 	time.timeZone = "America/New_York";
 
 	# The goal here is to make networking.fqdn accurate.
