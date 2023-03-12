@@ -13,7 +13,10 @@
 		];
 
 	networking.hostName = "Jason-Desktop-Linux";
-	environment.systemPackages = [ pkgs.vulkan-tools ];
+	environment.systemPackages = [
+		pkgs.vulkan-tools
+		pkgs.wineWowPackages.stable
+	];
 	time.timeZone = "America/New_York";
 	nixpkgs.config.allowUnfree = true;
 	programs.steam.enable = true;
@@ -26,4 +29,7 @@
 
 	# I keep ending up with so little space that I can’t update.
 	nix.settings.auto-optimise-store = true;
+
+	# See <https://nixos.org/manual/nixos/stable/#sec-x11>.
+	hardware.opengl.driSupport32Bit = true;
 }
