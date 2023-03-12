@@ -8,7 +8,10 @@ writeShellApplication {
 		iputils
 		knot-dns
 	];
-	text = ''
+	text = let
+		esa = lib.strings.escapeShellArg;
+		rr = import ../recursive-resolvers.nix;
+	in ''
 		# writeShellApplication enables this by default. We need
 		# to turn it off or else the script will exit when a
 		# test fails. We need the script to reach the very end
@@ -33,13 +36,13 @@ writeShellApplication {
 		{
 			local exit_status=0
 
-			if [ "$#" -lt 3 ]
+			if [ "$#" -lt 4 ]
 			then
 				echo_raw \
 					"ERROR: The check_dns_record" \
 					"funtion was called with $# " \
 					"arguments. It should only" \
-					"ever be called with 3" \
+					"ever be called with 4" \
 					"arguments, even when tests" \
 					"fail."
 				exit_status=1
@@ -48,11 +51,16 @@ writeShellApplication {
 			shift
 			local -r type="$1"
 			shift
+			local -r check_local="$1"
+			shift
 			local -r expectation="$*"
-			local -r dns_servers=(
-				""
-				localhost
-			)
+
+			local dns_servers=( "" )
+			if [ "$check_local" -eq 1 ]
+			then
+				dns_severs+=( localhost )
+			fi
+			readonly dns_servers
 
 			local actual kdig_es
 			for server in "''\${dns_servers[@]}"
@@ -88,6 +96,19 @@ writeShellApplication {
 						"''\${to_run[*]}"
 					actual="$("''\${to_run[@]}")"
 					kdig_es="$?"
+
+					# If there’s more than one
+					# record of a given type, then
+					# the order in which they’re
+					# printed is probably arbitrary.
+					# Either way we don’t really
+					# care about the order, we just
+					# care about the values. Sorting
+					# the output means that there
+					# will be a known order.
+					actual="$(echo_raw "$actual" |
+						sort
+					)"
 					echo_raw "$actual"
 					echo_raw \
 						"kdig exit status:" \
@@ -230,23 +251,47 @@ writeShellApplication {
 		{
 			local exit_status=0
 
-			local -a domains types expectations
+			local -a domains types check_locals expectations
 
 			domains+=( test.jasonyundt.email )
 			types+=( NS )
+			check_locals+=( 1 )
 			expectations+=(
 				nameserver.test.jasonyundt.email.
 			)
 
 			domains+=( nameserver.test.jasonyundt.email )
 			types+=( A )
+			check_locals+=( 1 )
 			expectations+=( 46.226.105.243 )
 
 			domains+=( nameserver.test.jasonyundt.email )
 			types+=( AAAA )
+			check_locals+=( 1 )
 			expectations+=(
 				2001:4b98:dc0:43:f816:3eff:fe58:92cc
 			)
+
+			# Make sure that the IP addresses that we’re
+			# using for DNS recursive resolvers are
+			# accurate.
+			domains+=( ${esa rr.domain } )
+			types+=( A )
+			check_locals+=( 0 )
+			expectations+=( ${esa (
+				builtins.concatStringsSep
+					"\n"
+					rr.expectedARecords
+			) } )
+
+			domains+=( ${esa rr.domain } )
+			types+=( AAAA )
+			check_locals+=( 0 )
+			expectations+=( ${esa (
+				builtins.concatStringsSep
+					"\n"
+					rr.expectedAAAARecords
+			) } )
 
 			local -r total="''\${#expectations[@]}"
 			# Normally, I would indent the condition of this
@@ -255,6 +300,7 @@ writeShellApplication {
 			# way that Neovim indents things.
 			if
 			[ "$total" -ne "''\${#domains[@]}" ] ||
+			[ "$total" -ne "''\${#check_locals[@]}" ]
 			[ "$total" -ne "''\${#types[@]}" ]
 			then
 				# shellcheck disable=SC1110
@@ -273,6 +319,7 @@ writeShellApplication {
 				check_dns_record \
 					"''\${domains[$i]}" \
 					"''\${types[$i]}" \
+					"''\${check_locals[$i]}" \
 					"''\${expectations[$i]}"
 				to_run_es="$?"
 				if [ "$exit_status" -eq 0 ]

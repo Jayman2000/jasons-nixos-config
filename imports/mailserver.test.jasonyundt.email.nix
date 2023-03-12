@@ -23,6 +23,16 @@
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAxhFrE4xzbbctfKmM731F3SEAilbltANP4J8WQhIAIb jayman@Jason-Lemur-Pro"
 	];
 
+	# The LAN for Gandicloud VPS doesn’t seem to advertise IPv6 DNS
+	# recursive resolver addresses. I’m also adding some IPv4
+	# addresses here as a back up.
+	networking.nameservers = let
+		recursiveResolvers = import ./recursive-resolvers.nix;
+	in builtins.concatLists [
+		recursiveResolvers.expectedARecords
+		recursiveResolvers.expectedAAAARecords
+	];
+
 	# It can be tricky to get the DNS records for a mailserver
 	# right. While it might be more robust to use an external DNS
 	# provider, it would mean that I would have to find a way to
