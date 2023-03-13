@@ -59,6 +59,15 @@ writeShellApplication {
 			if [ "$check_local" -eq 1 ]
 			then
 				dns_severs+=( localhost )
+			elif [ "$check_local" -ne 0 ]
+			then
+				# shellcheck disable=SC1111
+				echo_raw \
+					"ERROR: check_local is" \
+					"“$check_local”. It should" \
+					"only ever be 0 or 1. This" \
+					"should never happen, even" \
+					"when tests fail."
 			fi
 			readonly dns_servers
 
