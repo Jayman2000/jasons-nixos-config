@@ -42,9 +42,18 @@
 			rawConfig;
 	};
 	networking.firewall = let
-		dnsPort = [ 53 ];
+		# Source:
+		# <https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=domain>
+		unencryptedDNSPort = 53;
+		encryptedDNSPort = 853;
 	in {
-		allowedTCPPorts = dnsPort;
-		allowedUDPPorts = dnsPort;
+		# I don’t think that Knot DNS supports DNS over TLS [1].
+		#
+		# [1]: <https://www.rfc-editor.org/rfc/rfc7858.html>
+		allowedTCPPorts = [ unencryptedDNSPort ];
+		allowedUDPPorts = [
+			unencryptedDNSPort
+			encryptedDNSPort
+		];
 	};
 }

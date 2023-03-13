@@ -76,7 +76,7 @@ writeShellApplication {
 			do
 				for ipv in 4 6
 				do
-					for tp in udp tcp
+					for tp in udp tcp quic
 					do
 						# The arguments here are
 						# ordered according to
@@ -107,6 +107,11 @@ writeShellApplication {
 						elif [ "$tp" = tcp ]
 						then
 							to_run+=( +tcp )
+						elif [ "$tp" = quic ]
+						then
+							to_run+=(
+								+quic
+							)
 						else
 							# shellcheck disable=SC1111
 							echo_raw \
