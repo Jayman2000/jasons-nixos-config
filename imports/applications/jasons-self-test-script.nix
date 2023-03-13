@@ -58,7 +58,7 @@ writeShellApplication {
 			local dns_servers=( "" )
 			if [ "$check_local" -eq 1 ]
 			then
-				dns_severs+=( localhost )
+				dns_servers+=( localhost )
 			elif [ "$check_local" -ne 0 ]
 			then
 				# shellcheck disable=SC1111
