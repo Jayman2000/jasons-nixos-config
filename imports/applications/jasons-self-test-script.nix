@@ -67,71 +67,113 @@ writeShellApplication {
 			do
 				for ipv in 4 6
 				do
-					# The arguments here are ordered
-					# according to how <man:kdig(1)>
-					# says they should be ordered.
+					for tp in udp tcp
+					do
+						# The arguments here are
+						# ordered according to
+						# how <man:kdig(1)> says
+						# they should be
+						# ordered.
 
-					local to_run=( kdig )
-					## [common-settings]
-					### [query_class] SKIPED
-					### [query_type]
-					to_run+=( "$type" )
-					### [@server]
-					if [ "$server" != "" ]
-					then
-						to_run+=( "@$server" )
-					fi
-					### [options]
-					to_run+=( "-$ipv" )
-					to_run+=( "+short" )
-					## [query]
-					### name
-					to_run+=( "$domain" )
-					### [settings] SKIPED
-
-					# Add a blank line for spacing.
-					echo
-					echo_raw \
-						'$' \
-						"''\${to_run[*]}"
-					actual="$("''\${to_run[@]}")"
-					kdig_es="$?"
-
-					# If there’s more than one
-					# record of a given type, then
-					# the order in which they’re
-					# printed is probably arbitrary.
-					# Either way we don’t really
-					# care about the order, we just
-					# care about the values. Sorting
-					# the output means that there
-					# will be a known order.
-					actual="$(echo_raw "$actual" |
-						sort
-					)"
-					echo_raw "$actual"
-					echo_raw \
-						"kdig exit status:" \
-						"$kdig_es"
-					if [ "$kdig_es" -ne 0 ]
-					then
-						exit_status="$kdig_es"
-					fi
-					if [ "$actual" != "$expectation" ]
-					then
-						# shellcheck disable=SC1111
-						echo_raw \
-							"That" \
-							"previous" \
-							"command" \
-							"should have" \
-							"printed" \
-							"“$expectation”."
-						if [ "$exit_status" -eq 0 ]
+						local to_run=( kdig )
+						## [common-settings]
+						### [query_class] SKIPED
+						### [query_type]
+						to_run+=( "$type" )
+						### [@server]
+						if [ "$server" != "" ]
 						then
-							exit_status=1
+							to_run+=(
+								"@$server"
+							)
 						fi
-					fi
+						### [options]
+						to_run+=( "-$ipv" )
+						to_run+=( "+short" )
+						if [ "$tp" = udp ]
+						then
+							to_run+=(
+								+notcp
+							)
+						elif [ "$tp" = tcp ]
+						then
+							to_run+=( +tcp )
+						else
+							# shellcheck disable=SC1111
+							echo_raw \
+								"ERROR:" \
+								"Unkown" \
+								"transport" \
+								"protocol:" \
+								"“$tp”." \
+								"This" \
+								"should" \
+								"never" \
+								"happen," \
+								"even" \
+								"when" \
+								"tests" \
+								"fail."
+						fi
+						## [query]
+						### name
+						to_run+=( "$domain" )
+						### [settings] SKIPED
+
+						# Add a blank line for
+						# spacing.
+						echo
+						echo_raw \
+							'$' \
+							"''\${to_run[*]}"
+						actual="$(
+							"''\${to_run[@]}"
+						)"
+						kdig_es="$?"
+
+						# If there’s more than
+						# one record of a given
+						# type, then the order
+						# in which they’re
+						# printed is probably
+						# arbitrary. Either way
+						# we don’t really care
+						# about the order, we
+						# just care about the
+						# values. Sorting the
+						# output means that
+						# there will be a known
+						# order.
+						actual="$(
+							echo_raw "$actual" |
+								sort
+						)"
+						echo_raw "$actual"
+						echo_raw \
+							"kdig exit" \
+							"status:" \
+							"$kdig_es"
+						if [ "$kdig_es" -ne 0 ]
+						then
+							exit_status="$kdig_es"
+						fi
+						if [ "$actual" != "$expectation" ]
+						then
+							# shellcheck disable=SC1111
+							echo_raw \
+								"That" \
+								"previous" \
+								"command" \
+								"should" \
+								"have" \
+								"printed" \
+								"“$expectation”."
+							if [ "$exit_status" -eq 0 ]
+							then
+								exit_status=1
+							fi
+						fi
+					done
 				done
 			done
 
