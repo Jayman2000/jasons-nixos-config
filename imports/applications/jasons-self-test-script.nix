@@ -247,6 +247,72 @@ writeShellApplication {
 			return "$exit_status"
 		}
 
+		function dns_glue_records
+		{
+			local exit_status=0
+
+			local super_dns_server=ns1.box.jasonyundt.email
+			readonly super_dns_server
+			local ns_pattern
+			ns_pattern='test\.jasonyundt\.email\..+IN\s+NS\s+nameserver\.test\.jasonyundt\.email\.'
+			readonly ns_pattern
+			local a_pattern
+			a_pattern='nameserver\.test\.jasonyundt\.email\..+IN\s+A\s+46\.226\.105\.243'
+			readonly a_pattern
+			local aaaa_pattern
+			aaaa_pattern='nameserver\.test\.jasonyundt\.email\..+IN\s+AAAA\s+2001:4b98:dc0:43:f816:3eff:fe58:92cc'
+			readonly aaaa_pattern
+			local -r patterns=(
+				"$ns_pattern"
+				"$a_pattern"
+				"$aaaa_pattern"
+			)
+			local -r n=/dev/null
+
+			local to_run output kdig_es grep_es
+			for ipv in 4 6
+			do
+				to_run=(
+					kdig
+					NS
+					@"$super_dns_server"
+					-"$ipv"
+					test.jasonyundt.email
+				)
+				echo # Blank line for spacing
+				echo_raw '$' "''\${to_run[@]}"
+				output="$("''\${to_run[@]}" 2>&1)"
+				kdig_es="$?"
+
+				echo_raw "$output"
+				echo_raw \
+					"kdig exit status:" \
+					"$kdig_es"
+				if [ "$exit_status" -eq 0 ]
+				then
+					exit_status="$kdig_es"
+				fi
+				for pattern in "''\${patterns[@]}"
+				do
+					to_run=( grep -P "$pattern" )
+					echo_raw '$' "''\${to_run[@]}"
+					echo_raw "$output" |
+						"''\${to_run[@]}" > "$n"
+					grep_es="$?"
+					echo_raw \
+						"grep exit status:" \
+						"$grep_es"
+					if [ "$exit_status" -eq 0 ]
+					then
+						exit_status="$grep_es"
+					fi
+				done
+
+			done
+
+			return "$exit_status"
+		}
+
 		function dns_records
 		{
 			local exit_status=0
@@ -349,6 +415,10 @@ writeShellApplication {
 
 		test_names+=( "Disk space" )
 		test_logs+=( "$(disk_space_too_low 2>&1)" )
+		test_exit_statuses+=( "$?" )
+
+		test_names+=( "DNS glue records" )
+		test_logs+=( "$(dns_glue_records 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
 		test_names+=( "DNS records" )
