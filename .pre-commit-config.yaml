@@ -37,6 +37,7 @@ repos:
             - id: check-executables-have-shebangs
             - id: check-merge-conflict
             - id: check-symlinks
+            - id: check-toml
             - id: check-vcs-permalinks
             - id: check-shebang-scripts-are-executable
             - id: destroyed-symlinks
@@ -84,7 +85,9 @@ repos:
         repo: https://github.com/pre-commit/mirrors-mypy
         rev: v1.0.1
         hooks:
-            - id: mypy
+            -
+                id: mypy
+                additional_dependencies: &usn_deps [dnspython]
     -
         repo: https://github.com/PyCQA/autoflake
         rev: v2.0.2
@@ -100,6 +103,7 @@ repos:
                 # entry to:
                 # <https://pre-commit.com/#repository-local-hooks>
                 entry: python local-pre-commit-hooks/update-serial-numbers.py
+                additional_dependencies: *usn_deps
                 language: python
                 files: &zone_files ".*\\.zone$"
                 description: Update serial numbers in DNS zone file SOA records
