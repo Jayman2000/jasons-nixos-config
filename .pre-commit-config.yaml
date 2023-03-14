@@ -86,6 +86,11 @@ repos:
         hooks:
             - id: mypy
     -
+        repo: https://github.com/PyCQA/autoflake
+        rev: v2.0.2
+        hooks:
+            - id: autoflake
+    -
         repo: local
         hooks:
             -

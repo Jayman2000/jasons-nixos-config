@@ -6,7 +6,7 @@ from collections.abc import Iterable, Sequence
 from datetime import date, datetime, UTC
 from hashlib import file_digest
 from pathlib import Path
-from re import compile as re_compile, Match, Pattern
+from re import compile as re_compile, Pattern
 from sys import stderr
 from typing import Final
 
