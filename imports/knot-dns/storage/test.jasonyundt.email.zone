@@ -8,20 +8,20 @@ $TTL 60
 
 ; Breakdown of SOA fields:
 ;        [MNAME]                           [RNAME]
-@ IN SOA nameserver.test.jasonyundt.email. jason.jasonyundt.email (
-	2023022000  ; [Serial number]
+@ IN SOA mailserver.test.jasonyundt.email. jason.jasonyundt.email (
+	2023031400  ; [Serial number]
 	60  ; [Refresh time]
 	300  ; [Retry time]
 	600  ; [Expire Time]
 	60  ; [Minimum TTL/negative cache TTL]
 )
 
-@          IN NS   nameserver.test.jasonyundt.email.
+@          IN NS   mailserver.test.jasonyundt.email.
 ; TODO: Is there any way to not specify these IPs explicitly? It would
 ; be nice if I could just say “whatever IPv4 or IPv6 address we’re
 ; currently using.”
-nameserver IN A    46.226.105.243
-nameserver IN AAAA 2001:4b98:dc0:43:f816:3eff:fe58:92cc
+mailserver IN A    46.226.105.243
+mailserver IN AAAA 2001:4b98:dc0:43:f816:3eff:fe58:92cc
 
 ; See RFC1912 [1] Section 2.2 for details about how I generate serial
 ; numbers. You can generate one with this command:

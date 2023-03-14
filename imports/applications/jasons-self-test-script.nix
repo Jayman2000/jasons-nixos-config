@@ -305,13 +305,13 @@ writeShellApplication {
 			local super_dns_server=ns1.box.jasonyundt.email
 			readonly super_dns_server
 			local ns_pattern
-			ns_pattern='test\.jasonyundt\.email\..+IN\s+NS\s+nameserver\.test\.jasonyundt\.email\.'
+			ns_pattern='test\.jasonyundt\.email\..+IN\s+NS\s+mailserver\.test\.jasonyundt\.email\.'
 			readonly ns_pattern
 			local a_pattern
-			a_pattern='nameserver\.test\.jasonyundt\.email\..+IN\s+A\s+46\.226\.105\.243'
+			a_pattern='mailserver\.test\.jasonyundt\.email\..+IN\s+A\s+46\.226\.105\.243'
 			readonly a_pattern
 			local aaaa_pattern
-			aaaa_pattern='nameserver\.test\.jasonyundt\.email\..+IN\s+AAAA\s+2001:4b98:dc0:43:f816:3eff:fe58:92cc'
+			aaaa_pattern='mailserver\.test\.jasonyundt\.email\..+IN\s+AAAA\s+2001:4b98:dc0:43:f816:3eff:fe58:92cc'
 			readonly aaaa_pattern
 			local -r patterns=(
 				"$ns_pattern"
@@ -374,15 +374,15 @@ writeShellApplication {
 			types+=( NS )
 			check_locals+=( 1 )
 			expectations+=(
-				nameserver.test.jasonyundt.email.
+				mailserver.test.jasonyundt.email.
 			)
 
-			domains+=( nameserver.test.jasonyundt.email )
+			domains+=( mailserver.test.jasonyundt.email )
 			types+=( A )
 			check_locals+=( 1 )
 			expectations+=( 46.226.105.243 )
 
-			domains+=( nameserver.test.jasonyundt.email )
+			domains+=( mailserver.test.jasonyundt.email )
 			types+=( AAAA )
 			check_locals+=( 1 )
 			expectations+=(
