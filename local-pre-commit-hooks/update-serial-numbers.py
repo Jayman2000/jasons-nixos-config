@@ -80,7 +80,7 @@ def process_zone_path(zone_path : Path) -> None:
 			for line in lines:
 				for character in line:
 					if character == ";":
-						return
+						break
 					elif not character.isspace():
 						previous_zone_hash += character
 
