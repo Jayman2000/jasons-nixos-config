@@ -5,11 +5,11 @@ set -e
 
 function copy_and_restrict {
 	# Usage: copy_and_restrict <mode> <file> [file]…
-	mode="$1"
+	local mode="$1"
 	shift
 	sudo cp -r "$@" /etc/nixos/
 	for src in "$@"; do
-		dest="/etc/nixos/$src"
+		local dest="/etc/nixos/$src"
 		sudo chown -R root:root "$dest"
 		sudo chmod -R "$mode" "$dest"
 	done
