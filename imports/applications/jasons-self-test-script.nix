@@ -302,8 +302,11 @@ writeShellApplication {
 		{
 			local exit_status=0
 
-			local super_dns_server=ns1.box.jasonyundt.email
-			readonly super_dns_server
+			local -r super_dns_servers=(
+				ns-64-a.gandi.net
+				ns-114-b.gandi.net
+				ns-242-c.gandi.net
+			)
 			local ns_pattern
 			ns_pattern='test\.jasonyundt\.email\..+IN\s+NS\s+mailserver\.test\.jasonyundt\.email\.'
 			readonly ns_pattern
@@ -320,45 +323,53 @@ writeShellApplication {
 			)
 			local -r n=/dev/null
 
-			local to_run output kdig_es grep_es
-			for ipv in 4 6
+			local to_run out kdig_es grep_es
+			for dns_server in "''\${super_dns_servers[@]}"
 			do
-				to_run=(
-					kdig
-					NS
-					@"$super_dns_server"
-					-"$ipv"
-					test.jasonyundt.email
-				)
-				echo # Blank line for spacing
-				echo_raw '$' "''\${to_run[@]}"
-				output="$("''\${to_run[@]}" 2>&1)"
-				kdig_es="$?"
-
-				echo_raw "$output"
-				echo_raw \
-					"kdig exit status:" \
-					"$kdig_es"
-				if [ "$exit_status" -eq 0 ]
-				then
-					exit_status="$kdig_es"
-				fi
-				for pattern in "''\${patterns[@]}"
+				for ipv in 4 6
 				do
-					to_run=( grep -P "$pattern" )
+					to_run=(
+						kdig
+						NS
+						@"$dns_server"
+						-"$ipv"
+						test.jasonyundt.email
+					)
+					echo # Blank line for spacing
 					echo_raw '$' "''\${to_run[@]}"
-					echo_raw "$output" |
-						"''\${to_run[@]}" > "$n"
-					grep_es="$?"
+					out="$("''\${to_run[@]}" 2>&1)"
+					kdig_es="$?"
+
+					echo_raw "$out"
 					echo_raw \
-						"grep exit status:" \
-						"$grep_es"
+						"kdig exit status:" \
+						"$kdig_es"
 					if [ "$exit_status" -eq 0 ]
 					then
-						exit_status="$grep_es"
+						exit_status="$kdig_es"
 					fi
-				done
+					for pattern in "''\${patterns[@]}"
+					do
+						to_run=(
+							grep
+							-P
+							"$pattern"
+						)
+						echo_raw '$' "''\${to_run[@]}"
+						echo_raw "$out" |
+							"''\${to_run[@]}" > "$n"
+						grep_es="$?"
+						echo_raw \
+							"grep exit" \
+							"status:" \
+							"$grep_es"
+						if [ "$exit_status" -eq 0 ]
+						then
+							exit_status="$grep_es"
+						fi
+					done
 
+				done
 			done
 
 			return "$exit_status"
