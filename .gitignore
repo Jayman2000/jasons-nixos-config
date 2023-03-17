@@ -5,6 +5,9 @@
 # result symlinks (from, for example, nix-build)
 result
 
+# Previews of rendered Markdown
+*.html
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
