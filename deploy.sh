@@ -5,7 +5,7 @@ set -e
 
 function copy_and_restrict {
 	# Usage: copy_and_restrict <mode> <file> [file]…
-	local mode="$1"
+	local -r mode="$1"
 	shift
 	sudo cp -r "$@" /etc/nixos/
 	for src in "$@"; do
