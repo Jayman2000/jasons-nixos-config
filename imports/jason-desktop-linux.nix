@@ -16,6 +16,7 @@
 	environment.systemPackages = [ pkgs.vulkan-tools ];
 	time.timeZone = "America/New_York";
 	nixpkgs.config.allowUnfree = true;
+	hardware.steam-hardware.enable = true;
 	programs.steam.enable = true;
 
 	services.syncthing.folders = {
