@@ -10,36 +10,7 @@
 	home-manager.users.jayman = { pkgs, ... }: {
 		# Adapted from
 		# <https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable>.
-		home.packages = let
-			url = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz";
-			tarball = builtins.fetchTarball url;
-			unstablePkgs = import tarball {};
-			# Thanks to strager
-			# (<https://stackoverflow.com/users/39992/strager>)
-			# for this idea:
-			# <https://stackoverflow.com/a/71245733/7593853>
-			pyOverrides = finalAttrs: previousAttrs: {
-				# The version of python3Packages.cffi in
-				# the stable version of nixpkgs doesn’t
-				# work with Python 3.11. See
-				# <https://foss.heptapod.net/pypy/cffi/-/issues/551>.
-				#
-				# The only reason we want cffi to work
-				# with Python 3.11 it’s an indirect
-				# dependency of pre-commit. See below
-				# for why we want to run pre-commit with
-				# Python 3.11.
-				cffi = unstablePkgs.python311Packages.cffi;
-			};
-			overlay = finalAttrs: previousAttrs: {
-				python311 = previousAttrs.python311.override {
-					packageOverrides = pyOverrides;
-				};
-			};
-			pkgs = import <nixpkgs> {
-				overlays = [ overlay ];
-			};
-		in [
+		home.packages = [
 			pkgs.cargo # Used for this repo’s pre-commit config
 			pkgs.gcc # Used for this repo’s pre-commit config
 			pkgs.go # Used for this repo’s pre-commit config
