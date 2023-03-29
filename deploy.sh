@@ -4,18 +4,21 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
 set -e
 
+readonly config_dir="/etc/nixos"
+
 function copy_and_restrict {
 	# Usage: copy_and_restrict <mode> <file> [file]…
 	local -r mode="$1"
 	shift
-	sudo cp -r "$@" /etc/nixos/
+	sudo cp -r "$@" "$config_dir"
 	for src in "$@"; do
-		local dest="/etc/nixos/$src"
+		local dest="$config_dir/$src"
 		sudo chown -R root:root "$dest"
 		sudo chmod -R "$mode" "$dest"
 	done
 }
 
+sudo rm -r "$config_dir/imports"
 copy_and_restrict u=X,g=,o= imports/
 if [ "$switch" = yes ]; then
 	sudo nixos-rebuild switch
