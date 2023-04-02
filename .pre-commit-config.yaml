@@ -114,6 +114,13 @@ repos:
                 language: system
                 files: *zone_files
                 description: Validate DNS zone files
+            -
+                id: &ckc check-knot.conf
+                name: *ckc
+                entry: ./local-pre-commit-hooks/check-knot.conf.sh
+                language: system
+                files: '(^|.*/)knot\.conf$'
+                description: Validate Knot DNS config files
 # TODO: How do I make it accept hard tabs?
 #    -
 #        repo: https://github.com/nix-community/nixpkgs-fmt
