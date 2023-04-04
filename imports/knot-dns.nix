@@ -1,5 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
+{ pkgs, ... }:
 {
 	# It can be tricky to get the DNS records for a mailserver
 	# right. While it might be more robust to use an external DNS
@@ -19,6 +20,13 @@
 	# [1]: <https://en.wikipedia.org/w/index.php?title=Comparison_of_DNS_server_software&oldid=1135374152#Feature_matrix>
 	services.knot = {
 		enable = true;
+		package = pkgs.knot-dns.overrideAttrs (previousAttrs: {
+			version = "unstable-2023-04-04";
+			src = builtins.fetchTarball {
+				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/8649d909f158326694cc2212c3d63396dc7b3972/knot-dns-8649d909f158326694cc2212c3d63396dc7b3972.tar.gz";
+				sha256 = "1pzykx5wfm1afnyyhbd0af8g8lc7hf78f4jfbcbzbr0qni2xgy1f";
+			};
+		});
 		# Referencing ./knot-dns/storage the way we do here will
 		# add that path to the Nix store and replace any
 		# references to ./knot-dns/storage with its Nix store
