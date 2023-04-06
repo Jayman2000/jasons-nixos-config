@@ -7,6 +7,7 @@
 			./home-manager/22.11.nix
 			./common.nix
 			./efi.nix
+			./cdemu.nix
 			./cli-shortcuts.nix
 			./graphical.nix
 			./osx-kvm.nix
