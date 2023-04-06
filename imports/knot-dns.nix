@@ -1,6 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
 	# It can be tricky to get the DNS records for a mailserver
 	# right. While it might be more robust to use an external DNS
@@ -46,5 +46,30 @@
 	in {
 		allowedTCPPorts = dnsPort;
 		allowedUDPPorts = dnsPort;
+	};
+
+	users.groups.dns-updater = { };
+	systemd.services.generate-dns-update-key = let
+		dependant = [ "knot-dns.service" ];
+		scriptPath = ./knot-dns/generate-dns-update-key.sh;
+	in {
+		before = dependant;
+		wantedBy = dependant;
+		description = "Generate key for updating DNS records";
+		path = [ pkgs.knot-dns ];
+		script = builtins.readFile scriptPath;
+	};
+	security.acme = {
+		acceptTerms = true;
+		defaults = {
+			credentialsFile = ./knot-dns/lego-credentials;
+			dnsProvider = "rfc2136";
+			email = "swagfortress@gmail.com";
+			group = "dns-updater";
+		};
+		certs.mailserver = {
+			domain = config.networking.fqdn;
+			reloadServices = [ "knot-dns.service" ];
+		};
 	};
 }
