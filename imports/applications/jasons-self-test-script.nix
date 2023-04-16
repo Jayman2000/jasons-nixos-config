@@ -459,6 +459,62 @@ writeShellApplication {
 		}
 
 
+		function reverse_dns_records
+		{
+			local exit_status=0
+
+			local -r expected=mailserver.test.jasonyundt.email.
+			local -r to_check=(
+				46.226.105.243
+				2001:4b98:dc0:43:f816:3eff:fe58:92cc
+			)
+			local actual kdig_es
+
+			for ipv in 4 6
+			do
+				for address in "''\${to_check[@]}"
+				do
+					local to_run=(
+						kdig
+						+short
+						-"$ipv"
+						-x "$address"
+					)
+					actual="$("''\${to_run[@]}" 2>&1)"
+					kdig_es="$?"
+					if \
+						[ "$kdig_es" -ne 0 ] \
+						&& [ "$exit_status" -eq 0 ]
+					then
+						exit_status="$kdig_es"
+					fi
+
+					echo_raw '$' "''\${to_run[@]}"
+					echo_raw "$actual"
+					echo_raw "Exit status: $kdig_es"
+
+					if [ "$actual" != "$expected" ]
+					then
+						# shellcheck disable=SC1111
+						echo_raw \
+							That \
+							previous \
+							command \
+							should have \
+							printed \
+							"“$expected”."
+						if [ "$exit_status" -eq 0 ]
+						then
+							exit_status=1
+						fi
+					fi
+				done
+			done
+
+			exit "$exit_status"
+		}
+
+
 		test_names=( )
 		test_logs=( )
 		test_exit_statuses=( )
@@ -485,6 +541,10 @@ writeShellApplication {
 
 		test_names+=( "DNS records" )
 		test_logs+=( "$(dns_records 2>&1)" )
+		test_exit_statuses+=( "$?" )
+
+		test_names+=( "Reverse DNS records" )
+		test_logs+=( "$(reverse_dns_records 2>&1)" )
 		test_exit_statuses+=( "$?" )
 
 		any_errors=0
