@@ -106,7 +106,10 @@ repos:
                 additional_dependencies: *usn_deps
                 language: python
                 files: &zone_files ".*\\.zone$"
+                always_run: true
                 description: Update serial numbers in DNS zone file SOA records
+                stages:
+                    - post-commit
             -
                 id: &kzc kzonecheck
                 name: *kzc
