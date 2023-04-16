@@ -2,10 +2,12 @@
 SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2023)
 """
 from argparse import ArgumentParser, Namespace
-from collections.abc import Callable
+from collections.abc import Callable, Iterable, Sequence
 from datetime import date, datetime, UTC
 from hashlib import file_digest, sha256
 from pathlib import Path
+from subprocess import CalledProcessError, CompletedProcess, run
+from sys import stderr
 from tomllib import load as load_toml
 from typing import Final, NamedTuple, Optional, Self
 from warnings import warn
@@ -52,7 +54,7 @@ PARSER : Final[ArgumentParser] = ArgumentParser(
 )
 PARSER.add_argument(
 	'zone_file_paths',
-	nargs='+',
+	nargs='*',
 	type=Path,
 	metavar="ZONE_FILE"
 )
@@ -125,6 +127,11 @@ class SerialNumber(int):
 class ZoneFileInfo(NamedTuple):
 	serial : SerialNumber
 	hash : bytes
+
+
+def printerr(*args, **kwargs) -> None:
+	kwargs["file"] = stderr
+	print(*args, **kwargs)
 
 
 def current_zf_serial_number(zone_file_path : Path) -> SerialNumber:
@@ -235,5 +242,43 @@ def potentially_bump_serial_number(zone_file_path : Path) -> None:
 	write_new_hash_file(zone_file_path, new_serial)
 
 
-for zone_file_path in ARGS.zone_file_paths:
+def file_paths_in_git_repo() -> Iterable[Path]:
+	try:
+		RESULT : Final[CompletedProcess] = run(
+				("git", "ls-files", "-z"),
+				capture_output=True,
+				check=True,
+				text=True
+		)
+		LIST : Final[Sequence] = RESULT.stdout.split(sep="\0")
+		# str.split() assumes that the separator is in between
+		# each of the items in the string. The string here is
+		# actually NUL terminated, not NUL delimited. There’s a
+		# NUL after every item in the string, including the last
+		# one. As a result, str.split sees the final NUL
+		# terminator and assumes that there’s just an empty
+		# string after it. That’s why we have to ignore the last
+		# item in the LIST.
+		for path_string in LIST[:-1]:
+			yield Path(path_string)
+	except FileNotFoundError as error:
+		printerr("ERROR: git command not found.")
+		raise error
+	except CalledProcessError as error:
+		printerr("$", *error.cmd)
+		printerr(error.stderr)
+		raise error
+
+
+
+def paths_to_process() -> Iterable[Path]:
+	if len(ARGS.zone_file_paths) == 0:
+		for file_path in file_paths_in_git_repo():
+			if file_path.suffix == ".zone":
+				yield file_path
+	else:
+		return ARGS.zone_file_paths
+
+
+for zone_file_path in paths_to_process():
 	potentially_bump_serial_number(zone_file_path)
