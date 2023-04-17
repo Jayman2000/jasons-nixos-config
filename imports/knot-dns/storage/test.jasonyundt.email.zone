@@ -9,7 +9,7 @@ $TTL 60
 ; Breakdown of SOA fields:
 ;        [MNAME]                           [RNAME]
 @ IN SOA mailserver.test.jasonyundt.email. jason.jasonyundt.email. (
-	2023041700  ; [Serial number]
+	2023041701  ; [Serial number]
 	14400  ; [Refresh time]
 	3600  ; [Retry time]
 	604800  ; [Expire Time]
