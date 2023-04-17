@@ -10,10 +10,10 @@ $TTL 60
 ;        [MNAME]                           [RNAME]
 @ IN SOA mailserver.test.jasonyundt.email. jason.jasonyundt.email. (
 	2023041700  ; [Serial number]
-	60  ; [Refresh time]
-	300  ; [Retry time]
-	600  ; [Expire Time]
-	60  ; [Minimum TTL/negative cache TTL]
+	14400  ; [Refresh time]
+	3600  ; [Retry time]
+	604800  ; [Expire Time]
+	300  ; [Minimum TTL/negative cache TTL]
 )
 
 @          IN NS   mailserver.test.jasonyundt.email.
