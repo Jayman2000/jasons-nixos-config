@@ -21,10 +21,10 @@
 	services.knot = {
 		enable = true;
 		package = pkgs.knot-dns.overrideAttrs (previousAttrs: {
-			version = "unstable-2023-04-21";
+			version = "unstable-2023-04-27";
 			src = builtins.fetchTarball {
-				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/560f2c66fe5a027d8b9cc1ed801066df31bab434/knot-dns-560f2c66fe5a027d8b9cc1ed801066df31bab434.tar.gz";
-				sha256 = "0v97f0xd1ijy0d9b3q7qwaj7pdh62w1p9ly3rk46037swqgczzg7";
+				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/760f4df0f0d91df81f2b19830edc3501999cf4ee/knot-dns-760f4df0f0d91df81f2b19830edc3501999cf4ee.tar.gz";
+				sha256 = "0vfnq2dbpchkh0vd5q3pl8a2c5jfnnxyjq9ffbhfkayrib7pb4m1";
 			};
 		});
 		# Referencing ./knot-dns/storage the way we do here will
