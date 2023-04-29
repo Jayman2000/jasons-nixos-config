@@ -76,10 +76,24 @@ NixOS Manual). Each section in that manual is given a number like 1, 2.2 or
 2.2.1. Bellow is a list of section numbers and any additional notes that I have
 for them:
 
-- (1) Download the minimal ISO image. Also download its SHA-256 file, but
-download it from a separate Tor Browser session. **Make sure that you download
-an image for the correct version of NixOS** (the version that the
-machine-specific config depends on).
+- (1)
+
+	- Download the minimal ISO image. Also download its SHA-256
+	file, but download it from a separate Tor Browser session.
+	**Make sure that you download an image for the correct version
+	of NixOS** (the version that the machine-specific config
+	depends on).
+
+	- Verify the integrity of the installation image:
+
+		1. Make sure that both the `.iso` file and the
+		`.iso.sha256` are in the same directory.
+
+		2. Change into that directory.
+
+		3. Run
+
+				sha255sum -c <path-to-sha256-file>
 
 - (2)
 	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
