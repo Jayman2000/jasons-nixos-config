@@ -114,13 +114,16 @@ for them:
 
 	If it outputs “UEFI”, then you’re good.
 
-- (2.2.1) Give `jasonyundt.website.home.arpa` 2GiB of swap. This is a pretty
-arbitrary number.
+- (2.3.2)
 
-- (2.2.3) Use the following labels:
-	- `nixos-root` for the root partition.
-	- `nixos-swap` for the swap partition.
-	- `nixos-hdd` for the data partition on the hard drive.
+	- Give `jasonyundt.website.home.arpa` 2GiB of swap. This is a pretty
+	arbitrary number.
+
+	- Use the following labels:
+
+		- `nixos-root` for the root partition.
+		- `nixos-swap` for the swap partition.
+		- `nixos-hdd` for the data partition on the hard drive.
 
 ### 4. Deploy this config
 
