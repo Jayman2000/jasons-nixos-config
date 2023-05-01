@@ -167,17 +167,18 @@ and that the wallet is closed automatically after 10 minutes.
 6. In KWalletManager, add a password entry named “jason@jasonyundt.email”.
 7. Import Keyboard shortcuts.kksrc. Go to System
 Settings>Workspace>Shortcuts>Shortcuts>Import Scheme…
-8. Customize the rest of the system settings.
-9. In Firefox, install the following extensions:
+8. Add Transmission and Yakuake to the list of autostart applications.
+9. Customize the rest of the system settings.
+10. In Firefox, install the following extensions:
 	- Plasma Browser integration
 	- uBlock Origin
-10. In Firefox, enable HTTPS only mode.
-11. In Tor Browser Launcher Settings, check “Download over system Tor” and
+11. In Firefox, enable HTTPS only mode.
+12. In Tor Browser Launcher Settings, check “Download over system Tor” and
 click “Save & Exit”.
-12. In the Tor Browser, enable HTTPS only mode.
-13. In the Tor Browser, install uBlock Origin.
-14. Set up any additional email accounts in Thunderbird.
-15. In Kalendar, set up a reminder on the first of every month to review
+13. In the Tor Browser, enable HTTPS only mode.
+14. In the Tor Browser, install uBlock Origin.
+15. Set up any additional email accounts in Thunderbird.
+16. In Kalendar, set up a reminder on the first of every month to review
 installed packages.
 
 ## Hints for Contributors
