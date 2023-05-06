@@ -49,8 +49,8 @@ manager](https://nixos.org/manual/nix/stable/) installed.
 	You can verify whether or not Nix is installed by running:
 
 		nix-build --version && \
-			echo nix-build is installed. || \
-			echo nix-build is not installed.
+			echo Nix is installed. || \
+			echo Nix is not installed.
 
 2. If you don’t already have one, get a local copy of
 [the Nixpkgs repo](https://github.com/NixOS/nixpkgs):
