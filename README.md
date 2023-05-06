@@ -157,8 +157,13 @@ that contains the password for that email address.
 These post-installation steps should only be done on graphical systems.
 
 1. Log in via SDDM.
-2. Use KGpg to create a new GPG key to use for a KDE Wallet. Make sure that you
-save a revocation key.
+2. Use KGpg to create a new GPG key to use for a KDE Wallet.
+	1. Start KGpg if it’s not already running.
+	2. Right click on the KGpg tray icon.
+	3. Click “Key Manager”.
+	4. In the menu bar, open Keys > Generate Key Pair…
+	5. Click “Expert Mode”.
+	6. Answer the prompts in the terminal window.
 3. Back up the revocation key in the KeePass database. The other parts of the
 key aren’t really needed since this key is only going to be used locally on
 one machine.
