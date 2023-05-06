@@ -128,7 +128,7 @@ for them:
 ### 4. Deploy this config
 
 1. Get a copy of this repo on the machine.
-2. In `configuration.nix`, one of the system specific configs:
+2. In `configuration.nix`, import one of the system specific configs:
 	- `./imports/jason-desktop-linux.nix`,
 	- `./imports/jason-laptop-linux.nix`,
 	- `./imports/graphical-test-vm.nix`,
