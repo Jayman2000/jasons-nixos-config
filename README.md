@@ -116,6 +116,11 @@ for them:
 
 - (2.3.2)
 
+	- If you’re going to repartition an entire disk, then before you
+	start doing that, delete any existing signatures on the disk:
+
+			wipefs -a <path-to-block-device>
+
 	- Give `jasonyundt.website.home.arpa` 2GiB of swap. This is a pretty
 	arbitrary number.
 
