@@ -153,7 +153,8 @@ These post-installation steps should only be done on
 
 1. If one doesn’t already exist, create a new email address on
 `jasonyundt.email`. The address should be `<fqdn>@jasonyundt.email` where
-`<fqdn>` is the domain name of the machine you’re currently setting up.
+`<fqdn>` is the domain name of the machine you’re currently setting up
+(don’t include the trailing `.` that represents the root DNS zone).
 2. On the machine that you’re setting up, create a `~root/mail-password` file
 that contains the password for that email address.
 3. Make sure that only root has access to that file:
