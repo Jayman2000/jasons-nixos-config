@@ -143,10 +143,13 @@ for them:
 4. Reboot.
 5. Log in as root and set jayman’s password.
 
-#### Instructions specific to Jason’s Web Site
+#### Instructions specific to systems that import `auto-upgrade.nix`
 
-These post-installation steps should only be done on `jasonyundt.website` or
-`jasonyundt.website.home.arpa`.
+These post-installation steps should only be done on
+
+- `jasonyundt.website`
+- `jasonyundt.website.home.arpa`
+- `mailserver.test.jasonyundt.email`
 
 1. If one doesn’t already exist, create a new email address on
 `jasonyundt.email`. The address should be `<fqdn>@jasonyundt.email` where
