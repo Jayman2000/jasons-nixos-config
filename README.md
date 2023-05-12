@@ -71,10 +71,9 @@ of the manual:
 
 ### 3. Install NixOS
 
-Follow the instructions in NixOS’s Installation Instructions (there’re in the
-NixOS Manual). Each section in that manual is given a number like 1, 2.2 or
-2.2.1. Bellow is a list of section numbers and any additional notes that I have
-for them:
+Follow NixOS’s Installation Instructions (there’re in the NixOS Manual). Each
+section in that manual is given a number like 1, 2.2 or 2.2.1. Bellow is a list
+of section numbers and any additional notes that I have for them:
 
 - (1)
 
