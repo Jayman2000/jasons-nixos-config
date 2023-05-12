@@ -5,6 +5,7 @@
 set -e
 
 readonly config_dir="/etc/nixos"
+readonly imports_dir="$config_dir/imports"
 
 function copy_and_restrict {
 	# Usage: copy_and_restrict <mode> <file> [file]…
@@ -18,7 +19,11 @@ function copy_and_restrict {
 	done
 }
 
-sudo rm -r "$config_dir/imports"
+if [ -e "$imports_dir" ]
+then
+	sudo rm -r "$imports_dir"
+fi
+
 copy_and_restrict u=X,g=,o= imports/
 if [ "$switch" = yes ]; then
 	sudo nixos-rebuild switch
