@@ -113,6 +113,9 @@ of section numbers and any additional notes that I have for them:
 
 	If it outputs “UEFI”, then you’re good.
 
+- (2.2) Skip right to 2.3. We’re going to be doing a manual
+installation, not a graphical one.
+
 - (2.3.2)
 
 	- If you’re going to repartition an entire disk, then before you
