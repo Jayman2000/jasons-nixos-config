@@ -49,8 +49,8 @@ manager](https://nixos.org/manual/nix/stable/) installed.
 	You can verify whether or not Nix is installed by running:
 
 		nix-build --version && \
-			echo nix-build is installed. || \
-			echo nix-build is not installed.
+			echo Nix is installed. || \
+			echo Nix is not installed.
 
 2. If you don’t already have one, get a local copy of
 [the Nixpkgs repo](https://github.com/NixOS/nixpkgs):
@@ -71,10 +71,9 @@ of the manual:
 
 ### 3. Install NixOS
 
-Follow the instructions in NixOS’s Installation Instructions (there’re in the
-NixOS Manual). Each section in that manual is given a number like 1, 2.2 or
-2.2.1. Bellow is a list of section numbers and any additional notes that I have
-for them:
+Follow NixOS’s Installation Instructions (there’re in the NixOS Manual). Each
+section in that manual is given a number like 1, 2.2 or 2.2.1. Bellow is a list
+of section numbers and any additional notes that I have for them:
 
 - (1)
 
@@ -114,18 +113,29 @@ for them:
 
 	If it outputs “UEFI”, then you’re good.
 
-- (2.2.1) Give `jasonyundt.website.home.arpa` 2GiB of swap. This is a pretty
-arbitrary number.
+- (2.2) Skip right to 2.3. We’re going to be doing a manual
+installation, not a graphical one.
 
-- (2.2.3) Use the following labels:
-	- `nixos-root` for the root partition.
-	- `nixos-swap` for the swap partition.
-	- `nixos-hdd` for the data partition on the hard drive.
+- (2.3.2)
+
+	- If you’re going to repartition an entire disk, then before you
+	start doing that, delete any existing signatures on the disk:
+
+			wipefs -a <path-to-block-device>
+
+	- Give `jasonyundt.website.home.arpa` 2GiB of swap. This is a pretty
+	arbitrary number.
+
+	- Use the following labels:
+
+		- `nixos-root` for the root partition.
+		- `nixos-swap` for the swap partition.
+		- `nixos-hdd` for the data partition on the hard drive.
 
 ### 4. Deploy this config
 
 1. Get a copy of this repo on the machine.
-2. In `configuration.nix`, one of the system specific configs:
+2. In `configuration.nix`, import one of the system specific configs:
 	- `./imports/jason-desktop-linux.nix`,
 	- `./imports/jason-laptop-linux.nix`,
 	- `./imports/graphical-test-vm.nix`,
@@ -135,14 +145,18 @@ arbitrary number.
 4. Reboot.
 5. Log in as root and set jayman’s password.
 
-#### Instructions specific to Jason’s Web Site
+#### Instructions specific to systems that import `auto-upgrade.nix`
 
-These post-installation steps should only be done on `jasonyundt.website` or
-`jasonyundt.website.home.arpa`.
+These post-installation steps should only be done on
+
+- `jasonyundt.website`
+- `jasonyundt.website.home.arpa`
+- `mailserver.test.jasonyundt.email`
 
 1. If one doesn’t already exist, create a new email address on
 `jasonyundt.email`. The address should be `<fqdn>@jasonyundt.email` where
-`<fqdn>` is the domain name of the machine you’re currently setting up.
+`<fqdn>` is the domain name of the machine you’re currently setting up
+(don’t include the trailing `.` that represents the root DNS zone).
 2. On the machine that you’re setting up, create a `~root/mail-password` file
 that contains the password for that email address.
 3. Make sure that only root has access to that file:
@@ -154,8 +168,13 @@ that contains the password for that email address.
 These post-installation steps should only be done on graphical systems.
 
 1. Log in via SDDM.
-2. Use KGpg to create a new GPG key to use for a KDE Wallet. Make sure that you
-save a revocation key.
+2. Use KGpg to create a new GPG key to use for a KDE Wallet.
+	1. Start KGpg if it’s not already running.
+	2. Right click on the KGpg tray icon.
+	3. Click “Key Manager”.
+	4. In the menu bar, open Keys > Generate Key Pair…
+	5. Click “Expert Mode”.
+	6. Answer the prompts in the terminal window.
 3. Back up the revocation key in the KeePass database. The other parts of the
 key aren’t really needed since this key is only going to be used locally on
 one machine.
@@ -167,17 +186,18 @@ and that the wallet is closed automatically after 10 minutes.
 6. In KWalletManager, add a password entry named “jason@jasonyundt.email”.
 7. Import Keyboard shortcuts.kksrc. Go to System
 Settings>Workspace>Shortcuts>Shortcuts>Import Scheme…
-8. Customize the rest of the system settings.
-9. In Firefox, install the following extensions:
+8. Add Transmission and Yakuake to the list of autostart applications.
+9. Customize the rest of the system settings.
+10. In Firefox, install the following extensions:
 	- Plasma Browser integration
 	- uBlock Origin
-10. In Firefox, enable HTTPS only mode.
-11. In Tor Browser Launcher Settings, check “Download over system Tor” and
+11. In Firefox, enable HTTPS only mode.
+12. In Tor Browser Launcher Settings, check “Download over system Tor” and
 click “Save & Exit”.
-12. In the Tor Browser, enable HTTPS only mode.
-13. In the Tor Browser, install uBlock Origin.
-14. Set up any additional email accounts in Thunderbird.
-15. In Kalendar, set up a reminder on the first of every month to review
+13. In the Tor Browser, enable HTTPS only mode.
+14. In the Tor Browser, install uBlock Origin.
+15. Set up any additional email accounts in Thunderbird.
+16. In Kalendar, set up a reminder on the first of every month to review
 installed packages.
 
 ## Hints for Contributors
