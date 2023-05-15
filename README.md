@@ -145,6 +145,12 @@ installation, not a graphical one.
 4. Reboot.
 5. Log in as root and set jayman’s password.
 
+### 5. Do any manual set up
+
+While it would be nice if this config automatically set up everything
+for you, there are some things that need to be set up manually at the
+moment.
+
 #### Instructions specific to systems that import `auto-upgrade.nix`
 
 These post-installation steps should only be done on
