@@ -169,6 +169,20 @@ that contains the password for that email address.
 
 		sudo chmod 400 ~root/mail-password
 
+##### Instructions specific to `mailserver.test.jasonyundt.email`
+
+This section should only be followed if you’re setting up
+`mailserver.test.jasonyundt.email`.
+
+Make sure that the name server(s) for `jasonyundt.email.` have the
+following resource records:
+
+```zone
+test 10800 IN NS mailserver.test.jasonyundt.email.
+mailserver.test 10800 IN A <the machine’s IPv4 address>
+mailserver.test 10800 IN AAAA <the machine’s IPv6 address>
+```
+
 #### Instructions specific to graphical installs
 
 These post-installation steps should only be done on graphical systems.
@@ -228,3 +242,4 @@ those cases,
 See [COPYING.md](./COPYING.md).
 
 [NixOS]: https://nixos.org/
+[this image]: https://en.wikipedia.org/wiki/Domain_Name_System#/media/File:Domain_name_space.svg
