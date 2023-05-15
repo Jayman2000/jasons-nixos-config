@@ -23,8 +23,8 @@
 		package = pkgs.knot-dns.overrideAttrs (previousAttrs: {
 			version = "unstable-2023-04-27";
 			src = builtins.fetchTarball {
-				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/760f4df0f0d91df81f2b19830edc3501999cf4ee/knot-dns-760f4df0f0d91df81f2b19830edc3501999cf4ee.tar.gz";
-				sha256 = "0vfnq2dbpchkh0vd5q3pl8a2c5jfnnxyjq9ffbhfkayrib7pb4m1";
+				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/6af75d72b1938daa834e8b0c1f2acebb642c747f/knot-dns-6af75d72b1938daa834e8b0c1f2acebb642c747f.tar.gz";
+				sha256 = "1spawv1h0lymfb3va07jr18s0fck3r56rspjsgvjk5b617iixjpc";
 			};
 		});
 		# Referencing ./knot-dns/storage the way we do here will
