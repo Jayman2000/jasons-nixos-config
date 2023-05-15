@@ -4,12 +4,12 @@ with import <nixpkgs> { };
 
 stdenv.mkDerivation rec {
 	pname = "swapspace";
-	version = "1.17";
+	version = "1.18";
 	src = fetchFromGitHub {
 		owner = "Tookmund";
 		repo = "Swapspace";
 		rev = "v${version}";
-		hash = "sha256-v1kSkepZm6+S4wf86ETgQzEAZBLJ2jQBgCRdF7yvuxs=";
+		hash = "sha256-tzsw10cpu5hldkm0psWcFnWToWQejout/oGHJais6yw=";
 	};
 	buildInputs = [ automake autoconf ];
 
