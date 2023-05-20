@@ -21,7 +21,7 @@
 	services.knot = {
 		enable = true;
 		package = pkgs.knot-dns.overrideAttrs (previousAttrs: {
-			version = "unstable-2023-04-27";
+			version = "unstable-2023-05-13";
 			src = builtins.fetchTarball {
 				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/6af75d72b1938daa834e8b0c1f2acebb642c747f/knot-dns-6af75d72b1938daa834e8b0c1f2acebb642c747f.tar.gz";
 				sha256 = "1spawv1h0lymfb3va07jr18s0fck3r56rspjsgvjk5b617iixjpc";
