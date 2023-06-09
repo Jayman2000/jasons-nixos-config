@@ -11,9 +11,7 @@
 		# Adapted from
 		# <https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable>.
 		home.packages = let
-			url = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz";
-			tarball = builtins.fetchTarball url;
-			unstablePkgs = import tarball {};
+			unstablePkgs = (import ./nixpkgs-unstable.nix);
 			# Thanks to strager
 			# (<https://stackoverflow.com/users/39992/strager>)
 			# for this idea:
