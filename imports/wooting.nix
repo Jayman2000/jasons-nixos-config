@@ -7,11 +7,7 @@
 			url = "https://github.com/jtrees/nixpkgs/archive/refs/heads/update-wooting-udev-rules.tar.gz";
 			tarball = builtins.fetchTarball url;
 		in import tarball {};
-		# <https://github.com/NixOS/nixpkgs/pull/225053>
-		updatedWootilityPkgs = let
-			url = "https://github.com/jtrees/nixpkgs/archive/refs/heads/update-wootility.tar.gz";
-			tarball =  builtins.fetchTarball url;
-		in import tarball {};
+		unstablePkgs = import ./nixpkgs-unstable.nix;
 
 		# This overlay is only really needed since the Wooting
 		# Two HE is so new.
@@ -24,7 +20,7 @@
 			# because the version that’s currently in
 			# Nixpkgs is too old to support the Wooting Two
 			# HE.
-			wootility = updatedWootilityPkgs.wootility;
+			wootility = unstablePkgs.wootility;
 		});
 	in [ overlay ];
 
