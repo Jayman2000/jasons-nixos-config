@@ -36,13 +36,13 @@ You’ll need to install whatever version of NixOS matches that Home Manager
 version. If `<version>` is “22.05” then install NixOS 22.05; If `<version>` is
 “22.11” then install NixOS 22.11; etc.
 
-### 2. If you plan to install NixOS 22.05, then build its manual
+### 2. If you plan to install NixOS 22.11, then build its manual
 
-If you’re going to install NixOS 22.05, it’s probably a good idea to follow the
-installation instructions in the NixOS 22.05 Manual (as opposed to the
+If you’re going to install NixOS 22.11, it’s probably a good idea to follow the
+installation instructions in the NixOS 22.11 Manual (as opposed to the
 instructions in the manual for the latest version of NixOS). Unfortunately, the
-NixOS project doesn’t seem to distribute manuals for older stable versions of
-NixOS, so we’ll have to build the NixOS 22.05 Manual from source. Here’s how:
+NixOS project isn’t currently distributing built versions of the NixOS 22.11
+manual, so we’ll have to build the NixOS 22.11 Manual from source. Here’s how:
 
 1. Make sure that you have [the Nix package
 manager](https://nixos.org/manual/nix/stable/) installed.
@@ -61,10 +61,10 @@ manager](https://nixos.org/manual/nix/stable/) installed.
 
 		cd nixpkgs
 
-4. Make sure that you’re looking at the branch that contains the 22.05 version
+4. Make sure that you’re looking at the branch that contains the 22.11 version
 of the manual:
 
-		git checkout release-22.05
+		git checkout release-22.11
 
 5. Follow the instructions in
 `nixos/doc/manual/contributing-to-this-manual.chapter.md`
