@@ -18,7 +18,7 @@
 			# <https://stackoverflow.com/a/71245733/7593853>
 			pyOverrides = finalAttrs: previousAttrs: {
 				# The version of python3Packages.cffi in
-				# the stable version of nixpkgs doesn’t
+				# the 22.11 version of nixpkgs doesn’t
 				# work with Python 3.11. See
 				# <https://foss.heptapod.net/pypy/cffi/-/issues/551>.
 				#
@@ -34,13 +34,20 @@
 					packageOverrides = pyOverrides;
 				};
 			};
-			pkgs = import <nixpkgs> {
-				overlays = [ overlay ];
-			};
+			pkgsToUse = (
+				# See the comment in the pyOverrides
+				# declaration.
+				if config.system.nixos.release == "22.11" then
+					import <nixpkgs> {
+						overlays = [ overlay ];
+					}
+				else
+					pkgs
+			);
 		in [
-			pkgs.cargo # Used for this repo’s pre-commit config
-			pkgs.gcc # Used for this repo’s pre-commit config
-			pkgs.go # Used for this repo’s pre-commit config
+			pkgsToUse.cargo # Used for this repo’s pre-commit config
+			pkgsToUse.gcc # Used for this repo’s pre-commit config
+			pkgsToUse.go # Used for this repo’s pre-commit config
 
 			# local-pre-commit-hooks/update-serial-numbers.py
 			# is a script that requires Python 3.11. It’s
@@ -51,8 +58,8 @@
 			# mypy hook with Python 3.10, then the mypy hook
 			# would fail to check that Python 3.11-only
 			# script.
-			(pkgs.pre-commit.override {
-				python3Packages = pkgs.python311Packages;
+			(pkgsToUse.pre-commit.override {
+				python3Packages = pkgsToUse.python311Packages;
 			})
 
 			(import applications/git-bhc.nix)
