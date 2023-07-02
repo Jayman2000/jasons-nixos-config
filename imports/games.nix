@@ -84,10 +84,12 @@
 		teeworlds
 		the-legend-of-edgar
 		the-powder-toy
-		titanion
+		# This one (and a few others below) fail to build on NixOS 23.05. See <https://github.com/NixOS/nixpkgs/issues/241341>.
+		#titanion
 		toppler
-		torus-trooper
-		tumiki-fighters
+		# See the comment for titanion.
+		#torus-trooper
+		#tumiki-fighters
 		tworld2
 		unvanquished
 		#urbanterror  # TODO: Install on systems that already have unfree packages enabled.
