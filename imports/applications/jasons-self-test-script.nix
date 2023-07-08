@@ -189,35 +189,6 @@ writeShellApplication {
 			return "$exit_status"
 		}
 
-		function record_mismatch
-		{
-			if [ "$#" -ne 4 ]
-			then
-				echo_raw \
-					"The record_mismatch funtion" \
-					"was called with $# " \
-					"arguments. It should only" \
-					"ever be called with 4" \
-					"arguments."
-			fi
-			local -r domain="$1"
-			shift
-			local -r type="$1"
-			shift
-			local -r expected="$1"
-			shift
-			# If record_mismatch is called with too many
-			# arguments, act like the extra arguments were
-			# packed into the last argument.
-			local -r actual="$*"
-
-			# shellcheck disable=SC1111
-			echo_raw \
-				"$domain’s $type record" \
-				"should be “$expected”, but" \
-				"it’s actually “$actual”."
-		}
-
 		### Test functions: ###
 		function ping_test
 		{
