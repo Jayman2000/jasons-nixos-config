@@ -25,7 +25,7 @@
 		in
 		{
 			"Server" = { id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7"; };
-			"Jason-Lemur-Pro" = { id = "3PGXPGR-OWRBYZG-JQEQH73-XE7LIUP-F6OEYWJ-IC3DLCW-WHNAU3R-G2P6SAM"; };
+			"Jason-Lemur-Pro" = { id = "HDJCH46-RZMHE3K-T6S3G6N-662CFFW-CIAVKTI-BN6B32M-LFQCQKX-GG575AV"; };
 			"Jason-Lemur-Pro-VM-Test" = { id = "2MOLIOF-XEWO4JR-PUE4NUS-I3YSRGM-X374W7F-6BXK4S6-UGXVIL6-TYWHWAC"; };
 			"Jason-Desktop-Windows" = { id = "DAW6JNR-DHBHAVL-42UVJDB-SENEDDQ-OVLHNH3-XOVKDE4-JXVIQ23-GJBG6QZ"; };
 		# In other words, only add each device to the devices list if this config isn’t being deployed on that device.
