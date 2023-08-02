@@ -21,6 +21,7 @@
 
 	users.users.jayman.openssh.authorizedKeys.keys = [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
+		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZ+H6hJgs+SQVcRkTgmtHBkh0Fz9KFicmWih8qAA3Mb jayman@Jason-Laptop-Linux"
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAxhFrE4xzbbctfKmM731F3SEAilbltANP4J8WQhIAIb jayman@Jason-Lemur-Pro"
 	];
 
