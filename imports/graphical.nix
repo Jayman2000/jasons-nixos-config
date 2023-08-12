@@ -72,12 +72,7 @@
 
 			# Browsers to test my site with.
 			librewolf
-			(
-				if config.system.nixos.release == "22.11" then
-					palemoon
-				else
-					palemoon-bin
-			)
+			palemoon-bin
 			ungoogled-chromium
 
 			(import applications/cmark-html.nix)
