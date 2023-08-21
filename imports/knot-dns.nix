@@ -22,8 +22,10 @@
 		enable = true;
 		package = pkgs.knot-dns.overrideAttrs (previousAttrs: {
 			version = "unstable-2023-08-01";
-			src = builtins.fetchTarball {
-				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/badd72da3d102600812997c85557dd84de45ee98/knot-dns-badd72da3d102600812997c85557dd84de45ee98.tar.gz";
+			src = let
+				commit-ish = "badd72da3d102600812997c85557dd84de45ee98";
+			in builtins.fetchTarball {
+				url = "https://gitlab.nic.cz/knot/knot-dns/-/archive/${commit-ish}/knot-dns-${commit-ish}.tar.gz";
 				sha256 = "17bsxbb2jpfwgcp2kihlvhaini9v3m1qm3q02q45j59yinkjw89j";
 			};
 		});
