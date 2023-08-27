@@ -26,7 +26,7 @@ fi
 
 copy_and_restrict u=X,g=,o= imports/
 if [ "$switch" = yes ]; then
-	sudo nixos-rebuild switch
+	sudo nixos-rebuild switch --no-build-nix
 else
 	./update.sh
 fi
