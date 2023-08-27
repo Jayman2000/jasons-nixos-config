@@ -20,6 +20,12 @@
 		randomizedDelaySec = "45min";
 	};
 
+	# This allows users to run “systemctl poweroff” and
+	# “systemctl reboot” without sudo [1].
+	#
+	# [1]: <https://wiki.archlinux.org/title/Systemd#Power_management>
+	security.polkit.enable = true;
+
 	environment.defaultPackages = [ ];
 	environment.systemPackages = [ pkgs.htop ];
 	home-manager.useGlobalPkgs = true;
