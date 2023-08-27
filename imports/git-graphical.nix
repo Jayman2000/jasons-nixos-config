@@ -28,6 +28,7 @@
 				python3Packages = pkgs.python311Packages;
 			})
 
+			pkgs.gh
 			(import applications/git-bhc.nix)
 			(import applications/git-tb.nix)
 		];
