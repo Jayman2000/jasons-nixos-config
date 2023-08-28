@@ -1,6 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 Unless otherwise noted, everything in this file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-License-Identifier: GPL-2.0-or-later
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
 # SPDX-FileContributor: Jacob Adams <tookmund@gmail.com>
 { config, pkgs, ... }:
 let
@@ -61,17 +61,31 @@ in {
 		requires = dependencies;
 
 		path = [
-			pkgs.coreutils	# for mkdir and chmod
 			pkgs.util-linux  # for mkswap (swapspace runs it)
-			swapspacePkg
 		];
 		# Technically, I could use mkdir’s -m flag instead of chmod,
 		# but then (I’m assuming) /var and /var/lib would have their
 		# permissions set to 700 if they didn’t already exist.
-		script = ''
-			[ -d '${swapFileDir}' ] && mkdir -p '${swapFileDir}' && chmod 700 '${swapFileDir}'
-			swapspace --swappath='${swapFileDir}'
-		'';
+		script = let
+			implementation = pkgs.resholve.writeScript "swapspace-service-implementation" {
+				execer = [
+					# TODO: Get this fixed upstream.
+					# I don’t that I can start
+					# getting this fixed upstream
+					# until I contribute the
+					# swapspace package to Nixpkgs.
+					"cannot:${swapspacePkg}/bin/swapspace"
+				];
+				inputs = [
+					pkgs.coreutils	# for mkdir and chmod
+					swapspacePkg
+				];
+				interpreter = "${pkgs.bash}/bin/bash";
+			} ''
+				[ -d '${swapFileDir}' ] && mkdir -p '${swapFileDir}' && chmod 700 '${swapFileDir}'
+				swapspace --swappath='${swapFileDir}'
+			'';
+		in "${implementation}";
 		serviceConfig = {
 			Restart = "always";
 			RestartSec = 30;
@@ -82,12 +96,12 @@ in {
 	};
 	# END GPL-2.0-or-later LICENSED SECTION
 	systemd.services.ensure-enough-vm-to-shutdown = let
-		execStopPkg = (import ./applications/ensure-enough-vm-to-shutdown.nix);
+		execStopScript = (import ./applications/ensure-enough-vm-to-shutdown.nix);
 	in {
 		after = [ "swap.target" ];
 		wantedBy = [ "swap.target" ];
 		serviceConfig = {
-			ExecStop = "${execStopPkg}/bin/ensure-enough-vm-to-shutdown";
+			ExecStop = "${execStopScript}";
 			RemainAfterExit = true;
 		};
 

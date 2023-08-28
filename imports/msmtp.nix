@@ -1,5 +1,5 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
 { config, pkgs, ... }:
 {
 	programs.msmtp = {
@@ -40,8 +40,7 @@
 		description = "try to send any emails that are stuck in msmtpq’s queue";
 		startAt = "hourly";
 
-		path = with pkgs; [
-			msmtp
+		path = [
 			# The msmtp package in Nixpkgs uses resholve [1] to
 			# make sure that the commands used in the msmtpq script
 			# are absolute paths [2]. As a result, we don’t have to
@@ -60,10 +59,21 @@
 			# [4]: <https://github.com/abathur/resholve/issues/29>
 			# [5]: <https://git.marlam.de/gitweb/?p=msmtp.git;a=blob;f=scripts/msmtpq/msmtpq;h=d8b4039338254ba9674fc95ffc252f674d965155;hb=8ee1b0e42f4a735c547caed35775cfe858e69d40#l203>
 			# [6]: <https://git.marlam.de/gitweb/?p=msmtp.git;a=blob;f=scripts/msmtpq/msmtpq;h=d8b4039338254ba9674fc95ffc252f674d965155;hb=8ee1b0e42f4a735c547caed35775cfe858e69d40#l286>
-			inetutils
+			pkgs.inetutils
 		];
-		script = ''
-			msmtpq --q-mgmt -r
-		'';
+		script = let
+			implementation = pkgs.resholve.writeScript "flush-msmtpq-queue-service-implementation" {
+				execer = [
+					# TODO: This won’t be necessary
+					# once this PR is merged:
+					# <https://github.com/abathur/resholve/pull/103>
+					"cannot:${pkgs.msmtp}/bin/msmtpq"
+				];
+				inputs = [ pkgs.msmtp ];
+				interpreter = "${pkgs.bash}/bin/bash";
+			} ''
+				msmtpq --q-mgmt -r
+			'';
+		in "${implementation}";
 	};
 }
