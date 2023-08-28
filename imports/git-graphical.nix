@@ -29,6 +29,7 @@
 			})
 
 			pkgs.gh
+			pkgs.python3Packages.grip
 			(import applications/git-bhc.nix)
 			(import applications/git-tb.nix)
 		];
