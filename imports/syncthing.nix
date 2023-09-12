@@ -17,7 +17,7 @@
 				"Jason-Desktop-Linux" = { id = "7A735CO-FSRRF2I-FN5WRGV-OHGRWHR-TF4Z47H-OJBHRBA-G7CP7BN-FTLXGAX"; };
 			};
 			graphical-test-vm-device = {
-				"Graphical-Test-VM" = { id = "FKL7ZTK-VZXXCEB-62XKBQ3-O7LCUAJ-AW2VOXK-UJXHTWC-NNNOUJM-M2Q4UAG"; };
+				"Graphical-Test-VM" = { id = "7D3L763-ZUJTBTS-WGFVKGU-C2PM4CB-ASU6WK3-WKUWGYL-Y6XM6FN-FNA7UQY"; };
 			};
 			laptop-device = {
 				"Jason-Laptop-Linux" = { id = "HIUQOJU-CNAGZCU-BHAFKP7-2T4WAO3-XUMWZKC-N2ZXQWD-XSGWNZH-WRGEWAP"; };
