@@ -24,6 +24,14 @@ resholve.writeScript "deploy" {
 		exit 1
 	fi
 
+	# Just because the flatpak command is available, that doesn’t
+	# mean that the system actually has
+	# config.services.flatpak.enable set to true.
+	function is_flatpak_enabled
+	{
+		flatpak remote &> /dev/null
+	}
+
 	readonly config_dir="/etc/nixos"
 	readonly imports_dir="$config_dir/imports"
 
@@ -57,7 +65,7 @@ resholve.writeScript "deploy" {
 	readonly path_with_git="${git}/bin:$PATH"
 	sudo PATH="$path_with_git" nixos-rebuild "''${args[@]}" --no-build-nix
 
-	if [ "$switch" != yes ]
+	if [ "$switch" != yes ] && is_flatpak_enabled
 	then
 		# Assume that the user is trying to upgrade the system.
 		flatpak update --noninteractive
