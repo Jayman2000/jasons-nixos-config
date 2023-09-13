@@ -10,7 +10,6 @@ resholve.writeScriptBin "nicely-stop-session" {
 		"cannot:${systemd}/bin/systemctl"
 	];
 	inputs = [
-		coreutils  # for sleep
 		qt6.qttools  # for qdbus
 		systemd  # for systemctl
 	];
@@ -59,9 +58,6 @@ resholve.writeScriptBin "nicely-stop-session" {
 	fi
 	readonly kde_shutdown_type systemctl_shutdown_type
 
-	# We wait 30 seconds here to give other scripts a chance
-	# to close out of the current terminal.
-	sleep 30s
 	kde_shutdown logoutAnd"$kde_shutdown_type" || \
 		systemctl "$systemctl_shutdown_type"
 ''
