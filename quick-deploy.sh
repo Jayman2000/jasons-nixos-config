@@ -12,7 +12,8 @@ then
 		then
 			if [ "$1" = shutdown ] || [ "$1" = reboot ]
 			then
-				pushd imports/applications &&
+				sudo -v &&
+					pushd imports/applications &&
 					nix-build nicely-stop-session.nix &&
 					popd &&
 					./deploy.sh &&
