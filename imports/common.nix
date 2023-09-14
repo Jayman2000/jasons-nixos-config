@@ -5,6 +5,7 @@
 	imports = [
 		./git-common.nix
 		./neovim.nix
+		./sudo.nix
 	];
 
 	i18n.defaultLocale = "en_US.UTF-8";
@@ -33,7 +34,6 @@
 	users.users.jayman = {
 		description = "Jason Yundt";
 		isNormalUser = true;
-		extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
 	};
 	home-manager.users.jayman = { pkgs, ... }: {
 		home.stateVersion = config.system.stateVersion;
