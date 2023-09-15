@@ -39,7 +39,6 @@
 		freedink
 		freedroid
 		#frogatto  # TODO: Install on systems that already have unfree packages enabled.
-		frozen-bubble
 		gnujump
 		gotypist
 		graphwar
