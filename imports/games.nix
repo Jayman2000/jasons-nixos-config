@@ -90,7 +90,6 @@
 		# See the comment for titanion.
 		#torus-trooper
 		#tumiki-fighters
-		tworld2
 		unvanquished
 		#urbanterror  # TODO: Install on systems that already have unfree packages enabled.
 		vectoroids
