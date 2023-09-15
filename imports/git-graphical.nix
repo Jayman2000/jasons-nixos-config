@@ -30,8 +30,8 @@
 
 			pkgs.gh
 			pkgs.python3Packages.grip
-			(import applications/git-bhc.nix)
-			(import applications/git-tb.nix)
+			(import applications/git-bhc.nix { inherit pkgs; })
+			(import applications/git-tb.nix { inherit pkgs; })
 		];
 		programs.git = {
 			# I’ll enable this once this option is available in a stable version of Home Manager.

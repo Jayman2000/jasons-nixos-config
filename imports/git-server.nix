@@ -34,7 +34,9 @@ in {
 	home-manager.users.git = { pkgs, ... }: {
 		home.stateVersion = config.system.stateVersion;
 		programs.git.enable = true;
-		programs.git.extraConfig.core.hooksPath = "${(import applications/post-update.nix)}/bin";
+		programs.git.extraConfig.core.hooksPath = let
+			package = (import applications/post-update.nix { inherit pkgs; });
+		in "${package}/bin";
 	};
 
 	# The git user has write permission for the repo folders. git-daemon

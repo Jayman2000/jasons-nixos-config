@@ -1,27 +1,27 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2023)
-with import <nixpkgs> { };
+{ pkgs }:
 
 let
-	esa = lib.strings.escapeShellArg;
+	esa = pkgs.lib.strings.escapeShellArg;
 	rr = import ../recursive-resolvers.nix;
-in resholve.writeScriptBin "jasons-self-test-script" {
+in pkgs.resholve.writeScriptBin "jasons-self-test-script" {
 	execer = [
 		# TODO: This can’t be fixed upstream until subparsers
 		# are supported. See
 		# <https://github.com/abathur/resholve/pull/104>.
-		"cannot:${systemd}/bin/systemctl"
+		"cannot:${pkgs.systemd}/bin/systemctl"
 	];
 	# See <https://github.com/abathur/resholve/issues/29>.
 	fix.ping = true;
-	inputs = [
+	inputs = with pkgs; [
 		coreutils
 		gnugrep
 		iputils
 		knot-dns
 		systemd
 	];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	# writeShellApplication enables this by default. We need
 	# to turn it off or else the script will exit when a

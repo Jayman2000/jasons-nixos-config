@@ -53,7 +53,7 @@ in {
 		dependencies = [ "local-fs.target" "swap.target" ];
 		swapFileDirBase = if config.networking.hostName == "Jason-Desktop-Linux" then "/hdd/home" else "";
 		swapFileDir = "${swapFileDirBase}/var/lib/swapspace";
-		swapspacePkg = (import ./applications/swapspace.nix);
+		swapspacePkg = (import ./applications/swapspace.nix { inherit pkgs; });
 	in {
 		description = "Swapspace, a dynamic swap space manager";
 		documentation = [ "man:swapspace(8)" ];
@@ -96,7 +96,7 @@ in {
 	};
 	# END GPL-2.0-or-later LICENSED SECTION
 	systemd.services.ensure-enough-vm-to-shutdown = let
-		execStopScript = (import ./applications/ensure-enough-vm-to-shutdown.nix);
+		execStopScript = (import ./applications/ensure-enough-vm-to-shutdown.nix { inherit pkgs; });
 	in {
 		after = [ "swap.target" ];
 		wantedBy = [ "swap.target" ];

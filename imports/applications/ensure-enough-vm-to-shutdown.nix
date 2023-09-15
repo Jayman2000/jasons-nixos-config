@@ -1,15 +1,15 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
-with import <nixpkgs> { };
+{ pkgs }:
 
-resholve.writeScript "ensure-enough-vm-to-shutdown" {
+pkgs.resholve.writeScript "ensure-enough-vm-to-shutdown" {
 	execer = [
 		# TODO: This won’t be needed once Nixpkgs contains a
 		# version of binlore that contains this commit:
 		# <https://github.com/abathur/binlore/commit/c09ae5a2a4bca7a373d349421cd3f5ee7b8f94de>
-		"cannot:${procps}/bin/free"
+		"cannot:${pkgs.procps}/bin/free"
 	];
-	inputs = [
+	inputs = with pkgs; [
 		bc
 		coreutils
 		findutils
@@ -18,7 +18,7 @@ resholve.writeScript "ensure-enough-vm-to-shutdown" {
 		procps
 		util-linux
 	];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	# Row numbers and column numbers both start at 1.
 	function get_value_from_free {

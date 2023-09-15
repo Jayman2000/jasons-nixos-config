@@ -75,7 +75,7 @@
 			palemoon-bin
 			ungoogled-chromium
 
-			(import applications/cmark-html.nix)
+			(import applications/cmark-html.nix { inherit pkgs; })
 		];
 		xdg.dataFile."fonts/CCSymbols.ttf".source = "/etc/nixos/imports/CCSymbols.ttf";
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.

@@ -2,17 +2,17 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
 #
 # This is the post-update hook for Git. See githooks(5) for more information.
-with import <nixpkgs> { };
+{ pkgs }:
 
-resholve.writeScriptBin "post-update" {
+pkgs.resholve.writeScriptBin "post-update" {
 	execer = [
 		# TODO: This can’t be fixed upstream until subparsers
 		# are supported. See
 		# <https://github.com/abathur/resholve/pull/104>.
-		"cannot:${git}/bin/git"
+		"cannot:${pkgs.git}/bin/git"
 	];
-	inputs = [ git ];
-	interpreter = "${bash}/bin/bash";
+	inputs = [ pkgs.git ];
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	exec git update-server-info
 ''

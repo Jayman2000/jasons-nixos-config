@@ -1,17 +1,17 @@
 # SPDX-License-Identifier: LicenseRef-MIT-JY
-# SPDX-FileCopyrightText: 2022 Jason Yundt <jason@jasonyundt.email>
-with import <nixpkgs> { };
+# SPDX-FileCopyrightText: 2022–2023 Jason Yundt <jason@jasonyundt.email>
+{ pkgs }:
 
-stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation rec {
 	pname = "swapspace";
 	version = "1.18";
-	src = fetchFromGitHub {
+	src = pkgs.fetchFromGitHub {
 		owner = "Tookmund";
 		repo = "Swapspace";
 		rev = "v${version}";
 		hash = "sha256-tzsw10cpu5hldkm0psWcFnWToWQejout/oGHJais6yw=";
 	};
-	buildInputs = [ automake autoconf ];
+	buildInputs = with pkgs; [ automake autoconf ];
 
 	# See <https://github.com/Tookmund/Swapspace/blob/v1.17/README.md#where-to-start>.
 	preConfigure = "autoreconf -i";

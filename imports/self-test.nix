@@ -19,7 +19,7 @@
 		startAt = "hourly";
 		script = let
 			fqdn = config.networking.fqdn;
-			jasonsSelfTestScript = (import ./applications/jasons-self-test-script.nix);
+			jasonsSelfTestScript = (import ./applications/jasons-self-test-script.nix { inherit pkgs; });
 			subject = "Self-tests failed on ${fqdn}";
 
 			implementation = pkgs.resholve.writeScript "jasons-self-test-script-service-implementation" {
