@@ -34,7 +34,8 @@ we’re looking for.
 
 You’ll need to install whatever version of NixOS matches that Home Manager
 version. If `<version>` is “22.11” then install NixOS 22.11; If `<version>` is
-“23.05” then install NixOS 23.05; etc.
+“23.05” then install NixOS 23.05; If `<version>` is “unstable” then install
+NixOS Unstable; etc.
 
 ### 2. If you plan to install NixOS 22.11, then build its manual
 
