@@ -34,17 +34,20 @@ in {
 	# situation like that, you won’t be able to shut down.
 	boot.devSize = ramConstrainedTmpfsSize;
 
-	# My main concern is running out of virtual memory or hitting the size
-	# limit of a tmpfs. I’ll happily slow the system down a bit in order to
-	# avoid both of those things.
-	boot.tmpOnTmpfs = false;
-	# My expectation is that /tmp will be cleared when the system shuts
-	# down. It wouldn’t be a good idea, but I could see a program storing
-	# sensitive data in /tmp. The logic would go like this: “If the program
-	# shuts down successfully, then it will delete the file. If the program
-	# doesn’t shut down successfully, then it will get deleted when the
-	# system shuts down.”
-	boot.cleanTmpDir = true;
+	boot.tmp = {
+		# My main concern is running out of virtual memory or hitting
+		# the size limit of a tmpfs. I’ll happily slow the system down
+		# a bit in order to avoid both of those things.
+		useTmpfs = false;
+		# My expectation is that /tmp will be cleared when the system
+		# shuts down. It wouldn’t be a good idea, but I could see a
+		# program storing sensitive data in /tmp. The logic would go
+		# like this: “If the program shuts down successfully, then it
+		# will delete the file. If the program doesn’t shut down
+		# successfully, then it will get deleted when the system shuts
+		# down.”
+		cleanOnBoot = true;
+	};
 
 	# This next section was adapted from Swapspace’s swapspace.service. See:
 	# <https://github.com/Tookmund/Swapspace/blob/62c25dbc3f4741f23c99b6c9310c17d63391ad10/swapspace.service>
