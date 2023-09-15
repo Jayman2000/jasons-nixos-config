@@ -9,6 +9,7 @@ resholve.writeScriptBin "nicely-stop-session" {
 		# <https://github.com/abathur/resholve/pull/104>.
 		"cannot:${systemd}/bin/systemctl"
 	];
+	fake.external = [ "sudo" ];
 	inputs = [
 		qt6.qttools  # for qdbus
 		systemd  # for systemctl
@@ -59,5 +60,5 @@ resholve.writeScriptBin "nicely-stop-session" {
 	readonly kde_shutdown_type systemctl_shutdown_type
 
 	kde_shutdown logoutAnd"$kde_shutdown_type" || \
-		systemctl "$systemctl_shutdown_type"
+		sudo systemctl "$systemctl_shutdown_type"
 ''
