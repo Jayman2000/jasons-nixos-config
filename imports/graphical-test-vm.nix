@@ -3,7 +3,7 @@
 {
 	imports =
 		[
-			./home-manager/23.05.nix
+			./home-manager/unstable.nix
 			./common.nix
 			./efi.nix
 			./cli-shortcuts.nix
