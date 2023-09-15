@@ -55,7 +55,6 @@
 			chars
 			filelight
 			gitlab-runner
-			godot
 			kalendar
 			kdialog  # Used by ecwolf
 			keepassxc
@@ -76,7 +75,9 @@
 			ungoogled-chromium
 
 			(import applications/cmark-html.nix { inherit pkgs; })
-		];
+		] ++ (if config.system.nixos.release == "23.05"
+			then [ godot ]
+			else [ godot3 ]);
 		xdg.dataFile."fonts/CCSymbols.ttf".source = "/etc/nixos/imports/CCSymbols.ttf";
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.
 		xsession.enable = true;
