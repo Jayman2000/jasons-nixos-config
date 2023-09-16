@@ -3,7 +3,7 @@
 { config, lib, pkgs, ... }:
 {
 	imports = [
-		./home-manager/23.05.nix
+		./home-manager/unstable.nix
 		./common.nix
 		./auto-upgrade.nix
 		./knot-dns.nix
