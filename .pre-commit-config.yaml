@@ -30,7 +30,7 @@ exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
         repo: https://github.com/pre-commit/pre-commit-hooks
-        rev: v4.3.0
+        rev: v4.4.0
         hooks:
             - id: check-yaml
             - id: check-case-conflict
@@ -51,7 +51,7 @@ repos:
             - id: trailing-whitespace
     -
         repo: https://github.com/jumanjihouse/pre-commit-hooks
-        rev: 2.1.6
+        rev: 3.0.0
         hooks:
             -
                 id: forbid-space-in-indent
@@ -66,31 +66,31 @@ repos:
                 types: ['text']
     -
         repo: https://github.com/adrienverge/yamllint
-        rev: v1.26.3
+        rev: v1.32.0
         hooks:
             - id: yamllint
     -
         repo: https://github.com/igorshubovych/markdownlint-cli
-        rev: v0.31.1
+        rev: v0.37.0
         hooks:
             - id: markdownlint
     -
         repo: https://github.com/scop/pre-commit-shfmt
-        rev: v3.5.1-1
+        rev: v3.7.0-1
         hooks:
             -
                 id: shfmt
                 args: ["-fn"]
     -
         repo: https://github.com/pre-commit/mirrors-mypy
-        rev: v1.0.1
+        rev: v1.5.1
         hooks:
             -
                 id: mypy
                 additional_dependencies: &usn_deps [dnspython]
     -
         repo: https://github.com/PyCQA/autoflake
-        rev: v2.0.2
+        rev: v2.2.1
         hooks:
             - id: autoflake
     -
