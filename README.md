@@ -204,7 +204,7 @@ GPG key. If there was an existing wallet before you created this one, delete
 that wallet.
 5. In KDE Wallet settings, make sure that the new wallet is the default wallet
 and that the wallet is closed automatically after 10 minutes.
-6. In KWalletManager, add a password entry named “jason@jasonyundt.email”.
+6. In KWalletManager, add a password entry named <jason@jasonyundt.email>.
 7. Import Keyboard shortcuts.kksrc. Go to System
 Settings>Workspace>Shortcuts>Shortcuts>Import Scheme…
 8. Add Transmission and Yakuake to the list of autostart applications.
