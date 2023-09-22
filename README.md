@@ -243,4 +243,3 @@ those cases,
 See [COPYING.md](./COPYING.md).
 
 [NixOS]: https://nixos.org/
-[this image]: https://en.wikipedia.org/wiki/Domain_Name_System#/media/File:Domain_name_space.svg
