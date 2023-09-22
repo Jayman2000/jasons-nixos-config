@@ -29,6 +29,20 @@
 exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
+        # TODO: Once this MR is merged [1], repo should replaced with the
+        # upstream one.
+        #
+        # [1]: <https://gitlab.com/vojko.pribudic/pre-commit-update/-/merge_requests/1>
+        repo: https://gitlab.com/Jayman2000/pre-commit-update-mr
+        # TODO: Once that previously mentioned MR is merged, rev should be
+        # replaced with something that’s in the upstream repo. Once there’s a
+        # release that has contains that MR, rev should be replaced with a tag.
+        rev: version-that-i-want-to-use
+        hooks:
+            -
+                id: pre-commit-update
+                args: [--dry-run]
+    -
         repo: https://github.com/pre-commit/pre-commit-hooks
         rev: v4.4.0
         hooks:
