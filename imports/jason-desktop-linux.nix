@@ -29,4 +29,6 @@
 
 	# I keep ending up with so little space that I can’t update.
 	nix.settings.auto-optimise-store = true;
+
+	services.davfs2.enable = true;
 }
