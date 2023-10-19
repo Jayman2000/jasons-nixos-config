@@ -103,26 +103,26 @@ repos:
     -
         repo: local
         hooks:
-            -
-                id: &usn update-serial-numbers
-                name: *usn
-                # Here’s how I decided what to set the language and
-                # entry to:
-                # <https://pre-commit.com/#repository-local-hooks>
-                entry: python local-pre-commit-hooks/update-serial-numbers.py
-                additional_dependencies: *usn_deps
-                language: python
-                files: &zone_files ".*\\.zone$"
-                always_run: true
-                description: Update serial numbers in DNS zone file SOA records
-                stages:
-                    - post-commit
+            #-
+            #    id: &usn update-serial-numbers
+            #    name: *usn
+            #    # Here’s how I decided what to set the language and
+            #    # entry to:
+            #    # <https://pre-commit.com/#repository-local-hooks>
+            #    entry: python local-pre-commit-hooks/update-serial-numbers.py
+            #    additional_dependencies: *usn_deps
+            #    language: python
+            #    files: &zone_files ".*\\.zone$"
+            #    always_run: true
+            #    description: Update serial numbers in DNS zone file SOA records
+            #    stages:
+            #        - post-commit
             -
                 id: &kzc kzonecheck
                 name: *kzc
                 entry: ./local-pre-commit-hooks/kzonecheck.sh
                 language: system
-                files: *zone_files
+                files: &zone_files ".*\\.zone$"
                 description: Validate DNS zone files
             -
                 id: &ckc check-knot.conf
