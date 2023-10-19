@@ -12,7 +12,6 @@
 		#assaultcube  # TODO: Install on systems that already have unfree packages enabled.
 		atanks
 		azimuth
-		ballAndPaddle
 		ballerburg
 		blackshades
 		blobby
