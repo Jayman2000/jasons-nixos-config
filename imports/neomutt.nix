@@ -1,5 +1,5 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
 let
 	# Neonwolf is a color scheme for NeoMutt.
 	neonwolf-repo = builtins.fetchGit {
@@ -10,9 +10,7 @@ let
 in
 {
 	home-manager.users.jayman = { pkgs, ... }: {
-		home.packages = with pkgs; [
-			neomutt
-		];
+		home.packages = [ pkgs.neomutt ];
 		# Home Manager does have options specifically for Neomutt and email in general, but I find them to be frustrating.
 		xdg.configFile."neomutt/neomuttrc".text =
 			let
