@@ -14,7 +14,8 @@
 				mail_server_domain = "box.${address_domain}";
 				pass_command = "`kwallet-query -f Passwords -r '${address}' default`";
 				# Neonwolf is a color scheme for NeoMutt.
-				neonwolf-repo = pkgs.fetchFromGitHub {
+				neonwolf-repo = pkgs.fetchFromGitea {
+					domain = "codeberg.org";
 					owner = "h3xx";
 					repo="mutt-colors-neonwolf";
 					rev = "165a9bc5c190fb422d4814d3740279cbd342dc88";
