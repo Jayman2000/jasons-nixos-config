@@ -18,8 +18,8 @@
 					domain = "codeberg.org";
 					owner = "h3xx";
 					repo="mutt-colors-neonwolf";
-					rev = "165a9bc5c190fb422d4814d3740279cbd342dc88";
-					sha256 = "LZDr2RIZv8kggZ/O5BGggRiYOfDE7ibQFbvjFTjwr4U=";
+					rev = "39ad5a07e7a21c1f96a7651f134399482185a2f2";
+					sha256 = "1PX+sXhEmncQRenz45aerUq4G0iXIVHgh2SAYIxUtTk=";
 				};
 			in
 			''
