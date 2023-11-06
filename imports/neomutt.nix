@@ -1,15 +1,5 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
-{ pkgs, ... }:
-let
-	# Neonwolf is a color scheme for NeoMutt.
-	neonwolf-repo = pkgs.fetchFromGitHub {
-		owner = "h3xx";
-		repo="mutt-colors-neonwolf";
-		rev = "165a9bc5c190fb422d4814d3740279cbd342dc88";
-		sha256 = "LZDr2RIZv8kggZ/O5BGggRiYOfDE7ibQFbvjFTjwr4U=";
-	};
-in
 {
 	home-manager.users.jayman = { pkgs, ... }: {
 		home.packages = [ pkgs.neomutt ];
@@ -23,6 +13,13 @@ in
 				address_percent_encoded = "${address_local_part}%40${address_domain}";
 				mail_server_domain = "box.${address_domain}";
 				pass_command = "`kwallet-query -f Passwords -r '${address}' default`";
+				# Neonwolf is a color scheme for NeoMutt.
+				neonwolf-repo = pkgs.fetchFromGitHub {
+					owner = "h3xx";
+					repo="mutt-colors-neonwolf";
+					rev = "165a9bc5c190fb422d4814d3740279cbd342dc88";
+					sha256 = "LZDr2RIZv8kggZ/O5BGggRiYOfDE7ibQFbvjFTjwr4U=";
+				};
 			in
 			''
 				set real_name = "Jason Yundt"
