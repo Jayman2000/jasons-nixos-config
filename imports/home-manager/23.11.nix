@@ -4,11 +4,7 @@
 # Sources:
 # <https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module>
 # <https://nixos.wiki/wiki/Home_Manager>
-#
-# TODO: At the moment, there’s no release-23.11 branch for Home Manager,
-# so were using the master branch. This should be changed once there’s a
-# 23.11 branch for Home Manager.
 let
-	home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+	home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
 in
 import "${home-manager}/nixos"
