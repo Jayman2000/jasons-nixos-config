@@ -37,13 +37,13 @@ version. If `<version>` is “22.11” then install NixOS 22.11; If `<version>` 
 “23.05” then install NixOS 23.05; If `<version>` is “unstable” then install
 NixOS Unstable; etc.
 
-### 2. If you plan to install NixOS 23.11, then build its manual
+### 2. If you plan to install NixOS 23.05, then build its manual
 
-If you’re going to install NixOS 23.11, it’s probably a good idea to follow the
-installation instructions in the NixOS 23.11 Manual (as opposed to the
+If you’re going to install NixOS 23.05, it’s probably a good idea to follow the
+installation instructions in the NixOS 23.05 Manual (as opposed to the
 instructions in the manual for the latest version of NixOS). Unfortunately, the
-NixOS project isn’t currently distributing built versions of the NixOS 23.11
-manual, so we’ll have to build the NixOS 23.11 Manual from source. Here’s how:
+NixOS project isn’t currently distributing built versions of the NixOS 23.05
+manual, so we’ll have to build the NixOS 23.05 Manual from source. Here’s how:
 
 1. Make sure that you have [the Nix package
 manager](https://nixos.org/manual/nix/stable/) installed.
@@ -62,10 +62,10 @@ manager](https://nixos.org/manual/nix/stable/) installed.
 
 		cd nixpkgs
 
-4. Make sure that you’re looking at the branch that contains the 23.11 version
+4. Make sure that you’re looking at the branch that contains the 23.05 version
 of the manual:
 
-		git checkout release-23.11
+		git checkout release-23.05
 
 5. Follow the instructions in
 `nixos/doc/manual/contributing-to-this-manual.chapter.md`
