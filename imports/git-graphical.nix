@@ -3,6 +3,22 @@
 { config, pkgs, ... }:
 {
 	imports = [ ./git-common.nix ];
+
+	nixpkgs.overlays = let
+		# This PR fixes a bug with pre-commit:
+		# <https://github.com/NixOS/nixpkgs/pull/267499>.
+		pr267499 = pkgs.fetchFromGitHub {
+			owner = "NilsIrl";
+			repo = "nixpkgs";
+			rev = "69d78abdb885134bc339a89faa038dde99412f34";
+			sha256 = "VSpebaHL3JFXg04Tp3T72nEv+5G0ECC/fR1M+Ni9bmA=";
+		};
+		pr267499Pkgs = import pr267499 {};
+	in [
+		(self: super: {
+			pre-commit = pr267499Pkgs.pre-commit;
+		})
+	];
 	# Normally, I would just have pre-commit download its own copy of NodeJS, but
 	# on NixOS that doesn’t work. I tried installed NodeJS for jayman only, but
 	# that also didn’t work.
