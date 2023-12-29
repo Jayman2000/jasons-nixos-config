@@ -5,6 +5,7 @@
 	imports = [
 		./games.nix
 		./git-graphical.nix
+		./legacy-locale.nix
 		./neomutt.nix
 		./syncthing.nix
 		./tor-browser.nix
