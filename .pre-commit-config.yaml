@@ -30,7 +30,7 @@ exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
         repo: https://gitlab.com/vojko.pribudic/pre-commit-update
-        rev: v0.1.1
+        rev: v0.1.2
         hooks:
             -
                 id: pre-commit-update
