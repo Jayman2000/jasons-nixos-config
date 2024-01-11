@@ -16,7 +16,25 @@
 		pr267499Pkgs = import pr267499 {};
 	in [
 		(self: super: {
-			pre-commit = pr267499Pkgs.pre-commit;
+			# In another repo, I’m working on a program that
+			# requires Python 3.12. That repo runs mypy [1]
+			# as a pre-commit hook. By default, the nixpkgs
+			# version of pre-commit doesn’t use Python 3.12
+			# which results in mypy not being run using
+			# Python 3.12. When mypy gets run with an older
+			# version of Python, it won’t know about things
+			# that have been added to the standard library
+			# in Python 3.12.
+			#
+			# This override makes pre-commit use Python 3.12
+			# which causes mypy to use Python 3.12 which
+			# then causes mypy to actually understand my
+			# code.
+			#
+			# [1]: <https://mypy-lang.org>
+			pre-commit = pr267499Pkgs.pre-commit.override {
+				python3Packages = pkgs.python312Packages;
+			};
 		})
 	];
 	# Normally, I would just have pre-commit download its own copy of NodeJS, but
