@@ -26,6 +26,7 @@
 		chromium-bsu
 		curseofwar
 		chocolateDoom
+		commandergenius
 		cuyo
 		ecwolf
 		egoboo
