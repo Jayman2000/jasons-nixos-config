@@ -19,9 +19,6 @@
 			graphical-test-vm-device = {
 				"Graphical-Test-VM" = { id = "ZMIDUU3-NMXTXZZ-Q6XYCCN-G3QHDVO-3JBQZ6R-KK62LXI-5XFROZ3-SKV45A7"; };
 			};
-			laptop-device = {
-				"Jason-Laptop-Linux" = { id = "HIUQOJU-CNAGZCU-BHAFKP7-2T4WAO3-XUMWZKC-N2ZXQWD-XSGWNZH-WRGEWAP"; };
-			};
 		in
 		{
 			"Server" = { id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7"; };
@@ -30,16 +27,14 @@
 			"Jason-Desktop-Windows" = { id = "DAW6JNR-DHBHAVL-42UVJDB-SENEDDQ-OVLHNH3-XOVKDE4-JXVIQ23-GJBG6QZ"; };
 		# In other words, only add each device to the devices list if this config isn’t being deployed on that device.
 		} // (if config.networking.hostName != "Jason-Desktop-Linux" then desktop-device else { })
-		// (if config.networking.hostName != "Graphical-Test-VM" then graphical-test-vm-device else { })
-		// (if config.networking.hostName != "Jason-Laptop-Linux" then laptop-device else { });
+		// (if config.networking.hostName != "Graphical-Test-VM" then graphical-test-vm-device else { });
 
 		folders = let
 			all-others-except-vms = [
 				"Server"
 				"Jason-Lemur-Pro"
 				"Jason-Desktop-Windows"
-			] ++ (if config.networking.hostName != "Jason-Desktop-Linux" then [ "Jason-Desktop-Linux" ] else [ ])
-			++ (if config.networking.hostName != "Jason-Laptop-Linux" then [ "Jason-Laptop-Linux" ] else [ ]);
+			] ++ (if config.networking.hostName != "Jason-Desktop-Linux" then [ "Jason-Desktop-Linux" ] else [ ]);
 		in
 		{
 			"Keep Across Linux Distros!" = {

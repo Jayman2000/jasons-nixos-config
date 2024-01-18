@@ -19,9 +19,6 @@ we’re looking for.
 	- For Jason-Desktop-Linux, this is
 	`./src/imports/jason-desktop-linux.nix`.
 
-	- For Jason-Laptop-Linux, this is
-	`./src/imports/jason-laptop-linux.nix`.
-
 	- For Graphical-Test-VM, this is
 	`./src/imports/graphical-test-vm.nix`.
 
@@ -136,7 +133,6 @@ installation, not a graphical one.
 1. Get a copy of this repo on the machine.
 2. In `configuration.nix`, import one of the system specific configs:
 	- `./imports/jason-desktop-linux.nix`,
-	- `./imports/jason-laptop-linux.nix`,
 	- `./imports/graphical-test-vm.nix`,
 	- `./imports/jasonyundt.website.nix` or
 	- `./imports/jasonyundt.website.home.arpa.nix`
