@@ -131,11 +131,11 @@ installation, not a graphical one.
 ### 4. Deploy this config
 
 1. Get a copy of this repo on the machine.
-2. In `configuration.nix`, import one of the system specific configs:
-	- `./imports/jason-desktop-linux.nix`,
-	- `./imports/graphical-test-vm.nix` or
-	- `./imports/jasonyundt.website.home.arpa.nix`
-3. Run `./deploy.sh`.
+2. Determine the machine’s slug. The machine’s slug will be either:
+	- `jason-desktop-linux`,
+	- `graphical-test-vm` or
+	- `jasonyundt.website.home.arpa.nix`
+3. Run `JNC_MACHINE_SLUG=<slug> ./deploy.sh`.
 4. Reboot.
 5. Log in as root and set jayman’s password.
 

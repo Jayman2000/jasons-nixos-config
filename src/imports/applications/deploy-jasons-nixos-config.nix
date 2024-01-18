@@ -23,6 +23,19 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 		echo "ERROR: the sudo command isn’t available."
 		exit 1
 	fi
+	if [ ! -v JNC_MACHINE_SLUG ]
+	then
+		echo \
+			ERROR: The JNC_MACHINE_SLUG environment variable \
+			wasn’t set. Set it to the name of one of the files \
+			in src/configuration.nix/, but don’t include the .nix \
+			at the end. For example, to build the configuration \
+			for Jason-Desktop-Linux, \
+			$'run\n\n\tJNC_MACHINE_SLUG=jason-desktop-linux' \
+			"$0"
+		1>&2
+		exit 1
+	fi
 
 	# Just because the flatpak command is available, that doesn’t
 	# mean that the system actually has
@@ -47,12 +60,17 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 		done
 	}
 
-	if [ -e "$imports_dir" ]
-	then
-		sudo rm -r "$imports_dir"
-	fi
+	for to_remove in "$config_dir/configuration.nix" "$imports_dir"
+	do
+		if [ -e "$to_remove" ]
+		then
+			sudo rm -r "$to_remove"
+		fi
+	done
 
 	copy_and_restrict u=X,g=,o= src/imports/
+	copy_and_restrict u=,g=,o= "src/configuration.nix/$JNC_MACHINE_SLUG.nix"
+	sudo mv "$config_dir/$JNC_MACHINE_SLUG.nix" "$config_dir/configuration.nix"
 	declare -a args
 	if [ "$switch" = yes ]; then
 		args=( switch )
