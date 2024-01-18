@@ -22,7 +22,7 @@ we’re looking for.
 	- For Graphical-Test-VM, this is
 	`./src/imports/graphical-test-vm.nix`.
 
-	- For `jasonyundt.website` and `jasonyundt.website.home.arpa`, this is
+	- For `jasonyundt.website.home.arpa`, this is
 	`./src/imports/jasonyundt.website-common.nix`.
 2. Open that file.
 3. Look for a line that looks like this:
@@ -133,8 +133,7 @@ installation, not a graphical one.
 1. Get a copy of this repo on the machine.
 2. In `configuration.nix`, import one of the system specific configs:
 	- `./imports/jason-desktop-linux.nix`,
-	- `./imports/graphical-test-vm.nix`,
-	- `./imports/jasonyundt.website.nix` or
+	- `./imports/graphical-test-vm.nix` or
 	- `./imports/jasonyundt.website.home.arpa.nix`
 3. Run `./deploy.sh`.
 4. Reboot.
@@ -149,9 +148,7 @@ moment.
 #### Instructions specific to systems that import `auto-upgrade.nix`
 
 These post-installation steps should only be done on
-
-- `jasonyundt.website`
-- `jasonyundt.website.home.arpa`
+`jasonyundt.website.home.arpa`.
 
 1. If one doesn’t already exist, create a new email address on
 `jasonyundt.email`. The address should be `<fqdn>@jasonyundt.email` where
