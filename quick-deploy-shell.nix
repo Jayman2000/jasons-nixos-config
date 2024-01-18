@@ -3,8 +3,8 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-	deploy-jasons-nixos-config = import ./imports/applications/deploy-jasons-nixos-config.nix { inherit pkgs; };
-	nicely-stop-session = import ./imports/applications/nicely-stop-session.nix { inherit pkgs; };
+	deploy-jasons-nixos-config = import ./src/imports/applications/deploy-jasons-nixos-config.nix { inherit pkgs; };
+	nicely-stop-session = import ./src/imports/applications/nicely-stop-session.nix { inherit pkgs; };
 in
 pkgs.mkShell {
 	name = "deploy-shell";

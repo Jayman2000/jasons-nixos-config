@@ -67,7 +67,7 @@ repos:
                 # Pipfile.lock is automatically generated.
                 # knot.conf uses YAML-like syntax. See:
                 # <https://www.knot-dns.cz/docs/3.2/html/configuration.html>
-                exclude: '.*\.yaml$|(.*/)?Pipfile\.lock$|imports/knot-dns/knot\.conf$'
+                exclude: '.*\.yaml$|(.*/)?Pipfile\.lock$|src/imports/knot-dns/knot\.conf$'
                 # This is a workaround the following issue:
                 # <https://github.com/jumanjihouse/pre-commit-hooks/issues/69>
                 types: ['text']

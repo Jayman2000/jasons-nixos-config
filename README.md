@@ -17,16 +17,16 @@ machine’s config is designed to work with only one version of NixOS.
 1. Find the machine-specific config file that contains the information that
 we’re looking for.
 	- For Jason-Desktop-Linux, this is
-	`./imports/jason-desktop-linux.nix`.
+	`./src/imports/jason-desktop-linux.nix`.
 
 	- For Jason-Laptop-Linux, this is
-	`./imports/jason-laptop-linux.nix`.
+	`./src/imports/jason-laptop-linux.nix`.
 
 	- For Graphical-Test-VM, this is
-	`./imports/graphical-test-vm.nix`.
+	`./src/imports/graphical-test-vm.nix`.
 
 	- For `jasonyundt.website` and `jasonyundt.website.home.arpa`, this is
-	`./imports/jasonyundt.website-common.nix`.
+	`./src/imports/jasonyundt.website-common.nix`.
 2. Open that file.
 3. Look for a line that looks like this:
 

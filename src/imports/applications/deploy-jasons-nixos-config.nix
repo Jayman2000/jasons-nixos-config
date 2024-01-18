@@ -41,7 +41,7 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 		shift
 		sudo cp -r "$@" "$config_dir"
 		for src in "$@"; do
-			local dest="$config_dir/$src"
+			local dest="$config_dir/$(basename "$src")"
 			sudo chown -R root:root "$dest"
 			sudo chmod -R "$mode" "$dest"
 		done
@@ -52,7 +52,7 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 		sudo rm -r "$imports_dir"
 	fi
 
-	copy_and_restrict u=X,g=,o= imports/
+	copy_and_restrict u=X,g=,o= src/imports/
 	declare -a args
 	if [ "$switch" = yes ]; then
 		args=( switch )
