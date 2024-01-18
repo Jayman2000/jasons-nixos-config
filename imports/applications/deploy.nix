@@ -1,20 +1,20 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2023)
-with import <nixpkgs> { };
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
+{ pkgs ? import <nixpkgs> { } }:
 
-resholve.writeScript "deploy" {
+pkgs.resholve.writeScriptBin "deploy" {
 	execer = [
 		# TODO: This won’t be needed once this PR is completed:
 		# <https://github.com/abathur/resholve/pull/104>
-		"cannot:${flatpak}/bin/flatpak"
+		"cannot:${pkgs.flatpak}/bin/flatpak"
 	];
 	fake.external = [ "sudo" ];
 	inputs = [
-		coreutils
-		flatpak
-		nixos-rebuild
+		pkgs.coreutils
+		pkgs.flatpak
+		pkgs.nixos-rebuild
 	];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	set -e
 
@@ -62,7 +62,7 @@ resholve.writeScript "deploy" {
 
 	# Needed to workaround this issue:
 	# <https://github.com/NixOS/nix/issues/3533>
-	readonly path_with_git="${git}/bin:$PATH"
+	readonly path_with_git="${pkgs.git}/bin:$PATH"
 	sudo PATH="$path_with_git" nixos-rebuild "''${args[@]}" --no-build-nix
 
 	if [ "$switch" != yes ] && is_flatpak_enabled
