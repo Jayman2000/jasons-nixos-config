@@ -60,7 +60,7 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 		done
 	}
 
-	for to_remove in "$config_dir/configuration.nix" "$imports_dir"
+	for to_remove in "$config_dir/configuration.nix" "$config_dir/hardware-configuration.nix" "$imports_dir"
 	do
 		if [ -e "$to_remove" ]
 		then
@@ -71,6 +71,9 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	copy_and_restrict u=X,g=,o= src/imports/
 	copy_and_restrict u=,g=,o= "src/configuration.nix/$JNC_MACHINE_SLUG.nix"
 	sudo mv "$config_dir/$JNC_MACHINE_SLUG.nix" "$config_dir/configuration.nix"
+	copy_and_restrict u=,g=,o= "src/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
+	sudo mv "$config_dir/$JNC_MACHINE_SLUG.nix" "$config_dir/hardware-configuration.nix"
+
 	declare -a args
 	if [ "$switch" = yes ]; then
 		args=( switch )
