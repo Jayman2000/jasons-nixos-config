@@ -3,15 +3,15 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-	deploy-script = import ./imports/applications/deploy.nix { inherit pkgs; };
+	deploy-jasons-nixos-config = import ./imports/applications/deploy-jasons-nixos-config.nix { inherit pkgs; };
 in
 pkgs.mkShell {
 	name = "deploy-shell";
 	packages = [
-		deploy-script
+		deploy-jasons-nixos-config
 	];
 	shellHook = ''
-		deploy
+		deploy-jasons-nixos-config
 		exit
 	'';
 }

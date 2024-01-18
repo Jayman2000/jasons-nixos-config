@@ -2,7 +2,7 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
 { pkgs ? import <nixpkgs> { } }:
 
-pkgs.resholve.writeScriptBin "deploy" {
+pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	execer = [
 		# TODO: This won’t be needed once this PR is completed:
 		# <https://github.com/abathur/resholve/pull/104>
