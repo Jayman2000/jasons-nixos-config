@@ -6,6 +6,12 @@ set -e
 # See sysexits.h.
 readonly ex_usage=64
 
+if ! type sudo &> /dev/null
+then
+	echo "ERROR: the sudo command isn’t available." 1>&2
+	exit 1
+fi
+
 if [ "$#" -eq 1 ]
 then
 	if [ "$1" = shutdown ] || [ "$1" = reboot ]
