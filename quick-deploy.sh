@@ -11,11 +11,7 @@ then
 	if [ "$1" = shutdown ] || [ "$1" = reboot ]
 	then
 		sudo -v
-		pushd imports/applications
-		nix-build nicely-stop-session.nix
-		popd
-		./deploy.sh
-		./imports/applications/result/bin/nicely-stop-session "$1"
+		session_stop_type="$1" nix-shell quick-deploy-shell.nix
 	else
 		echo -E \
 			"ERROR: Invalid session stop type  “$1”. It" \
