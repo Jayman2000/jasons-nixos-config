@@ -152,7 +152,6 @@ These post-installation steps should only be done on
 
 - `jasonyundt.website`
 - `jasonyundt.website.home.arpa`
-- `mailserver.test.jasonyundt.email`
 
 1. If one doesn’t already exist, create a new email address on
 `jasonyundt.email`. The address should be `<fqdn>@jasonyundt.email` where
@@ -163,20 +162,6 @@ that contains the password for that email address.
 3. Make sure that only root has access to that file:
 
 		sudo chmod 400 ~root/mail-password
-
-##### Instructions specific to `mailserver.test.jasonyundt.email`
-
-This section should only be followed if you’re setting up
-`mailserver.test.jasonyundt.email`.
-
-Make sure that the name server(s) for `jasonyundt.email.` have the
-following resource records:
-
-```zone
-test 10800 IN NS mailserver.test.jasonyundt.email.
-mailserver.test 10800 IN A <the machine’s IPv4 address>
-mailserver.test 10800 IN AAAA <the machine’s IPv6 address>
-```
 
 #### Instructions specific to graphical installs
 
