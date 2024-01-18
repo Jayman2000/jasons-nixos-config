@@ -78,11 +78,9 @@ of section numbers and any additional notes that I have for them:
 
 - (1)
 
-	- Download the minimal ISO image. Also download its SHA-256
-	file, but download it from a separate Tor Browser session.
-	**Make sure that you download an image for the correct version
-	of NixOS** (the version that the machine-specific config
-	depends on).
+	- Download the minimal ISO image. Also download its SHA-256 file. **Make
+	sure that you download an image for the correct version of NixOS** (the
+	version that the machine-specific config depends on).
 
 	- Verify the integrity of the installation image:
 
@@ -213,12 +211,8 @@ Settings>Workspace>Shortcuts>Shortcuts>Import Scheme…
 	- Plasma Browser integration
 	- uBlock Origin
 11. In Firefox, enable HTTPS only mode.
-12. In Tor Browser Launcher Settings, check “Download over system Tor” and
-click “Save & Exit”.
-13. In the Tor Browser, enable HTTPS only mode.
-14. In the Tor Browser, install uBlock Origin.
-15. Set up any additional email accounts in Thunderbird.
-16. In Kalendar, set up a reminder on the first of every month to review
+12. Set up any additional email accounts in Thunderbird.
+13. In Kalendar, set up a reminder on the first of every month to review
 installed packages.
 
 ## Hints for Contributors

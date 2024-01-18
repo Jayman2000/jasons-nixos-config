@@ -8,7 +8,6 @@
 		./legacy-locale.nix
 		./neomutt.nix
 		./syncthing.nix
-		./tor-browser.nix
 		./tmpfs-and-swap.nix
 		./unit-timeouts.nix
 		./vm-host.nix
