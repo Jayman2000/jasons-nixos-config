@@ -10,4 +10,10 @@
 	users.users.jayman.openssh.authorizedKeys.keys = [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
 	];
+	# This is required for the following command to work:
+	#
+	# nixos-rebuild boot --target-host jayman@<host> --use-remote-sudo
+	#
+	# See <https://github.com/NixOS/nixpkgs/issues/159082>.
+	nix.settings.trusted-users = [ "jayman" ];
 }
