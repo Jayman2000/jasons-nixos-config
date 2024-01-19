@@ -3,15 +3,9 @@
 { pkgs ? import <nixpkgs> { } }:
 
 pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
-	execer = [
-		# TODO: This won’t be needed once this PR is completed:
-		# <https://github.com/abathur/resholve/pull/104>
-		"cannot:${pkgs.flatpak}/bin/flatpak"
-	];
 	fake.external = [ "sudo" ];
 	inputs = [
 		pkgs.coreutils
-		pkgs.flatpak
 		pkgs.nixos-rebuild
 	];
 	interpreter = "${pkgs.bash}/bin/bash";
@@ -36,14 +30,6 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 		1>&2
 		exit 1
 	fi
-
-	# Just because the flatpak command is available, that doesn’t
-	# mean that the system actually has
-	# config.services.flatpak.enable set to true.
-	function is_flatpak_enabled
-	{
-		flatpak remote &> /dev/null
-	}
 
 	readonly config_dir="/etc/nixos"
 	readonly imports_dir="$config_dir/imports"
@@ -85,10 +71,4 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	# <https://github.com/NixOS/nix/issues/3533>
 	readonly path_with_git="${pkgs.git}/bin:$PATH"
 	sudo PATH="$path_with_git" nixos-rebuild "''${args[@]}" --no-build-nix
-
-	if [ "$switch" != yes ] && is_flatpak_enabled
-	then
-		# Assume that the user is trying to upgrade the system.
-		flatpak update --noninteractive
-	fi
 ''
