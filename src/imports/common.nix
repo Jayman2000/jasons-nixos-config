@@ -30,7 +30,10 @@
 	security.polkit.enable = true;
 
 	environment.defaultPackages = [ ];
-	environment.systemPackages = [ pkgs.htop ];
+	environment.systemPackages = [
+		pkgs.htop
+		(import applications/nicely-stop-session.nix { inherit pkgs; })
+	];
 	home-manager.useGlobalPkgs = true;
 
 	users.users.jayman = {
