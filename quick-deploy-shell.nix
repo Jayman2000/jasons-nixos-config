@@ -13,7 +13,8 @@ pkgs.mkShell {
 		nicely-stop-session
 	];
 	shellHook = ''
-		deploy-jasons-nixos-config && nicely-stop-session "$session_stop_type"
+		deploy-jasons-nixos-config boot --upgrade && \
+			nicely-stop-session "$session_stop_type"
 		exit
 	'';
 }

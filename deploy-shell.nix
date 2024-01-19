@@ -11,7 +11,7 @@ pkgs.mkShell {
 		deploy-jasons-nixos-config
 	];
 	shellHook = ''
-		deploy-jasons-nixos-config
+		deploy-jasons-nixos-config boot --upgrade
 		exit
 	'';
 }
