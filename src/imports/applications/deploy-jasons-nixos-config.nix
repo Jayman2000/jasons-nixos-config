@@ -3,6 +3,12 @@
 { pkgs ? import <nixpkgs> { } }:
 
 pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
+	execer = [
+		# TODO: This won’t be necessary
+		# once this PR is merged:
+		# <https://github.com/abathur/binlore/pull/14>
+		"cannot:${pkgs.nixos-rebuild}/bin/nixos-rebuild"
+	];
 	fake.external = [ "sudo" ];
 	inputs = [
 		pkgs.coreutils
@@ -27,6 +33,28 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 			for Jason-Desktop-Linux, \
 			$'run\n\n\tJNC_MACHINE_SLUG=jason-desktop-linux' \
 			"$0"
+		1>&2
+		exit 1
+	fi
+	if [ ! -v JNC_NIXOS_REBUILD_AS_ROOT ]
+	then
+		echo \
+			ERROR: The JNC_NIXOS_REBUILD_AS_ROOT environment \
+			variable wasn’t set. Set it to 0 and nixos-rebuild \
+			will be run as your local user. Set it to 1 and \
+			nixos-rebuild will be run as root. \
+		1>&2
+		exit 1
+	fi
+	if ! {
+		[ "$JNC_NIXOS_REBUILD_AS_ROOT" -eq 0 ] || \
+		[ "$JNC_NIXOS_REBUILD_AS_ROOT" -eq 1 ]
+	}
+	then
+		echo \
+			ERROR: The JNC_NIXOS_REBUILD_AS_ROOT environment \
+			variable was set to "“$JNC_NIXOS_REBUILD_AS_ROOT”". \
+			It should only ever be set to 0 or 1. \
 		1>&2
 		exit 1
 	fi
@@ -63,5 +91,10 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	# Needed to workaround this issue:
 	# <https://github.com/NixOS/nix/issues/3533>
 	readonly path_with_git="${pkgs.git}/bin:$PATH"
-	sudo PATH="$path_with_git" nixos-rebuild "$@" --no-build-nix
+	if [ "$JNC_NIXOS_REBUILD_AS_ROOT" -eq 0 ]
+	then
+		PATH="$path_with_git" nixos-rebuild "$@" --no-build-nix
+	else
+		sudo PATH="$path_with_git" nixos-rebuild "$@" --no-build-nix
+	fi
 ''
