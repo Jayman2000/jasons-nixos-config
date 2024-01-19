@@ -78,7 +78,7 @@
 		] ++ (if config.system.nixos.release == "23.05"
 			then [ godot ]
 			else [ godot3 ]);
-		xdg.dataFile."fonts/CCSymbols.ttf".source = "/etc/nixos/imports/CCSymbols.ttf";
+		xdg.dataFile."fonts/CCSymbols.ttf".source = ./CCSymbols.ttf;
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.
 		xsession.enable = true;
 
