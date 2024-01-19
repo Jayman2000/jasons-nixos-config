@@ -7,7 +7,7 @@ let
 	nicely-stop-session = import ./src/imports/applications/nicely-stop-session.nix { inherit pkgs; };
 in
 pkgs.mkShell {
-	name = "deploy-shell";
+	name = "quick-deploy-shell";
 	packages = [
 		deploy-jasons-nixos-config
 		nicely-stop-session
