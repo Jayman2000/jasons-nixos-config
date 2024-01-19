@@ -10,6 +10,7 @@
 			./cdemu.nix
 			./cli-shortcuts.nix
 			./graphical.nix
+			./periodically-build-all-of-jnc.nix
 			./osx-kvm.nix
 			./wooting.nix
 		];
