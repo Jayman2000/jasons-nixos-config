@@ -1,6 +1,9 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{ pkgs ? import <nixpkgs> { } }:
+{
+	pkgs ? import <nixpkgs> { },
+	jasons-nixos-config ? import ../.. { inherit pkgs; }
+}:
 
 pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	execer = [
@@ -59,42 +62,15 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 		exit 1
 	fi
 
-	readonly config_dir="/etc/nixos"
-	readonly imports_dir="$config_dir/imports"
 
-	function copy_and_restrict {
-		# Usage: copy_and_restrict <mode> <file> [file]…
-		local -r mode="$1"
-		shift
-		sudo cp -r "$@" "$config_dir"
-		for src in "$@"; do
-			local dest="$config_dir/$(basename "$src")"
-			sudo chown -R root:root "$dest"
-			sudo chmod -R "$mode" "$dest"
-		done
-	}
-
-	for to_remove in "$config_dir/configuration.nix" "$config_dir/hardware-configuration.nix" "$imports_dir"
-	do
-		if [ -e "$to_remove" ]
-		then
-			sudo rm -r "$to_remove"
-		fi
-	done
-
-	copy_and_restrict u=X,g=,o= src/imports/
-	copy_and_restrict u=,g=,o= "src/configuration.nix/$JNC_MACHINE_SLUG.nix"
-	sudo mv "$config_dir/$JNC_MACHINE_SLUG.nix" "$config_dir/configuration.nix"
-	copy_and_restrict u=,g=,o= "src/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
-	sudo mv "$config_dir/$JNC_MACHINE_SLUG.nix" "$config_dir/hardware-configuration.nix"
-
+	declare -xr NIXOS_CONFIG="${jasons-nixos-config}/configuration.nix/$JNC_MACHINE_SLUG.nix"
 	# Needed to workaround this issue:
 	# <https://github.com/NixOS/nix/issues/3533>
-	readonly path_with_git="${pkgs.git}/bin:$PATH"
+	declare -xr PATH="${pkgs.git}/bin:$PATH"
 	if [ "$JNC_NIXOS_REBUILD_AS_ROOT" -eq 0 ]
 	then
-		PATH="$path_with_git" nixos-rebuild "$@" --no-build-nix
+		nixos-rebuild "$@" --no-build-nix
 	else
-		sudo PATH="$path_with_git" nixos-rebuild "$@" --no-build-nix
+		sudo --preserve-env=NIXOS_CONFIG,PATH nixos-rebuild "$@" --no-build-nix
 	fi
 ''
