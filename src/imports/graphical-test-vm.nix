@@ -7,6 +7,7 @@
 			./common.nix
 			./efi.nix
 			./cli-shortcuts.nix
+			./garbage-collection.nix
 			./graphical.nix
 			./serial-console.nix
 			./sshd.nix

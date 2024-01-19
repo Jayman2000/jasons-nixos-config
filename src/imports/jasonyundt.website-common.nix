@@ -8,6 +8,7 @@
 		./auto-upgrade.nix
 		./efi.nix
 		./git-server.nix
+		./garbage-collection.nix
 		./sshd.nix
 	];
 
