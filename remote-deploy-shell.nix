@@ -11,6 +11,8 @@ pkgs.mkShell {
 		deploy-jasons-nixos-config
 	];
 	shellHook = ''
+		set -e
+
 		if [ ! -v JNC_REMOTE_DEPLOY_ADDRESS ]
 		then
 			echo \
@@ -25,11 +27,13 @@ pkgs.mkShell {
 		# This is required for “--use-remote-sudo” to work. See
 		# <https://discourse.nixos.org/t/which-commands-are-required-for-remote-switch/17936/2?u=jasonyundt>.
 		declare -xr NIX_SSHOPTS="-t"
+		readonly destination="jayman@$JNC_REMOTE_DEPLOY_ADDRESS"
 		deploy-jasons-nixos-config \
 			boot \
 			--upgrade \
-			--target-host "jayman@$JNC_REMOTE_DEPLOY_ADDRESS" \
+			--target-host "$destination" \
 			--use-remote-sudo
+		ssh $NIX_SSHOPTS "$destination" nicely-stop-session reboot
 		exit
 	'';
 }
