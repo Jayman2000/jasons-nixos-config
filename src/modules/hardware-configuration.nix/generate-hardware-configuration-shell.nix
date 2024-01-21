@@ -6,16 +6,14 @@
 }:
 
 pkgs.mkShell {
-	name = "quick-deploy-shell";
+	name = "deploy-shell";
 	packages = let
-		customPkgs = import src/pkgs { inherit pkgs lib; };
+		customPkgs = import ../../pkgs { inherit pkgs lib; };
 	in [
-		customPkgs.deploy-jasons-nixos-config
-		customPkgs.nicely-stop-session
+		customPkgs.jasons-hardware-configuration-generator
 	];
 	shellHook = ''
-		JNC_NIXOS_REBUILD_AS_ROOT=1 deploy-jasons-nixos-config boot --upgrade && \
-			nicely-stop-session "$session_stop_type"
+		jasons-hardware-configuration-generator
 		exit
 	'';
 }

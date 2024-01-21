@@ -1,6 +1,6 @@
 <!--
 SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2021–2023)
+SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2021–2024)
 -->
 
 # Jason’s [NixOS] Config
@@ -17,13 +17,13 @@ machine’s config is designed to work with only one version of NixOS.
 1. Find the machine-specific config file that contains the information that
 we’re looking for.
 	- For Jason-Desktop-Linux, this is
-	`./src/imports/jason-desktop-linux.nix`.
+	`./src/modules/jason-desktop-linux.nix`.
 
 	- For Graphical-Test-VM, this is
-	`./src/imports/graphical-test-vm.nix`.
+	`./src/modules/graphical-test-vm.nix`.
 
 	- For `jasonyundt.website.home.arpa`, this is
-	`./src/imports/jasonyundt.website-common.nix`.
+	`./src/modules/jasonyundt.website-common.nix`.
 2. Open that file.
 3. Look for a line that looks like this:
 

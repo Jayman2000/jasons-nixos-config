@@ -1,14 +1,16 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2024)
-{ pkgs ? import <nixpkgs> {} }:
+{
+	pkgs ? import <nixpkgs> {},
+	lib ? pkgs.lib
+}:
 
-let
-	deploy-jasons-nixos-config = import ./src/imports/applications/deploy-jasons-nixos-config.nix { inherit pkgs; };
-in
 pkgs.mkShell {
 	name = "remote-deploy-shell";
-	packages = [
-		deploy-jasons-nixos-config
+	packages = let
+		customPkgs = import src/pkgs { inherit pkgs lib; };
+	in [
+		customPkgs.deploy-jasons-nixos-config
 	];
 	shellHook = ''
 		set -e
