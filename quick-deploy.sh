@@ -19,7 +19,15 @@ then
 	if [ "$1" = shutdown ] || [ "$1" = reboot ]
 	then
 		sudo -v
-		session_stop_type="$1" nix-shell quick-deploy-shell.nix
+		readonly script="
+			env \
+				JNC_NIXOS_REBUILD_AS_ROOT=1 \
+				deploy-jasons-nixos-config \
+				boot \
+				--upgrade && \
+					nicely-stop-session $1
+		"
+		nix-shell quick-deploy-shell.nix --run "$script"
 	else
 		echo -E \
 			"ERROR: Invalid session stop type  “$1”. It" \

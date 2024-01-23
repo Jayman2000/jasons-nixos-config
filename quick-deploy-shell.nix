@@ -10,12 +10,8 @@ pkgs.mkShell {
 	packages = let
 		customPkgs = import src/pkgs { inherit pkgs lib; };
 	in [
+		pkgs.coreutils
 		customPkgs.deploy-jasons-nixos-config
 		customPkgs.nicely-stop-session
 	];
-	shellHook = ''
-		JNC_NIXOS_REBUILD_AS_ROOT=1 deploy-jasons-nixos-config boot --upgrade && \
-			nicely-stop-session "$session_stop_type"
-		exit
-	'';
 }

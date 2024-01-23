@@ -12,8 +12,4 @@ pkgs.mkShell {
 	in [
 		customPkgs.deploy-jasons-nixos-config
 	];
-	shellHook = ''
-		JNC_NIXOS_REBUILD_AS_ROOT=1 deploy-jasons-nixos-config boot --upgrade
-		exit
-	'';
 }

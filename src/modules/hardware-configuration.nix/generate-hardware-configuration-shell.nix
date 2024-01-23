@@ -12,8 +12,4 @@ pkgs.mkShell {
 	in [
 		customPkgs.jasons-hardware-configuration-generator
 	];
-	shellHook = ''
-		jasons-hardware-configuration-generator
-		exit
-	'';
 }
