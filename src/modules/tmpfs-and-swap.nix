@@ -4,7 +4,6 @@
 # SPDX-FileContributor: Jacob Adams <tookmund@gmail.com>
 { config, pkgs, lib, ... }:
 let
-	customPkgs = import ../pkgs { inherit pkgs lib; };
 	# I which I could just say “all tmpfses will report that they’re full
 	# only if 90% of how ever much virtual memory we currently have is in
 	# use.”
@@ -72,16 +71,14 @@ in {
 		script = let
 			implementation = pkgs.resholve.writeScript "swapspace-service-implementation" {
 				execer = [
-					# TODO: Get this fixed upstream.
-					# I don’t that I can start
-					# getting this fixed upstream
-					# until I contribute the
-					# swapspace package to Nixpkgs.
-					"cannot:${customPkgs.swapspace}/bin/swapspace"
+					# TODO: This won’t be necessary
+					# once this PR is merged:
+					# <https://github.com/abathur/binlore/pull/16>
+					"cannot:${pkgs.swapspace}/bin/swapspace"
 				];
 				inputs = [
 					pkgs.coreutils	# for mkdir and chmod
-					customPkgs.swapspace
+					pkgs.swapspace
 				];
 				interpreter = "${pkgs.bash}/bin/bash";
 			} ''
@@ -99,6 +96,7 @@ in {
 	};
 	# END GPL-2.0-or-later LICENSED SECTION
 	systemd.services.ensure-enough-vm-to-shutdown = let
+		customPkgs = import ../pkgs { inherit pkgs lib; };
 		execStopScript = customPkgs.ensure-enough-vm-to-shutdown;
 	in {
 		after = [ "swap.target" ];
