@@ -4,8 +4,10 @@
 # Sources:
 # <https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module>
 # <https://nixos.wiki/wiki/Home_Manager>
+{ lib }:
+
 let
-	customLib = import ../../lib.nix;
+	customLib = import ../../lib.nix { inherit lib; };
 	src = customLib.fetchFromGitHubNoHash {
 		owner = "nix-community";
 		repo = "home-manager";
