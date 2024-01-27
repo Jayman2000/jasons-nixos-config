@@ -1,6 +1,11 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2023)
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2023–2024)
 let
-	nixpkgsUnstableTarball = builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz";
+	customLib = import ../lib.nix;
+	src = customLib.fetchFromGitHubNoHash {
+		owner = "NixOS";
+		repo = "nixpkgs";
+		rev = "nixos-unstable";
+	};
 in
-import nixpkgsUnstableTarball {}
+import src {}
