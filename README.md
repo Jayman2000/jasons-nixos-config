@@ -70,10 +70,11 @@ of the manual:
 ### 3. Install NixOS
 
 Follow NixOS’s Installation Instructions (there’re in the NixOS Manual). Each
-section in that manual is given a number like 1, 2.2 or 2.2.1. Bellow is a list
-of section numbers and any additional notes that I have for them:
+section in that manual is given a name like “Installation”, “Obtaining NixOS”
+or “Installing NixOS”. Bellow is a list of section names and any additional
+notes that I have for them:
 
-- (1)
+- Obtaining NixOS:
 
 	- Download the minimal ISO image. Also download its SHA-256 file. **Make
 	sure that you download an image for the correct version of NixOS** (the
@@ -90,7 +91,7 @@ of section numbers and any additional notes that I have for them:
 
 				sha255sum -c <path-to-sha256-file>
 
-- (2)
+- Installing NixOS:
 	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
 	create a VM. Its specs should match [the specs of Vultr’s $3.50 per
 	month “Regular Performance”
@@ -101,18 +102,18 @@ of section numbers and any additional notes that I have for them:
 	the virtual disk you create for it is large enough to store the “Keep
 	Across Linux Distros!” Syncthing folder.
 
-- (2.1) Make sure that you boot into UEFI mode.
-	Once you’re at a command prompt, run
+- Booting from the install medium: Make sure that you boot into UEFI mode. Once
+	you’re at a command prompt, run
 	[this command](https://askubuntu.com/a/162896):
 
 		[ -d /sys/firmware/efi ] && echo UEFI || echo BIOS
 
 	If it outputs “UEFI”, then you’re good.
 
-- (2.2) Skip right to 2.3. We’re going to be doing a manual
-installation, not a graphical one.
+- Graphical Installation: Skip right to the Manual Installation section. We’re
+going to be doing a manual installation, not a graphical one.
 
-- (2.3.2)
+- UEFI (GPT):
 
 	- If you’re going to repartition an entire disk, then before you
 	start doing that, delete any existing signatures on the disk:
