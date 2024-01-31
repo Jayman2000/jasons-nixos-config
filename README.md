@@ -129,22 +129,75 @@ going to be doing a manual installation, not a graphical one.
 		- `nixos-swap` for the swap partition.
 		- `nixos-hdd` for the data partition on the hard drive.
 
-### 4. Deploy this config
+- Installing:
 
-1. Get a copy of this repo on the machine.
-2. Determine the machine’s slug. The machine’s slug will be either:
-	- `jason-desktop-linux`,
-	- `graphical-test-vm` or
-	- `jasonyundt.website.home.arpa.nix`
-3. Run `JNC_MACHINE_SLUG=<slug> ./deploy.sh`.
-4. Reboot.
-5. Log in as root and set jayman’s password.
+	4. Instead of generating a new config, here’s what you should do:
 
-### 5. Do any manual set up
+		1. Change into the live user’s home directory:
+
+			```bash
+			cd
+			```
+
+		2. Download a copy of this repo:
+
+			```bash
+			curl \
+				--location \
+				--output archive.tar.gz \
+				https://github.com/Jayman2000/jasons-nixos-config/archive/refs/heads/<branch-name>.tar.gz
+			```
+
+		3. Extract it:
+
+			```bash
+			tar -xf archive.tar.gz
+			```
+
+		4. Change directory into the root of the repo:
+
+			```bash
+			cd jasons-nixos-config-<branch-name>
+			```
+
+		5. Determine what machine slug this machine uses:
+
+			- Jason-Desktop-Linux’s machine slug is
+			`jason-desktop-linux`
+
+			- Graphical-Test-VM’s machine slug is
+			`graphical-test-vm`
+
+			- `jasonyundt.website.home.arpa`’s machine slug is
+			`jasonyundt.website.home.arpa`
+
+		6. Set and export the `JNC_MACHINE_SLUG` environment variable:
+
+			```bash
+			export JNC_MACHINE_SLUG=<machine-slug>
+			```
+
+		7. Regenerate the machine’s hardware configuration:
+
+			```bash
+			JNC_INSTALLING=1 ./generate-hardware-configuration.sh
+			```
+
+	5. Don’t run `nixos-install` directly. Instead, run this command:
+
+		```bash
+		./install.sh
+		```
+
+### 4. Do any manual set up
 
 While it would be nice if this config automatically set up everything
 for you, there are some things that need to be set up manually at the
 moment.
+
+#### Instructions common to all systems
+
+1. Log in as root and set jayman’s password.
 
 #### Instructions specific to systems that import `auto-upgrade.nix`
 

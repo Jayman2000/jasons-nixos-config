@@ -24,6 +24,12 @@ resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 } ''
 	set -e
 
+	function jnc_installing_set_correctly
+	{
+		[ "$JNC_INSTALLING" -eq 0 ] || [ "$JNC_INSTALLING" -eq 1 ]
+	}
+
+	readonly JNC_MACHINE_SLUG
 	if [ ! -v JNC_MACHINE_SLUG ]
 	then
 		echo \
@@ -37,6 +43,35 @@ resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 		1>&2
 		exit 1
 	fi
+
+	if [ -v JNC_INSTALLING ]
+	then
+		if ! jnc_installing_set_correctly
+		then
+			echo \
+				ERROR: The JNC_INSTALLING environment variable \
+				was set to "$JNC_INSTALLING". It should only \
+				ever be set to 0 or 1. \
+				1>&2
+			exit 1
+		fi
+	else
+		if [ -d /mnt ]
+		then
+			echo \
+				ERROR: It looks like you booted a NixOS \
+				installation ISO, and then ran this script. If \
+				that’s the case, then set the JNC_INSTALLING \
+				environment variable to 1. Otherwise, set \
+				JNC_INSTALLING to 0. \
+				1>&2
+			exit 1
+		else
+			JNC_INSTALLING=0
+		fi
+
+	fi
+	readonly JNC_INSTALLING
 
 	function print_spdx_metadata
 	{
@@ -59,9 +94,14 @@ resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 		echo "#"
 	}
 
+	args=( --show-hardware-config )
+	if [ "$JNC_INSTALLING" -eq 1 ]
+	then
+		args+=( --root /mnt )
+	fi
 	readonly output="src/modules/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
 	{
 		print_spdx_metadata
-		nixos-generate-config --show-hardware-config
+		nixos-generate-config "''${args[@]}"
 	} | unexpand --tabs=2 --first-only > "$output"
 ''
