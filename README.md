@@ -131,7 +131,10 @@ going to be doing a manual installation, not a graphical one.
 
 - Installing:
 
-	4. Instead of generating a new config, here’s what you should do:
+	4. Skip this step. In the next step, `install.sh` will automatically
+	generate a config for us.
+
+	5. Don’t run `nixos-install` directly. Instead, do this:
 
 		1. Change into the live user’s home directory:
 
@@ -171,23 +174,11 @@ going to be doing a manual installation, not a graphical one.
 			- `jasonyundt.website.home.arpa`’s machine slug is
 			`jasonyundt.website.home.arpa`
 
-		6. Set and export the `JNC_MACHINE_SLUG` environment variable:
+		6. Regenerate the machine’s hardware configuration:
 
 			```bash
-			export JNC_MACHINE_SLUG=<machine-slug>
+			JNC_MACHINE_SLUG=<slug> ./install.sh
 			```
-
-		7. Regenerate the machine’s hardware configuration:
-
-			```bash
-			JNC_INSTALLING=1 ./generate-hardware-configuration.sh
-			```
-
-	5. Don’t run `nixos-install` directly. Instead, run this command:
-
-		```bash
-		./install.sh
-		```
 
 ### 4. Do any manual set up
 
