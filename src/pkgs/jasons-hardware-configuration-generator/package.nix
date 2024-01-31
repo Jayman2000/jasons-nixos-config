@@ -59,7 +59,7 @@ resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 		echo "#"
 	}
 
-	readonly output="./$JNC_MACHINE_SLUG.nix"
+	readonly output="src/modules/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
 	{
 		print_spdx_metadata
 		nixos-generate-config --show-hardware-config
