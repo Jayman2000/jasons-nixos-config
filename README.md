@@ -74,22 +74,9 @@ section in that manual is given a name like “Installation”, “Obtaining Nix
 or “Installing NixOS”. Bellow is a list of section names and any additional
 notes that I have for them:
 
-- Obtaining NixOS:
-
-	- Download the minimal ISO image. Also download its SHA-256 file. **Make
-	sure that you download an image for the correct version of NixOS** (the
-	version that the machine-specific config depends on).
-
-	- Verify the integrity of the installation image:
-
-		1. Make sure that both the `.iso` file and the
-		`.iso.sha256` are in the same directory.
-
-		2. Change into that directory.
-
-		3. Run
-
-				sha255sum -c <path-to-sha256-file>
+- Obtaining NixOS: Don’t download an ISO file. Instead, run `./build-iso.sh`.
+That script will build a customized installation image and put it in
+`result/iso/`
 
 - Installing NixOS:
 	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
@@ -131,39 +118,12 @@ going to be doing a manual installation, not a graphical one.
 
 - Installing:
 
-	4. Skip this step. In the next step, `install.sh` will automatically
-	generate a config for us.
+	4. Skip this step. In the next step, `install-using-jnc` will
+	automatically generate a config for us.
 
 	5. Don’t run `nixos-install` directly. Instead, do this:
 
-		1. Change into the live user’s home directory:
-
-			```bash
-			cd
-			```
-
-		2. Download a copy of this repo:
-
-			```bash
-			curl \
-				--location \
-				--output archive.tar.gz \
-				https://github.com/Jayman2000/jasons-nixos-config/archive/refs/heads/<branch-name>.tar.gz
-			```
-
-		3. Extract it:
-
-			```bash
-			tar -xf archive.tar.gz
-			```
-
-		4. Change directory into the root of the repo:
-
-			```bash
-			cd jasons-nixos-config-<branch-name>
-			```
-
-		5. Determine what machine slug this machine uses:
+		1. Determine what machine slug this machine uses:
 
 			- Jason-Desktop-Linux’s machine slug is
 			`jason-desktop-linux`
@@ -174,10 +134,10 @@ going to be doing a manual installation, not a graphical one.
 			- `jasonyundt.website.home.arpa`’s machine slug is
 			`jasonyundt.website.home.arpa`
 
-		6. Regenerate the machine’s hardware configuration:
+		2. Run this command:
 
 			```bash
-			JNC_MACHINE_SLUG=<slug> ./install.sh
+			JNC_MACHINE_SLUG=<slug> install-using-jnc
 			```
 
 ### 4. Do any manual set up
