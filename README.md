@@ -74,9 +74,33 @@ section in that manual is given a name like “Installation”, “Obtaining Nix
 or “Installing NixOS”. Bellow is a list of section names and any additional
 notes that I have for them:
 
-- Obtaining NixOS: Don’t download an ISO file. Instead, run `./build-iso.sh`.
-That script will build a customized installation image and put it in
-`result/iso/`
+- Obtaining NixOS: Don’t download an ISO file. Instead, do this:
+
+	1. Change directory to the root of this repo:
+
+		```bash
+		cd <path-to-repo>
+		```
+
+	2. Determine the machine slug for the machine that you’re going to be
+	installing NixOS on:
+
+		- Jason-Desktop-Linux’s machine slug is
+		`jason-desktop-linux`
+
+		- Graphical-Test-VM’s machine slug is
+		`graphical-test-vm`
+
+		- `jasonyundt.website.home.arpa`’s machine slug is
+		`jasonyundt.website.home.arpa`
+
+	3. Build the installation image:
+
+		```bash
+		JNC_MACHINE_SLUG=<slug> ./build-iso.sh
+
+	4. When that script finished, there will be an ISO file in the
+	`result/iso/` directory.
 
 - Installing NixOS:
 	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
