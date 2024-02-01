@@ -7,5 +7,9 @@
 	];
 	users.users.nixos.packages = let
 		pkgCollections = import ../pkgCollections { inherit pkgs lib; };
-	in [ pkgCollections.custom.install-using-jnc ];
+	in [
+		pkgCollections.custom.install-using-jnc
+		# This isn’t needed, but it’s useful for debugging.
+		pkgCollections.disko.disko
+	];
 }

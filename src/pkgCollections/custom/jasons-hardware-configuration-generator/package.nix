@@ -1,6 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{ pkgs }:
+{ pkgs, custom }:
 
 pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 	execer = [
@@ -14,7 +14,9 @@ pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 		pkgs.nixos-install-tools
 	];
 	interpreter = "${pkgs.bash}/bin/bash";
-} ''
+} (let
+	diskoDir = "${custom.jasons-nixos-config}/modules/disko";
+in ''
 	set -e
 
 	function jnc_installing_set_correctly
@@ -66,6 +68,11 @@ pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 	fi
 	readonly JNC_INSTALLING
 
+
+	function machine_uses_disko {
+		[ -e "${diskoDir}/$JNC_MACHINE_SLUG.nix" ]
+	}
+
 	function print_spdx_metadata
 	{
 		# I broke this up into multiple echo commands to prevent a very
@@ -92,9 +99,17 @@ pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 	then
 		args+=( --root /mnt )
 	fi
+	if machine_uses_disko
+	then
+		# The Disko documentation says to use the --no-filesystemss
+		# flag when running nixos-generate-config [1].
+		#
+		# [1]: <https://github.com/nix-community/disko/blob/v1.3.0/docs/quickstart.md#step-7-complete-the-nixos-installation>
+		args+=( --no-filesystems )
+	fi
 	readonly output="src/modules/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
 	{
 		print_spdx_metadata
 		nixos-generate-config "''${args[@]}"
 	} | unexpand --tabs=2 --first-only > "$output"
-''
+'')

@@ -1,13 +1,17 @@
 # SPDX-FileNotice: 🅭🄍1.0 Unless otherwise noted, everything in this file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{ pkgs, custom }:
+{ pkgs, custom, disko }:
 
 pkgs.resholve.writeScriptBin "install-using-jnc" {
-	inputs = [ pkgs.nixos-install-tools ];
+	inputs = [
+		pkgs.nixos-install-tools
+	];
 	fake.external = [ "sudo" ];
 	interpreter = "${pkgs.bash}/bin/bash";
-} ''
+} (let
+	diskoDir = "${custom.jasons-nixos-config}/modules/disko";
+in ''
 	set -eu
 
 	if ! type sudo &> /dev/null
@@ -40,6 +44,7 @@ pkgs.resholve.writeScriptBin "install-using-jnc" {
 	}
 	trap clean_up EXIT
 	trap clean_up SIGINT
+	readonly disko_config="${diskoDir}/$JNC_MACHINE_SLUG.nix"
 
 	function sudo_write {
 		local -r to_write="$1"
@@ -47,6 +52,16 @@ pkgs.resholve.writeScriptBin "install-using-jnc" {
 		echo "$to_write" | sudo tee "$*" > /dev/null
 	}
 
+	function machine_uses_disko {
+		[ -e "$disko_config" ]
+	}
+
+	if machine_uses_disko
+	then
+		sudo "${disko.disko}/bin/disko" \
+			--mode disko \
+			"$disko_config"
+	fi
 	sudo mkdir -p "$temporary_config_dir"
 	readonly dest="$temporary_config_dir/src"
 	sudo cp --recursive --remove-destination \
@@ -67,4 +82,4 @@ pkgs.resholve.writeScriptBin "install-using-jnc" {
 
 	cd /
 	sudo nixos-install
-''
+'')

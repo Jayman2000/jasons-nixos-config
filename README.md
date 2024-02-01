@@ -124,26 +124,57 @@ notes that I have for them:
 - Graphical Installation: Skip right to the Manual Installation section. We’re
 going to be doing a manual installation, not a graphical one.
 
-- UEFI (GPT):
+- Partitioning and formatting:
 
-	- If you’re going to repartition an entire disk, then before you
-	start doing that, delete any existing signatures on the disk:
+	- If the machine that you’re installing NixOS on uses
+	[Disko](https://github.com/nix-community/disko), then skip this
+	step. Here’s how you determine if the machine that you’re using
+	uses Disko:
 
-			wipefs -a <path-to-block-device>
+		1. Determine what machine slug this machine uses:
 
-	- Give `jasonyundt.website.home.arpa` 2GiB of swap. This is a pretty
-	arbitrary number.
+			- Jason-Desktop-Linux’s machine slug is
+			`jason-desktop-linux`
 
-	- Use the following labels:
+			- Graphical-Test-VM’s machine slug is
+			`graphical-test-vm`
 
-		- `nixos-root` for the root partition.
-		- `nixos-swap` for the swap partition.
-		- `nixos-hdd` for the data partition on the hard drive.
+			- `jasonyundt.website.home.arpa`’s machine slug is
+			`jasonyundt.website.home.arpa`
+
+		2. Open `./src/modules/disko`
+
+		3. If there’s a file named `<slug>.nix` then this
+		machine uses Disko. If there isn’t a file named
+		`<slug>.nix`, then this machine doesn’t use Disko.
+
+	- UEFI (GPT):
+
+		- If you’re going to repartition an entire disk, then
+		before you start doing that, delete any existing signatures on
+		the disk:
+
+				wipefs -a <path-to-block-device>
+
+		- Give `jasonyundt.website.home.arpa` 2GiB of swap. This
+		is a pretty arbitrary number.
+
+		- Use the following labels:
+
+			- `nixos-root` for the root partition.
+			- `nixos-swap` for the swap partition.
+			- `nixos-hdd` for the data partition on the hard drive.
 
 - Installing:
 
-	4. Skip this step. In the next step, `install-using-jnc` will
-	automatically generate a config for us.
+	1. If the machine uses Disko, then skip this step.
+
+	2. If the machine uses Disko, then skip this step.
+
+	3. If the machine uses Disko, then skip this step.
+
+	4. Always skip this step. In the next step, `install-using-jnc`
+	will automatically generate a config for us.
 
 	5. Don’t run `nixos-install` directly. Instead, do this:
 
