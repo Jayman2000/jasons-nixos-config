@@ -9,9 +9,7 @@
 	resholve
 }:
 
-let
-	configDir = "${jasons-nixos-config}/src/modules/configuration.nix/";
-in resholve.writeScriptBin "install-using-jnc" {
+resholve.writeScriptBin "install-using-jnc" {
 	inputs = [ nixos-install-tools ];
 	fake.external = [ "sudo" ];
 	interpreter = "${bash}/bin/bash";
