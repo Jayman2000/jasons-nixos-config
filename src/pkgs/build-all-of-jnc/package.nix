@@ -48,10 +48,6 @@ in resholve.writeScriptBin name {
 	do
 		machine_slug="$(basename --suffix=.nix "$file")"
 		echo "Building configuration for $machine_slug…"
-
-		# I don’t really want to run “dry-activate” here. I would
-		# rather use “build”, but that creates a result symlink, and I
-		# don’t want a result symlink.
 		env \
 			JNC_MACHINE_SLUG="$machine_slug" \
 			JNC_NIXOS_REBUILD_AS_ROOT=0 \
