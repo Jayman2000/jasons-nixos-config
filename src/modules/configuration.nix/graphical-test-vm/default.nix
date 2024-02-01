@@ -4,7 +4,7 @@ let
 	file = "/graphical-test-vm.nix";
 in {
 	imports = [
-		(../hardware-configuration.nix + file)
-		(../. + file)
+		(../../hardware-configuration.nix + file)
+		(../.. + file)
 	];
 }

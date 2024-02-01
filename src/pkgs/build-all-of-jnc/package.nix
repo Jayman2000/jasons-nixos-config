@@ -44,9 +44,9 @@ in resholve.writeScriptBin name {
 	trap clean_up SIGINT
 	# END CC-BY-SA-4.0 LICENSED SECTION
 
-	for file in ${jasons-nixos-config}/modules/configuration.nix/*
+	for directory in ${jasons-nixos-config}/modules/configuration.nix/*
 	do
-		machine_slug="$(basename --suffix=.nix "$file")"
+		machine_slug="$(basename "$directory")"
 		echo "Building configuration for $machine_slug…"
 		env \
 			JNC_MACHINE_SLUG="$machine_slug" \

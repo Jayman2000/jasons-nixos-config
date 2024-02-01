@@ -6,7 +6,7 @@
 }:
 
 let
-	configuration = "${jasons-nixos-config}/modules/configuration.nix/installation-image.nix";
+	configuration = "${jasons-nixos-config}/modules/configuration.nix/installation-image";
 	nixOSPackage = nixos configuration;
 in
 	nixOSPackage.config.system.build.isoImage

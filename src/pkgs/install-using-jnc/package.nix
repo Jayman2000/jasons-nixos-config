@@ -25,17 +25,18 @@ resholve.writeScriptBin "install-using-jnc" {
 	then
 		echo \
 			ERROR: The JNC_MACHINE_SLUG environment variable \
-			wasn’t set. Set it to the name of one of the files \
-			in src/modules/configuration.nix/, but don’t include \
-			the .nix at the end. For example, to install using the \
-			configuration for Jason-Desktop-Linux, \
-			$'run\n\n\tJNC_MACHINE_SLUG=jason-desktop-linux' \
+			wasn’t set. Set it to the name of one of the \
+			directories in src/modules/configuration.nix/, but \
+			don’t include a trailing slash at the end. For \
+			example, to install using the configuration for \
+			Jason-Desktop-Linux, run \
+			$'\n\n\tJNC_MACHINE_SLUG=jason-desktop-linux' \
 			"$0" 1>&2
 		exit 1
 	fi
 
 	readonly import_basedir=./src/modules/configuration.nix
-	readonly config="import $import_basedir/$JNC_MACHINE_SLUG.nix"
+	readonly config="import $import_basedir/$JNC_MACHINE_SLUG"
 	# After the installation is finished, we won’t need /etc/nixos.
 	readonly temporary_config_dir="/mnt/etc/nixos"
 	function clean_up {

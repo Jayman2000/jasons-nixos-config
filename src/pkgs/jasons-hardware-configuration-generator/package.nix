@@ -34,12 +34,12 @@ resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 	then
 		echo \
 			ERROR: The JNC_MACHINE_SLUG environment variable \
-			wasn’t set. Set it to the name of one of the files \
-			in src/modules/configuration.nix/, but don’t include \
-			the .nix at the end. For example, to generate a \
-			hardware configuration for Jason-Desktop-Linux, \
-			$'run\n\n\tJNC_MACHINE_SLUG=jason-desktop-linux' \
-			"$0"
+			wasn’t set. Set it to the name of one of the \
+			directories in src/modules/configuration.nix/, but \
+			don’t include a trailing slash at the end. For \
+			example, to generate a hardware configuration for \
+			Jason-Desktop-Linux, run \
+			$'\n\n\tJNC_MACHINE_SLUG=jason-desktop-linux' "$0" \
 		1>&2
 		exit 1
 	fi

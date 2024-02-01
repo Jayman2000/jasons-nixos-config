@@ -4,7 +4,7 @@ let
 	file = "/jasonyundt.website.home.arpa.nix";
 in {
 	imports = [
-		(../hardware-configuration.nix + file)
-		(../. + file)
+		(../../hardware-configuration.nix + file)
+		(../.. + file)
 	];
 }
