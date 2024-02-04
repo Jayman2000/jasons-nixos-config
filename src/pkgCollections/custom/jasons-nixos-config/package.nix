@@ -4,7 +4,7 @@
 
 stdenv.mkDerivation {
 	name = "jason-nixos-config";
-	src = ../..;
+	src = ../../..;
 	postInstall = ''
 		cp -r . "$out"
 	'';

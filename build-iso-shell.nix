@@ -8,8 +8,10 @@
 pkgs.mkShell {
 	name = "build-iso-shell";
 	packages = let
-		customPkgs = import src/pkgs { inherit pkgs lib; };
+		pkgCollections = import src/pkgCollections {
+			inherit pkgs lib;
+		};
 	in [
-		customPkgs.build-jnc-install-iso
+		pkgCollections.custom.build-jnc-install-iso
 	];
 }

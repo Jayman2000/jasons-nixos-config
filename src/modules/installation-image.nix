@@ -6,6 +6,6 @@
 		"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
 	];
 	users.users.nixos.packages = let
-		customPkgs = import ../pkgs { inherit pkgs lib; };
-	in [ customPkgs.install-using-jnc ];
+		pkgCollections = import ../pkgCollections { inherit pkgs lib; };
+	in [ pkgCollections.custom.install-using-jnc ];
 }

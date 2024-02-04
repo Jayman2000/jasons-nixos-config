@@ -27,7 +27,9 @@
 		# Adapted from
 		# <https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable>.
 		home.packages = let
-			customPkgs = import ../pkgs { inherit pkgs lib; };
+			pkgCollections = import ../pkgCollections {
+				inherit pkgs lib;
+			};
 		in [
 			pkgs.cargo # Used for this repo’s pre-commit config
 			pkgs.gcc # Used for this repo’s pre-commit config
@@ -35,8 +37,8 @@
 			pkgs.pre-commit
 			pkgs.gh
 			pkgs.python3Packages.grip
-			customPkgs.git-bhc
-			customPkgs.git-tb
+			pkgCollections.custom.git-bhc
+			pkgCollections.custom.git-tb
 		];
 		programs.git = {
 			# I’ll enable this once this option is available in a stable version of Home Manager.

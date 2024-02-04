@@ -24,10 +24,12 @@
 
 	environment.defaultPackages = [ ];
 	environment.systemPackages = let
-		customPkgs = import ../pkgs { inherit pkgs lib; };
+		pkgCollections = import ../pkgCollections {
+			inherit pkgs lib;
+		};
 	in [
 		pkgs.htop
-		customPkgs.nicely-stop-session
+		pkgCollections.custom.nicely-stop-session
 	];
 	home-manager.useGlobalPkgs = true;
 

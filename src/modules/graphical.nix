@@ -52,7 +52,9 @@
 
 	home-manager.users.jayman = { pkgs, ... }: {
 		home.packages = let
-			customPkgs = import ../pkgs { inherit pkgs lib; };
+			pkgCollections = import ../pkgCollections {
+				inherit pkgs lib;
+			};
 		in [
 			pkgs.ark
 			pkgs.chars
@@ -77,7 +79,7 @@
 			pkgs.palemoon-bin
 			pkgs.ungoogled-chromium
 
-			customPkgs.cmark-html
+			pkgCollections.custom.cmark-html
 		] ++ (if config.system.nixos.release == "23.05"
 			then [ pkgs.godot ]
 			else [ pkgs.godot3 ]);
