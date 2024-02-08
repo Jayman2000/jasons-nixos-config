@@ -1,26 +1,19 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{
-	bash,
-	coreutils,
-	git,
-	nixos-install-tools,
-	resholve
-}:
+{ pkgs }:
 
-
-resholve.writeScriptBin "jasons-hardware-configuration-generator" {
+pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 	execer = [
 		# TODO: This won’t be needed once this PR is completed:
 		# <https://github.com/abathur/binlore/pull/15>.
-		"cannot:${nixos-install-tools}/bin/nixos-generate-config"
+		"cannot:${pkgs.nixos-install-tools}/bin/nixos-generate-config"
 	];
 	inputs = [
-		coreutils
-		git
-		nixos-install-tools
+		pkgs.coreutils
+		pkgs.git
+		pkgs.nixos-install-tools
 	];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	set -e
 

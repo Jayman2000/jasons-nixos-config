@@ -1,15 +1,10 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{
-	bash,
-	cmark,
-	dos2unix,
-	resholve
-}:
+{ pkgs }:
 
-resholve.writeScriptBin "cmark-html" {
-	inputs = [ cmark dos2unix ];
-	interpreter = "${bash}/bin/bash";
+pkgs.resholve.writeScriptBin "cmark-html" {
+	inputs = [ pkgs.cmark pkgs.dos2unix ];
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	filename="$1.html"
 	bom=$'\uFEFF'

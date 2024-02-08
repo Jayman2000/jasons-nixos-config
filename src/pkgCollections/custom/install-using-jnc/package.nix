@@ -1,18 +1,12 @@
 # SPDX-FileNotice: 🅭🄍1.0 Unless otherwise noted, everything in this file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{
-	bash,
-	jasons-hardware-configuration-generator,
-	jasons-nixos-config,
-	nixos-install-tools,
-	resholve
-}:
+{ pkgs, custom }:
 
-resholve.writeScriptBin "install-using-jnc" {
-	inputs = [ nixos-install-tools ];
+pkgs.resholve.writeScriptBin "install-using-jnc" {
+	inputs = [ pkgs.nixos-install-tools ];
 	fake.external = [ "sudo" ];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	set -eu
 
@@ -56,7 +50,7 @@ resholve.writeScriptBin "install-using-jnc" {
 	sudo mkdir -p "$temporary_config_dir"
 	readonly dest="$temporary_config_dir/src"
 	sudo cp --recursive --remove-destination \
-		"${jasons-nixos-config}" \
+		"${custom.jasons-nixos-config}" \
 		"$dest"
 	cd "$temporary_config_dir"
 	# This prevents jasons-hardware-configuration-generator from silently
@@ -68,7 +62,7 @@ resholve.writeScriptBin "install-using-jnc" {
 	sudo \
 		--preserve-env=JNC_MACHINE_SLUG \
 		JNC_INSTALLING=1 \
-		"${jasons-hardware-configuration-generator}/bin/jasons-hardware-configuration-generator"
+		"${custom.jasons-hardware-configuration-generator}/bin/jasons-hardware-configuration-generator"
 	sudo_write "$config" "$temporary_config_dir/configuration.nix"
 
 	cd /
