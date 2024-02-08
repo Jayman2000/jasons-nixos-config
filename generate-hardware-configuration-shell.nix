@@ -8,8 +8,10 @@
 pkgs.mkShell {
 	name = "deploy-shell";
 	packages = let
-		customPkgs = import ./src/pkgs { inherit pkgs lib; };
+		pkgCollections = import ./src/pkgCollections {
+			inherit pkgs lib;
+		};
 	in [
-		customPkgs.jasons-hardware-configuration-generator
+		pkgCollections.custom.jasons-hardware-configuration-generator
 	];
 }

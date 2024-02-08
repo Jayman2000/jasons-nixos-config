@@ -4,8 +4,10 @@
 	home-manager.users.jayman = { pkgs, lib, ... }: {
 		systemd.user.services.build-all-of-jnc = {
 			Service.ExecStart = let
-				customPkgs = import ../pkgs { inherit pkgs lib; };
-			in "${customPkgs.build-all-of-jnc}/bin/build-all-of-jnc";
+				pkgCollections = import ../pkgCollections {
+					inherit pkgs lib;
+				};
+			in "${pkgCollections.custom.build-all-of-jnc}/bin/build-all-of-jnc";
 		};
 		systemd.user.timers.build-all-of-jnc = {
 			Install.WantedBy = [

@@ -12,4 +12,10 @@
 			function "${dir}/${name}"
 		);
 	in builtins.mapAttrs transformSubDirs subDirs;
+	fetchFromGitHubNoHash = { owner, repo, rev }:
+	let
+		rootURL = https://github.com/;
+		url = rootURL + "${owner}/${repo}/archive/${rev}.tar.gz";
+	in
+		builtins.fetchTarball url;
 }

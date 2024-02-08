@@ -35,8 +35,10 @@ in {
 		home.stateVersion = config.system.stateVersion;
 		programs.git.enable = true;
 		programs.git.extraConfig.core.hooksPath = let
-			customPkgs = import ../pkgs { inherit pkgs lib; };
-		in "${customPkgs.post-update}/bin";
+			pkgCollections = import ../pkgCollections {
+				inherit pkgs lib;
+			};
+		in "${pkgCollections.custom.post-update}/bin";
 	};
 
 	# The git user has write permission for the repo folders. git-daemon

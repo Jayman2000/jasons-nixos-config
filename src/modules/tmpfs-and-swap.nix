@@ -96,8 +96,8 @@ in {
 	};
 	# END GPL-2.0-or-later LICENSED SECTION
 	systemd.services.ensure-enough-vm-to-shutdown = let
-		customPkgs = import ../pkgs { inherit pkgs lib; };
-		execStopScript = customPkgs.ensure-enough-vm-to-shutdown;
+		pkgCollections = import ../pkgCollections { inherit pkgs lib; };
+		execStopScript = pkgCollections.custom.ensure-enough-vm-to-shutdown;
 	in {
 		after = [ "swap.target" ];
 		wantedBy = [ "swap.target" ];

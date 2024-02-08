@@ -8,10 +8,12 @@
 pkgs.mkShell {
 	name = "quick-deploy-shell";
 	packages = let
-		customPkgs = import src/pkgs { inherit pkgs lib; };
+		pkgCollections = import src/pkgCollections {
+			inherit pkgs lib;
+		};
 	in [
 		pkgs.coreutils
-		customPkgs.deploy-jasons-nixos-config
-		customPkgs.nicely-stop-session
+		pkgCollections.custom.deploy-jasons-nixos-config
+		pkgCollections.custom.nicely-stop-session
 	];
 }
