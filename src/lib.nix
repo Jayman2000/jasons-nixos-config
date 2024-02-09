@@ -12,10 +12,16 @@
 			function "${dir}/${name}"
 		);
 	in builtins.mapAttrs transformSubDirs subDirs;
-	fetchFromGitHubNoHash = { owner, repo, rev }:
+	fetchFromGitHubOptionalHash = { owner, repo, rev, sha256 ? null }:
 	let
 		rootURL = https://github.com/;
-		url = rootURL + "${owner}/${repo}/archive/${rev}.tar.gz";
-	in
-		builtins.fetchTarball url;
+		baseArgs = {
+			url = rootURL + "${owner}/${repo}/archive/${rev}.tar.gz";
+		};
+		additionalArgs = (
+			if sha256 == null
+			then { }
+			else { inherit sha256; }
+		);
+	in builtins.fetchTarball (baseArgs // additionalArgs);
 }

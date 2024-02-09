@@ -8,7 +8,7 @@
 {
 	imports = let
 		customLib = import ../../lib.nix { inherit lib; };
-		home-manager = customLib.fetchFromGitHubNoHash {
+		home-manager = customLib.fetchFromGitHubOptionalHash {
 			owner = "nix-community";
 			repo = "home-manager";
 			rev = "release-23.11";
