@@ -5,6 +5,7 @@
 	imports = [
 		"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
 	];
+	isoImage.squashfsCompression = "lz4";
 	users.users.nixos.packages = let
 		pkgCollections = import ../pkgCollections { inherit pkgs lib; };
 	in [
