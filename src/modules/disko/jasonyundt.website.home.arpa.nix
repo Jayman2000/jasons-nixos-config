@@ -1,37 +1,12 @@
-# SPDX-License-Identifier: LicenseRef-MIT-Disko
-# SPDX-FileCopyrightText: 2022 Nix community projects
-# SPDX-FileCopyrightText: 2024 Jason Yundt <jason@jasonyundt.email>
-# SPDX-FileAttributionText: Adapted from <https://github.com/nix-community/disko/blob/aef9a509db64a081186af2dc185654d78dc8e344/example/simple-efi.nix>.
-{
-	imports = [ ./common.nix ];
-	disko.devices.disk.main = {
-		device = "/dev/disk/by-path/virtio-pci-0000:04:00.0";
-		type = "disk";
-		content = {
-			type = "gpt";
-			partitions = {
-				ESP = {
-					type = "EF00";
-					size = "500M";
-					content = {
-						type = "filesystem";
-						format = "vfat";
-						mountpoint = "/boot";
-					};
-				};
-				swap = {
-					size = "2G";
-					content.type = "swap";
-				};
-				root = {
-					size = "100%";
-					content = {
-						type = "filesystem";
-						format = "ext4";
-						mountpoint = "/";
-					};
-				};
-			};
-		};
-	};
+# SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2024)
+#
+# Normally, I would use an imports list [1], but the disko command
+# doesn’t actually pay attention to the imports list, so I have to use
+# the import function [2].
+#
+# [1]: <https://nixos.org/manual/nixos/stable#sec-modularity>
+# [2]: <https://nixos.org/manual/nix/stable/language/builtins#builtins-import>
+import ../../misc/disko/vm-base.nix {
+	swapSize = "2G";
 }

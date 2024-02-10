@@ -3,6 +3,6 @@
 { lib, ... }:
 {
 	imports = let
-		tarball = import ../../misc/disko-tarball.nix { inherit lib; };
+		tarball = import ../../misc/disko/tarball.nix { inherit lib; };
 	in [ "${tarball}/module.nix" ];
 }
