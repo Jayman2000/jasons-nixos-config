@@ -33,5 +33,8 @@ pkgs.resholve.writeScriptBin "build-jnc-install-iso" {
 	fi
 
 	readonly attribute="custom.jnc-install-iso.\"$JNC_MACHINE_SLUG\""
-	nix-build "${custom.jasons-nixos-config}/pkgCollections" -A "$attribute"
+	nix-build \
+		"${custom.jasons-nixos-config}/pkgCollections" \
+		-A "$attribute" \
+		"$@"
 ''
