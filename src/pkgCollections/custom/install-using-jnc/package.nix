@@ -81,5 +81,5 @@ in ''
 	sudo_write "$config" "$temporary_config_dir/configuration.nix"
 
 	cd /
-	sudo nixos-install
+	sudo nixos-install --no-root-password
 '')
