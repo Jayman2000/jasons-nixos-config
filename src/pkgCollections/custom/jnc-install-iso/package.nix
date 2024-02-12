@@ -4,7 +4,25 @@
 
 let
 	pathToISO = path: let
-		configuration = "${path}/installation-image.nix";
+		configuration = {
+			imports = [
+				../../../modules/installation-image.nix
+			];
+			# We’re using the specialisation option in a
+			# creative way here. We not ever going to
+			# actually activate this specialisation.
+			# Instead, we’re declaring it here to make the
+			# system’s configuration get prebuilt and added
+			# to its installation image’s Nix store. That
+			# way we won’t have to wait for the
+			# configuration to build when nixos-install gets
+			# run.
+			specialisation.configToDeploy = {
+				inheritParentConfig = false;
+				configuration = import path;
+			};
+
+		};
 		nixOSPackage = pkgs.nixos configuration;
 	in
 		nixOSPackage.config.system.build.isoImage;
