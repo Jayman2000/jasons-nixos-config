@@ -6,7 +6,7 @@ pkgs.resholve.writeScriptBin "build-jnc-install-iso" {
 	execer = [
 		"cannot:${pkgs.nix}/bin/nix-build"
 	];
-	inputs = [ pkgs.nix ];
+	inputs = [ pkgs.nix pkgs.coreutils ];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	set -eu
@@ -32,9 +32,11 @@ pkgs.resholve.writeScriptBin "build-jnc-install-iso" {
 		exit 1
 	fi
 
+	mkdir -p ISOs
 	readonly attribute="custom.jnc-install-iso.\"$JNC_MACHINE_SLUG\""
 	nix-build \
 		"${custom.jasons-nixos-config}/pkgCollections" \
 		-A "$attribute" \
+		--out-link "ISOs/$JNC_MACHINE_SLUG" \
 		"$@"
 ''
