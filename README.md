@@ -176,24 +176,7 @@ going to be doing a manual installation, not a graphical one.
 	4. Always skip this step. In the next step, `install-using-jnc`
 	will automatically generate a config for us.
 
-	5. Don’t run `nixos-install` directly. Instead, do this:
-
-		1. Determine what machine slug this machine uses:
-
-			- Jason-Desktop-Linux’s machine slug is
-			`jason-desktop-linux`
-
-			- Graphical-Test-VM’s machine slug is
-			`graphical-test-vm`
-
-			- `jasonyundt.website.home.arpa`’s machine slug is
-			`jasonyundt.website.home.arpa`
-
-		2. Run this command:
-
-			```bash
-			JNC_MACHINE_SLUG=<slug> install-using-jnc
-			```
+	5. Don’t run `nixos-install` directly. Instead, run `install-using-jnc`.
 
 ### 4. Do any manual set up
 

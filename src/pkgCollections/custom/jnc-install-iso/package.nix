@@ -21,6 +21,9 @@ let
 				inheritParentConfig = false;
 				configuration = import path;
 			};
+			environment.variables = {
+				JNC_MACHINE_SLUG = builtins.baseNameOf path;
+			};
 
 		};
 		nixOSPackage = pkgs.nixos configuration;
