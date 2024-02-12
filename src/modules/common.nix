@@ -4,6 +4,7 @@
 {
 	imports = [
 		./git-common.nix
+		./machine-slug.nix
 		./neovim.nix
 		./sudo.nix
 	];

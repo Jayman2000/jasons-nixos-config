@@ -2,6 +2,9 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2024)
 { lib }:
 {
+	ls = dir: let
+		dirListing = builtins.readDir dir;
+	in builtins.attrNames dirListing;
 	mapSubDirs = function: dir: let
 		doesAttrReferToSubDir = (name: value:
 			value == "directory"
