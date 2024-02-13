@@ -5,7 +5,13 @@
 	imports = [
 		"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
 	];
-	isoImage.squashfsCompression = "lz4";
+	isoImage = {
+		squashfsCompression = "lz4";
+		# Hopefully, this will save the installation target from having
+		# to download any additional dependencies in order to build the
+		# system configuration.
+		includeSystemBuildDependencies = true;
+	};
 	users.users.nixos.packages = let
 		pkgCollections = import ../pkgCollections { inherit pkgs lib; };
 	in [
