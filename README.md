@@ -113,14 +113,6 @@ notes that I have for them:
 	the virtual disk you create for it is large enough to store the “Keep
 	Across Linux Distros!” Syncthing folder.
 
-- Booting from the install medium: Make sure that you boot into UEFI mode. Once
-	you’re at a command prompt, run
-	[this command](https://askubuntu.com/a/162896):
-
-		[ -d /sys/firmware/efi ] && echo UEFI || echo BIOS
-
-	If it outputs “UEFI”, then you’re good.
-
 - Graphical Installation: Skip right to the Manual Installation section. We’re
 going to be doing a manual installation, not a graphical one.
 

@@ -11,6 +11,8 @@
 		# to download any additional dependencies in order to build the
 		# system configuration.
 		includeSystemBuildDependencies = true;
+		makeBiosBootable = false;
+		makeEfiBootable = true;
 	};
 	users.users.nixos.packages = let
 		pkgCollections = import ../pkgCollections { inherit pkgs lib; };
