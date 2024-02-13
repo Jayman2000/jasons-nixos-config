@@ -12,6 +12,6 @@ pkgs.mkShell {
 			inherit pkgs lib;
 		};
 	in [
-		pkgCollections.custom.deploy-jasons-nixos-config
+		pkgCollections.custom.remote-deploy
 	];
 }
