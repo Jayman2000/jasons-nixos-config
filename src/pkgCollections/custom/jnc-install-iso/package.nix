@@ -4,27 +4,27 @@
 
 let
 	pathToISO = path: let
-		configuration = {
+		configuration = { config, lib, ... }: {
 			imports = [
 				../../../modules/installation-image.nix
+				../../../modules/machine-slug.nix
+				../../../modules/unattended-install.nix
 			];
-			# We’re using the specialisation option in a
-			# creative way here. We not ever going to
-			# actually activate this specialisation.
-			# Instead, we’re declaring it here to make the
-			# system’s configuration get prebuilt and added
-			# to its installation image’s Nix store. That
-			# way we won’t have to wait for the
-			# configuration to build when nixos-install gets
-			# run.
+			jnc.machineSlug = builtins.baseNameOf path;
+			# We’re using the specialisation option in a creative
+			# way here. We not ever going to actually activate this
+			# specialisation. Instead, we’re declaring it here to
+			# make the system’s configuration get prebuilt and added
+			# to its installation image’s Nix store. That way we
+			# won’t have to wait for the configuration to build when
+			# nixos-install gets run.
 			specialisation.configToDeploy = {
 				inheritParentConfig = false;
 				configuration = import path;
 			};
-			environment.variables = {
-				JNC_MACHINE_SLUG = builtins.baseNameOf path;
-			};
-
+			environment.variables.JNC_MACHINE_SLUG = (
+				config.jnc.machineSlug
+			);
 		};
 		nixOSPackage = pkgs.nixos configuration;
 	in

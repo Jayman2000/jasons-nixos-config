@@ -113,6 +113,36 @@ notes that I have for them:
 	the virtual disk you create for it is large enough to store the “Keep
 	Across Linux Distros!” Syncthing folder.
 
+	- Before you continue, decide whether or not you’re going to do
+	an unattended installation:
+
+		1. Open this repo’s root directory in a file manager.
+
+		2. Determine the machine slug for the machine that
+		you’re going to be installing NixOS on:
+
+			- Jason-Desktop-Linux’s machine slug is
+			`jason-desktop-linux`
+
+			- Graphical-Test-VM’s machine slug is
+			`graphical-test-vm`
+
+			- `jasonyundt.website.home.arpa`’s machine slug is
+			`jasonyundt.website.home.arpa`
+
+		3. Look inside the `src/modules/disko/` directory. If
+		there’s a file named `<machine-slug>.nix`, then you can
+		do an unattended installation if you want to. If there
+		isn’t a file named `<machine-slug>.nix`, then you cannot
+		do an unattended installation.
+
+- Booting from the install medium:
+
+	- If you’re going to do an unattended installation, then select
+	the “Unattended Install” option from the boot menu. Once you
+	select that option, the rest of the installation will be done
+	for you. Skip directly to “4. Do any manual set up”.
+
 - Graphical Installation: Skip right to the Manual Installation section. We’re
 going to be doing a manual installation, not a graphical one.
 
