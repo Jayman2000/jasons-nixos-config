@@ -11,6 +11,11 @@ pkgs.resholve.writeScriptBin "install-using-jnc" {
 	interpreter = "${pkgs.bash}/bin/bash";
 } (let
 	diskoDir = "${custom.jasons-nixos-config}/modules/disko";
+	coreUtilPath = name: "${pkgs.coreutils}/bin/${name}";
+	rm = coreUtilPath "rm";
+	tee = coreUtilPath "tee";
+	mkdir = coreUtilPath "mkdir";
+	cp = coreUtilPath "cp";
 in ''
 	set -eu
 
@@ -40,7 +45,7 @@ in ''
 	function clean_up {
 		echo Cleaning up…
 		cd /
-		sudo rm --recursive --force "$temporary_config_dir"
+		sudo ${rm} --recursive --force "$temporary_config_dir"
 	}
 	trap clean_up EXIT
 	trap clean_up SIGINT
@@ -49,7 +54,7 @@ in ''
 	function sudo_write {
 		local -r to_write="$1"
 		shift
-		echo "$to_write" | sudo tee "$*" > /dev/null
+		echo "$to_write" | sudo ${tee} "$*" > /dev/null
 	}
 
 	function machine_uses_disko {
@@ -62,9 +67,9 @@ in ''
 			--mode disko \
 			"$disko_config"
 	fi
-	sudo mkdir -p "$temporary_config_dir"
+	sudo ${mkdir} -p "$temporary_config_dir"
 	readonly dest="$temporary_config_dir/src"
-	sudo cp --recursive --remove-destination \
+	sudo ${cp} --recursive --remove-destination \
 		"${custom.jasons-nixos-config}" \
 		"$dest"
 	cd "$temporary_config_dir"
@@ -73,7 +78,7 @@ in ''
 	# jasons-hardware-configuration-generator does not write a new hardware
 	# configuration file, then this command will make it so that
 	# nixos-install fails.
-	sudo rm "$dest/modules/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
+	sudo ${rm} "$dest/modules/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
 	sudo \
 		--preserve-env=JNC_MACHINE_SLUG \
 		JNC_INSTALLING=1 \
@@ -81,5 +86,5 @@ in ''
 	sudo_write "$config" "$temporary_config_dir/configuration.nix"
 
 	cd /
-	sudo nixos-install --no-root-password
+	sudo ${pkgs.nixos-install-tools}/bin/nixos-install --no-root-password
 '')

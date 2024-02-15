@@ -68,6 +68,11 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	then
 		nixos-rebuild "$@" --no-build-nix
 	else
-		sudo --preserve-env=NIXOS_CONFIG,PATH nixos-rebuild "$@" --no-build-nix
+		sudo \
+			--preserve-env=NIXOS_CONFIG,PATH \
+			-- \
+			${pkgs.nixos-rebuild}/bin/nixos-rebuild \
+				"$@" \
+				--no-build-nix
 	fi
 ''

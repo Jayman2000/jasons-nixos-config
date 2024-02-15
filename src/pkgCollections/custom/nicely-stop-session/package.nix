@@ -60,5 +60,5 @@ pkgs.resholve.writeScriptBin "nicely-stop-session" {
 	readonly kde_shutdown_type systemctl_shutdown_type
 
 	kde_shutdown logoutAnd"$kde_shutdown_type" || \
-		sudo systemctl "$systemctl_shutdown_type"
+		sudo ${pkgs.systemd}/bin/systemctl "$systemctl_shutdown_type"
 ''
