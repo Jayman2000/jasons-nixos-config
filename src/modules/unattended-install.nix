@@ -7,49 +7,85 @@
 		./machine-slug.nix
 	];
 	config.systemd = {
-		services.unattended-install = let
-			dependencies = [ "network-online.target" ];
-		in {
-			wants = dependencies;
-			after = dependencies;
-			description = "automatic NixOS installer";
-			environment.JNC_MACHINE_SLUG = config.jnc.machineSlug;
-			path = [
-				# install-using-jnc runs disko, and
-				# disko needs commands from these
-				# packages to be in the user’s PATH.
-				pkgs.nix
-			];
-			script = let
-				pkgCollections = import ../pkgCollections {
-					inherit pkgs lib;
+		services = {
+			dump-journal = {
+				description = "Installation Log Copier";
+				path = [
+					# These are required for nixos-enter to
+					# work.
+					pkgs.util-linux
+				];
+				script = let
+					nixos-enter-package = (
+						config.system.build.nixos-enter
+					);
+					nixos-enter = "${nixos-enter-package}/bin/nixos-enter";
+				in ''
+					readonly mount_point=/mnt
+					readonly roots_home="$(
+						${nixos-enter} \
+							--root "$mount_point" \
+							--command "printf %s ~root"
+					)"
+					readonly dest="$mount_point/$roots_home/install.exported_journal"
+					journalctl --output=export > "$dest"
+				'';
+				serviceConfig = {
+					StandardOutput = "journal+console";
+					StandardError = "journal+console";
 				};
-				custom = pkgCollections.custom;
-			in ''
-				set -e
-				# This gives install-using-jnc access to
-				# sudo.
-				export PATH="${config.security.wrapperDir}:$PATH"
-				${custom.install-using-jnc}/bin/install-using-jnc
-			'';
-			serviceConfig = {
-				User = "nixos";
-				Group = "users";
-				StandardOutput = "journal+console";
-				# This workaround comes from here:
-				# <https://bugzilla.redhat.com/show_bug.cgi?id=1212756#c4>.
-				#
-				# It won’t be needed once there’s a
-				# stable version of Disko that has this
-				# PR:
-				# <https://github.com/nix-community/disko/pull/535>
-				StandardError = "null";
+				unitConfig = {
+					SuccessAction = "reboot";
+					OnFailure = "multi-user.target";
+				};
 			};
-			unitConfig = {
-				SuccessAction = "reboot";
-				# This allows me to debug if
-				# unattended-installer.service doesn’t work.
-				OnFailure = "multi-user.target";
+			unattended-install = let
+				dependencies = [ "network-online.target" ];
+			in {
+				wants = dependencies;
+				after = dependencies;
+				description = "automatic NixOS installer";
+				environment.JNC_MACHINE_SLUG = (
+					config.jnc.machineSlug
+				);
+				path = [
+					# install-using-jnc runs disko, and
+					# disko needs commands from these
+					# packages to be in the user’s PATH.
+					pkgs.nix
+				];
+				script = let
+					pkgCollections = import ../pkgCollections {
+						inherit pkgs lib;
+					};
+					custom = pkgCollections.custom;
+				in ''
+					set -e
+					# This gives install-using-jnc access to
+					# sudo.
+					export PATH="${config.security.wrapperDir}:$PATH"
+					${custom.install-using-jnc}/bin/install-using-jnc
+				'';
+				serviceConfig = {
+					User = "nixos";
+					Group = "users";
+					StandardOutput = "journal+console";
+					# This workaround comes from here:
+					# <https://bugzilla.redhat.com/show_bug.cgi?id=1212756#c4>.
+					#
+					# It won’t be needed once there’s a
+					# stable version of Disko that has this
+					# PR:
+					# <https://github.com/nix-community/disko/pull/535>
+					StandardError = "null";
+				};
+				unitConfig = {
+					OnSuccess = "dump-journal.service";
+					# This allows me to debug if
+					# unattended-installer.service
+					# doesn’t work.
+					OnFailure = "multi-user.target";
+				};
 			};
 		};
 		targets.unattended-install = {
