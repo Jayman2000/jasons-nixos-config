@@ -35,6 +35,7 @@
 			serviceConfig = {
 				User = "nixos";
 				Group = "users";
+				StandardOutput = "journal+console";
 				# This workaround comes from here:
 				# <https://bugzilla.redhat.com/show_bug.cgi?id=1212756#c4>.
 				#
