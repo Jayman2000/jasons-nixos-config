@@ -100,7 +100,7 @@ notes that I have for them:
 		JNC_MACHINE_SLUG=<slug> ./build-iso.sh
 
 	4. When that script finished, there will be an ISO file in the
-	`result/iso/` directory.
+	`ISOs/<machine-slug>/iso` directory.
 
 - Installing NixOS:
 	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
