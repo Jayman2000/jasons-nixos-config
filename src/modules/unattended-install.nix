@@ -109,6 +109,7 @@
 					# efi-directory:
 					# <https://github.com/NixOS/nixpkgs/blob/ee76c70ea139274f1afd5f7d287c0489b4750fee/nixos/modules/installer/cd-dvd/iso-image.nix#L238>
 					pkgName = "efi-directory-customized";
+					menuEntryName = "Unattended Install (${config.jnc.machineSlug})";
 					customizedEfiDir = pkgs.runCommand pkgName {
 						nativeBuildInputs = [
 							pkgs.buildPackages.grub2_efi
@@ -124,7 +125,8 @@
 						readonly grub_cfg
 						existing_boot_entry="$(
 						  echo -n \
-							"menuentry 'Unattended Install' "
+							menuentry \
+							"'${menuEntryName}' "
 						  sift \
 						    --multiline \
 						    --regexp='--class installer\s.*?{.*?}\n' \
