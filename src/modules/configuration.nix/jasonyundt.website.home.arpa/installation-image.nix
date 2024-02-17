@@ -1,1 +1,0 @@
-../graphical-test-vm/installation-image.nix

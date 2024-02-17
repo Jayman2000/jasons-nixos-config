@@ -100,7 +100,7 @@ notes that I have for them:
 		JNC_MACHINE_SLUG=<slug> ./build-iso.sh
 
 	4. When that script finished, there will be an ISO file in the
-	`result/iso/` directory.
+	`ISOs/<machine-slug>/iso` directory.
 
 - Installing NixOS:
 	- If you’re installing NixOS on `jasonyundt.website.home.arpa`, then
@@ -113,39 +113,45 @@ notes that I have for them:
 	the virtual disk you create for it is large enough to store the “Keep
 	Across Linux Distros!” Syncthing folder.
 
-- Booting from the install medium: Make sure that you boot into UEFI mode. Once
-	you’re at a command prompt, run
-	[this command](https://askubuntu.com/a/162896):
+	- Before you continue, decide whether or not you’re going to do
+	an unattended installation:
 
-		[ -d /sys/firmware/efi ] && echo UEFI || echo BIOS
+		1. Open this repo’s root directory in a file manager.
 
-	If it outputs “UEFI”, then you’re good.
+		2. Determine the machine slug for the machine that
+		you’re going to be installing NixOS on:
+
+			- Jason-Desktop-Linux’s machine slug is
+			`jason-desktop-linux`
+
+			- Graphical-Test-VM’s machine slug is
+			`graphical-test-vm`
+
+			- `jasonyundt.website.home.arpa`’s machine slug is
+			`jasonyundt.website.home.arpa`
+
+		3. Look inside the `src/modules/disko/` directory. If
+		there’s a file named `<machine-slug>.nix`, then you can
+		do an unattended installation if you want to. If there
+		isn’t a file named `<machine-slug>.nix`, then you cannot
+		do an unattended installation.
+
+- Booting from the install medium:
+
+	- If you’re going to do an unattended installation, then select
+	the “Unattended Install” option from the boot menu. Once you
+	select that option, the rest of the installation will be done
+	for you. Skip directly to “4. Do any manual set up”.
 
 - Graphical Installation: Skip right to the Manual Installation section. We’re
 going to be doing a manual installation, not a graphical one.
 
-- UEFI (GPT):
+- Partitioning and formatting:
 
-	- If you’re going to repartition an entire disk, then before you
-	start doing that, delete any existing signatures on the disk:
-
-			wipefs -a <path-to-block-device>
-
-	- Give `jasonyundt.website.home.arpa` 2GiB of swap. This is a pretty
-	arbitrary number.
-
-	- Use the following labels:
-
-		- `nixos-root` for the root partition.
-		- `nixos-swap` for the swap partition.
-		- `nixos-hdd` for the data partition on the hard drive.
-
-- Installing:
-
-	4. Skip this step. In the next step, `install-using-jnc` will
-	automatically generate a config for us.
-
-	5. Don’t run `nixos-install` directly. Instead, do this:
+	- If the machine that you’re installing NixOS on uses
+	[Disko](https://github.com/nix-community/disko), then skip this
+	step. Here’s how you determine if the machine that you’re using
+	uses Disko:
 
 		1. Determine what machine slug this machine uses:
 
@@ -158,11 +164,41 @@ going to be doing a manual installation, not a graphical one.
 			- `jasonyundt.website.home.arpa`’s machine slug is
 			`jasonyundt.website.home.arpa`
 
-		2. Run this command:
+		2. Open `./src/modules/disko`
 
-			```bash
-			JNC_MACHINE_SLUG=<slug> install-using-jnc
-			```
+		3. If there’s a file named `<slug>.nix` then this
+		machine uses Disko. If there isn’t a file named
+		`<slug>.nix`, then this machine doesn’t use Disko.
+
+	- UEFI (GPT):
+
+		- If you’re going to repartition an entire disk, then
+		before you start doing that, delete any existing signatures on
+		the disk:
+
+				wipefs -a <path-to-block-device>
+
+		- Give `jasonyundt.website.home.arpa` 2GiB of swap. This
+		is a pretty arbitrary number.
+
+		- Use the following labels:
+
+			- `nixos-root` for the root partition.
+			- `nixos-swap` for the swap partition.
+			- `nixos-hdd` for the data partition on the hard drive.
+
+- Installing:
+
+	1. If the machine uses Disko, then skip this step.
+
+	2. If the machine uses Disko, then skip this step.
+
+	3. If the machine uses Disko, then skip this step.
+
+	4. Always skip this step. In the next step, `install-using-jnc`
+	will automatically generate a config for us.
+
+	5. Don’t run `nixos-install` directly. Instead, run `install-using-jnc`.
 
 ### 4. Do any manual set up
 

@@ -1,27 +1,20 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{
-	bash,
-	coreutils,
-	git,
-	jasons-nixos-config,
-	nixos-rebuild,
-	resholve,
-}:
+{ pkgs, custom }:
 
-resholve.writeScriptBin "deploy-jasons-nixos-config" {
+pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	execer = [
 		# TODO: This won’t be necessary
 		# once this PR is merged:
 		# <https://github.com/abathur/binlore/pull/14>
-		"cannot:${nixos-rebuild}/bin/nixos-rebuild"
+		"cannot:${pkgs.nixos-rebuild}/bin/nixos-rebuild"
 	];
 	fake.external = [ "sudo" ];
 	inputs = [
-		coreutils
-		nixos-rebuild
+		pkgs.coreutils
+		pkgs.nixos-rebuild
 	];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	set -e
 
@@ -67,14 +60,19 @@ resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	fi
 
 
-	declare -xr NIXOS_CONFIG="${jasons-nixos-config}/modules/configuration.nix/$JNC_MACHINE_SLUG"
+	declare -xr NIXOS_CONFIG="${custom.jasons-nixos-config}/modules/configuration.nix/$JNC_MACHINE_SLUG"
 	# Needed to workaround this issue:
 	# <https://github.com/NixOS/nix/issues/3533>
-	declare -xr PATH="${git}/bin:$PATH"
+	declare -xr PATH="${pkgs.git}/bin:$PATH"
 	if [ "$JNC_NIXOS_REBUILD_AS_ROOT" -eq 0 ]
 	then
 		nixos-rebuild "$@" --no-build-nix
 	else
-		sudo --preserve-env=NIXOS_CONFIG,PATH nixos-rebuild "$@" --no-build-nix
+		sudo \
+			--preserve-env=NIXOS_CONFIG,PATH \
+			-- \
+			${pkgs.nixos-rebuild}/bin/nixos-rebuild \
+				"$@" \
+				--no-build-nix
 	fi
 ''

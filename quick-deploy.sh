@@ -19,6 +19,7 @@ then
 	if [ "$1" = shutdown ] || [ "$1" = reboot ]
 	then
 		sudo -v
+		./ensure-password-files-exist.sh
 		readonly script="
 			env \
 				JNC_NIXOS_REBUILD_AS_ROOT=1 \

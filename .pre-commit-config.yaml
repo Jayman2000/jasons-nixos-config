@@ -123,7 +123,8 @@ repos:
                         The author of this font waived all copyright to the
                         font and released it into the 🅮 public
                         domain).|SPDX-License-Identifier:( LicenseRef-MIT-JY|
-                        LicenseRef-MIT-NixOSWiki| LicenseRef-MIT-Nixpkgs)
+                        LicenseRef-MIT-NixOSWiki| LicenseRef-MIT-Nixpkgs|
+                        LicenseRef-MIT-Disko)
                     - --pattern
                     - >
                         SPDX-FileContributor:

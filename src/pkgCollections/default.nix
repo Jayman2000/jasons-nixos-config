@@ -6,9 +6,12 @@
 	customLib ? import ../lib.nix { inherit lib; }
 }:
 let
+	callPackageWithPCs = lib.callPackageWith (
+		packageCollections // { inherit customLib; }
+	);
 	pathToPackageCollection = (path:
 		import path {
-			inherit pkgs lib customLib;
+			inherit pkgs customLib callPackageWithPCs;
 			pkgCollectionRoot = path;
 		}
 	);

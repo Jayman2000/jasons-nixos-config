@@ -1,25 +1,19 @@
 # SPDX-FileNotice: 🅭🄍1.0 Unless otherwise noted, everything in this file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{
-	bash,
-	coreutils,
-	deploy-jasons-nixos-config,
-	jasons-nixos-config,
-	resholve
-}:
+{ pkgs, custom }:
 
 let
 	name = "build-all-of-jnc";
-in resholve.writeScriptBin name {
+in pkgs.resholve.writeScriptBin name {
 	execer = [
-		"cannot:${deploy-jasons-nixos-config}/bin/deploy-jasons-nixos-config"
+		"cannot:${custom.deploy-jasons-nixos-config}/bin/deploy-jasons-nixos-config"
 	];
 	inputs = [
-		deploy-jasons-nixos-config
-		coreutils
+		custom.deploy-jasons-nixos-config
+		pkgs.coreutils
 	];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	set -e
 
@@ -44,7 +38,7 @@ in resholve.writeScriptBin name {
 	trap clean_up SIGINT
 	# END CC-BY-SA-4.0 LICENSED SECTION
 
-	for directory in ${jasons-nixos-config}/modules/configuration.nix/*
+	for directory in ${custom.jasons-nixos-config}/modules/configuration.nix/*
 	do
 		machine_slug="$(basename "$directory")"
 		echo "Building configuration for $machine_slug…"

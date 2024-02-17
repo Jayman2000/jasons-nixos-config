@@ -4,7 +4,9 @@
 {
 	imports = [
 		./git-common.nix
+		./machine-slug.nix
 		./neovim.nix
+		./passwords.nix
 		./sudo.nix
 	];
 	boot.loader.systemd-boot.enable = true;

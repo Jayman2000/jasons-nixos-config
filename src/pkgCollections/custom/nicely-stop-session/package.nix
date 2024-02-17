@@ -1,25 +1,20 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{
-	bash,
-	qt6,
-	resholve,
-	systemd
-}:
+{ pkgs }:
 
-resholve.writeScriptBin "nicely-stop-session" {
+pkgs.resholve.writeScriptBin "nicely-stop-session" {
 	execer = [
 		# TODO: This can’t be fixed upstream until subparsers
 		# are supported. See
 		# <https://github.com/abathur/resholve/pull/104>.
-		"cannot:${systemd}/bin/systemctl"
+		"cannot:${pkgs.systemd}/bin/systemctl"
 	];
 	fake.external = [ "sudo" ];
 	inputs = [
-		qt6.qttools  # for qdbus
-		systemd  # for systemctl
+		pkgs.qt6.qttools  # for qdbus
+		pkgs.systemd  # for systemctl
 	];
-	interpreter = "${bash}/bin/bash";
+	interpreter = "${pkgs.bash}/bin/bash";
 } ''
 	readonly es_wrong_number_of_arguments=1
 	readonly es_invalid_shutdown_type=2
@@ -65,5 +60,5 @@ resholve.writeScriptBin "nicely-stop-session" {
 	readonly kde_shutdown_type systemctl_shutdown_type
 
 	kde_shutdown logoutAnd"$kde_shutdown_type" || \
-		sudo systemctl "$systemctl_shutdown_type"
+		sudo ${pkgs.systemd}/bin/systemctl "$systemctl_shutdown_type"
 ''
