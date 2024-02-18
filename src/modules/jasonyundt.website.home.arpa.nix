@@ -6,6 +6,7 @@
 {
 	imports = [
 		./jasonyundt.website-common.nix
+		./bcachefs.nix
 		./disko/common.nix
 		./disko/jasonyundt.website.home.arpa.nix
 		./serial-console.nix
