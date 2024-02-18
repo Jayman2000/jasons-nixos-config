@@ -5,6 +5,7 @@
 	imports =
 		[
 			./home-manager/23.11.nix
+			./bcachefs.nix
 			./common.nix
 			./efi.nix
 			./cdemu.nix
