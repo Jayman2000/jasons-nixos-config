@@ -71,7 +71,7 @@ repos:
                 types: ['text']
     -
         repo: https://github.com/adrienverge/yamllint
-        rev: v1.34.0
+        rev: v1.35.1
         hooks:
             - id: yamllint
     -
@@ -81,7 +81,7 @@ repos:
             - id: markdownlint
     -
         repo: https://github.com/scop/pre-commit-shfmt
-        rev: v3.7.0-4
+        rev: v3.8.0-1
         hooks:
             -
                 id: shfmt-src
