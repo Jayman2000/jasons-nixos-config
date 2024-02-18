@@ -5,6 +5,7 @@
 		[
 			./home-manager/23.11.nix
 			./common.nix
+			./bcachefs.nix
 			./disko/graphical-test-vm.nix
 			./efi.nix
 			./cli-shortcuts.nix
