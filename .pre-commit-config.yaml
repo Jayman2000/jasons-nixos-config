@@ -95,7 +95,7 @@ repos:
                 additional_dependencies: &usn_deps [dnspython]
     -
         repo: https://github.com/PyCQA/autoflake
-        rev: v2.2.1
+        rev: v2.3.0
         hooks:
             - id: autoflake
 # TODO: How do I make it accept hard tabs?
