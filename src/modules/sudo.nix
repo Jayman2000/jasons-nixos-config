@@ -1,17 +1,19 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2023–2024)
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
+	pkgCollections = import ../pkgCollections { inherit pkgs lib; };
 	realSudo = "${config.security.wrapperDir}/sudo";
 	customSudo = pkgs.resholve.writeScriptBin "sudo" {
 		inputs = [
+			pkgCollections.custom.bash-preamble.inputForResholve
 			pkgs.coreutils
 		];
 		interpreter = "${pkgs.bash}/bin/bash";
 		keep."${realSudo}" = true;
 	} ''
-		set -e
+		${pkgCollections.custom.bash-preamble.preambleForResholve}
 		console="$(tty)"
 		readonly console
 

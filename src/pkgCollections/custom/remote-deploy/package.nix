@@ -10,12 +10,13 @@ pkgs.resholve.writeScriptBin "remote-deploy" {
 		"cannot:${pkgs.openssh}/bin/ssh"
 	];
 	inputs = [
+		custom.bash-preamble.inputForResholve
 		custom.deploy-jasons-nixos-config
 		pkgs.openssh
 	];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
-	set -e
+	${custom.bash-preamble.preambleForResholve}
 
 	if [ ! -v JNC_REMOTE_DEPLOY_ADDRESS ]
 	then

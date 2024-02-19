@@ -10,7 +10,7 @@
 # This script exits in order to make sure that that happens. If
 # ./ensure-password-files-exist.sh doesn’t get run before that derivation is
 # built, then files will be missing from that derivation.
-set -e
+source src/pkgCollections/custom/bash-preamble/preamble.sh
 # See sysexits.h.
 readonly ex_usage=64
 

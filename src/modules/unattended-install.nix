@@ -1,7 +1,12 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2024)
 { config, pkgs, lib, modulesPath, ... }:
-{
+let
+	pkgCollections = import ../pkgCollections {
+		inherit pkgs lib;
+	};
+	preamble = pkgCollections.custom.bash-preamble.preambleForOthers;
+in {
 	imports = [
 		"${modulesPath}/installer/cd-dvd/iso-image.nix"
 		./machine-slug.nix
@@ -21,6 +26,7 @@
 					);
 					nixos-enter = "${nixos-enter-package}/bin/nixos-enter";
 				in ''
+					${preamble}
 					readonly mount_point=/mnt
 					readonly roots_home="$(
 						${nixos-enter} \
@@ -60,7 +66,7 @@
 					};
 					custom = pkgCollections.custom;
 				in ''
-					set -e
+					${preamble}
 					# This gives install-using-jnc access to
 					# sudo.
 					export PATH="${config.security.wrapperDir}:$PATH"
@@ -116,7 +122,7 @@
 							pkgs.sift
 						];
 					} ''
-						set -e
+						${preamble}
 
 						mkdir "$out"
 						cp -r ${item.source} "$out/EFI"

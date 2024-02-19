@@ -10,12 +10,13 @@ in pkgs.resholve.writeScriptBin name {
 		"cannot:${custom.deploy-jasons-nixos-config}/bin/deploy-jasons-nixos-config"
 	];
 	inputs = [
+		custom.bash-preamble.inputForResholve
 		custom.deploy-jasons-nixos-config
 		pkgs.coreutils
 	];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
-	set -e
+	${custom.bash-preamble.preambleForResholve}
 
 	# This is just to work around the fact that “nixos-rebuild build”
 	# leaves a result symlink that we don’t want.

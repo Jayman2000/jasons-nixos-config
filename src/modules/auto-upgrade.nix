@@ -1,6 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2023)
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
 	imports = [ ./msmtp.nix ];
 	systemd.services.auto-update = let
@@ -29,6 +29,10 @@
 		];
 		startAt = "daily";
 		script = let
+			pkgCollections = import ../pkgCollections {
+				inherit pkgs lib;
+			};
+			bash-preamble = pkgCollections.custom.bash-preamble;
 			fqdn = config.networking.fqdn;
 			implementation = pkgs.resholve.writeScript "auto-upgrade-service-implementation" {
 				execer = [
@@ -46,6 +50,7 @@
 					"cannot:${config.system.build.nixos-rebuild}/bin/nixos-rebuild"
 				];
 				inputs = [
+					bash-preamble.inputForResholve
 					pkgs.msmtp
 					pkgs.perlPackages.mimeConstruct
 					# NixOS’s built-in automatic
@@ -66,6 +71,7 @@
 				];
 				interpreter = "${pkgs.bash}/bin/bash";
 			} ''
+				${bash-preamble.preambleForResholve}
 				# For mime-constuct:
 				#
 				# --output prevents mime-construct from

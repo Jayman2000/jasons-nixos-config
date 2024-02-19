@@ -5,6 +5,7 @@
 
 pkgs.resholve.writeScriptBin "install-using-jnc" {
 	inputs = [
+		custom.bash-preamble.inputForResholve
 		pkgs.nixos-install-tools
 	];
 	fake.external = [ "sudo" ];
@@ -17,7 +18,7 @@ pkgs.resholve.writeScriptBin "install-using-jnc" {
 	mkdir = coreUtilPath "mkdir";
 	cp = coreUtilPath "cp";
 in ''
-	set -eu
+	${custom.bash-preamble.preambleForResholve}
 
 	if ! type sudo &> /dev/null
 	then
