@@ -7,6 +7,6 @@
 #
 # [1]: <https://nixos.org/manual/nixos/stable#sec-modularity>
 # [2]: <https://nixos.org/manual/nix/stable/language/builtins#builtins-import>
-import ../../misc/disko/vm-base.nix {
+import ../../misc/disko/base-configuration.nix {
 	swapSize = "2G";
 }

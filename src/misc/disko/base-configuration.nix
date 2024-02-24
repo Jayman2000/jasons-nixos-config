@@ -2,12 +2,12 @@
 # SPDX-FileCopyrightText: 2022 Nix community projects
 # SPDX-FileCopyrightText: 2024 Jason Yundt <jason@jasonyundt.email>
 # SPDX-FileAttributionText: Adapted from <https://github.com/nix-community/disko/blob/aef9a509db64a081186af2dc185654d78dc8e344/example/simple-efi.nix>.
-{ swapSize }:
+{ swapSize, device ? "/dev/disk/by-path/virtio-pci-0000:04:00.0" }:
 {
 	imports = [ ../../modules/disko/common.nix ];
 	disko.devices.disk.main = {
 		type = "disk";
-		device = "/dev/disk/by-path/virtio-pci-0000:04:00.0";
+		inherit device;
 		content = {
 			type = "gpt";
 			partitions = {

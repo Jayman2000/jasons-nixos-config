@@ -3,5 +3,6 @@
 #
 # See the comment at the top of ./jasonyundt.website.home.arpa.nix.
 import ../../misc/disko/base-configuration.nix {
-	swapSize = "16G";
+	device = "/dev/disk/by-path/pci-0000:00:1f.2-ata-1";
+	swapSize = "8G";
 }
