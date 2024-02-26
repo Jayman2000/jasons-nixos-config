@@ -1,6 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{ pkgs }:
+{ pkgs, custom }:
 
 pkgs.resholve.writeScript "ensure-enough-vm-to-shutdown" {
 	execer = [
@@ -9,17 +9,19 @@ pkgs.resholve.writeScript "ensure-enough-vm-to-shutdown" {
 		# <https://github.com/abathur/binlore/commit/c09ae5a2a4bca7a373d349421cd3f5ee7b8f94de>
 		"cannot:${pkgs.procps}/bin/free"
 	];
-	inputs = with pkgs; [
-		bc
-		coreutils
-		findutils
-		gawk
-		jq
-		procps
-		util-linux
+	inputs = [
+		custom.bash-preamble.inputForResholve
+		pkgs.bc
+		pkgs.coreutils
+		pkgs.findutils
+		pkgs.gawk
+		pkgs.jq
+		pkgs.procps
+		pkgs.util-linux
 	];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
+	${custom.bash-preamble.preambleForResholve}
 	# Row numbers and column numbers both start at 1.
 	function get_value_from_free {
 		local row="$1"

@@ -69,6 +69,10 @@ in {
 		# but then (I’m assuming) /var and /var/lib would have their
 		# permissions set to 700 if they didn’t already exist.
 		script = let
+			pkgCollections = import ../pkgCollections {
+				inherit pkgs lib;
+			};
+			bash-preamble = pkgCollections.custom.bash-preamble;
 			implementation = pkgs.resholve.writeScript "swapspace-service-implementation" {
 				execer = [
 					# TODO: This won’t be necessary
@@ -77,11 +81,13 @@ in {
 					"cannot:${pkgs.swapspace}/bin/swapspace"
 				];
 				inputs = [
+					bash-preamble.inputForResholve
 					pkgs.coreutils	# for mkdir and chmod
 					pkgs.swapspace
 				];
 				interpreter = "${pkgs.bash}/bin/bash";
 			} ''
+				${bash-preamble.preambleForResholve}
 				[ -d '${swapFileDir}' ] && mkdir -p '${swapFileDir}' && chmod 700 '${swapFileDir}'
 				swapspace --swappath='${swapFileDir}'
 			'';

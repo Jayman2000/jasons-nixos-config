@@ -1,6 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{ pkgs }:
+{ pkgs, custom }:
 
 pkgs.resholve.writeScriptBin "nicely-stop-session" {
 	execer = [
@@ -11,11 +11,13 @@ pkgs.resholve.writeScriptBin "nicely-stop-session" {
 	];
 	fake.external = [ "sudo" ];
 	inputs = [
+		custom.bash-preamble.inputForResholve
 		pkgs.qt6.qttools  # for qdbus
 		pkgs.systemd  # for systemctl
 	];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
+	${custom.bash-preamble.preambleForResholve}
 	readonly es_wrong_number_of_arguments=1
 	readonly es_invalid_shutdown_type=2
 

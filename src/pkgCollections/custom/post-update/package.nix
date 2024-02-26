@@ -2,7 +2,7 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
 #
 # This is the post-update hook for Git. See githooks(5) for more information.
-{ pkgs }:
+{ pkgs, custom }:
 
 pkgs.resholve.writeScriptBin "post-update" {
 	execer = [
@@ -11,8 +11,12 @@ pkgs.resholve.writeScriptBin "post-update" {
 		# <https://github.com/abathur/resholve/pull/104>.
 		"cannot:${pkgs.git}/bin/git"
 	];
-	inputs = [ pkgs.git ];
+	inputs = [
+		custom.bash-preamble.inputForResholve
+		pkgs.git
+	];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
+	${custom.bash-preamble.preambleForResholve}
 	exec git update-server-info
 ''

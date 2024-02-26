@@ -6,10 +6,14 @@ pkgs.resholve.writeScriptBin "build-jnc-install-iso" {
 	execer = [
 		"cannot:${pkgs.nix}/bin/nix-build"
 	];
-	inputs = [ pkgs.nix pkgs.coreutils ];
+	inputs = [
+		custom.bash-preamble.inputForResholve
+		pkgs.nix
+		pkgs.coreutils
+	];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
-	set -eu
+	${custom.bash-preamble.preambleForResholve}
 
 	if [ ! -v JNC_MACHINE_SLUG ]
 	then

@@ -7,7 +7,7 @@
 }:
 let
 	callPackageWithPCs = lib.callPackageWith (
-		packageCollections // { inherit customLib; }
+		packageCollections // { inherit lib customLib; }
 	);
 	pathToPackageCollection = (path:
 		import path {

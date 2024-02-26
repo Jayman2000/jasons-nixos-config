@@ -11,12 +11,13 @@ pkgs.resholve.writeScriptBin "deploy-jasons-nixos-config" {
 	];
 	fake.external = [ "sudo" ];
 	inputs = [
+		custom.bash-preamble.inputForResholve
 		pkgs.coreutils
 		pkgs.nixos-rebuild
 	];
 	interpreter = "${pkgs.bash}/bin/bash";
 } ''
-	set -e
+	${custom.bash-preamble.preambleForResholve}
 
 	if ! type sudo &> /dev/null
 	then

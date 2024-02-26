@@ -9,6 +9,7 @@ pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 		"cannot:${pkgs.nixos-install-tools}/bin/nixos-generate-config"
 	];
 	inputs = [
+		custom.bash-preamble.inputForResholve
 		pkgs.coreutils
 		pkgs.git
 		pkgs.nixos-install-tools
@@ -17,7 +18,7 @@ pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 } (let
 	diskoDir = "${custom.jasons-nixos-config}/modules/disko";
 in ''
-	set -e
+	${custom.bash-preamble.preambleForResholve}
 
 	function jnc_installing_set_correctly
 	{
