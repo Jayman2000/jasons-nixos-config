@@ -1,6 +1,6 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
-{ pkgs, custom }:
+{ pkgs, lib, custom }:
 
 pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 	execer = [
@@ -17,6 +17,8 @@ pkgs.resholve.writeScriptBin "jasons-hardware-configuration-generator" {
 	interpreter = "${pkgs.bash}/bin/bash";
 } (let
 	diskoDir = "${custom.jasons-nixos-config}/modules/disko";
+	bcachefs-tools = pkgs.bcachefs-tools;
+	pathExtension = "${lib.strings.escapeShellArg "${bcachefs-tools}/bin"}";
 in ''
 	${custom.bash-preamble.preambleForResholve}
 
@@ -110,7 +112,13 @@ in ''
 	fi
 	readonly output="src/modules/hardware-configuration.nix/$JNC_MACHINE_SLUG.nix"
 	{
+		# I only need this because
+		# src/modules/unattended-install.service runs this script as
+		# part of a systemd service. Specifically, the path_extension
+		# thing is a workaround for this bug:
+		# <https://github.com/NixOS/nixpkgs/issues/291843>
+		readonly path_extension=${pathExtension}
 		print_spdx_metadata
-		nixos-generate-config "''${args[@]}"
+		PATH="$path_extension:$PATH" nixos-generate-config "''${args[@]}"
 	} | unexpand --tabs=2 --first-only > "$output"
 '')

@@ -181,15 +181,55 @@ going to be doing a manual installation, not a graphical one.
 		- Give `jasonyundt.website.home.arpa` 2GiB of swap. This
 		is a pretty arbitrary number.
 
-		- Use the following labels:
+		- If you’re installing NixOS on Jason-Desktop-Linux, then you’ll
+		need to create several partitions with specific partition types.
+		Once you’ve taken a look at the table on [this page], create the
+		following parations:
 
-			- `nixos-root` for the root partition.
-			- `nixos-swap` for the swap partition.
-			- `nixos-hdd` for the data partition on the hard drive.
+			- On the NVME SSD, create two partitions:
+
+				- The first one should be an EFI System
+				Partition. Name it “EFI system partition”.
+
+				- The second one should be a Generic Linux Data
+				Partition. Name it “NixOS SSD Partition”.
+
+			- On the first Western Digital HDD, create a Generic
+			Linux Data Partition. Name it “NixOS HDD 1 Partition”.
+
+			- On the second Western Digital HDD, create a Generic
+			Linux Data Partition. Name it “NixOS HDD 2 Partition”.
+
+	- (Formatting): If you’re install NixOS on Jason-Desktop-Linux, then run
+	these commands to create a bcachefs root partition:
+
+		```bash
+		SSD=/dev/disk/by-partlabel/NixOS\\x20SSD\\x20Partition
+		HDD1=/dev/disk/by-partlabel/NixOS\\x20HDD\\x201\\x20Partition
+		HDD2=/dev/disk/by-partlabel/NixOS\\x20HDD\\x202\\x20Partition
+
+		bcachefs format \
+			--replicas=2 \
+			--label=SSD "$SSD" \
+			--label=HDD.HDD1 "$HDD1" \
+			--label=HDD.HDD2 "$HDD2" \
+			--foreground_target=SSD \
+			--promote_target=SSD \
+			--background_target=HDD
+		```
 
 - Installing:
 
-	1. If the machine uses Disko, then skip this step.
+	1. If the machine uses Disko, then skip this step. If you’re installing
+	on Jason-Desktop-Linux, then here’s how you mount the root filesystem:
+
+		```bash
+		SSD=/dev/disk/by-partlabel/NixOS\\x20SSD\\x20Partition
+		HDD1=/dev/disk/by-partlabel/NixOS\\x20HDD\\x201\\x20Partition
+		HDD2=/dev/disk/by-partlabel/NixOS\\x20HDD\\x202\\x20Partition
+
+		mount "$SSD:$HDD1:$HDD2" /mnt
+		```
 
 	2. If the machine uses Disko, then skip this step.
 
@@ -280,3 +320,4 @@ those cases,
 See [COPYING.md](./COPYING.md).
 
 [NixOS]: https://nixos.org/
+[this page]: https://uapi-group.org/specifications/specs/discoverable_partitions_specification/#defined-partition-type-uuids
