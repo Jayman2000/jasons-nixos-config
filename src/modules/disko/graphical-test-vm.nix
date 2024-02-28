@@ -4,5 +4,4 @@
 # See the comment at the top of ./jasonyundt.website.home.arpa.nix.
 import ../../misc/disko/vm-base.nix {
 	swapSize = "16G";
-	rootFilesystem = "bcachefs";
 }

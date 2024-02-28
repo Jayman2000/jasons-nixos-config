@@ -9,5 +9,4 @@
 # [2]: <https://nixos.org/manual/nix/stable/language/builtins#builtins-import>
 import ../../misc/disko/vm-base.nix {
 	swapSize = "2G";
-	rootFilesystem = "bcachefs";
 }
