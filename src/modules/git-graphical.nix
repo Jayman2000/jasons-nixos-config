@@ -8,11 +8,22 @@ in {
 
 	nixpkgs.overlays = [
 		(self: super: {
-			# This PR fixes a bug with pre-commit:
-			# <https://github.com/NixOS/nixpkgs/pull/267499>. It’s
-			# been merged into Nixpkgs’s master branch, but hasn’t
-			# been backported to NixOS 23.11 yet.
-			pre-commit = pkgCollections.nixpkgs-unstable.pre-commit;
+			pre-commit = let
+				# This PR fixes a bug with pre-commit:
+				# <https://github.com/NixOS/nixpkgs/pull/267499>.
+				# It’s been merged into Nixpkgs’s master branch,
+				# but hasn’t been backported to NixOS 23.11 yet.
+				# That’s why we’re using nixpkgs-unstable here.
+				unstablePkgs = pkgCollections.nixpkgs-unstable;
+			in unstablePkgs.pre-commit.override {
+				# Some of the pre-commit hooks that I use [1]
+				# require Python 3.12. We need to make
+				# pre-commit use Python 3.12, or else those
+				# hooks won’t work.
+				#
+				# [1]: <https://github.com/Jayman2000/jasons-pre-commit-hooks/>
+				python3Packages = unstablePkgs.python312Packages;
+			};
 		})
 	];
 	# Normally, I would just have pre-commit download its own copy of NodeJS, but
