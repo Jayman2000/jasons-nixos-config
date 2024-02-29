@@ -1,22 +1,18 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2023–2024)
 { config, pkgs, lib, ... }:
-{
+let
+	pkgCollections = import ../pkgCollections { inherit pkgs lib; };
+in {
 	imports = [ ./git-common.nix ];
 
-	nixpkgs.overlays = let
-		# This PR fixes a bug with pre-commit:
-		# <https://github.com/NixOS/nixpkgs/pull/267499>.
-		pr267499 = pkgs.fetchFromGitHub {
-			owner = "NilsIrl";
-			repo = "nixpkgs";
-			rev = "69d78abdb885134bc339a89faa038dde99412f34";
-			sha256 = "VSpebaHL3JFXg04Tp3T72nEv+5G0ECC/fR1M+Ni9bmA=";
-		};
-		pr267499Pkgs = import pr267499 {};
-	in [
+	nixpkgs.overlays = [
 		(self: super: {
-			pre-commit = pr267499Pkgs.pre-commit;
+			# This PR fixes a bug with pre-commit:
+			# <https://github.com/NixOS/nixpkgs/pull/267499>. It’s
+			# been merged into Nixpkgs’s master branch, but hasn’t
+			# been backported to NixOS 23.11 yet.
+			pre-commit = pkgCollections.nixpkgs-unstable.pre-commit;
 		})
 	];
 	# Normally, I would just have pre-commit download its own copy of NodeJS, but
@@ -26,11 +22,7 @@
 	home-manager.users.jayman = { pkgs, ... }: {
 		# Adapted from
 		# <https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable>.
-		home.packages = let
-			pkgCollections = import ../pkgCollections {
-				inherit pkgs lib;
-			};
-		in [
+		home.packages = [
 			pkgs.cargo # Used for this repo’s pre-commit config
 			pkgs.gcc # Used for this repo’s pre-commit config
 			pkgs.go # Used for this repo’s pre-commit config
