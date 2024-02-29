@@ -19,7 +19,7 @@
 			options.isoImage.volumeID.default
 			+ "-jnc"
 		);
-		squashfsCompression = "lz4";
+		squashfsCompression = null;
 		# Hopefully, this will save the installation target from having
 		# to download any additional dependencies in order to build the
 		# system configuration.
