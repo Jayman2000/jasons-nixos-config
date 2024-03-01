@@ -3,6 +3,7 @@
 { config, pkgs, lib, ... }:
 {
 	imports = [
+		./build-gpg-web-site.nix
 		./cc-symbols-font
 		./games.nix
 		./git-graphical.nix
