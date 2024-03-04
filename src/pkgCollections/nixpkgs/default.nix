@@ -2,10 +2,11 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2024)
 { customLib, ... }:
 let
-	nixpkgsUnstableTarball = customLib.fetchFromGitHubOptionalHash {
+	unstableTarball = customLib.fetchFromGitHubOptionalHash {
 		owner = "NixOS";
 		repo = "nixpkgs";
 		rev = "nixos-unstable";
 	};
-in
-import nixpkgsUnstableTarball {}
+in {
+	unstable = import unstableTarball {};
+}
