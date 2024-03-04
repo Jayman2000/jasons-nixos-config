@@ -7,5 +7,6 @@ let
 		repo = "nixpkgs";
 		rev = "nixos-unstable";
 	};
-in
-import nixpkgsUnstableTarball {}
+in {
+	unstable = import nixpkgsUnstableTarball {};
+}
