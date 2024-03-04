@@ -14,7 +14,7 @@ in {
 				# It’s been merged into Nixpkgs’s master branch,
 				# but hasn’t been backported to NixOS 23.11 yet.
 				# That’s why we’re using nixpkgs-unstable here.
-				unstablePkgs = pkgCollections.nixpkgs-unstable;
+				unstablePkgs = pkgCollections.nixpkgs.unstable;
 			in unstablePkgs.pre-commit.override {
 				# Some of the pre-commit hooks that I use [1]
 				# require Python 3.12. We need to make
