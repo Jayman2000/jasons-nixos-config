@@ -11,7 +11,7 @@ let
 	);
 	pathToPackageCollection = (path:
 		import path {
-			inherit pkgs customLib callPackageWithPCs;
+			inherit pkgs lib customLib callPackageWithPCs;
 			pkgCollectionRoot = path;
 		}
 	);
