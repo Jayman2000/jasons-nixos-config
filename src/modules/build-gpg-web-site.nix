@@ -26,6 +26,7 @@ let
 		)
 	);
 in {
+	imports = [ ./caddy-dev-server.nix ];
 	users = {
 		groups.webbuilder = { };
 		users = let
