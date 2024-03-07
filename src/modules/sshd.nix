@@ -8,7 +8,7 @@
 		settings.PermitRootLogin = "no";
 	};
 	users.users.jayman.openssh.authorizedKeys.keys = [
-		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOkLREBd8ijpssLjYJABnPiAEK11+uTkalt1qO3UntX jayman@Jason-Desktop-Linux"
+		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILWQkgb4A4mvzHeXAm6ghxfknl15cttipb56qP0IpBlj Jason-Desktop-Linux"
 	];
 	# This is required for the following command to work:
 	#
