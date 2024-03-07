@@ -76,14 +76,7 @@ in {
 					User = "nixos";
 					Group = "users";
 					StandardOutput = "journal+console";
-					# This workaround comes from here:
-					# <https://bugzilla.redhat.com/show_bug.cgi?id=1212756#c4>.
-					#
-					# It won’t be needed once there’s a
-					# stable version of Disko that has this
-					# PR:
-					# <https://github.com/nix-community/disko/pull/535>
-					StandardError = "null";
+					StandardError = "journal+console";
 				};
 				unitConfig = {
 					OnSuccess = "dump-journal.service";
