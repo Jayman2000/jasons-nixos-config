@@ -6,12 +6,12 @@
 }:
 
 pkgs.mkShell {
-	name = "build-iso-shell";
+	name = "make-installation-usb-shell";
 	packages = let
 		pkgCollections = import src/pkgCollections {
 			inherit pkgs lib;
 		};
 	in [
-		pkgCollections.custom.build-jnc-install-iso
+		pkgCollections.custom.make-installation-usb
 	];
 }

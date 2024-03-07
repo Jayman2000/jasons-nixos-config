@@ -7,7 +7,6 @@ src/generated
 
 # result symlinks (from, for example, nix-build)
 result
-ISOs
 
 # Previews of rendered Markdown
 *.html
