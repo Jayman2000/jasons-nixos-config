@@ -5,7 +5,10 @@
 {
 	services.openssh = {
 		enable = true;
-		settings.PermitRootLogin = "no";
+		settings = {
+			PasswordAuthentication = false;
+			PermitRootLogin = "no";
+		};
 	};
 	users.users.jayman.openssh.authorizedKeys.keys = [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILWQkgb4A4mvzHeXAm6ghxfknl15cttipb56qP0IpBlj Jason-Desktop-Linux"
