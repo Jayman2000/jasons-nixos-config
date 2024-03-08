@@ -2,8 +2,5 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022, 2024)
 {
 	virtualisation.libvirtd.enable = true;
-	programs.dconf.enable = true;
-	home-manager.users.jayman = { pkgs, ... }: {
-		home.packages = [ pkgs.virt-manager ];
-	};
+	programs.virt-manager.enable = true;
 }
