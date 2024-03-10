@@ -39,4 +39,13 @@
 			in newFilePath;
 		in libvirtNetworkForGuest;
 	};
+	# This makes it so that I don’t have to manually add a connection to
+	# virt-manager. Credit goes to the NixOS Wiki for this idea:
+	# <https://nixos.wiki/wiki/Virt-manager#NixOS>
+	home-manager.users.jayman.dconf.settings = {
+		"org/virt-manager/virt-manager/connections" = {
+			autoconnect = ["qemu:///system"];
+			uris = ["qemu:///system"];
+		};
+	};
 }
