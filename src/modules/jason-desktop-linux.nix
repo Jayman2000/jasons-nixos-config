@@ -7,7 +7,7 @@
 			./home-manager/23.11.nix
 			./bcachefs.nix
 			./common.nix
-			./efi.nix
+			#./efi.nix
                         #./cdemu.nix
 			#./cli-shortcuts.nix
 			#./graphical.nix
