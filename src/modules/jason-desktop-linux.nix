@@ -8,13 +8,13 @@
 			./bcachefs.nix
 			./common.nix
 			./efi.nix
-			./cdemu.nix
-			./cli-shortcuts.nix
-			./graphical.nix
-			./periodically-build-all-of-jnc.nix
-			./osx-kvm.nix
-			./tf2-tcmalloc-fix.nix
-			./wooting.nix
+                        #./cdemu.nix
+			#./cli-shortcuts.nix
+			#./graphical.nix
+			#./periodically-build-all-of-jnc.nix
+			#./osx-kvm.nix
+			#./tf2-tcmalloc-fix.nix
+			#./wooting.nix
 		];
 
 	networking.hostName = "Jason-Desktop-Linux";
