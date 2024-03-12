@@ -3,11 +3,11 @@
 { config, pkgs, lib, ... }:
 {
 	imports = [
-		./git-common.nix
-		./machine-slug.nix
-		./neovim.nix
+                #./git-common.nix
+                ./machine-slug.nix
+                #./neovim.nix
 		./passwords.nix
-		./sudo.nix
+                #./sudo.nix
 	];
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
