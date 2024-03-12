@@ -22,7 +22,7 @@
 	# “systemctl reboot” without sudo [1].
 	#
 	# [1]: <https://wiki.archlinux.org/title/Systemd#Power_management>
-	security.polkit.enable = true;
+	#security.polkit.enable = true;
 
 	environment.defaultPackages = [ ];
 	environment.systemPackages = let
@@ -31,7 +31,7 @@
 		};
 	in [
 		pkgs.htop
-		pkgCollections.custom.nicely-stop-session
+		#pkgCollections.custom.nicely-stop-session
 	];
 	home-manager.useGlobalPkgs = true;
 
@@ -39,23 +39,24 @@
 		description = "Jason Yundt";
 		isNormalUser = true;
 	};
-	home-manager.users.jayman = { pkgs, ... }: {
+	#home-manager.users.jayman = { pkgs, ... }: {
+	home-manager.users.jayman = {
 		home.stateVersion = config.system.stateVersion;
-		home.packages = with pkgs; [
-			file
-		];
-		programs.bash = {
-			# I think that this is necesary. Without it, I don’t think that the programs in home.packages would end up on my PATH.
-			enable = true;
+		#home.packages = with pkgs; [
+		#	file
+		#];
+		#programs.bash = {
+		#	# I think that this is necesary. Without it, I don’t think that the programs in home.packages would end up on my PATH.
+		#	enable = true;
 
-			initExtra = ''
-				function mkcd {
-					mkdir -p "$*"
-					cd "$*"
-				}
-			'';
-			sessionVariables = { EDITOR = "nvim"; };
-		};
+		#	initExtra = ''
+		#		function mkcd {
+		#			mkdir -p "$*"
+		#			cd "$*"
+		#		}
+		#	'';
+		#	sessionVariables = { EDITOR = "nvim"; };
+		#};
 	};
 
 	system.stateVersion = "22.05";
