@@ -88,14 +88,14 @@ repos:
                 args: ["-fn"]
     -
         repo: https://github.com/pre-commit/mirrors-mypy
-        rev: v1.8.0
+        rev: v1.9.0
         hooks:
             -
                 id: mypy
                 additional_dependencies: &usn_deps [dnspython]
     -
         repo: https://github.com/PyCQA/autoflake
-        rev: v2.3.0
+        rev: v2.3.1
         hooks:
             - id: autoflake
 # TODO: How do I make it accept hard tabs?
