@@ -4,6 +4,6 @@
 customLib.fetchFromGitHubOptionalHash {
 	owner = "nix-community";
 	repo = "disko";
-	rev = "v1.3.0";
-	sha256 = "wOIJwAsnZhM0NlFRwYJRgO4Lldh8j9viyzwQXtrbNtM=";
+	rev = "v1.4.1";
+	sha256 = "1hm5fxpbbmzgl3qfl6gfc7ikas4piaixnav27qi719l73fnqbr8x";
 }
