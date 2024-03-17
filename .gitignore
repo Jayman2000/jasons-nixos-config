@@ -7,10 +7,12 @@ src/generated
 
 # result symlinks (from, for example, nix-build)
 result
-ISOs
 
 # Previews of rendered Markdown
 *.html
+
+# Install drives for VMs
+vm-install-drive.img
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
