@@ -5,6 +5,7 @@
 let
 	pkgCollections = import ../pkgCollections { inherit pkgs lib; };
 	realSudo = "${config.security.wrapperDir}/sudo";
+	realSudoCommand = lib.strings.escapeShellArg realSudo;
 	customSudo = pkgs.resholve.writeScriptBin "sudo" {
 		inputs = [
 			pkgCollections.custom.bash-preamble.inputForResholve
@@ -17,11 +18,11 @@ let
 		console="$(tty)"
 		readonly console
 
-		${realSudo} -v
+		${realSudoCommand} -v
 		# Sudo normally writes directly to the terminal device instead
 		# of writing to stdout, so that’s what I’m doing here
 		echo Access granted. &> "$console"
-		${realSudo} "$@"
+		${realSudoCommand} "$@"
 	'';
 in {
 	environment.systemPackages = [ customSudo ];
