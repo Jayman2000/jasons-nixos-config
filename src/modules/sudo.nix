@@ -22,7 +22,7 @@ let
 		# Sudo normally writes directly to the terminal device instead
 		# of writing to stdout, so that’s what I’m doing here
 		echo Access granted. &> "$console"
-		${realSudoCommand} "$@"
+		exec ${realSudoCommand} "$@"
 	'';
 in {
 	environment.systemPackages = [ customSudo ];
