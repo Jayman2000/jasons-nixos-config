@@ -1,1 +1,7 @@
-The future commit that this commit talks about is <TODO>.
+The future commit that this commit talks about is 37bf45e (Replace
+install ISOs with install drives, 2024-03-17). That being said, I ended
+up not using disko-install when creating that commit. As it turns out,
+disko-install requires that you have a flakes.nix file [1]. I don’t have
+a flakes.nix file yet, so I’m not able to use disko-install.
+
+[1]: <https://github.com/nix-community/disko/blob/v1.4.1/docs/disko-install.md#requirements>
