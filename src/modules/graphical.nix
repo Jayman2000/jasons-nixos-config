@@ -3,6 +3,7 @@
 { config, pkgs, lib, ... }:
 {
 	imports = [
+		./build-descent-3.nix
 		./build-gpg-web-site.nix
 		./cc-symbols-font
 		./games.nix
