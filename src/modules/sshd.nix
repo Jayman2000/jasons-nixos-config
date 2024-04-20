@@ -12,6 +12,7 @@
 	};
 	users.users.jayman.openssh.authorizedKeys.keys = [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILWQkgb4A4mvzHeXAm6ghxfknl15cttipb56qP0IpBlj Jason-Desktop-Linux"
+		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPU8y9WavQXKA9q/sAvRQ/50ZNmDAWTN0eS2shxpAcbo Jason-Lemur-Pro"
 	];
 	# This is required for the following command to work:
 	#

@@ -12,6 +12,7 @@
 			./graphical.nix
 			./periodically-build-all-of-jnc.nix
 			./osx-kvm.nix
+			./sshd.nix
 			./tf2-tcmalloc-fix.nix
 			./wooting.nix
 		];
