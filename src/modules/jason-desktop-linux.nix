@@ -8,6 +8,7 @@
 			./bcachefs.nix
 			./common.nix
 			./efi.nix
+			./cdemu.nix
 			./cli-shortcuts.nix
 			./graphical.nix
 			./periodically-build-all-of-jnc.nix
