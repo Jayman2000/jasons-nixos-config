@@ -2,11 +2,10 @@
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2024)
 { lib, customLib, ... }:
 let
-	nixpkgsInstance = { rev, sha256 ? null }: let
+	nixpkgsInstance = { owner ? "NixOS", rev, sha256 ? null }: let
 		tarball = customLib.fetchFromGitHubOptionalHash {
-			owner = "NixOS";
 			repo = "nixpkgs";
-			inherit rev sha256;
+			inherit owner rev sha256;
 		};
 	in import tarball { };
 in {
@@ -19,5 +18,11 @@ in {
 			);
 		in "${commitThatRemovesEmacs24}^";
 		sha256 = "1d25l4gz1wrqcw90s2vvz3v0bnp16gqxaq9pxj55iqj9k28ab7wv";
+	};
+	# <https://github.com/NixOS/nixpkgs/pull/305046>
+	pr305046 = nixpkgsInstance {
+		owner = "bendlas";
+		rev = "257c1a231ed8b02b8e8196600cce2f09b1f61783";
+		sha256 = "0mwg9qxpgiriab9lr0cjxpan25dn63pb5kbydzdxy1ihs7x5f2aj";
 	};
 }
