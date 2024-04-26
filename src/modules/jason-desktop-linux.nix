@@ -12,6 +12,7 @@
 			./cli-shortcuts.nix
 			./graphical.nix
 			./periodically-build-all-of-jnc.nix
+			./printing.nix
 			./osx-kvm.nix
 			./sshd.nix
 			./tf2-tcmalloc-fix.nix
