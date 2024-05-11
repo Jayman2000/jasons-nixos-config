@@ -43,6 +43,7 @@
 		home.stateVersion = config.system.stateVersion;
 		home.packages = with pkgs; [
 			file
+			smem
 		];
 		programs.bash = {
 			# I think that this is necesary. Without it, I don’t think that the programs in home.packages would end up on my PATH.

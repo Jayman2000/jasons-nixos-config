@@ -29,8 +29,8 @@
 exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
-        repo: https://gitlab.com/vojko.pribudic/pre-commit-update
-        rev: v0.3.0
+        repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
+        rev: v0.3.1post2
         hooks:
             -
                 id: pre-commit-update
@@ -76,7 +76,7 @@ repos:
             - id: yamllint
     -
         repo: https://github.com/igorshubovych/markdownlint-cli
-        rev: v0.39.0
+        rev: v0.40.0
         hooks:
             - id: markdownlint
     -
@@ -88,7 +88,7 @@ repos:
                 args: ["-fn"]
     -
         repo: https://github.com/pre-commit/mirrors-mypy
-        rev: v1.9.0
+        rev: v1.10.0
         hooks:
             -
                 id: mypy
