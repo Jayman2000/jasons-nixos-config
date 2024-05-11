@@ -60,6 +60,7 @@
 			pkgs.ark
 			pkgs.chars
 			pkgs.filelight
+			pkgs.gdb
 			pkgs.gitlab-runner
 			pkgs.kalendar
 			pkgs.kdialog  # Used by ecwolf
