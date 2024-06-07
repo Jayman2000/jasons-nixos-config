@@ -11,6 +11,7 @@
 			./cdemu.nix
 			./cli-shortcuts.nix
 			./graphical.nix
+			./mouse-configuration-utility.nix
 			./periodically-build-all-of-jnc.nix
 			./printing.nix
 			./osx-kvm.nix
