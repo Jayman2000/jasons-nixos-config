@@ -14,17 +14,17 @@
 
 		devices = let
 			desktop-device = {
-				"Jason-Desktop-Linux" = { id = "7A735CO-FSRRF2I-FN5WRGV-OHGRWHR-TF4Z47H-OJBHRBA-G7CP7BN-FTLXGAX"; };
+				"Jason-Desktop-Linux" = { id = "KADJ4K2-U73CLZH-L6ADY3J-FRFPVUH-HQF3NQZ-472YGQU-K43NZWS-LLDX5AX"; };
 			};
 			graphical-test-vm-device = {
-				"Graphical-Test-VM" = { id = "ZMIDUU3-NMXTXZZ-Q6XYCCN-G3QHDVO-3JBQZ6R-KK62LXI-5XFROZ3-SKV45A7"; };
+				"Graphical-Test-VM" = { id = "WEHPXTB-ZFPDAJ4-NRSLXVG-FOJENRH-WVNGVKK-7YUUJUZ-OM7CUG7-NJFTKQU"; };
 			};
 		in
 		{
 			"Server" = { id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7"; };
 			"Jason-Lemur-Pro" = { id = "HDJCH46-RZMHE3K-T6S3G6N-662CFFW-CIAVKTI-BN6B32M-LFQCQKX-GG575AV"; };
 			"Jason-Lemur-Pro-VM-Test" = { id = "2MOLIOF-XEWO4JR-PUE4NUS-I3YSRGM-X374W7F-6BXK4S6-UGXVIL6-TYWHWAC"; };
-			"Jason-Desktop-Windows" = { id = "DAW6JNR-DHBHAVL-42UVJDB-SENEDDQ-OVLHNH3-XOVKDE4-JXVIQ23-GJBG6QZ"; };
+			"Jason-Desktop-Windows" = { id = "IJ7DGZZ-HEOL43C-4RCWITD-QCATRWR-HPTWFR3-XTTYEZW-QUV4CBL-5P7AGQF"; };
 		# In other words, only add each device to the devices list if this config isn’t being deployed on that device.
 		} // (if config.networking.hostName != "Jason-Desktop-Linux" then desktop-device else { })
 		// (if config.networking.hostName != "Graphical-Test-VM" then graphical-test-vm-device else { });
