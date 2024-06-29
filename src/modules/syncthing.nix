@@ -11,6 +11,7 @@
 		extraOptions.gui.tls = true;
 		overrideDevices = true;
 		overrideFolders = true;
+		openDefaultPorts = true;
 
 		devices = let
 			desktop-device = {
