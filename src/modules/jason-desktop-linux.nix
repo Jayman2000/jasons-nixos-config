@@ -27,7 +27,7 @@
 	hardware.steam-hardware.enable = true;
 	programs.steam.enable = true;
 
-	services.syncthing.folders = {
+	services.syncthing.settings.folders = {
 		"Keep Across Linux Distros!".path = "/hdd/home/jayman/Syncthing/.save";
 		"Projects".path = "/hdd/home/jayman/Syncthing/Projects";
 		"Game Data".path = "/hdd/home/jayman/Syncthing/Game Data";
