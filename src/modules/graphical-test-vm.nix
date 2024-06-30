@@ -16,7 +16,7 @@
 		];
 	networking.hostName = "Graphical-Test-VM";
 	time.timeZone = "America/New_York";
-	services.syncthing.folders = {
+	services.syncthing.settings.folders = {
 		"Keep Across Linux Distros!".path = "/home/jayman/Documents/Home/Syncthing/.save";
 	};
 }

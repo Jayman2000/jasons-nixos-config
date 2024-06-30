@@ -30,7 +30,7 @@ exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
         repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
-        rev: v0.3.2
+        rev: v0.3.3post1
         hooks:
             -
                 id: pre-commit-update
@@ -88,7 +88,7 @@ repos:
                 args: ["-fn"]
     -
         repo: https://github.com/pre-commit/mirrors-mypy
-        rev: v1.10.0
+        rev: v1.10.1
         hooks:
             -
                 id: mypy

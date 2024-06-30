@@ -106,7 +106,7 @@
 			then
 				"/var/empty"
 			else
-				config.services.syncthing.folders."Game Data".path
+				config.services.syncthing.settings.folders."Game Data".path
 		);
 		doomDataPath = "${gameDataPath}/doom";
 		soundFontPath = "${gameDataPath}/soundfonts/GM.sf2";
