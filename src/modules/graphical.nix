@@ -98,8 +98,13 @@
 			enable = true;
 			defaultCacheTtlSsh = 900;
 			enableSshSupport = true;
-			pinentryFlavor = "qt";
-		};
+		# Home Manager 24.05 removed the pinentryFlavor option and
+		# replaced it with pinentryPackage. See
+		# <https://github.com/nix-community/home-manager/pull/4895>.
+		} // (if config.system.nixos.release == "23.11"
+			then { pinentryFlavor = "qt"; }
+			else { pinentryPackage = pkgs.pinentry-qt; }
+		);
 
 		programs.powerline-go.enable = true;
 		home.shellAliases."randfd" = ''
