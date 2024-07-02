@@ -5,7 +5,7 @@
 	users.users.jayman.packages = with pkgs; [
 		_2048-in-terminal
 		#abbaye-des-morts  # TODO: Figure out why this fails to build.
-		#abuse  # TODO: Install on systems that already have unfree packages enabled.
+		#abuse	# TODO: Install on systems that already have unfree packages enabled.
 		alephone  # TODO: Declaratively install game data.
 		#alienarena  # TODO: Report upstream that this fails to build.
 		#armagetronad  # TODO: Figure out why this doesn’t work.
@@ -70,7 +70,7 @@
 		rrootage
 		sauerbraten
 		sdlpop
-		slade
+		#slade	# TODO: Reenable this one once this is fixed: <https://github.com/sirjuddington/SLADE/issues/1675>
 		srb2
 		srb2kart
 		stuntrally
