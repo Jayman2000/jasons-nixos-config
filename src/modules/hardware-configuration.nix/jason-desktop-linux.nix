@@ -12,7 +12,7 @@
 		[ (modulesPath + "/installer/scan/not-detected.nix")
 		];
 
-	boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+	boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
 	boot.initrd.kernelModules = [ ];
 	boot.kernelModules = [ "kvm-amd" ];
 	boot.extraModulePackages = [ ];
@@ -25,10 +25,11 @@
 	fileSystems."/boot" =
 		{ device = "/dev/disk/by-uuid/52D3-0277";
 			fsType = "vfat";
+			options = [ "fmask=0022" "dmask=0022" ];
 		};
 
 	swapDevices =
-		[ { device = "/dev/disk/by-uuid/dd0fcfbf-e8e0-4971-99ce-6800f91641fc"; }
+		[ { device = "/dev/disk/by-uuid/e17575bf-fa97-455c-9831-46e171b5ae53"; }
 		];
 
 	# Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -38,6 +39,7 @@
 	networking.useDHCP = lib.mkDefault true;
 	# networking.interfaces.docker0.useDHCP = lib.mkDefault true;
 	# networking.interfaces.enp9s0.useDHCP = lib.mkDefault true;
+	# networking.interfaces.virbr0.useDHCP = lib.mkDefault true;
 
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 	hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
