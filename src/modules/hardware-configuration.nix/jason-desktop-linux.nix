@@ -25,6 +25,7 @@
 	fileSystems."/boot" =
 		{ device = "/dev/disk/by-uuid/52D3-0277";
 			fsType = "vfat";
+			options = [ "fmask=0022" "dmask=0022" ];
 		};
 
 	swapDevices =
@@ -38,6 +39,7 @@
 	networking.useDHCP = lib.mkDefault true;
 	# networking.interfaces.docker0.useDHCP = lib.mkDefault true;
 	# networking.interfaces.enp9s0.useDHCP = lib.mkDefault true;
+	# networking.interfaces.virbr0.useDHCP = lib.mkDefault true;
 
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 	hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
