@@ -1,0 +1,224 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2023 Jason Yundt <jason@jasonyundt.email>
+root = true
+
+[**]
+# I’ve chosen to use spaces for indentation for several reasons. The
+# main reason has to do with how tab characters are handled in emails.
+#
+# I accept patches using git-send-email [1]. When sending a patch using
+# git-send-email, the diff is embedded in the body of the message [2].
+# According to the standard for the format of email messages [3]: “There
+# are two limits that this specification places on the number of
+# characters in a line.  Each line of characters MUST be no more than
+# 998 characters, and SHOULD be no more than 78 characters, excluding
+# the CRLF.”
+#
+# I want to try and avoid having people send messages with lines that
+# are longer than seventy-eight characters. Here’s the problem: in an
+# email, how wide are tab characters? If a line is indented one time,
+# how many more characters am I allowed to type before I hit the
+# seventy-eight character limit? What if the line is indented twice?
+#
+# Unfortunately, there isn’t one right answer for those questions. As
+# far as I know, there’s no standard that defines how long a tab
+# character is in an email.
+#
+# Additionally, I couldn’t find anything in the Unicode Standard or any
+# of its annexes about the width of a tab character. In Unicode, U+0009
+# CHARACTER TABULATION is a control code. The Unicode Standard says [4]:
+#
+#   “The Unicode Standard provides for the intact interchange of these
+#   code points, neither adding to nor subtracting from their semantics.
+#   The semantics of the control codes are generally determined by the
+#   application with which they are used. However, in the absence of
+#   specific application uses, they may be interpreted according to the
+#   control function semantics specified in ISO/IEC 6429:1992.”
+#
+# OK, so what does ISO/IEC 6429:1992 have to say about character
+# tabulations? Unfortunately, that standard costs over two hundred
+# dollars [5]. Luckily, you can read a free sample of the standard on
+# the ISO’s Web site [6]. The Introduction says “International Standard
+# ISO/IEC 6429 was prepared by the European Computer Manufacturers
+# Association (as Standard ECMA-48) and was adopted, under a special
+# "fast-track procedure", by Joint Technical Committee ISO/IEC JTC1,
+# Information technology, in parallel with its approval by national
+# bodies of ISO and IEC.”
+#
+# OK, so if I’m not willing to pay for ISO/IEC 6429:1992, then the next
+# best thing would be to look at ECMA-48. Part of ISO/IEC 6429:1992 is
+# available for free online. That part of ISO/IEC 6429:1992 says [7]:
+#
+#   ‘International Standard ISO/IEC 6429 was prepared by the European
+#   Computer Manufacturers Association (as Standard ECMA-48) and was
+#   adopted, under a special "fast-track procedure", by Joint Technical
+#   Committee ISO/IEC JTC1, Information technology, in parallel with its
+#   approval by national bodies of ISO and IEC.’
+#
+# I interpret that quote as saying “ISO/IEC 6429 and ECMA-48 basically
+# say the same thing.” Luckily, ECMA-48 is available for free on ECMA’s
+# Web site [8].
+#
+# ECMA-48 explains character tabulations in terms of fields. A character
+# tabulation causes text to appear in the next field [9][10]. I wasn’t
+# able to find anything in that standard that says how wide fields are.
+#
+# After all that searching, I was unable to find any applicable
+# standards that defined the width of a tab character in an email. As a
+# result, the width of a tab character in an email is implementation
+# defined. In other words: it could be anything. This means that we
+# can’t use tab characters and guarantee compliance with that email
+# standard from before (“Each line of characters MUST be no more than
+# 998 characters, and SHOULD be no more than 78 characters, excluding
+# the CRLF.” [3]). In an email, “\tA” might be three characters long, or
+# it might be one hundred characters long. On the other hand, “    A” is
+# guaranteed to be five characters long. There’s no chance that it
+# crosses the seventy-eight character limit.
+#
+# Using spaces also has other advantages. Some tools default to using
+# spaces for indentation, and others default to using tabs. The majority
+# of the tools that I use default to using space. One tool that I’ve
+# been wanting to use doesn’t support using tabs for indentation yet
+# [11]. I’m also aware of at least one language that requires that you
+# use spaces instead of tabs [12]. I’m not aware of any tools or
+# languages that support tabs but don’t support spaces.
+#
+# editorconfig-checker-disable
+# [1]: <https://jasonyundt.website/submitting-patches.html#send>
+# [2]: <https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_project_over_email>
+# [3]: <https://www.rfc-editor.org/rfc/rfc5322.html#section-2.1.1>
+# [4]: <https://www.unicode.org/versions/Unicode15.1.0/ch23.pdf#G20365>
+# [5]: <https://www.iso.org/standard/12782.html>
+# [6]: <https://www.iso.org/obp/ui/en/#iso:std:12782:en>
+# [7]: <https://www.iso.org/obp/ui/#iso:std:iso-iec:6429:ed-3:v1:en>
+# [8]: <https://ecma-international.org/publications-and-standards/standards/ecma-48/>
+# [9]: <https://ecma-international.org/wp-content/uploads/ECMA-48_5th_edition_june_1991.pdf#page=34>
+# [10]: <https://ecma-international.org/wp-content/uploads/ECMA-48_5th_edition_june_1991.pdf#page=59>
+# [11]: <https://github.com/NixOS/nixfmt/issues/116>
+# [12]: <https://yaml.org/spec/1.2.2/#61-indentation-spaces>
+# editorconfig-checker-enable
+indent_style = space
+
+# This is just my personal preference. I don’t have a good reason for
+# choosing 4 over any other number.
+indent_size = 4
+
+# Ideally, I would use U+2028 LINE SEPARATOR. Unlike other options,
+# U+2028 is platform-neutral. Platform neutrality is very important to
+# me. I find it very frustrating when software doesn’t do the right
+# thing on my machine because someone did something platform specific.
+# Additionally, the Unicode Standard recommends the use of U+2028 LINE
+# SEPARATOR [1].
+#
+# Unfortunately, the EditorConfig Specification doesn’t support U+2028
+# [2]. Even if it did, I tried using U+2028 a while ago and (if I
+# remember correctly) all of the common text editors that I tried didn’t
+# support it. I’m guessing that a lot of compliers, interpreters or
+# other tools also don’t support using U+2028 for newlines.
+#
+# This leaves me with three options: LF, CR or CRLF.
+#
+# I know that CR is used by Classic Mac OS [3], but I’m not aware of any
+# other platforms that use it. As far as I know, there are no modern
+# platforms that use CRs for newlines.
+#
+# I personally prefer using LF instead of CRLF. LFs take up less space,
+# and are used more often on FOSS platforms. Additionally, Git seems to
+# prefer it when you use LFs.
+#
+# [1]: <https://www.unicode.org/versions/Unicode15.1.0/ch05.pdf#G29990>
+# [2]: <https://spec.editorconfig.org/#supported-pairs>
+# [3]: <https://superuser.com/a/439443/954602>
+end_of_line = lf
+
+# The EditorConfig specification gives me five options for charset:
+# latin1, utf-8, utf-8-bom, utf-16be or utf-16le [1].
+#
+# I definitely want to use Unicode, so latin1 is off the table. I like
+# being able to use a lot of the weird symbols that Unicode provides. I
+# also add quotes that include emojis from time to time.
+#
+# Using UTF-16 is also unappealing. Most of the text in my repos is
+# probably going to either be written in English or in a programming
+# language that uses English keywords. As a result, my files will almost
+# certainly always be smaller if they’re encoded in UTF-8 [2].
+# Additionally, UTF-8 is much more popular than UTF-16 [3][4].
+#
+# That leaves us with two options: UTF-8 with a BOM or UTF-8 without a
+# BOM. According to the Unicode Standard, byte order marks can be used
+# for two different purposes [5]:
+#
+# 1. to clarify whether the file is little-endian or big-endian or
+# 2. to clarify what character set the file uses.
+#
+# Number 1 doesn’t apply to UTF-8 files. The Unicode Standard says so:
+# “For UTF-8, the encoding scheme consists merely of the UTF-8 code
+# units (= bytes) in sequence. Hence, there is no issue of big- versus
+# little-endian byte order for data represented in UTF-8” [6].
+#
+# Number 2 also doesn’t apply. We already know that all plain text files
+# will use UTF-8 because this EditorConfig file says that they will use
+# UTF-8. Including extra clarification that files are UTF-8 is
+# redundant.
+#
+# Additionally, including a BOM will break shebangs [7].
+#
+# Finally, the Unicode Standard recommends against using a BOM with
+# UTF-8: “Use of a BOM is neither required nor recommended for UTF-8,
+# but may be encountered in contexts where UTF-8 data is converted from
+# other encoding forms that use a BOM or where the BOM is used as a
+# UTF-8 signature” [6].
+#
+# For all those previous reasons, I chose to set charset to utf-8.
+#
+# editorconfig-checker-disable
+# [1]: <https://spec.editorconfig.org/#supported-pairs>
+# [2]: <https://utf8everywhere.org/#asian>
+# [3]: <https://w3techs.com/technologies/cross/character_encoding/ranking>
+# [4]: <https://w3techs.com/technologies/details/en-utf16>
+# [5]: <https://www.unicode.org/versions/Unicode15.1.0/ch23.pdf#G25817>
+# [6]: <https://www.unicode.org/versions/Unicode15.1.0/ch02.pdf#G19273>
+# [7]: <https://unicode.org/faq/utf_bom.html#bom5>
+# editorconfig-checker-enable
+charset = utf-8
+
+# Trailing whitespace makes files larger, and I don’t know of any
+# benefits to including it.
+trim_trailing_whitespace = true
+
+# I found the answers to this question [1] to be compelling. Also, I
+# don’t like it when I cat [2] a file and it puts my prompt on the same
+# line as the last part of the file.
+#
+# editorconfig-checker-disable
+# [1]: <https://stackoverflow.com/q/729692/7593853>
+# [2]: <https://www.gnu.org/software/coreutils/manual/html_node/cat-invocation.html#cat-invocation>
+# editorconfig-checker-enable
+insert_final_newline = true
+
+# I chose the number seventy-two for a very specific reason. I accept
+# patches via git-send-email [1]. When you submit changes using
+# git-send-email, the diff for your commits is included in the body of
+# one or more emails [2].
+#
+# According to the standard for the format of email messages [3]: “There
+# are two limits that this specification places on the number of
+# characters in a line.  Each line of characters MUST be no more than
+# 998 characters, and SHOULD be no more than 78 characters, excluding
+# the CRLF.”
+#
+# The number seventy-two was chosen to make it less likely that we go
+# past that seventy-eight character limit.
+#
+# I could have just made the limit seventy-eight, but characters tend to
+# get put in front of lines. For example, git-diff will add a space, a
+# plus or a minus before every line [4]. People also sometimes quote
+# diffs which will add an additional “> ” at the beginning of the line.
+#
+# editorconfig-checker-disable
+# [1]: <https://jasonyundt.website/submitting-patches#send>
+# [2]: <https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_project_over_email>
+# [3]: <https://www.rfc-editor.org/rfc/rfc5322.html#section-2.1.1>
+# [4]: <https://git-scm.com/docs/git-diff#_combined_diff_format>
+# editorconfig-checker-enable
+max_line_length = 72
