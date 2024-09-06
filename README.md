@@ -10,6 +10,7 @@ SPDX-FileCopyrightText: 2024 Jason Yundt <jason@jasonyundt.email>
 - You can use [pre-commit][1] to automatically check your contributions.
 Follow [these instructions][2] to get started. Skip [the part about
 creating a pre-commit configuration][3].
+- Try to keep lines shorter than seventy-three characters.
 
 [1]: https://pre-commit.com
 [2]: https://pre-commit.com/#quick-start
