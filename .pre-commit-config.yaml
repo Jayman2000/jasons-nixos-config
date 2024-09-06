@@ -32,3 +32,6 @@ repos:
             -
                 id: check-case-conflict
                 exclude: *default_exclude
+            -
+                id: check-merge-conflict
+                exclude: *default_exclude
