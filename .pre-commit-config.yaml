@@ -44,3 +44,10 @@ repos:
             -
                 id: destroyed-symlinks
                 exclude: *default_exclude
+    -
+        repo: https://github.com/pre-commit/pygrep-hooks
+        rev: v1.10.0
+        hooks:
+            -
+                id: text-unicode-replacement-char
+                exclude: *default_exclude
