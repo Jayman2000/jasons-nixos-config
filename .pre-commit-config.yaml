@@ -6,3 +6,8 @@ repos:
         rev: v0.2.0
         hooks:
             - id: repo-style-checker
+    -
+        repo: https://github.com/fsfe/reuse-tool
+        rev: v4.0.3
+        hooks:
+            - id: reuse
