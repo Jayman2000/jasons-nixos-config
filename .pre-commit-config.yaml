@@ -38,3 +38,6 @@ repos:
             -
                 id: check-symlinks
                 exclude: *default_exclude
+            -
+                id: check-vcs-permalinks
+                exclude: *default_exclude
