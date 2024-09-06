@@ -24,4 +24,11 @@ repos:
                 id: editorconfig-checker
                 args:
                     - -ignore-defaults
-                exclude: ^LICENSES/
+                exclude: &default_exclude ^LICENSES/
+    -
+        repo: https://github.com/pre-commit/pre-commit-hooks
+        rev: v4.6.0
+        hooks:
+            -
+                id: check-case-conflict
+                exclude: *default_exclude
