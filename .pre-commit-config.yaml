@@ -16,3 +16,12 @@ repos:
         rev: v0.4.0post1
         hooks:
             - id: pre-commit-update
+    -
+        repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+        rev: 3.0.3
+        hooks:
+            -
+                id: editorconfig-checker
+                args:
+                    - -ignore-defaults
+                exclude: ^LICENSES/
