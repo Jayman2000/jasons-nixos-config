@@ -35,3 +35,6 @@ repos:
             -
                 id: check-merge-conflict
                 exclude: *default_exclude
+            -
+                id: check-symlinks
+                exclude: *default_exclude
