@@ -12,6 +12,7 @@ Follow [these instructions][2] to get started. Skip [the part about
 creating a pre-commit configuration][3].
 - Try to keep lines shorter than seventy-three characters.
 - This repo uses an [EditorConfig](https://editorconfig.org) file.
+- Use [CommonMark](https://commonmark.org) for Markdown files.
 
 [1]: https://pre-commit.com
 [2]: https://pre-commit.com/#quick-start
