@@ -41,3 +41,6 @@ repos:
             -
                 id: check-vcs-permalinks
                 exclude: *default_exclude
+            -
+                id: destroyed-symlinks
+                exclude: *default_exclude
