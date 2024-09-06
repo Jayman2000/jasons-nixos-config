@@ -1,3 +1,8 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2024 Jason Yundt <jason@jasonyundt.email>
-repos: []
+repos:
+    -
+        repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
+        rev: v0.2.0
+        hooks:
+            - id: repo-style-checker
