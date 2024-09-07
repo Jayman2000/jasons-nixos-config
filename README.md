@@ -5,6 +5,8 @@ SPDX-FileCopyrightText: 2024 Jason Yundt <jason@jasonyundt.email>
 
 # Jason’s NixOS Config
 
+How to install and configure NixOS the way I do.
+
 ## Hints for Contributors
 
 - You can use [pre-commit][1] to automatically check your contributions.
