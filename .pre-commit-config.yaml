@@ -5,7 +5,11 @@ repos:
         repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
         rev: v0.2.0
         hooks:
-            - id: repo-style-checker
+            -
+                id: repo-style-checker
+            -
+                id: detect-bad-unicode
+                exclude: &default_exclude ^LICENSES/
     -
         repo: https://github.com/fsfe/reuse-tool
         rev: v4.0.3
@@ -24,7 +28,7 @@ repos:
                 id: editorconfig-checker
                 args:
                     - -ignore-defaults
-                exclude: &default_exclude ^LICENSES/
+                exclude: *default_exclude
     -
         repo: https://github.com/pre-commit/pre-commit-hooks
         rev: v4.6.0
