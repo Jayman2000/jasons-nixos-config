@@ -70,3 +70,10 @@ repos:
             -
                 id: gitleaks
                 exclude: *default_exclude
+    -
+        repo: https://github.com/Jayman2000/yamllint-pr
+        rev: pr630-rev-8
+        hooks:
+            -
+                id: yamllint
+                exclude: *default_exclude
