@@ -26,5 +26,6 @@ in {
                 options = [ "fmask=0022" "dmask=0022" ];
             };
         };
+        networking.hostName = "Graphical-Test-VM";
     };
 }
