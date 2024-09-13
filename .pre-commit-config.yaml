@@ -25,7 +25,7 @@ repos:
             - id: reuse
     -
         repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
-        rev: v0.4.0post1
+        rev: v0.5.0
         hooks:
             -
                 id: pre-commit-update
