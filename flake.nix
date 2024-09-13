@@ -17,7 +17,14 @@
             };
             default = pkgs.mkShellNoCC {
                 name = "shell-for-working-on-jasons-nixos-config";
-                packages = [
+                packages = let
+                    customPre-commit = pkgs.pre-commit.override {
+                        # One of the pre-commit repos that we use
+                        # requires a newer version of Python.
+                        python3Packages = pkgs.python312.pkgs;
+                    };
+                in [
+                    customPre-commit
                     pkgs.git
                     pkgs.nodePackages.livedown
                 ];
