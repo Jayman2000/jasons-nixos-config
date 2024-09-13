@@ -7,26 +7,28 @@
     inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     outputs = { self, nixpkgs }: let
         system = "x86_64-linux";
-        pkgs = import nixpkgs { inherit system; };
-        pinnedNixVersion = pkgs.nix;
+        pkgsForThisFlake = import nixpkgs { inherit system; };
+        pinnedNixVersion = pkgsForThisFlake.nix;
     in {
         devShells."${system}" = {
-            pinnedNixVersion = pkgs.mkShellNoCC {
+            pinnedNixVersion = pkgsForThisFlake.mkShellNoCC {
                 name = "shell-for-jnc-with-pinned-nix-version";
                 packages = [ pinnedNixVersion ];
             };
-            default = pkgs.mkShellNoCC {
+            default = pkgsForThisFlake.mkShellNoCC {
                 name = "shell-for-working-on-jasons-nixos-config";
                 packages = let
-                    customPre-commit = pkgs.pre-commit.override {
+                    # editorconfig-checker-disable
+                    customPre-commit = pkgsForThisFlake.pre-commit.override {
                         # One of the pre-commit repos that we use
                         # requires a newer version of Python.
-                        python3Packages = pkgs.python312.pkgs;
+                        python3Packages = pkgsForThisFlake.python312.pkgs;
                     };
+                    # editorconfig-checker-enable
                 in [
                     customPre-commit
-                    pkgs.git
-                    pkgs.nodePackages.livedown
+                    pkgsForThisFlake.git
+                    pkgsForThisFlake.nodePackages.livedown
                 ];
             };
         };
