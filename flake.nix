@@ -10,9 +10,17 @@
         pkgs = import nixpkgs { inherit system; };
         pinnedNixVersion = pkgs.nix;
     in {
-        devShells."${system}".pinnedNixVersion = pkgs.mkShellNoCC {
-            name = "shell-for-jnc-with-pinned-nix-version";
-            packages = [ pinnedNixVersion ];
+        devShells."${system}" = {
+            pinnedNixVersion = pkgs.mkShellNoCC {
+                name = "shell-for-jnc-with-pinned-nix-version";
+                packages = [ pinnedNixVersion ];
+            };
+            default = pkgs.mkShellNoCC {
+                name = "shell-for-working-on-jasons-nixos-config";
+                packages = [
+                    pkgs.git
+                ];
+            };
         };
     };
 }

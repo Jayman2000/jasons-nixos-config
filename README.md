@@ -9,6 +9,29 @@ How to install and configure NixOS the way I do.
 
 ## Hints for Contributors
 
+- This repo’s flake provides a dev shell that contains some of the tools
+that I use when developing this repo. You can activate the dev shell by
+running this command:
+
+    ```bash
+    nix \
+        --extra-experimental-features nix-command \
+        --extra-experimental-features flakes \
+        develop \
+            '.#pinnedNixVersion' \
+            --command \
+                nix \
+                    --extra-experimental-features nix-command \
+                    --extra-experimental-features flakes \
+                    develop
+    ```
+
+    That command is overly long for two reasons:
+
+    1. It’s designed to work even if you don’t have any experimental
+    features enabled.
+    2. It tried to pin the version of Nix that gets used to evaluate
+    `flake.nix`.
 - You can use [pre-commit][1] to automatically check your contributions.
 Follow [these instructions][2] to get started. Skip [the part about
 creating a pre-commit configuration][3].
