@@ -1,6 +1,10 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2024 Jason Yundt <jason@jasonyundt.email>
+{ pkgs, modulesPath, ... }:
 {
+    imports = [
+        (modulesPath + "/profiles/qemu-guest.nix")
+    ];
     boot.loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
