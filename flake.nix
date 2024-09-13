@@ -19,6 +19,7 @@
                 name = "shell-for-working-on-jasons-nixos-config";
                 packages = [
                     pkgs.git
+                    pkgs.nodePackages.livedown
                 ];
             };
         };
