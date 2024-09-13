@@ -15,17 +15,6 @@ in {
     imports = lib.lists.optional
         isGVT (modulesPath + "/profiles/qemu-guest.nix");
     config = lib.attrsets.optionalAttrs isGVT {
-        fileSystems = {
-            "/" = {
-                device = "UUID=c304403c-6ce0-4157-a079-2cbb6fb01b9c";
-                fsType = "bcachefs";
-            };
-            "/boot" = {
-                device = "/dev/disk/by-uuid/1358-F1E8";
-                fsType = "vfat";
-                options = [ "fmask=0022" "dmask=0022" ];
-            };
-        };
         networking.hostName = "Graphical-Test-VM";
     };
 }

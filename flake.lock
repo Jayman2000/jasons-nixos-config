@@ -1,5 +1,24 @@
 {
     "nodes": {
+        "disko": {
+            "inputs": {
+                "nixpkgs": [
+                    "nixpkgs"
+                ]
+            },
+            "locked": {
+                "lastModified": 1725377834,
+                "narHash": "sha256-tqoAO8oT6zEUDXte98cvA1saU9+1dLJQe3pMKLXv8ps=",
+                "rev": "e55f9a8678adc02024a4877c2a403e3f6daf24fe",
+                "revCount": 981,
+                "type": "tarball",
+                "url": "https://api.flakehub.com/f/pinned/nix-community/disko/1.7.0/0191b8cb-46f3-762f-a55e-bbfe19d12053/source.tar.gz"
+            },
+            "original": {
+                "type": "tarball",
+                "url": "https://flakehub.com/f/nix-community/disko/%2A.tar.gz"
+            }
+        },
         "nixpkgs": {
             "locked": {
                 "lastModified": 1725930920,
@@ -19,6 +38,7 @@
         },
         "root": {
             "inputs": {
+                "disko": "disko",
                 "nixpkgs": "nixpkgs"
             }
         }

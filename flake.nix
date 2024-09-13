@@ -4,8 +4,14 @@
     description = "The flake for Jason’s NixOS Config";
     nixConfig.pure-eval = true;
 
-    inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    outputs = { self, nixpkgs }: let
+    inputs = {
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+        disko = {
+            url = "https://flakehub.com/f/nix-community/disko/*.tar.gz";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+    };
+    outputs = { self, nixpkgs, disko }: let
         system = "x86_64-linux";
         pkgsForThisFlake = import nixpkgs { inherit system; };
         pinnedNixVersion = pkgsForThisFlake.nix;
@@ -27,6 +33,7 @@
                     # editorconfig-checker-enable
                 in [
                     customPre-commit
+                    disko.packages."${system}".disko
                     pkgsForThisFlake.git
                     pkgsForThisFlake.nixos-rebuild
                     pkgsForThisFlake.nodePackages.livedown
@@ -35,7 +42,10 @@
         };
         nixosConfigurations.graphicalTestVM = nixpkgs.lib.nixosSystem {
             inherit system;
-            modules = [ ./modules ];
+            modules = [
+                ./modules
+                disko.nixosModules.default
+            ];
             specialArgs = {
                 inherit pinnedNixVersion;
                 machineSlug = "graphical-test-vm";

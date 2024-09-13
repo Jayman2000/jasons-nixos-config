@@ -45,6 +45,11 @@ repos:
                 id: editorconfig-checker
                 args:
                     - -ignore-defaults
+                    - -exclude
+                    # I tried to get this file to match this repo’s
+                    # EditorConfig, but there’s a URL in this file that
+                    # is longer than 72 characters.
+                    - '^flake\.lock$'
                 exclude: *default_exclude
     -
         repo: https://github.com/pre-commit/pre-commit-hooks
