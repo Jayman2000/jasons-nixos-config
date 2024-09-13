@@ -36,7 +36,10 @@
         nixosConfigurations.graphicalTestVM = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [ ./modules ];
-            specialArgs.machineSlug = "graphical-test-vm";
+            specialArgs = {
+                inherit pinnedNixVersion;
+                machineSlug = "graphical-test-vm";
+            };
         };
     };
 }
