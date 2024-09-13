@@ -28,6 +28,7 @@
                 in [
                     customPre-commit
                     pkgsForThisFlake.git
+                    pkgsForThisFlake.nixos-rebuild
                     pkgsForThisFlake.nodePackages.livedown
                 ];
             };
