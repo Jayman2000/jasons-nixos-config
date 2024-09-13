@@ -4,7 +4,7 @@
 {
     imports = [
         (modulesPath + "/profiles/qemu-guest.nix")
-        ../imports/common.nix
+        ../imports
     ];
     boot.loader.efi.canTouchEfiVariables = true;
     fileSystems = {
