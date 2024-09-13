@@ -32,5 +32,9 @@
                 ];
             };
         };
+        nixosConfigurations.graphicalTestVM = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [ ];
+        };
     };
 }
