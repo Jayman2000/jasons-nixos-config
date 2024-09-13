@@ -4,11 +4,9 @@
 {
     imports = [
         (modulesPath + "/profiles/qemu-guest.nix")
+        ../imports/common.nix
     ];
-    boot.loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-    };
+    boot.loader.efi.canTouchEfiVariables = true;
     fileSystems = {
         "/" = {
             device = "UUID=c304403c-6ce0-4157-a079-2cbb6fb01b9c";
