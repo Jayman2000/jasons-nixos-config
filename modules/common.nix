@@ -13,5 +13,6 @@
     config = lib.mkIf config.jnc.commonOptions {
         boot.loader.systemd-boot.enable = true;
         nix.package = pinnedNixVersion;
+        system.stateVersion = "24.05";
     };
 }
