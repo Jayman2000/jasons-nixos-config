@@ -30,7 +30,7 @@ running this command:
 
     1. It’s designed to work even if you don’t have any experimental
     features enabled.
-    2. It tried to pin the version of Nix that gets used to evaluate
+    2. It tries to pin the version of Nix that gets used to evaluate
     `flake.nix`.
 - You can use [pre-commit][1] to automatically check your contributions.
 Follow [these instructions][2] to get started. Skip [the part about
