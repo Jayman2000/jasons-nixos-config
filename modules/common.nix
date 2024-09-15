@@ -14,5 +14,7 @@
         boot.loader.systemd-boot.enable = true;
         nix.package = pinnedNixVersion;
         system.stateVersion = "24.05";
+
+        jnc.setRootPasswordOnFirstBoot = true;
     };
 }
