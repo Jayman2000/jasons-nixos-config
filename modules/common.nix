@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2024 Jason Yundt <jason@jasonyundt.email>
 { config, lib, pinnedNixVersion, ... }:
 {
-    options.jnc.commonOptions = lib.mkOption {
+    options.jnc.commonOptions = lib.options.mkOption {
         type = lib.types.bool;
         default = true;
         description = ''
@@ -10,7 +10,7 @@
             Config.
         '';
     };
-    config = lib.mkIf config.jnc.commonOptions {
+    config = lib.modules.mkIf config.jnc.commonOptions {
         boot.loader.systemd-boot.enable = true;
         nix.package = pinnedNixVersion;
         system.stateVersion = "24.05";
