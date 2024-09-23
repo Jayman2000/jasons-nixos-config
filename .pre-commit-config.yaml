@@ -30,7 +30,7 @@ exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
         repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
-        rev: v0.3.3post1
+        rev: v0.5.0
         hooks:
             -
                 id: pre-commit-update
@@ -81,14 +81,14 @@ repos:
             - id: markdownlint
     -
         repo: https://github.com/scop/pre-commit-shfmt
-        rev: v3.8.0-1
+        rev: v3.9.0-1
         hooks:
             -
                 id: shfmt-src
                 args: ["-fn"]
     -
         repo: https://github.com/pre-commit/mirrors-mypy
-        rev: v1.11.1
+        rev: v1.11.2
         hooks:
             -
                 id: mypy
