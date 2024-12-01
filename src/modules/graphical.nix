@@ -20,12 +20,14 @@
 	networking.networkmanager.enable = true;
 
 	# Enable the X11 windowing system.
-	services.xserver = {
-		desktopManager.plasma5.enable = true;
-		displayManager.sddm.enable = true;
-		enable = true;
-		layout = "us";
+	services = {
+		xserver = {
+			desktopManager.plasma5.enable = true;
+			enable = true;
+			xkb.layout = "us";
+		};
 		libinput.enable = true;
+		displayManager.sddm.enable = true;
 	};
 
 	environment.systemPackages = with pkgs; [
