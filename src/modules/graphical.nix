@@ -24,7 +24,7 @@
 		desktopManager.plasma5.enable = true;
 		displayManager.sddm.enable = true;
 		enable = true;
-		layout = "us";
+		xkb.layout = "us";
 		libinput.enable = true;
 	};
 
