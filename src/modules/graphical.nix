@@ -15,7 +15,6 @@
 		./vm-host.nix
 	];
 
-	sound.enable = true;
 	hardware.pulseaudio.enable = true;
 	networking.networkmanager.enable = true;
 
