@@ -15,7 +15,6 @@
 		./vm-host.nix
 	];
 
-	hardware.pulseaudio.enable = true;
 	networking.networkmanager.enable = true;
 
 	# Enable the X11 windowing system.
