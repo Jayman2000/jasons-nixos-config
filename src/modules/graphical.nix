@@ -33,7 +33,7 @@
 		aspellDicts.en
 		audacity
 		noto-fonts
-		noto-fonts-cjk
+		noto-fonts-cjk-sans
 		noto-fonts-emoji
 		noto-fonts-extra
 		plasma5Packages.sonnet
