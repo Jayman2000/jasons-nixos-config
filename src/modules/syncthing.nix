@@ -19,7 +19,7 @@
 					"Jason-Desktop-Linux" = { id = "KADJ4K2-U73CLZH-L6ADY3J-FRFPVUH-HQF3NQZ-472YGQU-K43NZWS-LLDX5AX"; };
 				};
 				graphical-test-vm-device = {
-					"Graphical-Test-VM" = { id = "WEHPXTB-ZFPDAJ4-NRSLXVG-FOJENRH-WVNGVKK-7YUUJUZ-OM7CUG7-NJFTKQU"; };
+					"Graphical-Test-VM" = { id = "37WSTYX-LF6LIUJ-EMAA2Z3-FVAS6GI-2BGM2ND-E3FOYCB-I67JIZH-KBCGGA5"; };
 				};
 			in
 			{
