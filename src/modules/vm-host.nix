@@ -3,8 +3,5 @@
 { config, pkgs, ... }:
 {
 	virtualisation.libvirtd.enable = true;
-	programs.dconf.enable = true;
-	home-manager.users.jayman = { pkgs, ... }: {
-		home.packages = [ pkgs.virt-manager ];
-	};
+	programs.virt-manager.enable = true;
 }
