@@ -6,5 +6,7 @@
 		tarball = import ../../misc/disko/tarball.nix {
 			inherit customLib;
 		};
-	in pkgs.callPackage "${tarball}/package.nix" { };
+	in pkgs.callPackage "${tarball}/package.nix" {
+		diskoVersion = (import "${tarball}/version.nix").version;
+	};
 }
