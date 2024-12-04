@@ -24,8 +24,8 @@
 			in
 			{
 				"Server" = { id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7"; };
-				"Jason-Lemur-Pro" = { id = "HDJCH46-RZMHE3K-T6S3G6N-662CFFW-CIAVKTI-BN6B32M-LFQCQKX-GG575AV"; };
-				"Jason-Lemur-Pro-VM-Test" = { id = "2MOLIOF-XEWO4JR-PUE4NUS-I3YSRGM-X374W7F-6BXK4S6-UGXVIL6-TYWHWAC"; };
+				"Jason-Lemur-Pro" = { id = "J5UN6OL-YTQM5PO-ARP3I77-EZIHIXS-Y4QNWDS-OSUTZLP-TES6TDP-TCOAKAV"; };
+				"Jason-Lemur-Pro-VM-Test" = { id = "DACPZKJ-GMT2UG7-WDYKPBX-KOK3LEF-BLTKCEM-FJGP2L6-7GXB24S-2GPLQQC"; };
 				"Jason-Desktop-Windows" = { id = "IJ7DGZZ-HEOL43C-4RCWITD-QCATRWR-HPTWFR3-XTTYEZW-QUV4CBL-5P7AGQF"; };
 			# In other words, only add each device to the devices list if this config isn’t being deployed on that device.
 			} // (if config.networking.hostName != "Jason-Desktop-Linux" then desktop-device else { })
