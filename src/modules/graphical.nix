@@ -15,8 +15,6 @@
 		./vm-host.nix
 	];
 
-	sound.enable = true;
-	hardware.pulseaudio.enable = true;
 	networking.networkmanager.enable = true;
 
 	# Enable the X11 windowing system.
@@ -35,7 +33,7 @@
 		aspellDicts.en
 		audacity
 		noto-fonts
-		noto-fonts-cjk
+		noto-fonts-cjk-sans
 		noto-fonts-emoji
 		noto-fonts-extra
 		plasma5Packages.sonnet
@@ -74,7 +72,7 @@
 			pkgs.rustfmt
 			pkgs.tdesktop
 			pkgs.thunderbird
-			pkgs.transmission-qt
+			pkgs.transmission_4-qt
 			pkgs.xclip
 			pkgs.yakuake
 

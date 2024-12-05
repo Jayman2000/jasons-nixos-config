@@ -3,7 +3,7 @@
 { config, pkgs, ... }:
 {
 	imports = [
-		./home-manager/24.05.nix
+		./home-manager/24.11.nix
 		./common.nix
 		./auto-upgrade.nix
 		./efi.nix

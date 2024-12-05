@@ -11,7 +11,7 @@
 		home-manager = customLib.fetchFromGitHubOptionalHash {
 			owner = "nix-community";
 			repo = "home-manager";
-			rev = "release-24.05";
+			rev = "release-24.11";
 		};
 	in [ "${home-manager}/nixos" ];
 }

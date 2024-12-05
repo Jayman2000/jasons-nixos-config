@@ -4,7 +4,7 @@
 {
 	imports =
 		[
-			./home-manager/24.05.nix
+			./home-manager/24.11.nix
 			./bcachefs.nix
 			./common.nix
 			./efi.nix
