@@ -72,7 +72,7 @@
 			pkgs.rustfmt
 			pkgs.tdesktop
 			pkgs.thunderbird
-			pkgs.transmission-qt
+			pkgs.transmission_4-qt
 			pkgs.xclip
 			pkgs.yakuake
 
