@@ -1,8 +1,16 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
 # SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
-{ config, pkgs, ... }:
-{
-	users.users.jayman.packages = with pkgs; [
+{ config, pkgs, lib, ... }: let
+	gameDataPath = (
+		# TODO: It would be better if this said “if the config.services.syncthing.folders."Game Data" property exists”, but I don’t know how to say that.
+		if config.networking.hostName == "Graphical-Test-VM"
+		then
+			"/var/empty"
+		else
+			config.services.syncthing.settings.folders."Game Data".path
+	);
+in {
+	users.users.jayman.packages = (with pkgs; [
 		_2048-in-terminal
 		#abbaye-des-morts  # TODO: Figure out why this fails to build.
 		#abuse	# TODO: Install on systems that already have unfree packages enabled.
@@ -98,16 +106,16 @@
 		wesnoth
 		xmoto
 		xonotic
-	];
+	]) ++ (let
+		pkgCollections = import ../pkgCollections {
+			inherit pkgs lib;
+		};
+	in [
+		(pkgCollections.custom.run-descent3.override {
+			proprietaryGameDataDirectory = "${gameDataPath}/Descent/3/Fresh base directory";
+		})
+	]);
 	home-manager.users.jayman = let
-		gameDataPath = (
-			# TODO: It would be better if this said “if the config.services.syncthing.folders."Game Data" property exists”, but I don’t know how to say that.
-			if config.networking.hostName == "Graphical-Test-VM"
-			then
-				"/var/empty"
-			else
-				config.services.syncthing.settings.folders."Game Data".path
-		);
 		doomDataPath = "${gameDataPath}/doom";
 		soundFontPath = "${gameDataPath}/soundfonts/GM.sf2";
 		wolf3DDataPath = "${gameDataPath}/Wolfenstien 3D";
