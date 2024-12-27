@@ -51,12 +51,12 @@
 	users.users.jayman.extraGroups = [ "docker" ];
 	virtualisation.docker.enable = true;
 
-	home-manager.users.jayman = { pkgs, ... }: {
-		home.packages = let
-			pkgCollections = import ../pkgCollections {
-				inherit pkgs lib;
-			};
-		in [
+	home-manager.users.jayman = { pkgs, ... }: let
+		pkgCollections = import ../pkgCollections {
+			inherit pkgs lib;
+		};
+	in {
+		home.packages = [
 			pkgs.ark
 			pkgs.chars
 			pkgs.filelight
@@ -88,7 +88,10 @@
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.
 		xsession.enable = true;
 
-		programs.firefox.enable = true;
+		programs.firefox = {
+			enable = true;
+			package = pkgCollections.nixpkgs.unstable.firefox;
+		};
 
 		programs.ssh = {
 			enable = true;
