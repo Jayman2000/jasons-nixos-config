@@ -26,6 +26,10 @@
 		};
 		libinput.enable = true;
 		displayManager.sddm.enable = true;
+		# This allows me to use IPv6 even though my ISP only gives me
+		# IPv4 access. Source:
+		# <https://old.reddit.com/r/ipv6/comments/jwdrx4/how_to_connect_to_ipv6_servers_from_ipv4only/gcr6q1r/?utm_source=reddit&utm_medium=web2x&context=3>.
+		cloudflare-warp.enable = true;
 	};
 
 	environment.systemPackages = with pkgs; [
@@ -50,6 +54,9 @@
 	# Needed for local GitLab Runner
 	users.users.jayman.extraGroups = [ "docker" ];
 	virtualisation.docker.enable = true;
+
+	# Needed for Cloudflare WARP
+	nixpkgs.config.allowUnfree = true;
 
 	home-manager.users.jayman = { pkgs, ... }: let
 		pkgCollections = import ../pkgCollections {
