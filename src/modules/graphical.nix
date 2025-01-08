@@ -58,12 +58,12 @@
 	# Needed for Cloudflare WARP
 	nixpkgs.config.allowUnfree = true;
 
-	home-manager.users.jayman = { pkgs, ... }: let
-		pkgCollections = import ../pkgCollections {
-			inherit pkgs lib;
-		};
-	in {
-		home.packages = [
+	home-manager.users.jayman = { pkgs, ... }: {
+		home.packages = let
+			pkgCollections = import ../pkgCollections {
+				inherit pkgs lib;
+			};
+		in [
 			pkgs.ark
 			pkgs.chars
 			pkgs.filelight
@@ -95,10 +95,7 @@
 		# This is required to make programs.bash.sessionVariables work in graphical sessions.
 		xsession.enable = true;
 
-		programs.firefox = {
-			enable = true;
-			package = pkgCollections.nixpkgs.unstable.firefox;
-		};
+		programs.firefox.enable = true;
 
 		programs.ssh = {
 			enable = true;
