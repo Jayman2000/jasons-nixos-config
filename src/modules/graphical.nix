@@ -115,7 +115,7 @@
 
 		programs.powerline-go.enable = true;
 		home.shellAliases."randfd" = ''
-			ls --zero | shuf -zn 1 | tr '\\0' '\\n'
+			ls --zero | shuf -zn 1 | tr '\0' '\n'
 		'';
 	};
 }
