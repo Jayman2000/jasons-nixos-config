@@ -71,6 +71,7 @@ in {
 		pacvim
 		pinball
 		powermanga
+		prismlauncher
 		redeclipse
 		robotfindskitten
 		rocksndiamonds
