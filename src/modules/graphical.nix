@@ -19,13 +19,12 @@
 
 	# Enable the X11 windowing system.
 	services = {
-		xserver = {
-			desktopManager.plasma5.enable = true;
-			enable = true;
-			xkb.layout = "us";
-		};
+		desktopManager.plasma6.enable = true;
 		libinput.enable = true;
-		displayManager.sddm.enable = true;
+		displayManager.sddm = {
+			enable = true;
+			wayland.enable = true;
+		};
 		# This allows me to use IPv6 even though my ISP only gives me
 		# IPv4 access. Source:
 		# <https://old.reddit.com/r/ipv6/comments/jwdrx4/how_to_connect_to_ipv6_servers_from_ipv4only/gcr6q1r/?utm_source=reddit&utm_medium=web2x&context=3>.
@@ -40,7 +39,8 @@
 		noto-fonts-cjk-sans
 		noto-fonts-emoji
 		noto-fonts-extra
-		plasma5Packages.sonnet
+		kdePackages.sonnet
+		kdePackages.kdenlive
 		source-code-pro
 	];
 
