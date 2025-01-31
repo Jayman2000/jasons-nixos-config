@@ -40,6 +40,7 @@
 		noto-fonts-emoji
 		noto-fonts-extra
 		kdePackages.sonnet
+		kdePackages.kdenlive
 		source-code-pro
 	];
 
