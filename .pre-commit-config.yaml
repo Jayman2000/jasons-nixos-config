@@ -30,7 +30,7 @@ exclude: "^CC0-1\\.0\\.txt(\\.spdx-meta)?$|^LICENSES\\/.*"
 repos:
     -
         repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
-        rev: v0.6.1
+        rev: v0.7.0
         hooks:
             -
                 id: pre-commit-update
@@ -71,12 +71,12 @@ repos:
                 types: ['text']
     -
         repo: https://github.com/adrienverge/yamllint
-        rev: v1.37.0
+        rev: v1.37.1
         hooks:
             - id: yamllint
     -
         repo: https://github.com/igorshubovych/markdownlint-cli
-        rev: v0.44.0
+        rev: v0.45.0
         hooks:
             - id: markdownlint
     -
