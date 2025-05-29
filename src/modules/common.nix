@@ -59,5 +59,6 @@
 		};
 	};
 
+	nix.package = pkgs.nixVersions.nix_2_24;
 	system.stateVersion = "22.05";
 }
