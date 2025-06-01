@@ -1,5 +1,5 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2024)
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022–2025)
 { config, pkgs, lib, ... }:
 {
 	imports = [
@@ -64,16 +64,16 @@
 				inherit pkgs lib;
 			};
 		in [
-			pkgs.ark
+			pkgs.kdePackages.ark
 			pkgs.chars
-			pkgs.filelight
+			pkgs.kdePackages.filelight
 			pkgs.gdb
 			pkgs.gitlab-runner
-			pkgs.kdialog  # Used by ecwolf
+			pkgs.kdePackages.kdialog  # Used by ecwolf
 			pkgs.keepassxc
-			pkgs.kgpg
+			pkgs.kdePackages.kgpg
 			pkgs.libreoffice-qt # Hopefully, the Qt version will look better with the Plasma desktop.
-			pkgs.merkuro
+			pkgs.kdePackages.merkuro
 			pkgs.mpv
 			pkgs.rsync
 			pkgs.rustfmt
@@ -81,7 +81,7 @@
 			pkgs.thunderbird
 			pkgs.transmission_4-qt
 			pkgs.xclip
-			pkgs.yakuake
+			pkgs.kdePackages.yakuake
 
 			# Browsers to test my site with.
 			pkgs.librewolf
