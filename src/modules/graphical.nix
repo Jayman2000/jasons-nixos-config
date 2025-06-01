@@ -69,11 +69,11 @@
 			pkgs.filelight
 			pkgs.gdb
 			pkgs.gitlab-runner
-			pkgs.kalendar
 			pkgs.kdialog  # Used by ecwolf
 			pkgs.keepassxc
 			pkgs.kgpg
 			pkgs.libreoffice-qt # Hopefully, the Qt version will look better with the Plasma desktop.
+			pkgs.merkuro
 			pkgs.mpv
 			pkgs.rsync
 			pkgs.rustfmt
