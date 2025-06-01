@@ -77,7 +77,7 @@ in {
 		rocksndiamonds
 		rpg-cli
 		rrootage
-		sauerbraten
+		#sauerbraten  # TODO: Restore this after this bug gets fixed: <https://github.com/NixOS/nixpkgs/issues/412963>.
 		sdlpop
 		#slade	# TODO: Reenable this one once this is fixed: <https://github.com/sirjuddington/SLADE/issues/1675>
 		srb2
