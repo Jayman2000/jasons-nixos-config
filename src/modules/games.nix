@@ -1,5 +1,5 @@
 # SPDX-FileNotice: 🅭🄍1.0 This file is dedicated to the public domain using the CC0 1.0 Universal Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0/>.
-# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022)
+# SPDX-FileContributor: Jason Yundt <jason@jasonyundt.email> (2022, 2025)
 { config, pkgs, lib, ... }: let
 	gameDataPath = (
 		# TODO: It would be better if this said “if the config.services.syncthing.folders."Game Data" property exists”, but I don’t know how to say that.
@@ -51,7 +51,7 @@ in {
 		graphwar
 		hedgewars
 		kabeljau
-		kmines
+		kdePackages.kmines
 		lugaru
 		mar1d
 		mari0
@@ -77,7 +77,7 @@ in {
 		rocksndiamonds
 		rpg-cli
 		rrootage
-		sauerbraten
+		#sauerbraten  # TODO: Restore this after this bug gets fixed: <https://github.com/NixOS/nixpkgs/issues/412963>.
 		sdlpop
 		#slade	# TODO: Reenable this one once this is fixed: <https://github.com/sirjuddington/SLADE/issues/1675>
 		srb2

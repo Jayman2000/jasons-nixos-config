@@ -3,7 +3,7 @@
 {
 	imports =
 		[
-			./home-manager/24.11.nix
+			./home-manager/25.05.nix
 			./common.nix
 			./bcachefs.nix
 			./disko/graphical-test-vm.nix
