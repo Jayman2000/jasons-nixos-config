@@ -2,5 +2,10 @@
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 %YAML 1.2
 ---
-repos
-: []
+repos:
+    -
+        repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
+        rev: v0.4.0
+        hooks:
+            -
+                id: repo-style-checker
