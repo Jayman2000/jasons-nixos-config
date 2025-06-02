@@ -20,6 +20,9 @@ repos:
                     - ^LICENSE
                     - --pattern
                     - ^COPYING
+            -
+                id: flake-lock-updater
+                exclude: *standard_exclude
     -
         repo: https://github.com/fsfe/reuse-tool
         rev: v5.0.2
