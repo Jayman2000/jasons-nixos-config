@@ -9,3 +9,86 @@ repos:
         hooks:
             -
                 id: repo-style-checker
+            -
+                id: detect-bad-unicode
+                exclude: &standard_exclude ^LICENSES/
+            -
+                id: forbid-paths-that-match
+                exclude: *standard_exclude
+                args:
+                    - --pattern
+                    - ^LICENSE
+                    - --pattern
+                    - ^COPYING
+    -
+        repo: https://github.com/fsfe/reuse-tool
+        rev: v5.0.2
+        hooks:
+            -
+                id: reuse
+    -
+        repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
+        rev: v0.7.0
+        hooks:
+            -
+                id: pre-commit-update
+                exclude: *standard_exclude
+    -
+        # editorconfig-checker-disable
+        # yamllint disable-line rule:line-length
+        repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+        # editorconfig-checker-enable
+        rev: 3.2.1
+        hooks:
+            -
+                id: editorconfig-checker
+                exclude: *standard_exclude
+                args:
+                    - -ignore-defaults
+    -
+        repo: https://github.com/pre-commit/pre-commit-hooks
+        rev: v5.0.0
+        hooks:
+            -
+                id: check-case-conflict
+                exclude: *standard_exclude
+            -
+                id: check-merge-conflict
+                exclude: *standard_exclude
+            -
+                id: check-symlinks
+                exclude: *standard_exclude
+            -
+                id: check-vcs-permalinks
+                exclude: *standard_exclude
+            -
+                id: destroyed-symlinks
+                exclude: *standard_exclude
+    -
+        repo: https://github.com/pre-commit/pygrep-hooks
+        rev: v1.10.0
+        hooks:
+            -
+                id: text-unicode-replacement-char
+                exclude: *standard_exclude
+    -
+        repo: https://github.com/zricethezav/gitleaks
+        rev: v8.27.0
+        hooks:
+            -
+                id: gitleaks
+                exclude: *standard_exclude
+    -
+        repo: https://github.com/adrienverge/yamllint
+        rev: v1.37.1
+        hooks:
+            -
+                id: yamllint
+                exclude: *standard_exclude
+    -
+        repo: https://github.com/igorshubovych/markdownlint-cli
+        rev: v0.45.0
+        hooks:
+            -
+                id: markdownlint
+                exclude: *standard_exclude
