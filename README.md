@@ -5,6 +5,8 @@ SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 
 # Jasons NixOS Configs
 
+## Hints for Contributors
+
 ## Copying
 
 See [`copying.md`](./copying.md).
