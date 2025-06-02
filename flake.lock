@@ -25,6 +25,27 @@
                 "type": "github"
             }
         },
+        "disko": {
+            "inputs": {
+                "nixpkgs": [
+                    "nixpkgs"
+                ]
+            },
+            "locked": {
+                "lastModified": 1748832438,
+                "narHash":
+                "sha256-/CtyLVfNaFP7PrOPrTEuGOJBIhcBKVQ91KiEbtXJi0A=",
+                "owner": "nix-community",
+                "repo": "disko",
+                "rev": "58d6e5a83fff9982d57e0a0a994d4e5c0af441e4",
+                "type": "github"
+            },
+            "original": {
+                "owner": "nix-community",
+                "repo": "disko",
+                "type": "github"
+            }
+        },
         "jasons-nix-flake-style-guide": {
             "inputs": {
                 "blueprint": [
@@ -72,6 +93,7 @@
         "root": {
             "inputs": {
                 "blueprint": "blueprint",
+                "disko": "disko",
                 "jasons-nix-flake-style-guide":
                 "jasons-nix-flake-style-guide",
                 "nixpkgs": "nixpkgs",

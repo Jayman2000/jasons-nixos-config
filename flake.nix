@@ -21,6 +21,10 @@
       };
     };
     systems.follows = "jasons-nix-flake-style-guide/systems";
+    disko = {
+      url = "github:nix-community/disko?tag=latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs:
