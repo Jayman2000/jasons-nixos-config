@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
-{ inputs, modulesPath, ... }:
+{ inputs, modulesPath, perSystem, ... }:
 {
   system.stateVersion = "25.05";
   nixpkgs.hostPlatform = "x86_64-linux";
+  nix.package = perSystem.self.nix;
 
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
