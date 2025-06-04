@@ -107,4 +107,6 @@
     ];
     kernelModules = [ "kvm-amd" ];
   };
+
+  users.defaultUserShell = perSystem.self.nushell;
 }
