@@ -11,7 +11,10 @@
 {
   system.stateVersion = "25.05";
   nixpkgs.hostPlatform = "x86_64-linux";
-  nix.package = perSystem.self.nix;
+  nix = {
+    package = perSystem.self.nix;
+    settings.use-xdg-base-directories = true;
+  };
 
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
