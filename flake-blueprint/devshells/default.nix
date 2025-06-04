@@ -33,6 +33,14 @@ pkgs.mkShellNoCC {
             ...$rest
         )
       }
+      def --wrapped nr [flake_url: string, ...rest] {
+        (
+          n run
+            $"($flake_url).config.system.build.nixos-rebuild"
+            --
+            ...$rest
+        )
+      }
     '
   '';
 }
