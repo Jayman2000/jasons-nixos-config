@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 {
+  flake,
   inputs,
   lib,
   modulesPath,
@@ -18,6 +19,7 @@
 
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
+    flake.nixosModules.first-boot
     inputs.disko.nixosModules.default
   ];
 
