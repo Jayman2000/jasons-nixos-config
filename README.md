@@ -5,6 +5,11 @@ SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 
 # Jasons NixOS Configs
 
+## Documentation
+
+Please take a look at [the `Documentation` directory](./Documentation)
+for documentation.
+
 ## Hints for Contributors
 
 - Try to keep lines shorter than seventy-three characters.
