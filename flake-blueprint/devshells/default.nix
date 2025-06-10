@@ -24,12 +24,14 @@ pkgs.mkShellNoCC {
     ];
   shellHook = ''
     exec nu --execute '
+      $env.NIX_CONFIG = "
+        extra-experimental-features = nix-command flakes
+        accept-flake-config = true
+        allow-unsafe-native-code-during-evaluation = true
+      "
       def --wrapped n [...rest] {
         (
           nix
-            --extra-experimental-features "nix-command flakes"
-            --accept-flake-config
-            --allow-unsafe-native-code-during-evaluation
             ...$rest
         )
       }
