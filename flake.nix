@@ -84,6 +84,8 @@
       # The secretCode was chosen for a specific reason. See the comment
       # about pinnedNixHint in flake-blueprint/devshells/default.nix.
       secretCode = builtins.hashString "sha256" flakeRoot;
+      jnfsgLib = inputs.jasons-nix-flake-style-guide.lib;
+      currentFlakeURL = jnfsgLib.flakeURL flakeRoot;
       commandToCheckForDevShell = [
         "nix"
         "--extra-experimental-features"
@@ -94,7 +96,7 @@
         "--no-allow-unsafe-native-code-during-evaluation"
 
         "run"
-        "path:${inputs.nixpkgs.lib.strings.escapeURL flakeRoot}#nushell"
+        "${currentFlakeURL}#nushell"
         "--"
         "--commands"
         "which ${secretCode} | is-not-empty"

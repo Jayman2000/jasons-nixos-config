@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 {
   flake,
+  inputs,
   perSystem,
   pkgs,
   pname,
@@ -19,7 +20,7 @@ pkgs.writers.writeNuBin pname
       "${pkgs.lib.strings.makeBinPath [ perSystem.self.nix ]}"
       "--set"
       "flake_url"
-      "path:${pkgs.lib.strings.escapeURL "${flake}"}"
+      (inputs.jasons-nix-flake-style-guide.lib.flakeURL flake)
     ];
   }
   ''

@@ -3,6 +3,7 @@
 {
   config,
   flake,
+  inputs,
   lib,
   perSystem,
   pkgs,
@@ -138,10 +139,13 @@
               ];
             script =
               let
-                inherit (lib.strings) escapeShellArg escapeURL;
-                path = "${flake}";
-                fragment = configToInstallName;
-                url = "path:${escapeURL path}#${escapeURL fragment}";
+                inherit (lib.strings) escapeShellArg;
+                jnfsgLib = inputs.jasons-nix-flake-style-guide.lib;
+                baseURL = jnfsgLib.flakeURL flake;
+                # editorconfig-checker-disable
+                fragment = jnfsgLib.percent-encodeAll configToInstallName;
+                # editorconfig-checker-enable
+                fullURL = "${baseURL}#${fragment}";
                 disk = configToInstall.config.disko.devices.disk.main;
                 diskPath = disk.device;
               in
@@ -150,7 +154,7 @@
                   allow-unsafe-native-code-during-evaluation = true
                 '
                 disko-install \
-                    --flake ${escapeShellArg url} \
+                    --flake ${escapeShellArg fullURL} \
                     --disk main ${escapeShellArg diskPath} \
                     --write-efi-boot-entries
               '';
