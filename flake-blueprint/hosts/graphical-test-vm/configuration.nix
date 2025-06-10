@@ -13,9 +13,7 @@
   system.stateVersion = "25.05";
 
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
-    flake.nixosModules.default
-    flake.nixosModules.first-boot
+    flake.nixosModules.graphical-test-vm-common
   ];
 
   disko.devices.disk.main = {

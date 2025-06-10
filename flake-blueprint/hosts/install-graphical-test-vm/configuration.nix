@@ -8,7 +8,7 @@
 }:
 {
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
+    flake.nixosModules.graphical-test-vm-common
     flake.nixosModules.installer
   ];
 
