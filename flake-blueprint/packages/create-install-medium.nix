@@ -31,6 +31,7 @@ pkgs.writers.writeNuBin pname
 
     def main [config_name: string, create_image: bool, path: string] {
       let config_name_encoded = $config_name | url encode --all
+      let absolute_path = $path | path expand
 
       if $create_image {
         # editorconfig-checker-disable
@@ -43,7 +44,7 @@ pkgs.writers.writeNuBin pname
         )
         cd $temp_dir
         nix build $"($config_url).config.system.build.diskoImages"
-        cp result/main.raw $path
+        cp result/main.raw $absolute_path
         cd -
         rm --recursive --force $temp_dir
       } else {
@@ -56,7 +57,7 @@ pkgs.writers.writeNuBin pname
             nix run $"($env.flake_url)#disko-install"
               --
                 --flake $config_url
-                --disk main $path
+                --disk main $absolute_path
         )
       }
     }
