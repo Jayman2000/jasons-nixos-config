@@ -153,6 +153,14 @@
                 declare -rx NIX_CONFIG='
                   allow-unsafe-native-code-during-evaluation = true
                 '
+                # This next printf is a workaround for this issue [1].
+                #
+                # editorconfig-checker-disable
+                # <https://discourse.nixos.org/t/am-i-understanding-string-contexts-correctly/65567?u=jasonyundt>
+                # editorconfig-checker-enable
+                printf \
+                  'Using the flake located here: %s\n' \
+                  ${escapeShellArg "${flake}"}
                 disko-install \
                     --flake ${escapeShellArg fullURL} \
                     --disk main ${escapeShellArg diskPath} \
