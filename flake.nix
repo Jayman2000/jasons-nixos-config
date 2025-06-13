@@ -85,7 +85,7 @@
       # about pinnedNixHint in flake-blueprint/devshells/default.nix.
       secretCode = builtins.hashString "sha256" flakeRoot;
       jnfsgLib = inputs.jasons-nix-flake-style-guide.lib;
-      currentFlakeURL = jnfsgLib.flakeURL flakeRoot;
+      currentFlakeURL = jnfsgLib.flakeURL { input = flakeRoot; };
       commandToCheckForDevShell = [
         "nix"
         "--extra-experimental-features"
