@@ -141,11 +141,10 @@
               let
                 inherit (lib.strings) escapeShellArg;
                 jnfsgLib = inputs.jasons-nix-flake-style-guide.lib;
-                baseURL = jnfsgLib.flakeURL flake;
-                # editorconfig-checker-disable
-                fragment = jnfsgLib.percent-encodeAll configToInstallName;
-                # editorconfig-checker-enable
-                fullURL = "${baseURL}#${fragment}";
+                url = jnfsgLib.flakeURL {
+                  input = flake;
+                  attribute = configToInstallName;
+                };
                 disk = configToInstall.config.disko.devices.disk.main;
                 diskPath = disk.device;
               in
@@ -162,7 +161,7 @@
                   'Using the flake located here: %s\n' \
                   ${escapeShellArg "${flake}"}
                 disko-install \
-                    --flake ${escapeShellArg fullURL} \
+                    --flake ${escapeShellArg url} \
                     --disk main ${escapeShellArg diskPath} \
                     --write-efi-boot-entries
               '';

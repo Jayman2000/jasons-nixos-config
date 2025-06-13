@@ -20,7 +20,9 @@ pkgs.writers.writeNuBin pname
       "${pkgs.lib.strings.makeBinPath [ perSystem.self.nix ]}"
       "--set"
       "flake_url"
-      (inputs.jasons-nix-flake-style-guide.lib.flakeURL flake)
+      (inputs.jasons-nix-flake-style-guide.lib.flakeURL {
+        input = flake;
+      })
     ];
   }
   ''
