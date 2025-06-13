@@ -47,12 +47,20 @@
           # Source: <https://uapi-group.org/specifications/specs/discoverable_partitions_specification>
           # editorconfig-checker-enable
           type = "4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709";
-          size = "100%";
+          end = "-24G";
           content = {
             type = "filesystem";
             format = "bcachefs";
             mountpoint = "/";
           };
+        };
+        nixosSwap = {
+          # editorconfig-checker-disable
+          # Source: <https://uapi-group.org/specifications/specs/discoverable_partitions_specification>
+          # editorconfig-checker-enable
+          type = "0657fd6d-a4ab-43c4-84e5-0933c84b4f4f";
+          size = "100%";
+          content.type = "swap";
         };
       };
     };
