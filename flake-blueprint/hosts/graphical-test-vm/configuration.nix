@@ -13,6 +13,7 @@
   system.stateVersion = "25.05";
 
   imports = [
+    flake.nixosModules.first-boot
     flake.nixosModules.graphical-test-vm-common
   ];
 
