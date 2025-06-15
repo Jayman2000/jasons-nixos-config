@@ -77,4 +77,6 @@
     ];
     kernelModules = [ "kvm-amd" ];
   };
+
+  programs.tmux.enable = true;
 }
