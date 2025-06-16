@@ -15,6 +15,7 @@
   imports = [
     flake.nixosModules.first-boot
     flake.nixosModules.graphical-test-vm-common
+    flake.nixosModules.home-manager
   ];
 
   disko.devices.disk.main = {
