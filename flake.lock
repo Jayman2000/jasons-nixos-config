@@ -46,6 +46,38 @@
                 "type": "github"
             }
         },
+        "forge-view-preview": {
+            "inputs": {
+                "blueprint": [
+                    "blueprint"
+                ],
+                "jasons-nix-flake-style-guide": [
+                    "jasons-nix-flake-style-guide"
+                ],
+                "nixpkgs": [
+                    "nixpkgs"
+                ],
+                "systems": [
+                    "systems"
+                ]
+            },
+            "locked": {
+                "lastModified": 1748864375,
+                "narHash":
+                "sha256-5/KEgXrXqbt+RC0apSv1ECjzH2nXRCbA2VSJWexkeiE=",
+                "ref": "refs/heads/main",
+                "rev": "0d0de4093b32b42ec2d67421ebd1a6502ab1a333",
+                "revCount": 59,
+                "type": "git",
+                "url":
+                "https://codeberg.org/JasonYundt/forge-view-preview.git"
+            },
+            "original": {
+                "type": "git",
+                "url":
+                "https://codeberg.org/JasonYundt/forge-view-preview.git"
+            }
+        },
         "home-manager": {
             "inputs": {
                 "nixpkgs": [
@@ -134,6 +166,7 @@
             "inputs": {
                 "blueprint": "blueprint",
                 "disko": "disko",
+                "forge-view-preview": "forge-view-preview",
                 "home-manager": "home-manager",
                 "jasons-nix-flake-style-guide":
                 "jasons-nix-flake-style-guide",

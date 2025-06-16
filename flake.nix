@@ -30,6 +30,17 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    forge-view-preview = {
+      # editorconfig-checker-disable
+      url = "git+https://codeberg.org/JasonYundt/forge-view-preview.git";
+      # editorconfig-checker-disable
+      inputs = {
+        blueprint.follows = "blueprint";
+        jasons-nix-flake-style-guide.follows = "jasons-nix-flake-style-guide";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
   };
 
   outputs =

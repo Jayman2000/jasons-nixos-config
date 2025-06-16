@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 {
+  config,
   flake,
   inputs,
   lib,
@@ -80,5 +81,12 @@
   };
 
   programs.tmux.enable = true;
-  environment.systemPackages = [ pkgs.elinks ];
+  environment.systemPackages =
+    let
+      fvpPackages = inputs.forge-view-preview.packages;
+    in
+    [
+      pkgs.elinks
+      fvpPackages."${config.nixpkgs.hostPlatform.system}".default
+    ];
 }
