@@ -14,5 +14,10 @@
       target = "Documents/Home/VC/.keep";
       text = "";
     };
+    personalLocalDirectory = {
+      recursive = true;
+      target = "Documents/Home/local/.keep";
+      text = "";
+    };
   };
 }
