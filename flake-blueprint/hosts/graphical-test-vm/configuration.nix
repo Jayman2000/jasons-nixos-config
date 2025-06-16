@@ -80,4 +80,5 @@
   };
 
   programs.tmux.enable = true;
+  environment.systemPackages = [ pkgs.elinks ];
 }
