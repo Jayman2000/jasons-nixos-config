@@ -11,7 +11,7 @@
     wantedBy = [ "multi-user.target" ];
     wants = [ "getty-pre.target" ];
     before = [ "getty-pre.target" ];
-    description = "Potentially prompt for a root password";
+    description = "Potentially do first-time setup";
     script =
       let
         resholvedScript =
@@ -23,6 +23,7 @@
                 coreutils
                 dbus
                 shadow
+                openssh
               ];
               interpreter = lib.meta.getExe pkgs.bash;
               # This is a workaround for this issue [1].
@@ -39,11 +40,18 @@
                 # [1]: <https://github.com/NixOS/nixpkgs/pull/342536>
                 # editorconfig-checker-enable
                 "cannot:${pkgs.shadow}/bin/passwd"
+                # TODO: This won’t be needed once a solution for this
+                # issue [1] is found and released.
+                #
+                # [1]: <https://github.com/abathur/resholve/issues/120>
+                "cannot:${pkgs.openssh}/bin/ssh-keygen"
               ];
             }
             ''
               set -o errexit -o nounset -o pipefail
-              readonly marker=~root/initial-password-set
+              readonly marker=~root/first-boot-setup-performed
+              readonly ssh_p1='Enter a passphrase for a new SSH key: '
+              readonly ssh_p2='Enter the same passphrase again: '
 
               function set_systemd_show_status {
                   # I used --print-reply here in order to force
@@ -95,6 +103,40 @@
                               There was an error setting the password. \
                               Please try again.
                       fi
+                  done
+
+                  while true
+                  do
+                      while [ -v ssh_passphrase ]
+                      do
+                          read -rsp "$ssh_p1" passphrase_1
+                          read -rsp "$ssh_p2" passphrase_2
+                          if [ "$passphrase_1" != "$passphrase_2" ]
+                          then
+                              >&2 echo \
+                                  The two passphrases that you entered \
+                                  do not match.
+                          elif [ -z "$passphrase_1" ]
+                          then
+                              >&2 echo \
+                                  Empty passphrases are not allowed.
+                          else
+                              ssh_passphrase="$passphrase_1"
+                          fi
+                      done
+                      if ssh-keygen \
+                          -t ed25519 \
+                          -a 100 \
+                          -N "$ssh_passphrase"
+                      then
+                          echo Successfully generated a new SSH key.
+                          break
+                      else
+                          >&2 echo \
+                              There was an error generating the SSH \
+                              key. Please try again.
+                      fi
+                      unset ssh_passphrase
                   done
 
                   restore_original_systemd_show_status
