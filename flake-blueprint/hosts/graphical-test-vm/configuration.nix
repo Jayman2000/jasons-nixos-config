@@ -80,7 +80,10 @@
     kernelModules = [ "kvm-amd" ];
   };
 
-  programs.tmux.enable = true;
+  programs = {
+    git.enable = true;
+    tmux.enable = true;
+  };
   environment.systemPackages =
     let
       fvpPackages = inputs.forge-view-preview.packages;
