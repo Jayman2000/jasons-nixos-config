@@ -90,6 +90,13 @@
     in
     [
       pkgs.elinks
+      pkgs.man-pages
+      pkgs.man-pages-posix
       fvpPackages."${config.nixpkgs.hostPlatform.system}".default
     ];
+  documentation = {
+    dev.enable = true;
+    man.generateCaches = true;
+    nixos.includeAllModules = true;
+  };
 }

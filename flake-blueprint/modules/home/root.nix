@@ -20,4 +20,5 @@
       text = "";
     };
   };
+  manual.html.enable = true;
 }
