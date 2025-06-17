@@ -81,7 +81,16 @@
   };
 
   programs = {
-    git.enable = true;
+    git = {
+      enable = true;
+      config = {
+        init.defaultBranch = "main";
+        user = {
+          name = "Jason Yundt";
+          email = "jason@jasonyundt.email";
+        };
+      };
+    };
     tmux.enable = true;
   };
   environment.systemPackages =
