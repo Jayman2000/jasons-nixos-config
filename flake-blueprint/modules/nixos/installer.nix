@@ -42,7 +42,7 @@
       # we can just use the current NixOS version as the state version.
       system.stateVersion = config.system.nixos.release;
 
-      disko.devices.disk.main = {
+      disko.devices.disk."install-${configToInstallName}" = {
         # This gets overridden by either the Disko image generator or
         # disko-install.
         device = "/var/empty";

@@ -46,7 +46,7 @@ pkgs.writers.writeNuBin pname
         )
         cd $temp_dir
         nix build $"($config_url).config.system.build.diskoImages"
-        cp result/main.raw $absolute_path
+        cp result/*.raw $absolute_path
         cd -
         rm --recursive --force $temp_dir
       } else {
