@@ -92,6 +92,12 @@
       };
     };
     tmux.enable = true;
+    ssh = {
+      startAgent = true;
+      extraConfig = ''
+        AddKeysToAgent yes
+      '';
+    };
   };
   environment.systemPackages =
     let
