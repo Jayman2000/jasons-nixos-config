@@ -56,5 +56,8 @@
     # editorconfig-checker-enable
     kernelPackages = lib.mkForce pkgs.linuxPackages_6_14;
   };
-  users.defaultUserShell = perSystem.self.nushell;
+  users.defaultUserShell = perSystem.self.shell-shim;
+  # Normally, we wouldn’t need to explictly add Nushell to our PATH. We
+  # only need to add it because we’re using shell-shim.
+  environment.systemPackages = [ perSystem.self.nushell ];
 }

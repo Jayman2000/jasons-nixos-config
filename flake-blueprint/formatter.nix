@@ -5,7 +5,13 @@ let
   inherit (inputs.treefmt-nix.lib) evalModule;
   treefmt-nixModule = {
     projectRootFile = "flake.nix";
-    programs.nixfmt.enable = true;
+    programs = {
+      nixfmt.enable = true;
+      rustfmt = {
+        enable = true;
+        edition = "2024";
+      };
+    };
   };
   processedTreefmt-nixModule = evalModule pkgs treefmt-nixModule;
 in

@@ -105,3 +105,30 @@ repos:
             -
                 id: nixfmt
                 exclude: *standard_exclude
+    -
+        repo: https://github.com/AndrejOrsula/pre-commit-cargo
+        rev: 0.4.0
+        hooks:
+            -
+                id: cargo-update
+                files: "Cargo\\.toml"
+                args:
+                    - --manifest-path
+                    - flake-blueprint/packages/shell-shim/Cargo.toml
+    -
+        # editorconfig-checker-disable
+        # yamllint disable-line rule:line-length
+        repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+        # editorconfig-checker-enable
+        rev: v2.14.0
+        hooks:
+            -
+                id: pretty-format-toml
+                # This next line prevents pretty-format-toml from trying
+                # to format Cargo.lock.
+                files: ".*\\.toml"
+                exclude: *standard_exclude
+                args:
+                    - --autofix
+                    - --indent
+                    - "4"

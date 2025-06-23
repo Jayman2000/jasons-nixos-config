@@ -4,8 +4,9 @@
   flake,
   perSystem,
   pkgs,
+  mkShell ? pkgs.mkShellNoCC,
 }:
-pkgs.mkShellNoCC {
+mkShell {
   name = "shell-with-pinned-nix";
   packages =
     let
