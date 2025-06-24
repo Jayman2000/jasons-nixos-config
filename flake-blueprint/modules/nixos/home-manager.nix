@@ -14,7 +14,7 @@
     # won’t have to evaluate Nixpkgs an extra time when evaluating NixOS
     # configurations in this repository.
     useGlobalPkgs = true;
-    users.root = flake.homeModules.root;
+    users.jayman = flake.homeModules.jayman;
     sharedModules =
       let
         homeModule = {

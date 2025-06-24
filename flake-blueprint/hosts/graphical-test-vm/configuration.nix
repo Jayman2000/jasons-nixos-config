@@ -108,4 +108,11 @@
     man.generateCaches = true;
     nixos.includeAllModules = true;
   };
+  users.users.jayman = {
+    description = "Jason Yundt";
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+  };
+  # Needed for run0.
+  security.polkit.enable = true;
 }

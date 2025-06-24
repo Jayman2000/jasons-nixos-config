@@ -14,6 +14,9 @@
     description = "Potentially do first-time setup";
     script =
       let
+        inherit (lib.strings) escapeShellArg;
+        opensshBin = lib.attrsets.getBin pkgs.openssh;
+        ssh-keygen = "${opensshBin}/bin/ssh-keygen";
         resholvedScript =
           # editorconfig-checker-disable
           pkgs.resholve.writeScript "first-boot-setup-resholved-script"
@@ -23,7 +26,7 @@
                 coreutils
                 dbus
                 shadow
-                openssh
+                systemd
               ];
               interpreter = lib.meta.getExe pkgs.bash;
               # This is a workaround for this issue [1].
@@ -45,6 +48,12 @@
                 #
                 # [1]: <https://github.com/abathur/resholve/issues/120>
                 "cannot:${pkgs.openssh}/bin/ssh-keygen"
+                # TODO: This should be removed after this pull
+                # request [1] makes it into the version of resholve that
+                # we’re using.
+                #
+                # [1]: <https://github.com/abathur/resholve/pull/121>
+                "cannot:${pkgs.systemd}/bin/run0"
               ];
             }
             ''
@@ -92,10 +101,10 @@
 
                   while true
                   do
-                      echo Please enter a password for root.
-                      if passwd root
+                      echo Please enter a password for jayman.
+                      if passwd jayman
                       then
-                          echo Successfully set root password.
+                          echo Successfully set jayman’s password.
                           touch "$marker"
                           break
                       else
@@ -131,13 +140,23 @@
                       # the Codeberg documentation recommends using
                       # them [1].
                       #
+                      # TODO: This next part references the ssh-keygen’s
+                      # store path directly. That direct store path
+                      # reference should be removed after this pull
+                      # request [2] makes it into the version of
+                      # resholve that we’re using.
+                      #
                       # editorconfig-checker-disable
                       # [1]: <https://docs.codeberg.org/security/ssh-key/#generating-an-ssh-key-pair>
+                      # [2]: <https://github.com/abathur/resholve/pull/121>
                       # editorconfig-checker-enable
-                      if ssh-keygen \
-                          -t ed25519 \
-                          -a 100 \
-                          -N "$ssh_passphrase"
+                      if run0 \
+                          --user=jayman \
+                          -- \
+                          ${escapeShellArg ssh-keygen} \
+                              -t ed25519 \
+                              -a 100 \
+                              -N "$ssh_passphrase"
                       then
                           echo Successfully generated a new SSH key.
                           break

@@ -60,4 +60,11 @@
   # Normally, we wouldn’t need to explictly add Nushell to our PATH. We
   # only need to add it because we’re using shell-shim.
   environment.systemPackages = [ perSystem.self.nushell ];
+
+  # This is a workaround for this issue [1]. After a fix for that issue
+  # makes it into the version of Nixpkgs that we use, this next part
+  # should be removed.
+  #
+  # [1]: <https://github.com/NixOS/nixpkgs/issues/361592>
+  security.pam.services.systemd-run0 = { };
 }
