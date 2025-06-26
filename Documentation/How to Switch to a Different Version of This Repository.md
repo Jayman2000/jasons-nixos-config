@@ -56,6 +56,7 @@ command:
     ```nushell
     (
         nr
+            true
             $".#nixosConfigurations.($config_attr_name)"
             boot
                 --flake $".#($config_attr_name)"

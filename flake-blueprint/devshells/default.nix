@@ -22,6 +22,7 @@ mkShell {
       perSystem.self.nix
       perSystem.self.nushell
       pinnedNixHint
+      pkgs.systemd
     ];
   shellHook = ''
     exec nu --execute '
@@ -36,13 +37,18 @@ mkShell {
             ...$rest
         )
       }
-      def --wrapped nr [flake_url: string, ...rest] {
-        (
-          n run
-            $"($flake_url).config.system.build.nixos-rebuild"
-            --
-            ...$rest
-        )
+      def --wrapped nr [run_as_root: bool, flake_url: string, ...rest] {
+        mut command = [ ]
+        if $run_as_root {
+          $command ++= ["run0" "--setenv=NIX_CONFIG" "--"]
+        }
+        $command ++= [
+          "nix"
+          "run"
+          $"($flake_url).config.system.build.nixos-rebuild"
+          "--"
+        ]
+        run-external ...$command ...$rest
       }
     '
   '';
