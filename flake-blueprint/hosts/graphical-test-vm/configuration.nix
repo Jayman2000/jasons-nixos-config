@@ -17,6 +17,7 @@
     flake.nixosModules.first-boot
     flake.nixosModules.graphical-test-vm-common
     flake.nixosModules.home-manager
+    flake.nixosModules.neovim
   ];
 
   disko.devices.disk.main = {
