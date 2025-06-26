@@ -120,7 +120,7 @@ repos:
         # yamllint disable-line rule:line-length
         repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
         # editorconfig-checker-enable
-        rev: v2.14.0
+        rev: v2.15.0
         hooks:
             -
                 id: pretty-format-toml
