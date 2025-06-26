@@ -16,6 +16,7 @@
   imports = [
     flake.nixosModules.first-boot
     flake.nixosModules.graphical-test-vm-common
+    flake.nixosModules.gui
     flake.nixosModules.home-manager
     flake.nixosModules.neovim
   ];
