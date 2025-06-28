@@ -4,8 +4,10 @@
   Home Manager configuration that’s applies to all jayman user accounts
   on all NixOS configurations that use Home Manager.
 */
+{ flake, ... }:
 { pkgs, ... }:
 {
+  imports = [ flake.homeModules.web-browsers ];
   home.file = {
     versionControlDirectory = {
       recursive = true;
