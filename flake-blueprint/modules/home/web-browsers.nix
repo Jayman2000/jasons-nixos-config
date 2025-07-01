@@ -23,7 +23,14 @@
           nurRepos.rycee.firefox-addons.ublock-origin
         ];
       isDefault = true;
-      search.default = "ddg";
+      search = {
+        default = "ddg";
+        # Every so often, I get errors about potentially clobbering a
+        # search-related Firefox configuration file when I switch to a
+        # new Home Manager generation. Hopefully, setting force to true
+        # will prevent that from happening.
+        force = true;
+      };
       settings = {
         "browser.newtabpage.enabled" = false;
         "browser.search.suggest.enabled" = false;
