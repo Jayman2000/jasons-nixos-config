@@ -108,6 +108,7 @@
     in
     [
       pkgs.elinks
+      pkgs.file
       pkgs.man-pages
       pkgs.man-pages-posix
       fvpPackages."${config.nixpkgs.hostPlatform.system}".default
