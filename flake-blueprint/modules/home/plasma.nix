@@ -29,5 +29,23 @@
       };
     input.keyboard.options = [ "compose:menu" ];
     session.general.askForConfirmationOnLogout = false;
+    panels = [
+      {
+        widgets = [
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.pager"
+          "org.kde.plasma.icontasks"
+          "org.kde.plasma.systemtray"
+          {
+            digitalClock = {
+              date = {
+                enable = true;
+                format = "isoDate";
+              };
+            };
+          }
+        ];
+      }
+    ];
   };
 }
