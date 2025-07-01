@@ -7,7 +7,10 @@
 { flake, ... }:
 { pkgs, ... }:
 {
-  imports = [ flake.homeModules.web-browsers ];
+  imports = with flake.homeModules; [
+    plasma
+    web-browsers
+  ];
   home.file = {
     versionControlDirectory = {
       recursive = true;
