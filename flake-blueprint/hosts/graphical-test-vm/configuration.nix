@@ -13,12 +13,13 @@
 {
   system.stateVersion = "25.05";
 
-  imports = [
-    flake.nixosModules.first-boot
-    flake.nixosModules.graphical-test-vm-common
-    flake.nixosModules.gui
-    flake.nixosModules.home-manager
-    flake.nixosModules.neovim
+  imports = with flake.nixosModules; [
+    first-boot
+    graphical-test-vm-common
+    gui
+    home-manager
+    neovim
+    vm-guest
   ];
 
   disko.devices.disk.main = {
