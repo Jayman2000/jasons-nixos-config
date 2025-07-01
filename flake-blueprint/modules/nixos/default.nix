@@ -4,6 +4,7 @@
   Common options that apply to all configurations in this repository.
 */
 {
+  flake,
   inputs,
   lib,
   perSystem,
@@ -19,6 +20,7 @@
 
   imports = [
     inputs.disko.nixosModules.default
+    flake.nixosModules.custom-date-format
   ];
 
   boot = {
