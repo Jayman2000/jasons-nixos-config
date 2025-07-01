@@ -7,6 +7,8 @@
   programs.plasma = {
     enable = true;
     overrideConfig = true;
+
+    input.keyboard.options = [ "compose:menu" ];
     session.general.askForConfirmationOnLogout = false;
   };
 }
