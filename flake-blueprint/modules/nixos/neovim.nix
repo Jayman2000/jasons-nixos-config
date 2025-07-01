@@ -6,5 +6,8 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    configure.customRC = ''
+      set spell
+    '';
   };
 }
