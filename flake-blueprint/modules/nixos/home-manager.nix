@@ -5,9 +5,15 @@
   that applies to all NixOS configurations that use Home Manager.
 */
 { flake, inputs }:
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [ inputs.home-manager.nixosModules.default ];
+
+  # Some of the Home Manager modules depend on these fonts.
+  environment.systemPackages = with pkgs; [
+    noto-fonts
+    source-code-pro
+  ];
 
   home-manager = {
     # This normally defaults to false. Setting to true means that we

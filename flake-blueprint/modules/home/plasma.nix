@@ -8,6 +8,25 @@
     enable = true;
     overrideConfig = true;
 
+    fonts =
+      let
+        defaultFontSettings = {
+          family = "Noto Serif";
+          pointSize = 10;
+        };
+      in
+      {
+        general = defaultFontSettings;
+        fixedWidth = defaultFontSettings // {
+          family = "Source Code Pro";
+        };
+        small = defaultFontSettings // {
+          pointSize = 8;
+        };
+        toolbar = defaultFontSettings;
+        menu = defaultFontSettings;
+        windowTitle = defaultFontSettings;
+      };
     input.keyboard.options = [ "compose:menu" ];
     session.general.askForConfirmationOnLogout = false;
   };
