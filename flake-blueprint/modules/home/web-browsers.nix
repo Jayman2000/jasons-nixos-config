@@ -103,6 +103,28 @@
               "false"
             ]
           ];
+          # adminSettings is deprecated [1], but it’s the only way to
+          # turn on uBlock Origin’s “Disable JavaScript” feature [2].
+          #
+          # editorconfig-checker-disable
+          # [1]: <https://github.com/gorhill/uBlock/wiki/Deploying-uBlock-Origin#customizing-the-settings>
+          # [2]: <https://github.com/uBlockOrigin/uBlock-issues/discussions/3694>
+          # editorconfig-checker-enable
+          adminSettings = {
+            hostnameSwitchesString = ''
+              ${
+                # These first two are set by uBlock Origin by default.
+                ""
+              }
+              no-large-media: behind-the-scene false
+              no-csp-reports: * true
+              ${
+                # This one disables JavaScript.
+                ""
+              }
+              no-scripting: * true
+            '';
+          };
         };
       };
     };
