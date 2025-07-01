@@ -130,6 +130,11 @@
                 ""
               }
               no-scripting: * true
+              ${
+                # This next part allows JavaScript on certain Web sites.
+                ""
+              }
+              no-scripting: search.nixos.org false
             '';
           };
         };
