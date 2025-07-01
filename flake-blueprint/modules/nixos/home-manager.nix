@@ -14,6 +14,12 @@
     # won’t have to evaluate Nixpkgs an extra time when evaluating NixOS
     # configurations in this repository.
     useGlobalPkgs = true;
+    # A few times, I’ve tried to deploy a new version of this
+    # repository, and it’s failed because Firefox replaced a symlink
+    # with a regular file. Hopefully, setting backupFileExtension will
+    # make Home Manager failures less likely.
+    backupFileExtension = "backup";
+
     users.jayman = flake.homeModules.jayman;
     sharedModules =
       let
