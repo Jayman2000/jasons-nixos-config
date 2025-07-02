@@ -11,6 +11,7 @@
   ...
 }:
 {
+  networking.hostName = "Graphical-Test-VM";
   system.stateVersion = "25.05";
 
   imports = with flake.nixosModules; [
