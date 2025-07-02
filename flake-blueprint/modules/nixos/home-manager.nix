@@ -26,7 +26,18 @@
     # make Home Manager failures less likely.
     backupFileExtension = "backup";
 
-    users.jayman = flake.homeModules.jayman;
+    users =
+      let
+        userAttributeName = "jayman";
+        username = config.users.users."${userAttributeName}".name;
+        homeModule = {
+          imports = [ flake.homeModules."${userAttributeName}" ];
+          home.username = username;
+        };
+      in
+      {
+        "${userAttributeName}" = homeModule;
+      };
     sharedModules =
       let
         homeModule = {

@@ -15,6 +15,7 @@
     script =
       let
         inherit (lib.strings) escapeShellArg;
+        myUsername = config.users.users.jayman.name;
         opensshBin = lib.attrsets.getBin pkgs.openssh;
         ssh-keygen = "${opensshBin}/bin/ssh-keygen";
         resholvedScript =
@@ -58,6 +59,7 @@
             }
             ''
               set -o errexit -o nounset -o pipefail
+              readonly user=${escapeShellArg myUsername}
               readonly marker=~root/first-boot-setup-performed
               readonly ssh_p1='Enter a passphrase for a new SSH key: '
               readonly ssh_p2='Enter the same passphrase again: '
@@ -101,10 +103,10 @@
 
                   while true
                   do
-                      echo Please enter a password for jayman.
-                      if passwd jayman
+                      echo "Please enter a password for $user."
+                      if passwd "$user"
                       then
-                          echo Successfully set jayman’s password.
+                          echo "Successfully set $user’s password."
                           touch "$marker"
                           break
                       else
@@ -151,7 +153,7 @@
                       # [2]: <https://github.com/abathur/resholve/pull/121>
                       # editorconfig-checker-enable
                       if run0 \
-                          --user=jayman \
+                          --user="$user" \
                           -- \
                           ${escapeShellArg ssh-keygen} \
                               -t ed25519 \
