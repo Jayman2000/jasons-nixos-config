@@ -113,6 +113,7 @@
       fvpPackages = inputs.forge-view-preview.packages;
     in
     [
+      pkgs.chars
       pkgs.elinks
       pkgs.file
       pkgs.man-pages
