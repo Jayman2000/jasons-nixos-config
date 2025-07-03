@@ -39,4 +39,9 @@ in
     tmpfiles.settings."10-syncthing"."${dataDir}"."d".mode = "2770";
     services.syncthing.serviceConfig.UMask = "7007";
   };
+  # This next part should be removed after we switch to a version of
+  # Nixpkgs that has this pull request [1] merged into it.
+  #
+  # [1]: <https://github.com/NixOS/nixpkgs/pull/422094>
+  environment.systemPackages = [ config.services.syncthing.package ];
 }
