@@ -33,9 +33,10 @@ in
   };
   users.users.jayman.extraGroups = [ syncthingGroup ];
   # This allows anyone in the syncthingGroup group to modify the synced
-  # folders.
+  # folders. It also ensures that any files or folders created in the
+  # synced folders are owned by the syncthingGroup group.
   systemd = {
-    tmpfiles.settings."10-syncthing"."${dataDir}"."d".mode = "0770";
+    tmpfiles.settings."10-syncthing"."${dataDir}"."d".mode = "2770";
     services.syncthing.serviceConfig.UMask = "7007";
   };
 }
