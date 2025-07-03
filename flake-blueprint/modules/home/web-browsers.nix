@@ -135,7 +135,9 @@
                 ""
               }
               no-scripting: localhost false
+              no-scripting: noogle.dev false
               no-scripting: search.nixos.org false
+              no-scripting: wiki.nixos.org false
             '';
           };
         };
