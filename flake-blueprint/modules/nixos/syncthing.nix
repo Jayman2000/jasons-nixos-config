@@ -10,6 +10,7 @@ in
     enable = true;
     openDefaultPorts = true;
     settings = {
+      gui.tls = true;
       devices = {
         # editorconfig-checker-disable
         Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
