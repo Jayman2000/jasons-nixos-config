@@ -21,7 +21,7 @@ in
         id = "syrpl-vpqnk";
         path = "~/.save";
       };
-      options.urAccepted = 1;
+      options.urAccepted = 3;
     };
     # This prevents the default folder from being created.
     #
