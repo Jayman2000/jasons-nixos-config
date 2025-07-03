@@ -22,6 +22,13 @@ in
       };
       options.urAccepted = 1;
     };
+    # This prevents the default folder from being created.
+    #
+    # editorconfig-checker-disable
+    # Source:
+    # <https://wiki.nixos.org/wiki/Syncthing#Disable_default_sync_folder>.
+    # editorconfig-checker-enable
+    extraFlags = [ "--no-default-folder" ];
   };
   users.users.jayman.extraGroups = [ syncthingGroup ];
   # This allows anyone in the syncthingGroup group to modify the synced
@@ -30,9 +37,4 @@ in
     tmpfiles.settings."10-syncthing"."${dataDir}"."d".mode = "0770";
     services.syncthing.serviceConfig.UMask = "7007";
   };
-  # This prevents the default folder from being created.
-  #
-  # Source:
-  # <https://wiki.nixos.org/wiki/Syncthing#Disable_default_sync_folder>.
-  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
 }
