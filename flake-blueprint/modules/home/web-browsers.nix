@@ -135,6 +135,8 @@
                 ""
               }
               no-scripting: localhost false
+              no-scripting: 127.0.0.1 false
+              no-scripting: [::1] false
               no-scripting: noogle.dev false
               no-scripting: search.nixos.org false
               no-scripting: wiki.nixos.org false
