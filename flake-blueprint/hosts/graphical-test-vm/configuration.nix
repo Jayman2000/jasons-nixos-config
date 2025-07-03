@@ -94,6 +94,10 @@
           name = "Jason Yundt";
           email = "jason@jasonyundt.email";
         };
+        alias = {
+          f = "fetch --all --prune";
+          p = "pull --all --prune";
+        };
       };
     };
     tmux.enable = true;
