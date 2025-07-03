@@ -134,6 +134,7 @@
                 # This next part allows JavaScript on certain Web sites.
                 ""
               }
+              no-scripting: localhost false
               no-scripting: search.nixos.org false
             '';
           };
