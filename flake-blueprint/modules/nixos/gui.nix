@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+{ pkgs, ... }:
 {
   /**
     The first few options in this section were taken from
@@ -12,4 +13,8 @@
     };
     desktopManager.plasma6.enable = true;
   };
+
+  environment.systemPackages = [
+    pkgs.keepassxc
+  ];
 }
