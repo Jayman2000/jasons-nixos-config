@@ -59,7 +59,7 @@ pkgs.writers.writeNuBin pname
             nix run $"($env.flake_url)#disko-install"
               --
                 --flake $config_url
-                --disk main $absolute_path
+                --disk $"install-($config_name)" $absolute_path
         )
       }
     }
