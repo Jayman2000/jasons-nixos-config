@@ -21,8 +21,8 @@ this command:
     manager installed. If that command gives you an error, then you need
     to install the Nix package manager.
 
-1. Make sure that you have the `udisksctl` command installed by running
-this command:
+1. If you’re going to install NixOS on physical hardware, then make sure
+that you have the `udisksctl` command installed by running this command:
 
     ```nushell
     udisksctl help
@@ -30,7 +30,8 @@ this command:
 
     If that command finishes successfully, then you have `udisksctl`
     installed. If that command gives you an error, then you need to
-    install `udisksctl`.
+    install `udisksctl` (but only if you’re installing NixOS on physical
+    hardware).
 
 1. Make sure that you have a copy of this repository on your system.
 
