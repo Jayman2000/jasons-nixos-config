@@ -20,6 +20,7 @@
     gui
     home-manager
     neovim
+    ssh-server
     syncthing
     vm-guest
   ];
