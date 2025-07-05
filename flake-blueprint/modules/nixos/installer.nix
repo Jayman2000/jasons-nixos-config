@@ -47,7 +47,7 @@
         # disko-install.
         device = "/var/empty";
         type = "disk";
-        imageSize = "4G";
+        imageSize = "16G";
         content = {
           type = "gpt";
           # NOTE: It’s important that the partition names here don’t
