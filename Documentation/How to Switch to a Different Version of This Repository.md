@@ -39,7 +39,7 @@ the contents of the Git repository.
 running this command:
 
     ```nushell
-    n eval --apply builtins.attrNames .#nixosConfigurations
+    n eval .#lib.installableConfigurationNames
     ```
 
 1. Choose which of those configurations you want to use.
