@@ -27,31 +27,29 @@
       defaultGlibcLocales = options.i18n.glibcLocales.default;
       overrideAttrsFunction = finalAttrs: previousAttrs: {
         env.patchFile = "${./0001-Use-ISO-8601-date-format.patch}";
-        postUnpack =
-          (previousAttrs.postUnpack or "")
-          + ''
-            readonly locales_dir="$sourceRoot/localedata/locales"
-            # editorconfig-checker-disable
-            readonly original="$locales_dir/"${escapeShellArg localeLangAndTerritory}
-            readonly new="$locales_dir/"${escapeShellArg "${localeLangAndTerritory}@${customLocaleModifier}"}
-            # editorconfig-checker-enable
-            cp "$original" "$new"
-            # The --strip=1 part is needed to apply patches that were
-            # generated using git-format-patch [1].
-            #
-            # editorconfig-checker-disable
-            # [1]: <https://old.reddit.com/r/git/comments/m1sw8a/apply_patch_files_to_non_git_repo>
-            # editorconfig-checker-enable
-            patch \
-              --strip=1 \
-              --input="$patchFile" \
-              --directory="$sourceRoot"
-            # Without this next part, this package would fail to build.
-            printf \
-              '%s\n' \
-              ${escapeShellArg "${customLocale}/${localeCodeset} \\"} \
-              >> "$sourceRoot/localedata/SUPPORTED"
-          '';
+        postUnpack = (previousAttrs.postUnpack or "") + ''
+          readonly locales_dir="$sourceRoot/localedata/locales"
+          # editorconfig-checker-disable
+          readonly original="$locales_dir/"${escapeShellArg localeLangAndTerritory}
+          readonly new="$locales_dir/"${escapeShellArg "${localeLangAndTerritory}@${customLocaleModifier}"}
+          # editorconfig-checker-enable
+          cp "$original" "$new"
+          # The --strip=1 part is needed to apply patches that were
+          # generated using git-format-patch [1].
+          #
+          # editorconfig-checker-disable
+          # [1]: <https://old.reddit.com/r/git/comments/m1sw8a/apply_patch_files_to_non_git_repo>
+          # editorconfig-checker-enable
+          patch \
+            --strip=1 \
+            --input="$patchFile" \
+            --directory="$sourceRoot"
+          # Without this next part, this package would fail to build.
+          printf \
+            '%s\n' \
+            ${escapeShellArg "${customLocale}/${localeCodeset} \\"} \
+            >> "$sourceRoot/localedata/SUPPORTED"
+        '';
       };
       # editorconfig-checker-disable
       customizedGlibcLocales = defaultGlibcLocales.overrideAttrs overrideAttrsFunction;
