@@ -18,6 +18,14 @@ pkgs.writers.writeNuBin pname
       "PATH"
       ":"
       "${pkgs.lib.strings.makeBinPath [ perSystem.self.nix ]}"
+      "--prefix"
+      "PATH"
+      ":"
+      "${pkgs.lib.strings.makeBinPath [ pkgs.systemd ]}"
+      "--prefix"
+      "PATH"
+      ":"
+      "${pkgs.lib.strings.makeBinPath [ pkgs.coreutils ]}"
       "--set"
       "flake_url"
       (inputs.jasons-nix-flake-style-guide.lib.flakeURL {
@@ -54,12 +62,23 @@ pkgs.writers.writeNuBin pname
         # bottom half of this if statement.
         let config_url = $"($env.flake_url)#install-($config_name)"
         (
-          sudo
-            --preserve-env=NIX_CONFIG
-            nix run $"($env.flake_url)#disko-install"
+          run0
+            --setenv=NIX_CONFIG
+            --
+              # TODO: Once this bug [1] gets fixes, stop using the env
+              # command (use run0’s --setenv=PATH instead) and remove
+              # coreutils from this package’s list of dependencies.
+              #
+              # [1]: <https://github.com/NixOS/nixpkgs/issues/420570>
+              env
               --
-                --flake $config_url
-                --disk $"install-($config_name)" $absolute_path
+              # This makes sure that we don’t get warnings about
+              # potentially not using the pinned version of Nix.
+              $"PATH=($env.PATH | str join ":")"
+                nix run $"($env.flake_url)#disko-install"
+                  --
+                    --flake $config_url
+                    --disk $"install-($config_name)" $absolute_path
         )
       }
     }
