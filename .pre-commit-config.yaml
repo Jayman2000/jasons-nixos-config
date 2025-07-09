@@ -100,7 +100,7 @@ repos:
                 exclude: *standard_exclude
     -
         repo: https://github.com/NixOS/nixfmt
-        rev: bd28847b7282475cebbe51fa8e3ae7182c06dcbb
+        rev: 3f27e217d30e0b9fbdc6d6226b15b74bfd4626cc
         hooks:
             -
                 id: nixfmt
