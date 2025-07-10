@@ -131,6 +131,21 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
   };
-  # Needed for run0.
-  security.polkit.enable = true;
+  security.polkit = {
+    # Needed for run0.
+    enable = true;
+    # This part is based on some code from the ArchWiki [1].
+    #
+    # [1]: <https://wiki.archlinux.org/title/Polkit#Globally>
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          subject.isInGroup("wheel")
+          && action.id == "org.freedesktop.systemd1.manage-units"
+        ) {
+          return polkit.Result.AUTH_ADMIN_KEEP;
+        }
+      });
+    '';
+  };
 }
