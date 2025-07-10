@@ -16,7 +16,8 @@
     desktopManager.plasma6.enable = true;
   };
 
-  environment.systemPackages = [
-    pkgs.keepassxc
+  environment.systemPackages = with pkgs; [
+    gimp
+    keepassxc
   ];
 }
