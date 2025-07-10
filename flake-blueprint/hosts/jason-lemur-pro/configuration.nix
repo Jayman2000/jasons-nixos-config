@@ -2,16 +2,13 @@
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 { flake, ... }:
 {
-  networking.hostName = "Graphical-Test-VM";
+  networking.hostName = "Jason-Lemur-Pro";
   system.stateVersion = "25.05";
 
-  imports = with flake.nixosModules; [
-    graphical-test-vm-common
-    workstation
-  ];
+  imports = [ flake.nixosModules.workstation ];
 
   disko.devices.disk.main = {
-    device = "/dev/disk/by-path/pci-0000:04:00.0";
+    device = "/dev/disk/by-path/pci-0000:02:00.0-nvme-1";
     type = "disk";
     content = {
       type = "gpt";
@@ -57,17 +54,5 @@
         };
       };
     };
-  };
-
-  boot = {
-    # These next two were suggested by nixos-generate-config.
-    initrd.availableKernelModules = [
-      "ahci"
-      "virtio_blk"
-      "virtio_pci"
-      "virtio_scsi"
-      "xhci_pci"
-    ];
-    kernelModules = [ "kvm-amd" ];
   };
 }

@@ -9,7 +9,6 @@
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
-    flake.nixosModules.default
     flake.nixosModules.serial-console
   ];
 }

@@ -42,7 +42,10 @@
       # we can just use the current NixOS version as the state version.
       system.stateVersion = config.system.nixos.release;
 
-      boot.initrd.availableKernelModules = [ "usb_storage" ];
+      boot.initrd.availableKernelModules = [
+        "uas"
+        "usb_storage"
+      ];
 
       disko.devices.disk."install-${configToInstallName}" = {
         # This gets overridden by either the Disko image generator or
