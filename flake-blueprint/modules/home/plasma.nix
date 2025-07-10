@@ -49,5 +49,14 @@
         ];
       }
     ];
+    kwin.nightLight = {
+      enable = true;
+      mode = "times";
+      time = {
+        morning = "05:30";
+        evening = "21:00";
+      };
+      transitionTime = 60;
+    };
   };
 }
