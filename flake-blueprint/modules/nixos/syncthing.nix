@@ -20,6 +20,9 @@ in
         devices = [ "Server" ];
         id = "syrpl-vpqnk";
         path = "~/.save";
+        # This setting helps prevent errors when syncthing. Plus, I
+        # don’t really want permissions to synchronized anyway.
+        ignorePerms = true;
       };
       options.urAccepted = 3;
     };
