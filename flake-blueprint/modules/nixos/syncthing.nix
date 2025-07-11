@@ -16,14 +16,25 @@ in
         Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
         # editorconfig-checker-enable
       };
-      folders."Keep Across Linux Distros!" = {
-        devices = [ "Server" ];
-        id = "syrpl-vpqnk";
-        path = "~/.save";
-        # This setting helps prevent errors when syncthing. Plus, I
-        # don’t really want permissions to synchronized anyway.
-        ignorePerms = true;
-      };
+      folders =
+        let
+          commonOptions = {
+            devices = [ "Server" ];
+            # This setting helps prevent errors when syncthing. Plus, I
+            # don’t really want permissions to synchronized anyway.
+            ignorePerms = true;
+          };
+        in
+        {
+          "Keep Across Linux Distros!" = commonOptions // {
+            id = "syrpl-vpqnk";
+            path = "~/.save";
+          };
+          "Game Data" = commonOptions // {
+            id = "eheef-uq5hv";
+            path = "~/Game Data";
+          };
+        };
       options.urAccepted = 3;
     };
     # This prevents the default folder from being created.
