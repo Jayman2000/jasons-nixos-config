@@ -10,7 +10,10 @@
   systemd.services.first-boot-setup = {
     wantedBy = [ "multi-user.target" ];
     wants = [ "getty-pre.target" ];
-    before = [ "getty-pre.target" ];
+    before = [
+      "getty-pre.target"
+      "display-manager.service"
+    ];
     description = "Potentially do first-time setup";
     script =
       let
