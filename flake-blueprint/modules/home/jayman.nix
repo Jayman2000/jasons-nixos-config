@@ -8,6 +8,7 @@
 { pkgs, ... }:
 {
   imports = with flake.homeModules; [
+    games
     plasma
     web-browsers
   ];

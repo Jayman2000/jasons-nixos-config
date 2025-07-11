@@ -3,7 +3,10 @@
 { flake, ... }:
 { pkgs, ... }:
 {
-  imports = [ flake.nixosModules.profile-picture ];
+  imports = with flake.nixosModules; [
+    games
+    profile-picture
+  ];
   /**
     The first few options in this section were taken from
     [here](https://wiki.nixos.org/wiki/KDE#Plasma_6).
