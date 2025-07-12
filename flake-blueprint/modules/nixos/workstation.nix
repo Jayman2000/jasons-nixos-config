@@ -6,17 +6,25 @@
   The configuration in this file does not apply to installation mediums.
 */
 { flake, inputs }:
-{ config, pkgs, ... }:
 {
-  imports = with flake.nixosModules; [
-    default
-    first-boot
-    gui
-    home-manager
-    neovim
-    ssh-server
-    syncthing
-    vm-guest
+  config,
+  modulesPath,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    # This first one was suggested by nixos-generate-config. Without it,
+    # I wasn’t able to connect to Wi-Fi networks on jasons-lemur-pro.
+    (modulesPath + "/installer/scan/not-detected.nix")
+    flake.nixosModules.default
+    flake.nixosModules.first-boot
+    flake.nixosModules.gui
+    flake.nixosModules.home-manager
+    flake.nixosModules.neovim
+    flake.nixosModules.ssh-server
+    flake.nixosModules.syncthing
+    flake.nixosModules.vm-guest
   ];
 
   programs = {
@@ -62,7 +70,13 @@
   users.users.jayman = {
     description = "Jason Yundt";
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      # This allows jayman to use sudo and run0.
+      "wheel"
+      # This allows jayman to mess with NetworkManager. See
+      # <https://wiki.nixos.org/wiki/NetworkManager#Installation>.
+      "networkmanager"
+    ];
   };
   security.polkit = {
     # Needed for run0.

@@ -58,6 +58,7 @@
     # editorconfig-checker-enable
     kernelPackages = lib.mkForce pkgs.linuxPackages_6_14;
   };
+  networking.networkmanager.enable = true;
   users.defaultUserShell = perSystem.self.shell-shim;
   # Normally, we wouldn’t need to explictly add Nushell to our PATH. We
   # only need to add it because we’re using shell-shim.
