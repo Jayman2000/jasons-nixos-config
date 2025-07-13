@@ -4,58 +4,75 @@
 let
   dataDir = config.services.syncthing.dataDir;
   syncthingGroup = config.services.syncthing.group;
-in
-{
-  services.syncthing = {
-    enable = true;
-    openDefaultPorts = true;
-    settings = {
-      gui.tls = true;
-      devices = {
-        # editorconfig-checker-disable
-        Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
-        # editorconfig-checker-enable
-      };
-      folders =
-        let
-          commonOptions = {
-            devices = [ "Server" ];
-            # This setting helps prevent errors when syncthing. Plus, I
-            # don’t really want permissions to synchronized anyway.
-            ignorePerms = true;
-          };
-        in
-        {
-          "Keep Across Linux Distros!" = commonOptions // {
+  folderConfig = {
+    devices = [ "Server" ];
+    # This setting helps prevent errors when syncthing. Plus, I don’t
+    # really want permissions to synchronized anyway.
+    ignorePerms = true;
+  };
+  /**
+    Configuration that applies to all systems that use this module.
+  */
+  unconditionalConfig = {
+    services.syncthing = {
+      enable = true;
+      openDefaultPorts = true;
+      settings = {
+        gui.tls = true;
+        devices = {
+          # editorconfig-checker-disable
+          Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
+          # editorconfig-checker-enable
+        };
+        folders = {
+          "Keep Across Linux Distros!" = folderConfig // {
             id = "syrpl-vpqnk";
             path = "~/.save";
           };
-          "Game Data" = commonOptions // {
+          "Game Data" = folderConfig // {
             id = "eheef-uq5hv";
             path = "~/Game Data";
           };
         };
-      options.urAccepted = 3;
+        options.urAccepted = 3;
+      };
+      # This prevents the default folder from being created.
+      #
+      # editorconfig-checker-disable
+      # Source:
+      # <https://wiki.nixos.org/wiki/Syncthing#Disable_default_sync_folder>.
+      # editorconfig-checker-enable
+      extraFlags = [ "--no-default-folder" ];
     };
-    # This prevents the default folder from being created.
+    users.users.jayman.extraGroups = [ syncthingGroup ];
+    # This allows anyone in the syncthingGroup group to modify the
+    # synced folders. It also ensures that any files or folders created
+    # in the synced folders are owned by the syncthingGroup group.
+    systemd = {
+      tmpfiles.settings."10-syncthing"."${dataDir}"."d".mode = "2770";
+      services.syncthing.serviceConfig.UMask = "7007";
+    };
+    # This next part should be removed after we switch to a version of
+    # Nixpkgs that has this pull request [1] merged into it.
     #
-    # editorconfig-checker-disable
-    # Source:
-    # <https://wiki.nixos.org/wiki/Syncthing#Disable_default_sync_folder>.
-    # editorconfig-checker-enable
-    extraFlags = [ "--no-default-folder" ];
+    # [1]: <https://github.com/NixOS/nixpkgs/pull/422094>
+    environment.systemPackages = [ config.services.syncthing.package ];
   };
-  users.users.jayman.extraGroups = [ syncthingGroup ];
-  # This allows anyone in the syncthingGroup group to modify the synced
-  # folders. It also ensures that any files or folders created in the
-  # synced folders are owned by the syncthingGroup group.
-  systemd = {
-    tmpfiles.settings."10-syncthing"."${dataDir}"."d".mode = "2770";
-    services.syncthing.serviceConfig.UMask = "7007";
+  notOnVM = config.networking.hostName != "Graphical-Test-VM";
+  /**
+    Configurations that only apply to physical systems that use this
+    module.
+  */
+  nonVMConfig = {
+    services.syncthing.settings.folders.Projects = folderConfig // {
+      id = "mjwge-zeznc";
+      path = "~/Projects";
+    };
   };
-  # This next part should be removed after we switch to a version of
-  # Nixpkgs that has this pull request [1] merged into it.
-  #
-  # [1]: <https://github.com/NixOS/nixpkgs/pull/422094>
-  environment.systemPackages = [ config.services.syncthing.package ];
+in
+{
+  config = lib.modules.mkMerge [
+    unconditionalConfig
+    (lib.modules.mkIf notOnVM nonVMConfig)
+  ];
 }
