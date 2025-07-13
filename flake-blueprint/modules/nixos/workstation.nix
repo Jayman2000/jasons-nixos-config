@@ -60,6 +60,7 @@
       pkgs.file
       pkgs.man-pages
       pkgs.man-pages-posix
+      pkgs.libreoffice-qt6-fresh
       fvpPackages."${config.nixpkgs.hostPlatform.system}".default
     ];
   documentation = {
