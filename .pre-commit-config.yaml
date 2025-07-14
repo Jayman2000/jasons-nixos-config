@@ -36,9 +36,6 @@ repos:
             -
                 id: pre-commit-update
                 exclude: *standard_exclude
-                args:
-                    - --bleeding-edge
-                    - nixfmt
     -
         # editorconfig-checker-disable
         # yamllint disable-line rule:line-length
@@ -100,7 +97,7 @@ repos:
                 exclude: *standard_exclude
     -
         repo: https://github.com/NixOS/nixfmt
-        rev: 3f27e217d30e0b9fbdc6d6226b15b74bfd4626cc
+        rev: v1.0.0
         hooks:
             -
                 id: nixfmt
