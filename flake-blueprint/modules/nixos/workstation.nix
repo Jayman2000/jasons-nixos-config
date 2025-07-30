@@ -40,6 +40,9 @@
           f = "fetch --all --prune";
           p = "pull --all --prune";
         };
+        # This allows me to push to Git remotes that are stored in
+        # Syncthing folders.
+        safe.directory = "*";
       };
     };
     tmux.enable = true;
