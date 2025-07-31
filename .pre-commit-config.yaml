@@ -129,3 +129,13 @@ repos:
                     - --autofix
                     - --indent
                     - "4"
+    -
+        repo: https://codeberg.org/JasonYundt/nix-pre-commit-hooks-pr
+        rev: pr-1-rev-0
+        hooks:
+            -
+                id: nix-check-flake
+                exclude: *standard_exclude
+                args:
+                    - --all-systems
+                    - --keep-going
