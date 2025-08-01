@@ -96,13 +96,6 @@ repos:
                 id: markdownlint
                 exclude: *standard_exclude
     -
-        repo: https://github.com/NixOS/nixfmt
-        rev: v1.0.0
-        hooks:
-            -
-                id: nixfmt
-                exclude: *standard_exclude
-    -
         repo: https://github.com/AndrejOrsula/pre-commit-cargo
         rev: 0.4.0
         hooks:
