@@ -235,3 +235,31 @@ max_line_length = 72
 # [1]: <https://github.com/NixOS/rfcs/blob/62d1245ec1eae275edb996229585637035c02538/rfcs/0166-nix-formatting.md#indentation>
 # editorconfig-checker-enable
 indent_size = 2
+
+[flake.lock]
+# Many of my flake.lock files contain a really long URL:
+#
+# editorconfig-checker-disable
+# https://codeberg.org/JasonYundt/percent-encoding-rosetta-stone/releases/download/v1/Percent-encoding%20Rosetta%20Stone%20version%201.tar.xz
+# editorconfig-checker-enable
+#
+# That URL is longer than the previously set max_line_length value. When
+# I’m dealing with a really long string, the first thing that I try to
+# do is to split up the string over multiple lines. Unfortunately, I
+# can’t do that. flake.lock files are JSON files [1], and there’s no way
+# to split up a long string over multiple lines in JSON [2]. The second
+# thing that I would try to do is include editorconfig-checker comments
+# [3]. I can’t do that either because there’s no way to include comments
+# in JSON files [4].
+#
+# I couldn’t think of any way to get the editorconfig-checker pre-commit
+# hook to stop giving errors for that really long URL, so I’m removing
+# the line length limit for flake.lock files.
+#
+# editorconfig-checker-disable
+# [1]: <https://nix.dev/manual/nix/2.28/command-ref/new-cli/nix3-flake#lock-files>
+# [2]: <https://stackoverflow.com/a/52557585/7593853>
+# [3]: <https://github.com/editorconfig-checker/editorconfig-checker?tab=readme-ov-file#excluding-blocks>
+# [4]: <https://stackoverflow.com/a/244858/7593853>
+# editorconfig-checker-enable
+max_line_length = unset
