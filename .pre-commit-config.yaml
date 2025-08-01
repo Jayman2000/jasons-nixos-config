@@ -139,3 +139,8 @@ repos:
                 args:
                     - --all-systems
                     - --keep-going
+            -
+                id: nix-format
+                exclude: *standard_exclude
+                args:
+                    - --keep-going
