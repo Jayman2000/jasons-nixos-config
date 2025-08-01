@@ -5,7 +5,7 @@
 repos:
     -
         repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
-        rev: v0.4.0
+        rev: v0.5.0
         hooks:
             -
                 id: repo-style-checker
@@ -76,7 +76,7 @@ repos:
                 exclude: *standard_exclude
     -
         repo: https://github.com/zricethezav/gitleaks
-        rev: v8.27.2
+        rev: v8.28.0
         hooks:
             -
                 id: gitleaks
