@@ -39,6 +39,8 @@ repos:
             -
                 id: pre-commit-update
                 exclude: *standard_exclude
+                args:
+                    - --dry-run
     -
         # editorconfig-checker-disable
         # yamllint disable-line rule:line-length
