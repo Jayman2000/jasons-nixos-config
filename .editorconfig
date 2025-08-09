@@ -227,16 +227,15 @@ insert_final_newline = true
 # editorconfig-checker-enable
 max_line_length = 72
 
-[**.nix]
+[{**.nix,flake.lock,**.license}]
 # I’m only using 2 for Nix files because the Nix ecosystem project
-# itself uses 2 spaces for indentation [1].
+# itself uses 2 spaces for indentation [1]. Also, when Nix generates a
+# flake.lock file, it uses 2 spaces for indentation.
 #
 # editorconfig-checker-disable
 # [1]: <https://github.com/NixOS/rfcs/blob/62d1245ec1eae275edb996229585637035c02538/rfcs/0166-nix-formatting.md#indentation>
 # editorconfig-checker-enable
 indent_size = 2
-
-[flake.lock]
 # Many of my flake.lock files contain a really long URL:
 #
 # editorconfig-checker-disable
@@ -256,10 +255,26 @@ indent_size = 2
 # hook to stop giving errors for that really long URL, so I’m removing
 # the line length limit for flake.lock files.
 #
+# I’m also unsetting the line length for .nix files as well. Most of the
+# time, my .nix files end up getting formatted using “nix fmt” [5]. The
+# formatter that “nix fmt” ends up using should be the thing that
+# enforces the line length limitation, not editorconfig-checker.
+#
+# Also, when writing .license files, you can’t really split values over
+# multiple lines because .license files contain SPDX-License-Identifier
+# tags and SPDX file tags [6]. There’s no way to split long
+# SPDX-License-Identifier tags or SPDX file tags over multiple lines
+# [7][8] so it doesn’t make sense to enforce a line length limit for
+# .license files.
+#
 # editorconfig-checker-disable
 # [1]: <https://nix.dev/manual/nix/2.28/command-ref/new-cli/nix3-flake#lock-files>
 # [2]: <https://stackoverflow.com/a/52557585/7593853>
 # [3]: <https://github.com/editorconfig-checker/editorconfig-checker?tab=readme-ov-file#excluding-blocks>
 # [4]: <https://stackoverflow.com/a/244858/7593853>
+# [5]: <https://nix.dev/manual/nix/2.28/command-ref/new-cli/nix3-fmt>
+# [6]: <https://reuse.software/spec-3.2#comment-headers>
+# [7]: <https://spdx.github.io/spdx-spec/v2.3/using-SPDX-short-identifiers-in-source-files>
+# [8]: <https://spdx.github.io/spdx-spec/v2.3/file-tags>
 # editorconfig-checker-enable
 max_line_length = unset
