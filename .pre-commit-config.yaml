@@ -23,6 +23,9 @@ repos:
             -
                 id: flake-lock-updater
                 exclude: *standard_exclude
+            -
+                id: forbid-template-markers
+                exclude: *standard_exclude
     -
         repo: https://github.com/fsfe/reuse-tool
         rev: v5.0.2
