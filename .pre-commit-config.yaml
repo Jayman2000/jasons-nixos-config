@@ -5,7 +5,7 @@
 repos:
     -
         repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
-        rev: v0.5.0
+        rev: v0.6.0
         hooks:
             -
                 id: repo-style-checker
