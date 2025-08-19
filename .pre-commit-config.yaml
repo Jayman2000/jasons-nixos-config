@@ -46,7 +46,7 @@ repos:
         # yamllint disable-line rule:line-length
         repo: https://github.com/editorconfig-checker/editorconfig-checker.python
         # editorconfig-checker-enable
-        rev: 3.2.1
+        rev: 3.4.0
         hooks:
             -
                 id: editorconfig-checker
