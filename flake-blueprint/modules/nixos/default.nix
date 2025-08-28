@@ -12,6 +12,7 @@
   ...
 }:
 {
+  system.configurationRevision = flake.rev;
   nixpkgs.hostPlatform = "x86_64-linux";
   nix = {
     package = perSystem.self.nix;
