@@ -12,7 +12,7 @@
   ...
 }:
 {
-  system.configurationRevision = flake.rev;
+  system.configurationRevision = flake.rev or "Not available";
   nixpkgs.hostPlatform = "x86_64-linux";
   nix = {
     package = perSystem.self.nix;
