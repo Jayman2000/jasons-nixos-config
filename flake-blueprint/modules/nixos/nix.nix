@@ -7,6 +7,10 @@
 {
   nix = {
     package = perSystem.self.nix;
-    settings.use-xdg-base-directories = true;
+    settings = {
+      use-xdg-base-directories = true;
+      # This is supposed to be one gibibyte in bytes.
+      download-buffer-size = 1024 * 1024 * 1024;
+    };
   };
 }
