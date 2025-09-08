@@ -54,7 +54,7 @@
     # editorconfig-checker-disable
     # [1]: <https://lore.kernel.org/lkml/CAHk-=widprp4XoHUcsDe7e16YZjLYJWra-dK0hE1MnfPMf6C3Q@mail.gmail.com/>
     # editorconfig-checker-enable
-    kernelPackages = lib.mkForce pkgs.linuxPackages_6_15;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_6_16;
   };
   networking.networkmanager.enable = true;
   users.defaultUserShell = perSystem.self.shell-shim;
