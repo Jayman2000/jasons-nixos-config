@@ -21,9 +21,6 @@ repos:
                     - --pattern
                     - ^COPYING
             -
-                id: flake-lock-updater
-                exclude: *standard_exclude
-            -
                 id: forbid-template-markers
                 exclude: *standard_exclude
     -
