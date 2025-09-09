@@ -9,6 +9,9 @@
       # Disabling root login is also good for security.
       PermitRootLogin = "no";
     };
+    # This next part is needed or else Nix won’t allow you to use
+    # Jason-Desktop-Linux as a remote builder.
+    knownHosts.Jason-Desktop-Linux.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFMLFsPPiGBoxMwtJz1FDZHagmJh2jDSiFYPr89+gdWV";
   };
   users.users.jayman.openssh.authorizedKeys.keys = [
     # editorconfig-checker-disable

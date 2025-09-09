@@ -12,6 +12,20 @@
 {
   nix = {
     package = perSystem.self.nix;
+
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "Jason-Desktop-Linux";
+        maxJobs = 12;
+        sshUser = "jayman";
+        systems = [
+          "i686-linux"
+          "x86_64-linux"
+        ];
+      }
+    ];
+
     settings = {
       trusted-users = lib.modules.mkIf (lib.attrsets.hasAttr "jayman" config.users.users) [
         config.users.users.jayman.name
