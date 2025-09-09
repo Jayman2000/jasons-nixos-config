@@ -22,7 +22,7 @@
     flake.nixosModules.gui
     flake.nixosModules.home-manager
     flake.nixosModules.neovim
-    flake.nixosModules.ssh-server
+    flake.nixosModules.ssh
     flake.nixosModules.syncthing
     flake.nixosModules.vm-guest
   ];
