@@ -21,6 +21,7 @@
     flake.nixosModules.first-boot
     flake.nixosModules.gui
     flake.nixosModules.home-manager
+    flake.nixosModules.media
     flake.nixosModules.neovim
     flake.nixosModules.ssh
     flake.nixosModules.syncthing
