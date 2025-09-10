@@ -5,5 +5,8 @@
 */
 { pkgs, ... }:
 {
-  environment.systemPackages = [ pkgs.mpv ];
+  environment.systemPackages = with pkgs; [
+    mpv
+    yt-dlp
+  ];
 }
