@@ -58,9 +58,13 @@
   };
   networking.networkmanager.enable = true;
   users.defaultUserShell = perSystem.self.shell-shim;
-  # Normally, we wouldn’t need to explictly add Nushell to our PATH. We
-  # only need to add it because we’re using shell-shim.
-  environment.systemPackages = [ perSystem.self.nushell ];
+  environment.systemPackages = [
+    # Normally, we wouldn’t need to explictly add Nushell to our PATH. We only
+    # need to add it because we’re using shell-shim.
+    perSystem.self.nushell
+
+    pkgs.wget
+  ];
 
   # This is a workaround for this issue [1]. After a fix for that issue
   # makes it into the version of Nixpkgs that we use, this next part
