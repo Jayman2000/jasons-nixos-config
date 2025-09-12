@@ -4,8 +4,24 @@
 let
   dataDir = config.services.syncthing.dataDir;
   syncthingGroup = config.services.syncthing.group;
+  /**
+    This function is intended to be used with lib.lists.filter.
+  */
+  isNotVM = deviceName: deviceName != "Graphical-Test-VM";
+  /**
+    This function is intended to be used with lib.lists.filter.
+  */
+  isNotCurrentDevice = deviceName: deviceName != config.networking.hostName;
+  /**
+    The same thing as isNotCurrentDevice, but can be used with lib.attrsets.filterAttrs.
+  */
+  isNotCurrentDevice' = name: value: (isNotCurrentDevice name);
   folderConfig = {
-    devices = [ "Server" ];
+    devices = lib.lists.filter isNotCurrentDevice [
+      "Graphical-Test-VM"
+      "Jason-Lemur-Pro"
+      "Server"
+    ];
     # This setting helps prevent errors when syncthing. Plus, I don’t
     # really want permissions to synchronized anyway.
     ignorePerms = true;
@@ -19,9 +35,11 @@ let
       openDefaultPorts = true;
       settings = {
         gui.tls = true;
-        devices = {
+        devices = lib.attrsets.filterAttrs isNotCurrentDevice' {
           # editorconfig-checker-disable
           Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
+          Graphical-Test-VM.id = "DJJPUZU-N5H4PFF-Q5GPFT7-FNQYES4-57SE5SL-NU22RQN-DH2NRVI-XKOMUAN";
+          Jason-Lemur-Pro.id = "KQUK7VW-JETKGA2-SPQTBH7-25MGHFI-H5BKM4O-2LDJUYG-HB2NIDQ-WF65SQE";
           # editorconfig-checker-enable
         };
         folders = {
@@ -65,6 +83,7 @@ let
   */
   nonVMConfig = {
     services.syncthing.settings.folders.Projects = folderConfig // {
+      devices = lib.lists.filter isNotVM folderConfig.devices;
       id = "mjwge-zeznc";
       path = "~/Projects";
     };
