@@ -65,6 +65,12 @@
       pkgs.man-pages
       pkgs.man-pages-posix
       pkgs.libreoffice-qt6-fresh
+      # These next few packages make spellchecking work in LibreOffice. Source:
+      # <https://wiki.nixos.org/wiki/LibreOffice>.
+      pkgs.hunspell
+      pkgs.hunspellDicts.en_US
+      pkgs.hyphenDicts.en_US
+
       pkgs.gimp
       pkgs.inkscape
       fvpPackages."${config.nixpkgs.hostPlatform.system}".default
