@@ -19,6 +19,7 @@
         hostName = "Jason-Desktop-Linux";
         maxJobs = 12;
         sshUser = "jayman";
+        supportedFeatures = [ "big-parallel" ];
         systems = [
           "i686-linux"
           "x86_64-linux"
