@@ -6,6 +6,7 @@
   imports = with flake.nixosModules; [
     games
     profile-picture
+    transmission
   ];
   /**
     The first few options in this section were taken from
