@@ -141,6 +141,7 @@
               no-scripting: search.nixos.org false
               no-scripting: wiki.nixos.org false
               no-scripting: codeberg.org false
+              no-scripting: archive.org false
             '';
           };
         };
