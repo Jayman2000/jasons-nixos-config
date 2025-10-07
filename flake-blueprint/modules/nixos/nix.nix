@@ -13,6 +13,11 @@
   nix = {
     package = perSystem.self.nix;
 
+    # The main goal of using a flake for my NixOS config is to make things more
+    # reproducible. Channels lead to less reproducibility so I’m disabling
+    # them.
+    channel.enable = false;
+
     distributedBuilds = true;
     buildMachines = [
       {
