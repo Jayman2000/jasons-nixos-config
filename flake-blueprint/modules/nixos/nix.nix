@@ -39,6 +39,9 @@
       use-xdg-base-directories = true;
       # This is supposed to be one gibibyte in bytes.
       download-buffer-size = 1024 * 1024 * 1024;
+      # This next setting results in better error messages and less builds that
+      # get canceled partway through.
+      keep-going = true;
     };
   };
 }
