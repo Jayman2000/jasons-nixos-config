@@ -25,7 +25,7 @@ repos:
                 exclude: *standard_exclude
     -
         repo: https://github.com/fsfe/reuse-tool
-        rev: v6.1.2
+        rev: v6.2.0
         hooks:
             -
                 id: reuse
@@ -43,7 +43,7 @@ repos:
         # yamllint disable-line rule:line-length
         repo: https://github.com/editorconfig-checker/editorconfig-checker.python
         # editorconfig-checker-enable
-        rev: 3.4.0
+        rev: 3.4.1
         hooks:
             -
                 id: editorconfig-checker
