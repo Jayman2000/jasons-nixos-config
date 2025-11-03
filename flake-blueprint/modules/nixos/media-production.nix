@@ -2,5 +2,8 @@
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 { pkgs, ... }:
 {
-  environment.systemPackages = [ pkgs.kdePackages.kdenlive ];
+  environment.systemPackages = with pkgs; [
+    audacity
+    kdePackages.kdenlive
+  ];
 }
