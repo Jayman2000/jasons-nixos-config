@@ -5,6 +5,7 @@
 {
   imports = with flake.nixosModules; [
     games
+    media-production
     profile-picture
     transmission
   ];
