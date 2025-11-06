@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+{ inputs, ... }:
 {
   config,
   lib,
@@ -7,6 +8,9 @@
   ...
 }:
 {
+  imports = [ inputs.retroarch-nix.hmModules.retroarch ];
+
+  # vkQuake
   # Normally, I would use home.file and mkOutOfStoreSymlink, but I can’t
   # because I’m using a flake [1].
   #
@@ -42,4 +46,14 @@
             '';
       };
     };
+
+  # RetroArch
+  programs.retroarch = {
+    enable = true;
+    cores.mesen.enable = true;
+    settings = {
+      config_save_on_exit = "false";
+      rgui_browser_directory = "/var/lib/syncthing/Game Data/RetroArch";
+    };
+  };
 }

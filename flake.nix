@@ -60,6 +60,13 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    retroarch-nix = {
+      url = "github:StoppingBuck/retroarch-nix";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs =
