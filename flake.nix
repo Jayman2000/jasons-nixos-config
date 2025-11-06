@@ -23,7 +23,7 @@
     };
     systems.follows = "jasons-nix-flake-style-guide/systems";
     disko = {
-      url = "github:nix-community/disko?tag=latest";
+      url = "github:nix-community/disko?ref=refs/tags/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
