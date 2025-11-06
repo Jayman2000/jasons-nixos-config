@@ -228,6 +228,29 @@
         "type": "github"
       }
     },
+    "retroarch-nix": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743256458,
+        "narHash": "sha256-HKWStKIHNyMjp9XjN3/EePIk2/Dm35H4HxYZXLhKwrI=",
+        "owner": "StoppingBuck",
+        "repo": "retroarch-nix",
+        "rev": "8a9bf6e4b9e9214abc3129f881807591a7c9a22c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "StoppingBuck",
+        "repo": "retroarch-nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "blueprint": "blueprint",
@@ -239,6 +262,7 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
+        "retroarch-nix": "retroarch-nix",
         "systems": [
           "jasons-nix-flake-style-guide",
           "systems"
