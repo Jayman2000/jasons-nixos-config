@@ -25,6 +25,7 @@
     gimp
     kdePackages.isoimagewriter
     kdePackages.kcalc
+    kdePackages.kclock
     keepassxc
   ];
 }
