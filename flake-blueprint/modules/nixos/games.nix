@@ -16,7 +16,10 @@
       # [1]: <https://github.com/NixOS/nixpkgs/pull/430140>
       customVkquake = pkgs.vkquake.overrideAttrs overrideAttrsFunc;
     in
-    [ customVkquake ];
+    [
+      customVkquake
+      pkgs.prismlauncher
+    ];
   networking.firewall =
     let
       # editorconfig-checker-disable
