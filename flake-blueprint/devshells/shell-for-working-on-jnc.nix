@@ -23,10 +23,7 @@ let
           pre-commit
           # Dependencies for pre-commit hooks:
           nodejs
-          cabal-install
-          ghc
           cargo
-          rustc
         ]);
     }
   );
