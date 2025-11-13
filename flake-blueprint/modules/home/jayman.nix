@@ -8,6 +8,7 @@
 { pkgs, ... }:
 {
   imports = with flake.homeModules; [
+    email-clients
     games
     plasma
     web-browsers
