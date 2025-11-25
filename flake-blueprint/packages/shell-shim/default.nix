@@ -13,7 +13,7 @@ pkgs.rustPlatform.buildRustPackage (finalAttrs: {
     in
     cargoManifest.package.version;
   src = ./.;
-  cargoHash = "sha256-BlWKgkW1PByCFWrj4QtB4UIpbZfrWl5RdqurKCLEENo=";
+  cargoHash = "sha256-JPY4nmb7w+ojk4tWpuGtXJEvS5v7/S4PSzNL2wWcrLM=";
 
   nativeBuildInputs = [
     pkgs.pkg-config
