@@ -105,6 +105,9 @@ repos:
                 id: cargo-update
                 files: "Cargo\\.toml"
                 args:
+                    - --cutoff
+                    - "1 month ago"
+                    - --
                     - --manifest-path
                     - flake-blueprint/packages/shell-shim/Cargo.toml
     -
