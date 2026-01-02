@@ -71,6 +71,7 @@
       pkgs.hunspellDicts.en_US
       pkgs.hyphenDicts.en_US
 
+      pkgs.cifs-utils
       pkgs.gimp
       pkgs.inkscape
       fvpPackages."${config.nixpkgs.hostPlatform.system}".default
