@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 %YAML 1.2
 ---
 repos:
     -
         repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
-        rev: v0.7.0
+        rev: v0.7.1
         hooks:
             -
                 id: repo-style-checker
@@ -85,7 +85,7 @@ repos:
                 exclude: *standard_exclude
     -
         repo: https://github.com/adrienverge/yamllint
-        rev: v1.37.1
+        rev: v1.38.0
         hooks:
             -
                 id: yamllint
@@ -115,7 +115,7 @@ repos:
         # yamllint disable-line rule:line-length
         repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
         # editorconfig-checker-enable
-        rev: v2.15.0
+        rev: v2.16.0
         hooks:
             -
                 id: pretty-format-toml
