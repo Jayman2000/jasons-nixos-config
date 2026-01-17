@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 /**
   Common configuration that applies to all workstation machines.
 
@@ -113,4 +113,9 @@
     enable = true;
     setSocketVariable = true;
   };
+  # This allows me to use Cloudflare WARP. Cloudflare WARP allows me to
+  # circumvent restrictions when connected to certain Wi-Fi networks.
+  services.cloudflare-warp.enable = true;
+  # Unfortunately, services.couldflare-warp depends on unfree packages.
+  nixpkgs.config.allowUnfree = true;
 }
