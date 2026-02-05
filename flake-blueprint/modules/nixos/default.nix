@@ -21,7 +21,10 @@
     flake.nixosModules.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    edk2-uefi-shell.enable = true;
+  };
   networking.networkmanager.enable = true;
   users.defaultUserShell = perSystem.self.shell-shim;
   environment.systemPackages = [
