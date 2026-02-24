@@ -53,6 +53,7 @@
         AddKeysToAgent yes
       '';
     };
+    virt-manager.enable = true;
   };
   environment.systemPackages =
     let
@@ -109,9 +110,12 @@
       });
     '';
   };
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
+  virtualisation = {
+    docker.rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+    libvirtd.enable = true;
   };
   # This allows me to use Cloudflare WARP. Cloudflare WARP allows me to
   # circumvent restrictions when connected to certain Wi-Fi networks.
