@@ -31,4 +31,5 @@
       allowedTCPPorts = portListForQuake;
       allowedUDPPorts = portListForQuake;
     };
+  programs.steam.enable = true;
 }
