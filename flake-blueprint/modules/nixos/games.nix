@@ -19,6 +19,7 @@
     [
       customVkquake
       pkgs.prismlauncher
+      pkgs.protontricks
     ];
   networking.firewall =
     let
