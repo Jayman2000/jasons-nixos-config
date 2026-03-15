@@ -19,7 +19,6 @@
     [
       customVkquake
       pkgs.prismlauncher
-      pkgs.protontricks
     ];
   networking.firewall =
     let
@@ -32,6 +31,9 @@
       allowedTCPPorts = portListForQuake;
       allowedUDPPorts = portListForQuake;
     };
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    protontricks.enable = true;
+  };
   hardware.steam-hardware.enable = true;
 }
