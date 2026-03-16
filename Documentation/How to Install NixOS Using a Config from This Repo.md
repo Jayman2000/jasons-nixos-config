@@ -6,7 +6,14 @@ SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
 # How to Install NixOS Using a Config from This Repo
 
 If you want to do a fresh install of NixOS using a configuration from
-this repository, then here’s what you need to do:
+this repository, then the first that you need to do is decide whether or
+not you will be using the `jason-desktop-linux` NixOS configuration. If
+you are going to be using the `jason-desktop-linux` NixOS configuration,
+then please follow the instructions at the bottom of this page in the
+“Instructions for `jason-desktop-linux`” section. Otherwise, follow the
+instructions in the below “Generic instructions” section.
+
+## Generic instructions
 
 1. Open a terminal.
 
@@ -109,3 +116,19 @@ NixOS on.
 1. Start booting into the install medium.
 
 1. At the bootloader menu, choose the `unattendedInstall` option.
+
+## Instructions for `jason-desktop-linux`
+
+1. Manually install NixOS. When preforming the manual installation, do
+not use any of the NixOS configurations from this repository.
+
+    More information about manually installing NixOS can be found in
+    [the NixOS manual](https://nixos.org/manual/nixos/stable).
+
+1. After the manual installation is finished, boot into the new NixOS
+installation.
+
+1. Switch to using the `jason-desktop-linux` NixOS configuration from
+this repository by following [these instructions][1].
+
+[1]: <./How to Switch to a Different Version of This Repository.md>
