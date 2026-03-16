@@ -10,7 +10,10 @@
   ...
 }:
 {
-  imports = [ flake.nixosModules.default ];
+  imports = [
+    flake.nixosModules.default
+    inputs.disko.nixosModules.default
+  ];
 
   options.jnc.configToInstallName =
     let

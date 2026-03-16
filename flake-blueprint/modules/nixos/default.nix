@@ -16,7 +16,6 @@
   nixpkgs.hostPlatform = "x86_64-linux";
 
   imports = [
-    inputs.disko.nixosModules.default
     flake.nixosModules.custom-date-format
     flake.nixosModules.nix
   ];

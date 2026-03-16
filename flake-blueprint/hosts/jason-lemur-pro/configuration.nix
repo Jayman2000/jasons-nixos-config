@@ -1,11 +1,14 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
-{ flake, ... }:
+{ flake, inputs, ... }:
 {
   networking.hostName = "Jason-Lemur-Pro";
   system.stateVersion = "25.05";
 
-  imports = [ flake.nixosModules.workstation ];
+  imports = [
+    flake.nixosModules.workstation
+    inputs.disko.nixosModules.default
+  ];
 
   disko.devices.disk.main = {
     device = "/dev/disk/by-path/pci-0000:02:00.0-nvme-1";

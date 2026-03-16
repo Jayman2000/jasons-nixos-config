@@ -1,13 +1,14 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
-{ flake, ... }:
+{ flake, inputs, ... }:
 {
   networking.hostName = "Graphical-Test-VM";
   system.stateVersion = "25.05";
 
-  imports = with flake.nixosModules; [
-    graphical-test-vm-common
-    workstation
+  imports = [
+    flake.nixosModules.graphical-test-vm-common
+    flake.nixosModules.workstation
+    inputs.disko.nixosModules.default
   ];
 
   disko.devices.disk.main = {
