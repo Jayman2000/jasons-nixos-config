@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+[*.patch]
+# I generate .patch files using git-format-patch. If git-format-patch
+# includes trailing whitespace in the patch file, then it’s better to
+# just leave that trailing whitespace. If the trailing whitespace really
+# is something that should be removed, then it should be removed in the
+# original file and the patch file should be regenerated.
+trim_trailing_whitespace = false
+# Similarly, if the indentation should be changed, then it should be
+# changed in the original file and the patch file should be regenerated.
+indent_size = unset
+indent_style = unset

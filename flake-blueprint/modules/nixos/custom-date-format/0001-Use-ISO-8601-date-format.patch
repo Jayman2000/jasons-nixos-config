@@ -1,0 +1,48 @@
+From 3f4f10f68e7b8cfd9bff1a63a9d6cf27f7368dce Mon Sep 17 00:00:00 2001
+From: Jason Yundt <jason@jasonyundt.email>
+Date: Tue, 1 Jul 2025 10:49:48 -0400
+Subject: [PATCH] Use ISO 8601 date format
+
+This is the date format that I prefer using.
+---
+SPDX-License-Identifier: CC0-1.0
+SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+
+editorconfig-checker-disable
+
+ localedata/locales/en_US@jason | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/localedata/locales/en_US@jason b/localedata/locales/en_US@jason
+index f2e1fbac..b819cbb2 100644
+--- a/localedata/locales/en_US@jason
++++ b/localedata/locales/en_US@jason
+@@ -109,13 +109,13 @@ mon	"January";/
+ 	"November";/
+ 	"December"
+ % Appropriate date and time representation (%c)
+-d_t_fmt "%a %d %b %Y %r %Z"
++d_t_fmt "%A, %xT%X"
+ %
+ % Appropriate date representation (%x)
+-d_fmt   "%m//%d//%Y"
++d_fmt   "%F"
+ %
+ % Appropriate time representation (%X)
+-t_fmt   "%r"
++t_fmt   "%H:%M:%S%z"
+ %
+ % Appropriate AM/PM time representation (%r)
+ t_fmt_ampm "%I:%M:%S %p"
+@@ -124,7 +124,7 @@ t_fmt_ampm "%I:%M:%S %p"
+ % different from d_t_fmt for historical reasons and has been different
+ % since 2000 when date_fmt was added as a GNU extension.  At the end
+ % of 2018 it was adjusted to use 12H time (bug 24046) instead of 24H.
+-date_fmt "%a %b %e %r %Z %Y"
++date_fmt "%c"
+ %
+ % Strings for AM/PM
+ %
+-- 
+2.49.0
+

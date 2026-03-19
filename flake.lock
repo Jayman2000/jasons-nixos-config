@@ -1,0 +1,310 @@
+{
+  "nodes": {
+    "blueprint": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "jasons-nix-flake-style-guide",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767386128,
+        "narHash": "sha256-BJDu7dIMauO2nYRSL4aI8wDNtEm2KOb7lDKP3hxdrpo=",
+        "owner": "numtide",
+        "repo": "blueprint",
+        "rev": "0ed984d51a3031065925ab08812a5434f40b93d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "blueprint",
+        "type": "github"
+      }
+    },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1746728054,
+        "narHash": "sha256-eDoSOhxGEm2PykZFa/x9QG5eTH0MJdiJ9aR00VAofXE=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "ff442f5d1425feb86344c028298548024f21256d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "refs/tags/latest",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1767609335,
+        "narHash": "sha256-feveD98mQpptwrAEggBQKJTYbvwwglSbOv53uCfH9PY=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "250481aafeb741edfe23d29195671c19b36b6dca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "forge-view-preview": {
+      "inputs": {
+        "blueprint": [
+          "blueprint"
+        ],
+        "jasons-nix-flake-style-guide": [
+          "jasons-nix-flake-style-guide"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767532685,
+        "narHash": "sha256-AUCX9YbPpN1+VdekfM434avPRBJBMPylhujJjGCEfsY=",
+        "ref": "refs/heads/main",
+        "rev": "cdbe0ac48f7f39f8beb6ce19a907b56b7389d978",
+        "revCount": 94,
+        "type": "git",
+        "url": "https://codeberg.org/JasonYundt/forge-view-preview.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/JasonYundt/forge-view-preview.git"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763992789,
+        "narHash": "sha256-WHkdBlw6oyxXIra/vQPYLtqY+3G8dUVZM8bEXk0t8x4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "44831a7eaba4360fb81f2acc5ea6de5fde90aaa3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-25.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "jasons-nix-flake-style-guide": {
+      "inputs": {
+        "blueprint": [
+          "blueprint"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "percent-encoding-rosetta-stone": "percent-encoding-rosetta-stone",
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1749838239,
+        "narHash": "sha256-eiZgsnNmfqZdRBpaevJ23nydPqt0H/jgUFJN3hVdblY=",
+        "ref": "refs/heads/main",
+        "rev": "f1191fae56f9ffe4253e3e439508b87b620f5907",
+        "revCount": 95,
+        "type": "git",
+        "url": "https://codeberg.org/JasonYundt/jasons-nix-flake-style-guide.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/JasonYundt/jasons-nix-flake-style-guide.git"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1767313136,
+        "narHash": "sha256-16KkgfdYqjaeRGBaYsNrhPRRENs0qzkQVUooNHtoy2w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ac62194c3917d5f474c1a844b6fd6da2db95077d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1765674936,
+        "narHash": "sha256-k00uTP4JNfmejrCLJOwdObYC9jHRrr/5M/a/8L2EIdo=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "2075416fcb47225d9b68ac469a5c4801a9c4dd85",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nur": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767967772,
+        "narHash": "sha256-Mcp7KvJ5fSsvKAdwrEAo45Ecy0BI58W9MDIP0rKAkPM=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "337342ecb212bdfe80ade37d2f91a12db29c9542",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "percent-encoding-rosetta-stone": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-6tgdbyzGtTaEeE+Ho6tLNv7lSlfQ7A24gtSMz4uATF8=",
+        "type": "tarball",
+        "url": "https://codeberg.org/JasonYundt/percent-encoding-rosetta-stone/releases/download/v1/Percent-encoding%20Rosetta%20Stone%20version%201.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://codeberg.org/JasonYundt/percent-encoding-rosetta-stone/releases/download/v1/Percent-encoding%20Rosetta%20Stone%20version%201.tar.xz"
+      }
+    },
+    "plasma-manager": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767662275,
+        "narHash": "sha256-d5Q1GmQ+sW1Bt8cgDE0vOihzLaswsm8cSdg8124EqXE=",
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "rev": "51816be33a1ff0d4b22427de83222d5bfa96d30e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "type": "github"
+      }
+    },
+    "retroarch-nix": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768429039,
+        "narHash": "sha256-6/OLEkCNGAM4cvgl1yvO3DtEjSQPqJtJqp90+3+Oo8s=",
+        "owner": "StoppingBuck",
+        "repo": "retroarch-nix",
+        "rev": "207d6d4f21ea5afbf5c593016c4b9f961ff99ba6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "StoppingBuck",
+        "repo": "retroarch-nix",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "blueprint": "blueprint",
+        "disko": "disko",
+        "flake-parts": "flake-parts",
+        "forge-view-preview": "forge-view-preview",
+        "home-manager": "home-manager",
+        "jasons-nix-flake-style-guide": "jasons-nix-flake-style-guide",
+        "nixpkgs": "nixpkgs",
+        "nur": "nur",
+        "plasma-manager": "plasma-manager",
+        "retroarch-nix": "retroarch-nix",
+        "systems": [
+          "jasons-nix-flake-style-guide",
+          "systems"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      }
+    },
+    "systems": {
+      "flake": false,
+      "locked": {
+        "path": "./supported-systems.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "./supported-systems.nix",
+        "type": "path"
+      },
+      "parent": [
+        "jasons-nix-flake-style-guide"
+      ]
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767801790,
+        "narHash": "sha256-QfX6g3Wj2vQe7oBJEbTf0npvC6sJoDbF9hb2+gM5tf8=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "778a1d691f1ef45dd68c661715c5bf8cbf131c80",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

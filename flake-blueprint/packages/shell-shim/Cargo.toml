@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+
+[dependencies]
+shell-quote = ">=0.7.2"
+
+[dev-dependencies]
+cargo = ">=0.88.0"
+
+[package]
+edition = "2024"
+name = "shell-shim"
+version = "0.0.0"
