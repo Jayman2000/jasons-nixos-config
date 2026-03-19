@@ -19,6 +19,8 @@ let
   folderConfig = {
     devices = lib.lists.filter isNotCurrentDevice [
       "Graphical-Test-VM"
+      "Jason-Desktop-Linux"
+      "Jason-Desktop-Windows"
       "Jason-Lemur-Pro"
       "Server"
       "TNAS Server"
@@ -39,9 +41,11 @@ let
         devices = lib.attrsets.filterAttrs isNotCurrentDevice' {
           # editorconfig-checker-disable
           Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
-          Graphical-Test-VM.id = "DJJPUZU-N5H4PFF-Q5GPFT7-FNQYES4-57SE5SL-NU22RQN-DH2NRVI-XKOMUAN";
-          Jason-Lemur-Pro.id = "KQUK7VW-JETKGA2-SPQTBH7-25MGHFI-H5BKM4O-2LDJUYG-HB2NIDQ-WF65SQE";
-          "TNAS Server".id = "UI23FM4-44FA7UA-AQLCKDN-VXWF7SO-5WS7VE4-DWNJ4MI-KYKA2TC-CQPWCAM";
+          Graphical-Test-VM.id = "MK4T7K3-CIYQR3E-PBXE5JM-5MPWPHV-65PM66C-7DURQDD-3MATNB5-J24F4QH";
+          Jason-Desktop-Linux.id = "N3YVKHB-DZBB7WJ-MXIFZWB-3IZNV6E-4JCCG46-ZE7FIBD-K57IB3L-3LNBPAO";
+          Jason-Desktop-Windows.id = "IJ7DGZZ-HEOL43C-4RCWITD-QCATRWR-HPTWFR3-XTTYEZW-QUV4CBL-5P7AGQF";
+          Jason-Lemur-Pro.id = "FBN7V4Q-JGER7TM-KX246K5-7OO53AI-QE7JLDO-ARYVMP2-GP5ZZQR-72246QK";
+          "TNAS Server".id = "IOPU45L-EYRCENI-BXXWAWP-UUSPAIX-VIRXRCN-4TMHVAD-C3V3LEV-VY4HTQZ";
           # editorconfig-checker-enable
         };
         folders = {
