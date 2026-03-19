@@ -39,7 +39,7 @@ let
         devices = lib.attrsets.filterAttrs isNotCurrentDevice' {
           # editorconfig-checker-disable
           Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
-          Graphical-Test-VM.id = "DJJPUZU-N5H4PFF-Q5GPFT7-FNQYES4-57SE5SL-NU22RQN-DH2NRVI-XKOMUAN";
+          Graphical-Test-VM.id = "MK4T7K3-CIYQR3E-PBXE5JM-5MPWPHV-65PM66C-7DURQDD-3MATNB5-J24F4QH";
           Jason-Lemur-Pro.id = "KQUK7VW-JETKGA2-SPQTBH7-25MGHFI-H5BKM4O-2LDJUYG-HB2NIDQ-WF65SQE";
           "TNAS Server".id = "UI23FM4-44FA7UA-AQLCKDN-VXWF7SO-5WS7VE4-DWNJ4MI-KYKA2TC-CQPWCAM";
           # editorconfig-checker-enable
