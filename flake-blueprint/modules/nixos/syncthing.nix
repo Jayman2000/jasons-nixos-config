@@ -19,6 +19,7 @@ let
   folderConfig = {
     devices = lib.lists.filter isNotCurrentDevice [
       "Graphical-Test-VM"
+      "Jason-Desktop-Linux"
       "Jason-Lemur-Pro"
       "Server"
       "TNAS Server"
@@ -40,6 +41,7 @@ let
           # editorconfig-checker-disable
           Server.id = "QZBHFNE-XJWGGY4-6JXYMD3-D3HVGR2-C64BVH2-6M644XU-RSVRGAS-QZ752Q7";
           Graphical-Test-VM.id = "MK4T7K3-CIYQR3E-PBXE5JM-5MPWPHV-65PM66C-7DURQDD-3MATNB5-J24F4QH";
+          Jason-Desktop-Linux.id = "N3YVKHB-DZBB7WJ-MXIFZWB-3IZNV6E-4JCCG46-ZE7FIBD-K57IB3L-3LNBPAO";
           Jason-Lemur-Pro.id = "KQUK7VW-JETKGA2-SPQTBH7-25MGHFI-H5BKM4O-2LDJUYG-HB2NIDQ-WF65SQE";
           "TNAS Server".id = "UI23FM4-44FA7UA-AQLCKDN-VXWF7SO-5WS7VE4-DWNJ4MI-KYKA2TC-CQPWCAM";
           # editorconfig-checker-enable
