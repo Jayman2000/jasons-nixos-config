@@ -47,4 +47,9 @@
       device = "/dev/disk/by-uuid/e17575bf-fa97-455c-9831-46e171b5ae53";
     }
   ];
+
+  # For my Wooting [1] keyboard.
+  #
+  # [1]: <https://wooting.io>
+  hardware.wooting.enable = true;
 }
