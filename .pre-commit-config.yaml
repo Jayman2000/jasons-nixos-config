@@ -9,6 +9,9 @@ repos:
         hooks:
             -
                 id: repo-style-checker
+                args:
+                    - --ignore-path-pattern
+                    - nixpkgs/.*
             -
                 id: detect-bad-unicode
                 exclude: &standard_exclude ^LICENSES/
