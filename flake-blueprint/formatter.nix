@@ -15,6 +15,7 @@ let
         edition = "2024";
       };
     };
+    settings.excludes = [ "nixpkgs/*" ];
   };
   processedTreefmt-nixModule = evalModule pkgs treefmt-nixModule;
 in
