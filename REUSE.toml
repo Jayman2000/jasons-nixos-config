@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2026 Jason Yundt <jason@jasonyundt.email>
+
+version = 1
+
+[[annotations]]
+# editorconfig-checker-disable
+SPDX-FileCopyrightText = "Copyright (c) 2003-2025 Eelco Dolstra and the Nixpkgs/NixOS contributors"
+# editorconfig-checker-enable
+SPDX-License-Identifier = "LicenseRef-NixpkgsMIT"
+path = "nixpkgs/**"
+precedence = "override"
