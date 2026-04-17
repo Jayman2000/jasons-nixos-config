@@ -4,7 +4,7 @@
   description = "Tools for deploying NixOS the way that I do";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "path:./nixpkgs";
     blueprint = {
       url = "github:numtide/blueprint";
       inputs = {

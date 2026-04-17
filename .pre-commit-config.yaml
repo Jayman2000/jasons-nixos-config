@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 %YAML 1.2
 ---
+exclude: '^nixpkgs/.*'
 repos:
     -
         repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
@@ -9,6 +10,9 @@ repos:
         hooks:
             -
                 id: repo-style-checker
+                args:
+                    - --ignore-path-pattern
+                    - nixpkgs/.*
             -
                 id: detect-bad-unicode
                 exclude: &standard_exclude ^LICENSES/
