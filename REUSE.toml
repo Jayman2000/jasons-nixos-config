@@ -7,6 +7,6 @@ version = 1
 # editorconfig-checker-disable
 SPDX-FileCopyrightText = "Copyright (c) 2003-2025 Eelco Dolstra and the Nixpkgs/NixOS contributors"
 # editorconfig-checker-enable
-SPDX-License-Identifier = "LicenseRef-NixpkgsMIT"
-path = "nixpkgs/**"
+SPDX-License-Identifier = "LicenseRef-Nixpkgs2505"
+path = "nixpkgs-25.05/**"
 precedence = "override"
