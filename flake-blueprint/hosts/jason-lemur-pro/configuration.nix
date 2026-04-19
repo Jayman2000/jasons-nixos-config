@@ -10,6 +10,7 @@
     inputs.disko.nixosModules.default
   ];
 
+  hardware.cpu.intel.updateMicrocode = true;
   disko.devices.disk.main = {
     device = "/dev/disk/by-path/pci-0000:02:00.0-nvme-1";
     type = "disk";
