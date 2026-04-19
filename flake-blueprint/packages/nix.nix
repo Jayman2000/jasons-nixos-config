@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 {
   pkgs,
   pname,
   system,
 }:
 let
-  originalPackage = pkgs."${pname}";
+  originalPackage = pkgs.nixVersions.nix_2_28;
   inherit (pkgs.lib.attrsets) filterAttrs;
   # The i686-linux version of this test fails to evaluate. We’re
   # excluding it in order to make sure that there aren’t any evaluation
