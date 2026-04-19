@@ -48,8 +48,11 @@
     }
   ];
 
-  # For my Wooting [1] keyboard.
-  #
-  # [1]: <https://wooting.io>
-  hardware.wooting.enable = true;
+  hardware = {
+    cpu.amd.updateMicrocode = true;
+    # For my Wooting [1] keyboard.
+    #
+    # [1]: <https://wooting.io>
+    wooting.enable = true;
+  };
 }
