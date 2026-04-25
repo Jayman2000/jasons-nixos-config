@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 /**
   This module enables a custom locale that uses ISO 8601-style dates.
 */
@@ -26,7 +26,9 @@
 
       defaultGlibcLocales = options.i18n.glibcLocales.default;
       overrideAttrsFunction = finalAttrs: previousAttrs: {
-        env.patchFile = "${./0001-Use-ISO-8601-date-format.patch}";
+        env = (previousAttrs.env or { }) // {
+          patchFile = "${./0001-Use-ISO-8601-date-format.patch}";
+        };
         postUnpack = (previousAttrs.postUnpack or "") + ''
           readonly locales_dir="$sourceRoot/localedata/locales"
           # editorconfig-checker-disable
