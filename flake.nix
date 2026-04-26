@@ -4,7 +4,7 @@
   description = "Tools for deploying NixOS the way that I do";
 
   inputs = {
-    nixpkgs.url = "path:./nixpkgs-25.05";
+    nixpkgs.url = "path:./nixpkgs-25.11";
     blueprint = {
       url = "github:numtide/blueprint";
       inputs = {
@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     forge-view-preview = {

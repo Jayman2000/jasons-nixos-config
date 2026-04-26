@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 { inputs, ... }:
 {
   config,
@@ -8,6 +8,8 @@
   ...
 }:
 {
+  # TODO: Switch to using the RetroArch module that’s built-in to Home Manager.
+  disabledModules = [ "programs/retroarch.nix" ];
   imports = [ inputs.retroarch-nix.hmModules.retroarch ];
 
   # vkQuake

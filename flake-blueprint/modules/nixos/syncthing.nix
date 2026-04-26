@@ -60,13 +60,6 @@ let
         };
         options.urAccepted = 3;
       };
-      # This prevents the default folder from being created.
-      #
-      # editorconfig-checker-disable
-      # Source:
-      # <https://wiki.nixos.org/wiki/Syncthing#Disable_default_sync_folder>.
-      # editorconfig-checker-enable
-      extraFlags = [ "--no-default-folder" ];
     };
     users.users.jayman.extraGroups = [ syncthingGroup ];
     # This allows anyone in the syncthingGroup group to modify the
