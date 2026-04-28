@@ -16,7 +16,7 @@
     profiles."${config.home.username}" = {
       extensions.packages =
         let
-          system = pkgs.hostPlatform.system;
+          system = pkgs.stdenv.hostPlatform.system;
           nurRepos = inputs.nur.legacyPackages."${system}".repos;
         in
         [
