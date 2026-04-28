@@ -8,10 +8,6 @@
   ...
 }:
 {
-  # TODO: Switch to using the RetroArch module that’s built-in to Home Manager.
-  disabledModules = [ "programs/retroarch.nix" ];
-  imports = [ inputs.retroarch-nix.hmModules.retroarch ];
-
   # vkQuake
   # Normally, I would use home.file and mkOutOfStoreSymlink, but I can’t
   # because I’m using a flake [1].
