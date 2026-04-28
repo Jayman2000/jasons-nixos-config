@@ -10,7 +10,7 @@
     ];
     script =
       let
-        system = pkgs.hostPlatform.system;
+        system = pkgs.stdenv.hostPlatform.system;
         flakePackages = flake.packages."${system}";
         profilePicturePackage = flakePackages.profile-picture;
         profilePicture = "${profilePicturePackage}/image.png";

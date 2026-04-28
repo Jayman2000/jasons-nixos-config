@@ -51,7 +51,7 @@
     };
     nushell = {
       enable = true;
-      package = flake.packages."${pkgs.hostPlatform.system}".nushell;
+      package = flake.packages."${pkgs.stdenv.hostPlatform.system}".nushell;
       extraConfig = ''
         def --env mkcd [path: string] {
           mkdir $path
