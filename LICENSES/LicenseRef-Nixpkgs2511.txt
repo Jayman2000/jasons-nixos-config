@@ -1,0 +1,1 @@
+../nixpkgs-25.11/COPYING
