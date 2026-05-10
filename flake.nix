@@ -4,7 +4,12 @@
   description = "Tools for deploying NixOS the way that I do";
 
   inputs = {
-    nixpkgs.url = "path:./nixpkgs-25.11";
+    # TODO: We’re only using nixos-unstable-small in order to avoid this bug
+    # [1]. Once that bug is fixed in nixos-unstable, we should switch to using
+    # nixos-unstable.
+    #
+    # [1]: <https://github.com/NixOS/nixpkgs/issues/513546>
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     blueprint = {
       url = "github:numtide/blueprint";
       inputs = {
@@ -27,7 +32,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     forge-view-preview = {
