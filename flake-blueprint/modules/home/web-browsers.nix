@@ -12,6 +12,9 @@
 {
   programs.firefox = {
     enable = true;
+    # This next part prevents an evaluation warning from happening.
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
+
     languagePacks = [ "en-US" ];
     profiles."${config.home.username}" = {
       extensions.packages =
