@@ -6,10 +6,7 @@ let
   treefmt-nixModule = {
     projectRootFile = "flake.nix";
     programs = {
-      nixfmt = {
-        enable = true;
-        package = pkgs.nixfmt-rfc-style;
-      };
+      nixfmt.enable = true;
       rustfmt = {
         enable = true;
         edition = "2024";
