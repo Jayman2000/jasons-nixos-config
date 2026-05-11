@@ -30,7 +30,7 @@
               interpreter = lib.meta.getExe pkgs.bash;
               inputs = with pkgs; [
                 coreutils
-                xorg.lndir
+                lndir
               ];
             }
             ''
