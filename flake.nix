@@ -3,12 +3,14 @@
 {
   description = "Tools for deploying NixOS the way that I do";
   inputs = {
-    # TODO: We’re only using nixos-unstable-small in order to avoid this bug
-    # [1]. Once that bug is fixed in nixos-unstable, we should switch to using
-    # nixos-unstable.
+    # TODO: We’re only using the staging-next-26.05 branch because the
+    # release-26.05 and the nixos-26.05 branches do not exist yet. Once the
+    # release-26.05 branch exists [1], we should switch from using
+    # staging-next-26.05 to using release-26.05. Once the nixos-26.05 branch
+    # exists, we should switch from using release-26.05 to using nixos-26.05.
     #
-    # [1]: <https://github.com/NixOS/nixpkgs/issues/513546>
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    # [1]: <https://github.com/NixOS/nixpkgs/issues/503391>
+    nixpkgs.url = "github:NixOS/nixpkgs/staging-next-26.05";
     blueprint = {
       url = "github:numtide/blueprint";
       inputs = {
