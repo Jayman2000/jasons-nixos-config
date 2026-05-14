@@ -74,6 +74,7 @@
       pkgs.hyphenDicts.en_US
 
       pkgs.cifs-utils
+      pkgs.forgejo-cli
       pkgs.gimp
       pkgs.inkscape
       fvpPackages."${config.nixpkgs.hostPlatform.system}".default
