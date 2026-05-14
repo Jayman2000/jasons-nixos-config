@@ -18,6 +18,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINtGh8BdxRt7Pu3J82SIjzOWRCnuqpHpzYSmlMcCXaBO jayman@Graphical-Test-VM"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILWQkgb4A4mvzHeXAm6ghxfknl15cttipb56qP0IpBlj jayman@Jason-Desktop-Linux"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP5Zve4N1Oxbsx0J7a85U3jtiPgR+di3nX094KLiTgdn jayman@Jason-Lemur-Pro"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ6ZinXpsymSnj3QCpwnjSEXuXktxuUczqRFun/M4LMQ root@Jason-Lemur-Pro"
     # editorconfig-checker-enable
   ];
 }
