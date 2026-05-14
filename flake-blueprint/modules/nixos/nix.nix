@@ -57,5 +57,9 @@ in
       hostName = "Jason-Desktop-Linux";
       maxJobs = 12;
     })
+    (mkBuildMachineModule {
+      hostName = "Jason-Lemur-Pro";
+      maxJobs = 8;
+    })
   ];
 }
