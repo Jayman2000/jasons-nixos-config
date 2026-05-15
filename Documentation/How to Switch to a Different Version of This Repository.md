@@ -1,6 +1,6 @@
 <!--
 SPDX-License-Identifier: CC0-1.0
-SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 -->
 
 # How to Switch to a Different Version of This Repository
@@ -39,7 +39,12 @@ the contents of the Git repository.
 running this command:
 
     ```nushell
-    n eval .#lib.installableConfigurationNames
+    (
+        nix
+            --extra-experimental-features 'nix-command flakes'
+            eval
+                .#lib.installableConfigurationNames
+    )
     ```
 
 1. Choose which of those configurations you want to use.

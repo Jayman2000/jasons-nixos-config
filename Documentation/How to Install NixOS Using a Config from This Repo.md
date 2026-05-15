@@ -1,6 +1,6 @@
 <!--
 SPDX-License-Identifier: CC0-1.0
-SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 -->
 
 # How to Install NixOS Using a Config from This Repo
@@ -49,18 +49,16 @@ command:
     cd <path to repository>
     ```
 
-1. Start this repository’s flake’s default dev shell by running this
-command:
-
-    ```nushell
-    nix --extra-experimental-features 'nix-command flakes' develop
-    ```
-
 1. Get a list of NixOS configurations that this repository provides by
 running this command:
 
     ```nushell
-    n eval .#lib.installableConfigurationNames
+    (
+        nix
+            --extra-experimental-features 'nix-command flakes'
+            eval
+                .#lib.installableConfigurationNames
+    )
     ```
 
 1. Choose which of those configurations you want to use.
@@ -75,11 +73,14 @@ USB drive to your system and write down the path to its device file.
 
         ```nushell
         (
-            n run .#create-install-medium
-                --
-                    <config name>
-                    false
-                    <path to USB device file>
+            nix
+                --extra-experimental-features 'nix-command flakes'
+                run
+                    .#create-install-medium
+                    --
+                        <config name>
+                        false
+                        <path to USB device file>
         )
         ```
 
@@ -89,11 +90,14 @@ USB drive to your system and write down the path to its device file.
 
         ```nushell
         (
-            n run .#create-install-medium
-                --
-                    <config name>
-                    true
-                    <path to where you want the image file to be>
+            nix
+                --extra-experimental-features 'nix-command flakes'
+                run
+                    .#create-install-medium
+                    --
+                        <config name>
+                        true
+                        <path to where you want the image file to be>
         )
         ```
 
