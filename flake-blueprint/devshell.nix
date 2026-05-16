@@ -25,21 +25,6 @@ pkgs.mkShell {
             "run0"
             "--setenv=NIX_CONFIG"
             "--"
-            # This next part is needed or else you might get this error
-            # when running nr:
-            #
-            # > evaluation warning: The pinned version of Nix may not
-            # >                     have been used to evaluate this
-            # >                     flake.
-            #
-            # TODO: After we switch to a version of Nixpkgs that doesn’t
-            # have this bug [1], this next part should be changed so
-            # that we use run0’s --setenv option instead of using the
-            # env command.
-            #
-            # [1]: <https://github.com/NixOS/nixpkgs/issues/420570>
-            "env"
-            $"PATH=($env.PATH | str join ":")"
           ]
         }
         $command ++= [
