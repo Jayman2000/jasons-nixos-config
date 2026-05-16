@@ -29,6 +29,8 @@ pkgs.mkShell {
         }
         $command ++= [
           "nix"
+          "--extra-experimental-features"
+          "nix-command flakes"
           "run"
           $"($flake_url).config.system.build.nixos-rebuild"
           "--"
