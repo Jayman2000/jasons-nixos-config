@@ -1,0 +1,4 @@
+root = false
+
+[*.BAT]
+end_of_line = crlf

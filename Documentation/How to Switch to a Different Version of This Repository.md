@@ -68,6 +68,17 @@ command:
     )
     ```
 
+    You may want to add this argument to the end of that command:
+
+    ```nushell
+    --override-input unshareable path:./subflakes/all-unshareable-files
+    ```
+
+    Doing so will make it so that games which contain unshareable files
+    (for example: `TH1DISK1.FDI`) are automatically configured. Note:
+    you will need to have a copy of all of the unshareable files or else
+    this will not work.
+
 1. Exit the dev shell by running this command:
 
     ```nushell

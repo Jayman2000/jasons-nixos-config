@@ -1,0 +1,12 @@
+[project]
+name = "launch-pc-98-touhou-game"
+version = "0.dev0"
+dependencies = ["platformdirs"]
+requires-python = ">=3.14"
+
+[project.scripts]
+launch-pc-98-touhou-game = "launch_pc_98_touhou_game:main"
+
+[build-system]
+requires = ["uv_build>=0.10.0,<0.11"]
+build-backend = "uv_build"

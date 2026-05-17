@@ -243,7 +243,8 @@
           "jasons-nix-flake-style-guide",
           "systems"
         ],
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix",
+        "unshareable": "unshareable"
       }
     },
     "systems": {
@@ -279,6 +280,17 @@
         "repo": "treefmt-nix",
         "type": "github"
       }
+    },
+    "unshareable": {
+      "locked": {
+        "path": "./subflakes/zero-unshareable-files",
+        "type": "path"
+      },
+      "original": {
+        "path": "./subflakes/zero-unshareable-files",
+        "type": "path"
+      },
+      "parent": []
     }
   },
   "root": "root",

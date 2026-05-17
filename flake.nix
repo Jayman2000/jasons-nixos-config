@@ -67,6 +67,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    unshareable.url = "path:./subflakes/zero-unshareable-files";
   };
   outputs =
     inputs:
