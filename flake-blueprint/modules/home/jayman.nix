@@ -34,21 +34,6 @@
       enable = true;
       settings.git_protocol = "ssh";
     };
-    vesktop = {
-      enable = true;
-      settings = {
-        discordBranch = "stable";
-        tray = false;
-        minimizeToTray = false;
-        hardwareAcceleration = true;
-        hardwareVideoAcceleration = true;
-        arRPC = false;
-        enableSplashScreen = false;
-        # I don’t really know what this next one is, so I’m turning it
-        # off.
-        appBadge = false;
-      };
-    };
     nushell = {
       enable = true;
       package = flake.packages."${pkgs.stdenv.hostPlatform.system}".nushell;
