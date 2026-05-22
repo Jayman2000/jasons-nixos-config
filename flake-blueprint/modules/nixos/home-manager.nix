@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 /**
   A NixOS module that provides common Home Manager–related configuration
   that applies to all NixOS configurations that use Home Manager.
@@ -10,7 +10,7 @@
   imports = [ inputs.home-manager.nixosModules.default ];
 
   # Some of the Home Manager modules depend on these fonts.
-  environment.systemPackages = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     source-code-pro
   ];
