@@ -70,6 +70,10 @@
       prefix = "flake-blueprint";
       nixpkgs.config = {
         allowBroken = false;
+        # Unfortunately, services.couldflare-warp depends on unfree packages.
+        # services.cloudflare-warp is enabled in
+        # flake-blueprint/modules/nixos/workstation.nix.
+        allowUnfree = true;
         warnUndeclaredOptions = true;
       };
     };
