@@ -121,6 +121,4 @@
   # This allows me to use Cloudflare WARP. Cloudflare WARP allows me to
   # circumvent restrictions when connected to certain Wi-Fi networks.
   services.cloudflare-warp.enable = true;
-  # Unfortunately, services.couldflare-warp depends on unfree packages.
-  nixpkgs.config.allowUnfree = true;
 }
