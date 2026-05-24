@@ -3,14 +3,10 @@
 {
   description = "Tools for deploying NixOS the way that I do";
   inputs = {
-    # TODO: We’re only using the staging-next-26.05 branch because the
-    # release-26.05 and the nixos-26.05 branches do not exist yet. Once the
-    # release-26.05 branch exists [1], we should switch from using
-    # staging-next-26.05 to using release-26.05. Once the nixos-26.05 branch
-    # exists, we should switch from using release-26.05 to using nixos-26.05.
-    #
-    # [1]: <https://github.com/NixOS/nixpkgs/issues/503391>
-    nixpkgs.url = "github:NixOS/nixpkgs/staging-next-26.05";
+    # TODO: We’re only using the release-26.05 branch because the nixos-26.05
+    # branch does not exist yet. Once the nixos-26.05 branch exists, we should
+    # switch from using release-26.05 to using nixos-26.05.
+    nixpkgs.url = "github:NixOS/nixpkgs/release-26.05";
     blueprint = {
       url = "github:numtide/blueprint";
       inputs = {
