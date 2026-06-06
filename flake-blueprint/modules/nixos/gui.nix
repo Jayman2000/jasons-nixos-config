@@ -23,6 +23,7 @@
 
   environment.systemPackages = with pkgs; [
     gimp
+    kdePackages.filelight
     kdePackages.isoimagewriter
     kdePackages.kcalc
     kdePackages.kclock
