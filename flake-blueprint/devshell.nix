@@ -15,7 +15,9 @@ pkgs.mkShell {
     # Dependencies for pre-commit hooks:
     pkgs.nodejs
     pkgs.cargo
-  ];
+  ]
+  # This next one doesn’t work on i686-linux.
+  ++ pkgs.lib.lists.optional (!pkgs.stdenv.hostPlatform.isx86_32) pkgs.kdePackages.isoimagewriter;
   shellHook = ''
     exec nu --execute '
       def --wrapped nr [run_as_root: bool, flake_url: string, ...rest] {

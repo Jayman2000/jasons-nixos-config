@@ -6,8 +6,8 @@
   system.stateVersion = "25.05";
 
   imports = [
+    flake.nixosModules.disko
     flake.nixosModules.workstation
-    inputs.disko.nixosModules.default
   ];
 
   hardware.cpu.intel.updateMicrocode = true;

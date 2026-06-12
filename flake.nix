@@ -22,7 +22,15 @@
     };
     systems.follows = "jasons-nix-flake-style-guide/systems";
     disko = {
-      url = "github:nix-community/disko?ref=refs/tags/latest";
+      # TODO: Once the pull request gets merged, switch this URL to:
+      #
+      # "github:nix-community/disko"
+      #
+      # Once the changes from the pull request end up in a stable release of
+      # disko, switch this URL to:
+      #
+      # "github:nix-community/disko?ref=refs/tags/latest"
+      url = "github:nix-community/disko?ref=refs/pull/1272/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
