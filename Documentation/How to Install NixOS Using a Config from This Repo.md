@@ -49,6 +49,12 @@ command:
     cd <path to repository>
     ```
 
+1. Start this repository’s default dev shell by running this command:
+
+    ```nushell
+    nix --extra-experimental-features 'nix-command flakes' develop
+    ```
+
 1. Get a list of NixOS configurations that this repository provides by
 running this command:
 
@@ -57,59 +63,76 @@ running this command:
         nix
             --extra-experimental-features 'nix-command flakes'
             eval
-                .#lib.installableConfigurationNames
+                --apply builtins.attrNames
+                .#nixosConfigurations
     )
     ```
 
 1. Choose which of those configurations you want to use.
 
-1. If you’re going to install NixOS on physical hardware, then attach a
-USB drive to your system and write down the path to its device file.
+1. Store your chosen configuration in a variable by running this
+command:
 
-1. Create an install medium by doing one of the following:
+    ```nushell
+    let config_attr_name = <name of config that you chose>
+    ```
 
-    - If you’re installing NixOS on physical hardware, then turn the USB
-    drive into an install medium by running this command:
+1. Create an unattended install ISO file by running this command:
 
-        ```nushell
-        (
-            nix
-                --extra-experimental-features 'nix-command flakes'
-                run
-                    .#create-install-medium
-                    --
-                        <config name>
-                        false
-                        <path to USB device file>
-        )
-        ```
+    ```nushell
+    (
+        nr
+        false
+        $".#nixosConfigurations.($config_attr_name)"
+            build-image
+                --flake $".#($config_attr_name)"
+                --image-variant disko-unattended-install-iso
+    )
+    ```
 
-    - If you’re installing NixOS on a virtual machine, then generate a
-    disk image that will function as an install medium by running this
+    If that command finishes successfully, then the newly generated
+    unattended install ISO file will be located in the `./result/iso/`
+    directory.
+
+1. If you’re going to install NixOS on physical hardware, then create a
+bootable unattended install USB drive by doing the following:
+
+    1. Attach a USB drive to your system and write down the path to its
+    device file.
+
+    1. Open [the KDE ISO Image
+    Writer](https://apps.kde.org/isoimagewriter) by running this
     command:
 
         ```nushell
-        (
-            nix
-                --extra-experimental-features 'nix-command flakes'
-                run
-                    .#create-install-medium
-                    --
-                        <config name>
-                        true
-                        <path to where you want the image file to be>
-        )
+        isoimagewriter
         ```
 
-1. If you’re going to install NixOS on physical hardware, then power-off
-the USB drive by running this command:
+        This should cause a GUI application to open.
 
-    ```nushell
-    udisksctl power-off --block-device <path to USB device file>
-    ```
+    1. In the “ISO image” section of the KDE ISO Image Writer window,
+    select the unattended install ISO that we generated earlier (it
+    should be in the `./result/iso/` directory).
 
-1. If you’re going to install NixOS on physical hardware, then
-physically remove the USB drive from your system.
+    1. In the “USB drive” section of the KDE ISO Image Writer window,
+    select the USB drive that you connected previously.
+
+    1. Click on the “Create” button.
+
+    1. Click on the “Continue” button.
+
+    1. Enter your password when prompted.
+
+    1. Once it successfully finishes writing the unattended install ISO
+    to the USB drive, click on the “Close” button.
+
+    1. Power-off the USB drive by running this command:
+
+        ```nushell
+        udisksctl power-off --block-device <path to USB device file>
+        ```
+
+    1. Physically remove the USB drive from your system.
 
 1. Make sure that the machine that you’re going to install NixOS on is
 powered off.
@@ -119,7 +142,8 @@ NixOS on.
 
 1. Start booting into the install medium.
 
-1. At the bootloader menu, choose the `unattendedInstall` option.
+1. At the bootloader menu, choose the option that says “Disko Unattended
+NixOS Installer”.
 
 ## Instructions for `jason-desktop-linux`
 
