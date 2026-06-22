@@ -10,6 +10,7 @@ pkgs.mkShell {
   packages = [
     perSystem.self.nushell
     pkgs.systemd
+    pkgs.flamegraph
 
     pkgs.pre-commit
     # Dependencies for pre-commit hooks:
