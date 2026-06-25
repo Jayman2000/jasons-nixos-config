@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
-{ lib, ... }:
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
+{ lib, pkgs, ... }:
 {
   accounts.email.accounts =
     let
@@ -28,6 +28,14 @@
           tls.enable = true;
         };
         primary = true;
+        aerc.enable = true;
+        passwordCommand = [
+          (lib.meta.getExe pkgs.kdePackages.kdialog)
+          "--password"
+          # TODO: Spaces in arguments seem to be broken. This needs to be fixed
+          # upstream.
+          "Enter password for ${personalServerAddress}."
+        ];
       };
       verizonAddress = "jayundt@verizon.net";
       verizonSpecificConfig = {
@@ -64,15 +72,26 @@
         personalServerSpecificConfig
       ];
     };
-  programs.thunderbird = {
-    enable = true;
-    profiles.main.isDefault = true;
-    settings = {
-      # This makes Thunderbird use the “Classic View” layout.
-      "mail.pane_config.dynamic" = 0;
-      # This makes Thunderbird use the “Table View” instead of the default
-      # “Cards View”.
-      "mail.threadpane.listview" = 1;
+  programs = {
+    aerc = {
+      enable = true;
+      extraConfig = {
+        general.unsafe-accounts-conf = true;
+        # This is needed or else you won’t be able to view text/plain stuff
+        # from within aerc itself.
+        filters."text/plain" = "colorize";
+      };
+    };
+    thunderbird = {
+      enable = true;
+      profiles.main.isDefault = true;
+      settings = {
+        # This makes Thunderbird use the “Classic View” layout.
+        "mail.pane_config.dynamic" = 0;
+        # This makes Thunderbird use the “Table View” instead of the default
+        # “Cards View”.
+        "mail.threadpane.listview" = 1;
+      };
     };
   };
 }
