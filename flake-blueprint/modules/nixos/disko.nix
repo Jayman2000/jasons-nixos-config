@@ -9,6 +9,9 @@
   imports = [ inputs.disko.nixosModules.default ];
 
   image.modules.disko-unattended-install-iso = {
+    # I want to avoid using channels as much as possible. Additionally, I think
+    # that avoiding copying a channel will make installs finish faster.
+    disko.unattendedInstall.extraNixOSInstallArgs = [ "--no-channel-copy" ];
     # Hopefully, disabling compression will make it so that building the ISO
     # image is faster and that installing files off of the ISO is faster.
     isoImage.squashfsCompression = null;
