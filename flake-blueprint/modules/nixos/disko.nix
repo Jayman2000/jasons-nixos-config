@@ -8,7 +8,12 @@
 {
   imports = [ inputs.disko.nixosModules.default ];
 
-  # TODO: I don’t think that this next part should be necessary. I think that
-  # there’s some sort of bug with the version of disko that I’m using.
-  image.modules.disko-unattended-install-iso.boot.supportedFilesystems.bcachefs = true;
+  image.modules.disko-unattended-install-iso = {
+    # Hopefully, disabling compression will make it so that building the ISO
+    # image is faster and that installing files off of the ISO is faster.
+    isoImage.squashfsCompression = null;
+    # TODO: I don’t think that this next part should be necessary. I think that
+    # there’s some sort of bug with the version of disko that I’m using.
+    boot.supportedFilesystems.bcachefs = true;
+  };
 }
