@@ -44,6 +44,18 @@
         # This allows me to push to Git remotes that are stored in
         # Syncthing folders.
         safe.directory = "*";
+
+        sendemail = {
+          smtpServer = "box.jasonyundt.email";
+          smtpUser = "jason@jasonyundt.email";
+          # Weirdly enough, setting smtpEncryption to "ssl" does not mean “use
+          # SSL”. Instead it means “implicitly use TLS. If smtpServerPort is
+          # not specified, then use the standard port for implicit TLS: port
+          # 465.”
+          #
+          # Source: <man:git-send-email(1)>
+          smtpEncryption = "ssl";
+        };
       };
     };
     tmux.enable = true;
