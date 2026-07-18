@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 {
   perSystem,
   pkgs,
@@ -13,7 +13,7 @@ pkgs.rustPlatform.buildRustPackage (finalAttrs: {
     in
     cargoManifest.package.version;
   src = ./.;
-  cargoHash = "sha256-rPdxjiApyuEHJwp6SBTLclpWq3Om9AvPQsOYOhk8ae4=";
+  cargoHash = "sha256-vjJmQkVzm8uRF3xLTEHI6LMG3MPuuLc5qUIliL1Z+pQ=";
 
   nativeBuildInputs = [
     pkgs.pkg-config
