@@ -28,6 +28,8 @@
     flake.nixosModules.vm-guest
   ];
 
+  boot.loader.efi.canTouchEfiVariables = true;
+
   programs = {
     git = {
       enable = true;
