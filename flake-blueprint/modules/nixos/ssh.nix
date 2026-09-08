@@ -28,4 +28,12 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ6ZinXpsymSnj3QCpwnjSEXuXktxuUczqRFun/M4LMQ root@Jason-Lemur-Pro"
     # editorconfig-checker-enable
   ];
+  # This is a workaround for this issue:
+  # <https://github.com/NixOS/nix/issues/8499>.
+  programs.ssh.extraConfig = ''
+    Host *
+      ControlMaster auto
+      ControlPath ~/.ssh/control-master-%r@%h:%p
+      ControlPersist 1m
+  '';
 }
