@@ -40,6 +40,7 @@
     # need to add it because we’re using shell-shim.
     perSystem.self.nushell
 
+    pkgs.smem
     pkgs.wget
   ];
 
