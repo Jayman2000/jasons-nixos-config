@@ -43,6 +43,7 @@
     pkgs.smem
     pkgs.wget
   ];
+  programs.htop.enable = true;
 
   # This is a workaround for this issue [1]. After a fix for that issue
   # makes it into the version of Nixpkgs that we use, this next part
