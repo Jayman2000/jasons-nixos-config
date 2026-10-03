@@ -113,7 +113,16 @@ repos:
                     - "1 month ago"
                     - --
                     - --manifest-path
-                    - flake-blueprint/packages/shell-shim/Cargo.toml
+                    # editorconfig-checker-disable
+                    # yamllint disable-line rule:line-length
+                    - &cargo_manifest flake-blueprint/packages/shell-shim/Cargo.toml
+                    # editorconfig-checker-enable
+            -
+                id: cargo-fmt
+                exclude: *standard_exclude
+                args:
+                    - --manifest-path
+                    - *cargo_manifest
     -
         # editorconfig-checker-disable
         # yamllint disable-line rule:line-length
