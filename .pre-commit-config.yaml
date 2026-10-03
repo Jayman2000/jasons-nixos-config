@@ -108,6 +108,7 @@ repos:
             -
                 id: cargo-update
                 files: "Cargo\\.toml"
+                exclude: *standard_exclude
                 args:
                     - --cutoff
                     - "1 month ago"
