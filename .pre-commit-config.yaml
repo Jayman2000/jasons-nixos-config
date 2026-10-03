@@ -118,6 +118,9 @@ repos:
                     # yamllint disable-line rule:line-length
                     - &cargo_manifest flake-blueprint/packages/shell-shim/Cargo.toml
                     # editorconfig-checker-enable
+                    - -Z
+                    - unstable-options
+                    - --breaking
             -
                 id: cargo-fmt
                 exclude: *standard_exclude
