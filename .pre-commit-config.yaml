@@ -139,7 +139,7 @@ repos:
                 # This next line prevents pretty-format-toml from trying
                 # to format Cargo.lock.
                 files: ".*\\.toml"
-                exclude: *standard_exclude
+                exclude: ^LICENSES/|.*\.lock$
                 args:
                     - --autofix
                     - --indent
