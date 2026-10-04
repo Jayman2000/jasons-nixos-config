@@ -278,3 +278,15 @@ indent_size = 2
 # [8]: <https://spdx.github.io/spdx-spec/v2.3/file-tags>
 # editorconfig-checker-enable
 max_line_length = unset
+
+[**.lock]
+# Cargo automatically generates Cargo.lock files that have overly long
+# lines. I suspect that most software that generates lock files has this
+# same problem so let’s just unset the max_line_length for all lock
+# files.
+max_line_length = unset
+
+[Cargo.lock]
+# Cargo.lock files use weird indentation that normally makes
+# editorconfig-checker give errors.
+indent_size = unset

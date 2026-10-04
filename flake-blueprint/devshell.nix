@@ -17,6 +17,7 @@ pkgs.mkShell {
     pkgs.nodejs
     pkgs.cargo
     pkgs.go
+    pkgs.rustfmt
   ]
   # This next one doesn’t work on i686-linux.
   ++ pkgs.lib.lists.optional (!pkgs.stdenv.hostPlatform.isx86_32) pkgs.kdePackages.isoimagewriter;

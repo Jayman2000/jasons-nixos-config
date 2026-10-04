@@ -6,7 +6,7 @@ exclude: '^nixpkgs[^/]*/.*'
 repos:
     -
         repo: https://github.com/Jayman2000/jasons-pre-commit-hooks
-        rev: v0.8.0
+        rev: v0.9.0
         hooks:
             -
                 id: repo-style-checker
@@ -27,6 +27,14 @@ repos:
             -
                 id: forbid-template-markers
                 exclude: *standard_exclude
+            -
+                id: check-if-rust-edition-is-old
+                exclude: *standard_exclude
+                args:
+                    # editorconfig-checker-disable
+                    # yamllint disable-line rule:line-length
+                    - &cargo_manifest flake-blueprint/packages/shell-shim/Cargo.toml
+                    # editorconfig-checker-enable
     -
         repo: https://github.com/fsfe/reuse-tool
         rev: v6.2.0
@@ -108,12 +116,22 @@ repos:
             -
                 id: cargo-update
                 files: "Cargo\\.toml"
+                exclude: *standard_exclude
                 args:
                     - --cutoff
                     - "1 month ago"
                     - --
                     - --manifest-path
-                    - flake-blueprint/packages/shell-shim/Cargo.toml
+                    - *cargo_manifest
+                    - -Z
+                    - unstable-options
+                    - --breaking
+            -
+                id: cargo-fmt
+                exclude: *standard_exclude
+                args:
+                    - --manifest-path
+                    - *cargo_manifest
     -
         # editorconfig-checker-disable
         # yamllint disable-line rule:line-length
@@ -126,7 +144,7 @@ repos:
                 # This next line prevents pretty-format-toml from trying
                 # to format Cargo.lock.
                 files: ".*\\.toml"
-                exclude: *standard_exclude
+                exclude: ^LICENSES/|.*\.lock$
                 args:
                     - --autofix
                     - --indent
