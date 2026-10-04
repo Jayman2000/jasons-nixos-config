@@ -4,9 +4,6 @@
 [dependencies]
 shell-quote = "0.8.0"
 
-[dev-dependencies]
-cargo = "0.97.2"
-
 [package]
 edition = "2024"
 name = "shell-shim"
