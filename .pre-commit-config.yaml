@@ -35,6 +35,9 @@ repos:
                     # yamllint disable-line rule:line-length
                     - &cargo_manifest flake-blueprint/packages/shell-shim/Cargo.toml
                     # editorconfig-checker-enable
+            -
+                id: gitignore-generator
+                exclude: *standard_exclude
     -
         repo: https://github.com/fsfe/reuse-tool
         rev: v6.2.0
