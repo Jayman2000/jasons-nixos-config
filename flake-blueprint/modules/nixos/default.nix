@@ -45,12 +45,5 @@
   ];
   programs.htop.enable = true;
 
-  # This is a workaround for this issue [1]. After a fix for that issue
-  # makes it into the version of Nixpkgs that we use, this next part
-  # should be removed.
-  #
-  # [1]: <https://github.com/NixOS/nixpkgs/issues/361592>
-  security.pam.services.systemd-run0 = { };
-
   services.automatic-timezoned.enable = true;
 }
