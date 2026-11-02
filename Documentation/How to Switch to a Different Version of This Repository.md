@@ -43,7 +43,8 @@ running this command:
         nix
             --extra-experimental-features 'nix-command flakes'
             eval
-                .#lib.installableConfigurationNames
+                --apply builtins.attrNames
+                .#nixosConfigurations
     )
     ```
 
