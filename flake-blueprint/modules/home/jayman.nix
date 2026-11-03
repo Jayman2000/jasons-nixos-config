@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: CC0-1.0
-# SPDX-FileCopyrightText: 2025 Jason Yundt <jason@jasonyundt.email>
+# SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
 /**
   Home Manager configuration that’s applies to all jayman user accounts
   on all NixOS configurations that use Home Manager.
@@ -58,6 +58,8 @@
           cd $path
         }
       '';
+      # This prevents Home Manager from emitting an evaluation warning.
+      loadSessionVariables = true;
     };
   };
 }
