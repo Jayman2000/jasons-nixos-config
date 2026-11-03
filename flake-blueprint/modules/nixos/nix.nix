@@ -43,7 +43,7 @@ in
   ];
 
   nix = {
-    package = pkgs.nixVersions.nix_2_34;
+    package = pkgs.nix;
 
     # The main goal of using a flake for my NixOS config is to make things more
     # reproducible. Channels lead to less reproducibility so I’m disabling
