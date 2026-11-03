@@ -3,7 +3,9 @@
 {
   description = "Tools for deploying NixOS the way that I do";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    # TODO: Switch from using NixOS Unstable to using NixOS 26.11 after the
+    # NixOS 26.11 branch-off has happened.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     blueprint = {
       url = "github:numtide/blueprint";
       inputs = {
@@ -34,7 +36,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     forge-view-preview = {

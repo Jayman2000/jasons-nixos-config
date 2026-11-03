@@ -81,7 +81,7 @@
       pkgs.man-pages-posix
       pkgs.redumper
       pkgs.unar
-      pkgs.libreoffice-qt6-fresh
+      pkgs.libreoffice-qt
       # These next few packages make spellchecking work in LibreOffice. Source:
       # <https://wiki.nixos.org/wiki/LibreOffice>.
       pkgs.hunspell
