@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
+  imports = [ inputs.steam-config-nix.nixosModules.default ];
+
   environment.systemPackages =
     let
       overrideAttrsFunc = finalAttrs: previousAttrs: {
@@ -35,6 +37,12 @@
   programs.steam = {
     enable = true;
     protontricks.enable = true;
+
+    config = {
+      enable = true;
+      defaultCompatTool = "proton-stable";
+      displayRatesAsBits = false;
+    };
   };
   hardware.steam-hardware.enable = true;
 }

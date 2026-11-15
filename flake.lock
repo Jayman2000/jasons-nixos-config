@@ -225,11 +225,39 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
+        "steam-config-nix": "steam-config-nix",
         "systems": [
           "jasons-nix-flake-style-guide",
           "systems"
         ],
         "treefmt-nix": "treefmt-nix"
+      }
+    },
+    "steam-config-nix": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787302388,
+        "narHash": "sha256-yxf4VNstB9G8EQnhuDQv1bO/l7OJiDJRMQMZTElXhDA=",
+        "owner": "different-name",
+        "repo": "steam-config-nix",
+        "rev": "0be0e63afbe6a9bb0fdacf190c0c5219e7889c64",
+        "type": "github"
+      },
+      "original": {
+        "owner": "different-name",
+        "ref": "refs/tags/v0.6.0",
+        "repo": "steam-config-nix",
+        "type": "github"
       }
     },
     "systems": {
