@@ -149,6 +149,20 @@ repos:
                     - --indent
                     - "4"
     -
+        repo: local
+        hooks:
+            -
+                id: &id update-versions-pinned-in-dot-nix-files
+                name: *id
+                language: unsupported
+                entry: nix
+                pass_filenames: false
+                args:
+                    - --extra-experimental-features
+                    - nix-command flakes
+                    - run
+                    - .#update-versions-pinned-in-dot-nix-files
+    -
         repo: https://codeberg.org/JasonYundt/nix-pre-commit-hooks-pr
         rev: pr-1-rev-0
         hooks:
