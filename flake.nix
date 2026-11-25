@@ -15,7 +15,10 @@
     };
     jasons-nix-flake-style-guide = {
       # editorconfig-checker-disable
-      url = "git+https://codeberg.org/JasonYundt/jasons-nix-flake-style-guide.git";
+      # TODO: Switch back to using jasons-nix-flake-style-guide’s default
+      # branch once the multiple-blueprints branch has been merged into
+      # jasons-nix-flake-style-guide’s default branch.
+      url = "git+https://codeberg.org/JasonYundt/jasons-nix-flake-style-guide.git?ref=refs/heads/multiple-blueprints";
       # editorconfig-checker-enable
       inputs = {
         blueprint.follows = "blueprint";

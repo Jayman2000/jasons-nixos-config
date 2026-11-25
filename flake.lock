@@ -126,15 +126,16 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1782265284,
-        "narHash": "sha256-npnkOYlZKJYZWtv5+18vBNHPTnOk6QUdYAASQFPWtR8=",
-        "ref": "refs/heads/main",
-        "rev": "79753a1add1bd11d3950b710ab79e5f3ef22f6fe",
-        "revCount": 108,
+        "lastModified": 1795606639,
+        "narHash": "sha256-yTfWfW56I+PDsF+jXm4FM/zokw+7BM93KzvB1fx2Tk8=",
+        "ref": "refs/heads/multiple-blueprints",
+        "rev": "2f91e303d96fd8c17ea14203265c253a108cb6ba",
+        "revCount": 116,
         "type": "git",
         "url": "https://codeberg.org/JasonYundt/jasons-nix-flake-style-guide.git"
       },
       "original": {
+        "ref": "refs/heads/multiple-blueprints",
         "type": "git",
         "url": "https://codeberg.org/JasonYundt/jasons-nix-flake-style-guide.git"
       }
