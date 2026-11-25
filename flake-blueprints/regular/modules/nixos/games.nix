@@ -1,6 +1,11 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
-{ inputs, pkgs, ... }:
+{
+  flake,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [ inputs.steam-config-nix.nixosModules.default ];
 
@@ -42,6 +47,17 @@
       enable = true;
       defaultCompatTool = "proton-stable";
       displayRatesAsBits = false;
+
+      apps."METAL GEAR & METAL GEAR 2: Solid Snake" =
+        let
+          buildSystem = pkgs.stdenv.buildPlatform.system;
+          inherit (flake.crossOutputs.x86_64-windows.packages."${buildSystem}") mgshdfix;
+        in
+        {
+          id = 2131680;
+          dllOverrides = mgshdfix.dllOverrides;
+          files.game.place.".".source = mgshdfix;
+        };
     };
   };
   hardware.steam-hardware.enable = true;
