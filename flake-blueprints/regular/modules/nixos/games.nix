@@ -1,6 +1,12 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2025–2026 Jason Yundt <jason@jasonyundt.email>
-{ inputs, pkgs, ... }:
+{
+  flake,
+  inputs,
+  perSystem,
+  pkgs,
+  ...
+}:
 {
   imports = [ inputs.steam-config-nix.nixosModules.default ];
 
@@ -42,6 +48,30 @@
       enable = true;
       defaultCompatTool = "proton-stable";
       displayRatesAsBits = false;
+
+      apps."METAL GEAR & METAL GEAR 2: Solid Snake" =
+        let
+          buildSystem = pkgs.stdenv.buildPlatform.system;
+          inherit (flake.crossOutputs.x86_64-windows.packages."${buildSystem}") mgshdfix;
+        in
+        {
+          id = 2131680;
+          dllOverrides = mgshdfix.dllOverrides;
+          files.game.place = {
+            "0MGSHDFix" = {
+              source = mgshdfix;
+              target = ".";
+            };
+            # TODO: <https://www.nexusmods.com/metalgearandmetalgear2mc/mods/15>
+            # TODO: File a <https://www.nexusmods.com/metalgearandmetalgear2mc/mods/15> feature request asking for there to be a way to download it without using Nexus Mods.
+            # TODO: MGSHDFix config file
+            # TODO: <https://www.nexusmods.com/metalgearandmetalgear2mc/mods/2>
+            # TODO: File a <https://www.nexusmods.com/metalgearandmetalgear2mc/mods/2> feature request asking for there to be a way to download it without using Nexus Mods.
+          };
+          preHook = ''
+            ${pkgs.lib.strings.escapeShellArg (pkgs.lib.meta.getExe perSystem.self.work-around-mgshdfix-bug)}
+          '';
+        };
     };
   };
   hardware.steam-hardware.enable = true;
