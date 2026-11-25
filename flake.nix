@@ -86,16 +86,48 @@
   };
   outputs =
     inputs:
-    inputs.blueprint {
-      inherit inputs;
-      prefix = "flake-blueprint";
-      nixpkgs.config = {
-        allowBroken = false;
-        # Unfortunately, services.couldflare-warp depends on unfree packages.
-        # services.cloudflare-warp is enabled in
-        # flake-blueprint/modules/nixos/workstation.nix.
-        allowUnfree = true;
-        warnUndeclaredOptions = true;
+    let
+      blueprintArg = {
+        inherit inputs;
+        prefix = "flake-blueprints/regular";
+        nixpkgs.config = {
+          allowBroken = false;
+          # Unfortunately, services.couldflare-warp depends on unfree packages.
+          # services.cloudflare-warp is enabled in
+          # flake-blueprint/modules/nixos/workstation.nix.
+          allowUnfree = true;
+          # Unfortunately, this is needed in order to cross build packages for
+          # Windows.
+          microsoftVisualStudioLicenseAccepted = true;
+          warnUndeclaredOptions = true;
+        };
       };
+      regularOutputs = inputs.blueprint blueprintArg;
+
+      createCrossOutput =
+        hostSystem:
+        let
+          modifiedInputs = inputs // {
+            # This is needed or else blueprint will generate checks for the
+            # regular outputs (the ones that aren’t cross-built). We need to do
+            # “inputs.self // <whatever>” instead of doing just “<whatever”
+            # because self contains some extra things that aren’t outputs like
+            # lastModifiedDate.
+            self = inputs.self // inputs.self.crossOutputs."${hostSystem}";
+          };
+        in
+        {
+          "${hostSystem}" = modifiedInputs.blueprint (
+            blueprintArg
+            // {
+              inputs = modifiedInputs;
+              prefix = "flake-blueprints/cross/${hostSystem}";
+            }
+          );
+        };
+    in
+    regularOutputs
+    // {
+      crossOutputs = createCrossOutput "x86_64-windows";
     };
 }

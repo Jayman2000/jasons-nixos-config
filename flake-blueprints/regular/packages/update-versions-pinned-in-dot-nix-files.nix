@@ -1,6 +1,14 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2026 Jason Yundt <jason@jasonyundt.email>
 { pkgs, pname }:
+let
+  inherit (pkgs.lib.strings) escapeNixString;
+  hostSystem = pkgs.stdenv.hostPlatform.system;
+  packagesThatHaveUpdateScripts = pkgs.lib.lists.map (
+    attrName:
+    "crossOutputs.x86_64-windows.packages.${escapeNixString hostSystem}.${escapeNixString attrName}"
+  ) [ "mgshdfix" ];
+in
 pkgs.resholve.writeScriptBin pname
   {
     interpreter = pkgs.lib.meta.getExe pkgs.bash;
@@ -8,10 +16,12 @@ pkgs.resholve.writeScriptBin pname
       gh
       jq
       nix
+      nix-update
     ];
     execer = [
       "cannot:${pkgs.lib.meta.getExe pkgs.nix}"
       "cannot:${pkgs.lib.meta.getExe pkgs.gh}"
+      "cannot:${pkgs.lib.meta.getExe pkgs.nix-update}"
     ];
   }
   ''
@@ -110,6 +120,20 @@ pkgs.resholve.writeScriptBin pname
     #
     # [1]: <https://github.com/NixOS/nix/issues/11946>
     check_for_latest_github_release steam-config-nix
+
+    readonly packages_that_have_update_scripts=(
+      ${pkgs.lib.strings.escapeShellArgs packagesThatHaveUpdateScripts}
+    )
+    for package_that_has_update_script in "''${packages_that_have_update_scripts[@]}"
+    do
+      printf 'Running update script for %q…\n' "$package_that_has_update_script"
+      NIX_CONFIG='extra-experimental-features = flakes' nix-update \
+        --use-update-script \
+        --flake \
+        -- \
+          "$package_that_has_update_script"
+      printf 'Finished running update script for %q.\n' "$package_that_has_update_script"
+    done
 
     if [ "$are_there_any_outdated_inputs" -eq 0 ]
     then
